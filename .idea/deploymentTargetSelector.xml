@@ -8,6 +8,9 @@
       <SelectionState runConfigName="CarbonFootprintQuestionnaire">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="Questionnaire">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
