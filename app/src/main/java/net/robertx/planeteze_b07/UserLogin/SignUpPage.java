@@ -18,15 +18,11 @@ import net.robertx.planeteze_b07.R;
 
 public class SignUpPage extends AppCompatActivity {
     Button backbutton;
-    EditText editTextEmail, editTextPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up_page);
-
-        editTextEmail = findViewById(R.id.emailbox_signup);
-        editTextPassword = findViewById(R.id.password_signup);
 
         backbutton = findViewById(R.id.returnhomescreen_signup);
         backbutton.setOnClickListener(new View.OnClickListener() {
