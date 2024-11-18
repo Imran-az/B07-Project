@@ -46,24 +46,8 @@ public class Questionnaire extends AppCompatActivity {
             answerOptions.add("Oops you didn't add shit");
         }
 
-        for (String option: answerOptions) {
-            // add a button to the linearLayout answerButtons
-            ToggleButton button = new ToggleButton(this);
-            button.setText(option);
-            button.setTextOn(option);
-            button.setTextOff(option);
-            button.setBackgroundResource(R.drawable.toggle_button_background);
-
-
-//            button.setOnClickListener(v -> {
-//
-//            });
-            LinearLayout answerButtons = findViewById(R.id.answerButtons);
-            answerButtons.addView(button);
-        }
-
-
-
+        RadioButtonSystem options = findViewById(R.id.options);
+        options.addOptions(answerOptions);
 
     }
 }
