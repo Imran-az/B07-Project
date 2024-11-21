@@ -2,7 +2,7 @@ package net.robertx.planeteze_b07;
 
 import java.util.HashMap;
 
-public class CalculateCarbonFootPrintFood {
+public class YearlyFoodCarbonFootprintCalculator {
     private String dietType; // e.g., "Vegetarian", "Vegan", "Pescatarian", "Meat-based"
     private String beefConsumption; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String porkConsumption; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
@@ -10,7 +10,7 @@ public class CalculateCarbonFootPrintFood {
     private String fishConsumption; //"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String foodWaste; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
 
-    public CalculateCarbonFootPrintFood(HashMap<String, String> responses) {
+    public YearlyFoodCarbonFootprintCalculator(HashMap<String, String> responses) {
         // Extract values from the HashMap
         this.dietType = responses.get("What best describes your diet?");
 

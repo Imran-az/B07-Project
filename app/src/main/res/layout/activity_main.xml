@@ -7,13 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- TextView for displaying fetched CO2 value -->
     <TextView
+        android:id="@+id/co2_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Fetching CO2 value..."
+        android:textSize="18sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

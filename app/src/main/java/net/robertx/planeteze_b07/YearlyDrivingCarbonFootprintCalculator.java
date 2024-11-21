@@ -1,7 +1,7 @@
 package net.robertx.planeteze_b07;
 import java.util.HashMap;
 
-public class CalculateCarbonFootprintTransportationCar implements CalculateYearlyCarbonFootPrint {
+public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCarbonFootPrint {
     public String carType; // Gasoline, Diesel, Hybrid, Electric
     public double distanceDriven; // Distance driven in kilometers
 
@@ -28,7 +28,7 @@ public class CalculateCarbonFootprintTransportationCar implements CalculateYearl
     }
 
 
-    public CalculateCarbonFootprintTransportationCar(HashMap<String, String> responses) {
+    public YearlyDrivingCarbonFootprintCalculator(HashMap<String, String> responses) {
         // Extract values from the HashMap
         if (responses.containsKey("Do you own or regularly use a car?") &&
                 responses.get("Do you own or regularly use a car?").equalsIgnoreCase("Yes")) {
@@ -64,6 +64,4 @@ public class CalculateCarbonFootprintTransportationCar implements CalculateYearl
         // Calculate carbon footprint
         return emissionFactor * distanceDriven;
     }
-
-
 }

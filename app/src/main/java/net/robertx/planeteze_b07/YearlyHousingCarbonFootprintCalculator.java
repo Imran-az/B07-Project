@@ -2,7 +2,7 @@ package net.robertx.planeteze_b07;
 
 import java.util.HashMap;
 
-public class AnnualHouseCo2 {
+public class YearlyHousingCarbonFootprintCalculator {
     String typeOfHome;
     String numOccupants;
     String sizeOfHome;
@@ -10,7 +10,7 @@ public class AnnualHouseCo2 {
     String avgElectricityBill;
     String waterHeatingType;
 
-    public AnnualHouseCo2(HashMap<String, String> responses) {
+    public YearlyHousingCarbonFootprintCalculator(HashMap<String, String> responses) {
         this.typeOfHome = responses.get("What type of home do you live in?");
         this.numOccupants = responses.get("How many people live in your home?");
         this.sizeOfHome = responses.get("What is the size of your home?");

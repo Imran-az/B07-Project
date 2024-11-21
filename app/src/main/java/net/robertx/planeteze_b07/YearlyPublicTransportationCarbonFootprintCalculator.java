@@ -2,11 +2,11 @@ package net.robertx.planeteze_b07;
 
 import java.util.HashMap;
 
-public class CalcPt {
+public class YearlyPublicTransportationCarbonFootprintCalculator {
     private String frequency; // e.g., "Never", "Occasionally", "Frequently", "Always"
     private String hoursPerWeek; // e.g., "Under 1 hour", "1-3 hours", "3-5 hours", etc.
 
-    public CalcPt(HashMap<String, String> responses) {
+    public YearlyPublicTransportationCarbonFootprintCalculator(HashMap<String, String> responses) {
         // Extract values from the HashMap
         this.frequency = responses.get("How often do you use public transportation?");
         this.hoursPerWeek = responses.get("How much time do you spend on public transport per week?");
