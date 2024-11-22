@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         android:id="@+id/loginbox_title"
         android:layout_width="199dp"
         android:layout_height="56dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="230dp"
         android:background="#80FFFFFF"
         android:gravity="center_horizontal"
         android:padding="10dp"
@@ -22,7 +21,6 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,17 +28,19 @@
         android:id="@+id/emailaddress_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="72dp"
         android:background="#80FFFFFF"
         android:ems="10"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:text="Email Address"
+        android:text=""
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/loginbox_title"
-        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@id/loginbox_title"
         app:layout_constraintTop_toTopOf="@id/loginbox_title" />
 
@@ -48,7 +48,8 @@
         android:id="@+id/Password_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="64dp"
+        android:autofillHints="password"
         android:background="#80FFFFFF"
         android:ems="10"
         android:hint="Enter Password"
@@ -57,9 +58,7 @@
         android:textColorHint="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:autofillHints="password"
         app:layout_constraintEnd_toEndOf="@id/emailaddress_login"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/emailaddress_login"
         app:layout_constraintTop_toTopOf="@id/emailaddress_login" />
 
@@ -84,10 +83,36 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="@id/backbutton_login"
-        app:layout_constraintTop_toTopOf="@id/backbutton_login"
-        tools:layout_editor_absoluteY="449dp" />
+        app:layout_constraintTop_toTopOf="@id/backbutton_login" />
+
+    <Button
+        android:id="@+id/resetPasswordbutton"
+        android:layout_width="209dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:text="Reset Password"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toRightOf="@+id/backbutton_login"
+        app:layout_constraintRight_toLeftOf="@+id/loginbutton"
+        app:layout_constraintTop_toBottomOf="@id/message" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="159dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="20dp"
+        android:background="#80FFFFFF"
+        android:gravity="center"
+        android:text="Forgot your password?"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintLeft_toRightOf="@+id/backbutton_login"
+        app:layout_constraintRight_toLeftOf="@+id/loginbutton"
+        app:layout_constraintTop_toBottomOf="@id/loginbutton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
