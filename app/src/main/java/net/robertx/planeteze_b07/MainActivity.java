@@ -10,13 +10,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import android.util.Log;
-
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +23,19 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        System.out.println("Hello, World!");
 
+       HousingCO2DataRetriever housingCO2DataRetriever = new HousingCO2DataRetriever();
+         housingCO2DataRetriever.getSpecificCO2Value("Detached", "Under-1000-sqft", "Under-50-Dollars", "1-Occupant", "Wood")
+                .thenAccept(co2Value -> {
+                     // Handle the retrieved CO2 value
+                    System.out.println("CO2 Value: " + co2Value);
+                })
+                .exceptionally(throwable -> {
+                     // Handle the exception
+                     return null;
+                });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
     }
+
 }
