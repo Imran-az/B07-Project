@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.questionaire.Questionnaire;
+import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
 import java.util.ArrayList;
 
@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Questionnaire.class);
-            intent.putExtra("question", question);
-            intent.putExtra("options", options);
+            Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
+//            intent.putExtra("question", question);
+//            intent.putExtra("options", options);
             startActivity(intent);
         });
 

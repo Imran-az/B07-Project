@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.questionaire;
+package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.content.Context;
 import android.util.AttributeSet;
