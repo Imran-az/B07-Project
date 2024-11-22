@@ -34,17 +34,17 @@ public class LoginPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     //comment out this method for testing login (Until sign out button is implemented)
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(),
-                    MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent intent = new Intent(getApplicationContext(),
+//                    MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 
     Button backbutton2;
     @Override
