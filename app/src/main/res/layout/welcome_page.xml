@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="322dp"
         android:layout_height="44dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="324dp"
         android:text="Welcome to Planeteze"
         android:textColor="@color/white"
         android:textSize="30sp"
@@ -23,28 +23,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/signupbutton"
+        android:layout_width="176dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="24dp"
+        android:padding="10dp"
+        android:text="SIGN UP"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/loginbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
+
+    <Button
         android:id="@+id/loginbutton"
         android:layout_width="170dp"
         android:layout_height="59dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:padding="10dp"
         android:text="LOGIN"
-        android:textStyle="bold"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/signupbutton"
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
-    <Button
-        android:id="@+id/signupbutton"
-        android:layout_width="176dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:text="SIGN UP"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/loginbutton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
