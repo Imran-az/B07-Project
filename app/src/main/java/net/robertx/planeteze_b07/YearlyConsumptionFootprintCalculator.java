@@ -1,5 +1,6 @@
 package net.robertx.planeteze_b07;
 
+import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
     private static final Map<String, Double> monthlyReduction = new HashMap<>();
     private static final Map<String, Double> annualReduction = new HashMap<>();
     private static final Map<String, Double> rarelyReduction = new HashMap<>();
+
+    private static final String TAG = "ConsumptionFootprint";
 
     static {
         CLOTHES_EMISSION.put("Monthly", 360.0);
@@ -29,8 +32,8 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
         monthlyReduction.put("Frequently", 108.0);
         monthlyReduction.put("Always", 180.0);
 
-        annualReduction.put("Occasionally", 15.0);
-        annualReduction.put("Frequently", 30.0);
+        annualReduction.put("Occasional", 15.0);
+        annualReduction.put("Frequent", 30.0);
         annualReduction.put("Always", 50.0);
 
         rarelyReduction.put("Occasionally", 0.75);
@@ -42,37 +45,52 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
         RECYCLING_REDUCTION.put("Rarely", rarelyReduction);
     }
     @Override
-    public double calculateYearlyFootprint(HashMap<String, String> responses){
-        String clothesFrequency = responses.get("How often do you buy new clothes?");
-        String devicesPurchased = responses.get("How many new electronic devices do you purchase each year?");
-        String recyclingFrequency = responses.get("How often do you recycle?");
-        String isEcoFriendly = responses.get("How eco-friendly are your purchases?");
+    public double calculateYearlyFootprint(HashMap<String, String> responses) {
+        // Extract responses
+        String clothesFrequency = responses.getOrDefault("How often do you buy new clothes?", "Rarely");
+        String devicesPurchased = responses.getOrDefault("How many electronic devices (phones, laptops, etc.) have you purchased in the past year?", "None");
+        String recyclingFrequency = responses.getOrDefault("How often do you recycle?", "Never");
+        String isEcoFriendly = responses.getOrDefault("Do you buy second-hand or eco-friendly products?", "No");
 
+        // Validate clothes frequency
         if (!CLOTHES_EMISSION.containsKey(clothesFrequency)) {
             throw new IllegalArgumentException("Invalid clothes frequency: " + clothesFrequency);
         }
+
+        // Validate device purchases
         if (!DEVICES_EMISSION.containsKey(devicesPurchased)) {
             throw new IllegalArgumentException("Invalid devices purchased: " + devicesPurchased);
         }
-        if (!RECYCLING_REDUCTION.containsKey(clothesFrequency)) {
-            throw new IllegalArgumentException("Invalid recycling frequency: " + recyclingFrequency);
+
+        // Fetch the sub-map for recycling reductions
+        Map<String, Double> reductionMap = RECYCLING_REDUCTION.get(clothesFrequency);
+        if (reductionMap == null) {
+            throw new IllegalArgumentException("Invalid clothes frequency for recycling reduction: " + clothesFrequency);
         }
 
+        // Get the recycling reduction value
+        double recyclingReduction = reductionMap.getOrDefault(recyclingFrequency, 0.0);
+
+        // Calculate emissions
         double clothesEmission = CLOTHES_EMISSION.get(clothesFrequency);
         double devicesEmission = DEVICES_EMISSION.get(devicesPurchased);
 
-        Map<String, Double> reductionMap = RECYCLING_REDUCTION.get(clothesFrequency);
-        double recyclingReduction = reductionMap.getOrDefault(recyclingFrequency, 0.0);
+        // Debug log
+        Log.d(TAG, "Clothes Emission: " + clothesEmission);
+        Log.d(TAG, "Devices Emission: " + devicesEmission);
+        Log.d(TAG, "Recycling Reduction: " + recyclingReduction);
 
+        // Calculate total emission
         double totalEmission;
-        if (isEcoFriendly.equalsIgnoreCase("Regularly")) {
+        if ("Regularly".equalsIgnoreCase(isEcoFriendly)) {
             totalEmission = ((clothesEmission * 0.5) + devicesEmission) - recyclingReduction;
-        } else if (isEcoFriendly.equalsIgnoreCase("Occasionally")) {
+        } else if ("Occasionally".equalsIgnoreCase(isEcoFriendly)) {
             totalEmission = ((clothesEmission * 0.7) + devicesEmission) - recyclingReduction;
         } else {
             totalEmission = (clothesEmission + devicesEmission) - recyclingReduction;
         }
 
-        return Math.max(totalEmission, 0.0);
+        return Math.max(totalEmission, 0.0); // Ensure no negative emissions
     }
+
 }

@@ -9,8 +9,8 @@ public class YearlyPublicTransportationCarbonFootprintCalculator {
 
     public double calculateYearlyFootprint(HashMap <String, String> responses) {
         // Extract values from the HashMap
-        this.frequency = responses.get("How often do you use public transportation?");
-        this.hoursPerWeek = responses.get("How much time do you spend on public transport per week?");
+        this.frequency = responses.get("How often do you use public transportation (bus, train, subway)?");
+        this.hoursPerWeek = responses.get("How much time do you spend on public transport per week (bus, train, subway)?");
 
         return calculateFootprint(frequency, hoursPerWeek);
     }

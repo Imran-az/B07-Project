@@ -13,14 +13,17 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
 
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
+        // Reset dietFootprint at the start of each calculation
+        dietFootprint = 0;
+
         // Extract values from the HashMap
         this.dietType = responses.get("What best describes your diet?");
 
         if (dietType.equalsIgnoreCase("Meat-based")) {
-            this.beefConsumption = responses.get("How often do you eat beef?");
-            this.porkConsumption = responses.get("How often do you eat pork?");
-            this.chickenConsumption = responses.get("How often do you eat chicken?");
-            this.fishConsumption = responses.get("How often do you eat fish?");
+            this.beefConsumption = responses.get("How often do you eat the following animal-based products? Beef:");
+            this.porkConsumption = responses.get("How often do you eat the following animal-based products? Pork:");
+            this.chickenConsumption = responses.get("How often do you eat the following animal-based products? Chicken:");
+            this.fishConsumption = responses.get("How often do you eat the following animal-based products? Fish/Seafood:");
         }
 
         this.foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
@@ -28,16 +31,17 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         // If diet is meat-based, add footprints for meat consumption
         if (dietType.equalsIgnoreCase("Meat-based")) {
             dietFootprint += calculateMeatConsumptionFootprint(beefConsumption, porkConsumption, chickenConsumption, fishConsumption);
-        }
-        else{
+        } else {
             dietFootprint = calculateDietFootprint(dietType);
         }
 
         // Add footprint for food waste
-        dietFootprint += calculateFoodWasteFootprint(foodWaste);
+        dietFootprint += calculateFoodWasteFootprint(this.foodWaste);
 
+        System.out.println(" in Function  diet" + dietFootprint);
         return dietFootprint;
     }
+
 
     private double calculateDietFootprint(String dietType) {
         if (dietType.equalsIgnoreCase("Vegetarian")) {
@@ -46,8 +50,6 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
             return 500;
         } else if (dietType.equalsIgnoreCase("Pescatarian")) {
             return 1500;
-        } else if (dietType.equalsIgnoreCase("Meat-based")) {
-            return 0; // Meat-based diets add consumption footprints later
         }
         throw new IllegalArgumentException("Invalid diet type: " + dietType);
     }

@@ -29,7 +29,12 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
 
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        // Extract values from the HashMap
+
+        if (responses.containsKey("Do you own or regularly use a car?") &&
+                responses.get("Do you own or regularly use a car?").equalsIgnoreCase("No")) {
+            return 0;
+        }
+
         if (responses.containsKey("Do you own or regularly use a car?") &&
                 responses.get("Do you own or regularly use a car?").equalsIgnoreCase("Yes")) {
             this.carType = responses.get("What type of car do you drive?");
@@ -37,20 +42,19 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
 
             // Convert distance string to numeric value (default to 0 if missing or invalid)
             this.distanceDriven = parseDistance(distanceStr);
-        } else {
-            // No car usage
-            this.carType = "None";
-            this.distanceDriven = 0;
+
+            double emissionFactor = getEmissionFactor();
+
+            // Calculate and return carbon footprint
+            return emissionFactor * distanceDriven;
         }
 
-        double emissionFactor = getEmissionFactor();
-
-        // Calculate carbon footprint
-        return emissionFactor * distanceDriven;
+        // Default return in case the key doesn't exist or has unexpected values
+        return 0;
     }
 
     private double getEmissionFactor() {
-        double emissionFactor;
+        double emissionFactor = 0.0;
 
         // Get emission factor based on car type
         if (carType.equalsIgnoreCase("gasoline")) {
@@ -61,8 +65,6 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
             emissionFactor = 0.16; // kg CO2 per km
         } else if (carType.equalsIgnoreCase("electric")) {
             emissionFactor = 0.05; // kg CO2 per km
-        } else {
-            emissionFactor = 0; // Unknown or no car
         }
         return emissionFactor;
     }

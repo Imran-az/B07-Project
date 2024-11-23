@@ -6,9 +6,11 @@ public class YearlyFlightCarbonFootprintCalculator implements CalculateYearlyCar
 
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        String shortHaulFlights = responses.get("How many short-haul flights have you taken in the past year?");
-        String longHaulFlights = responses.get("How many long-haul flights have you taken in the past year?");
+        String shortHaulFlights = responses.get("How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?");
+        String longHaulFlights = responses.get("How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?");
+        assert shortHaulFlights != null;
         double shortHaulFootprint = calculateShortHaulFootprint(shortHaulFlights);
+        assert longHaulFlights != null;
         double longHaulFootprint = calculateLongHaulFootprint(longHaulFlights);
         return shortHaulFootprint + longHaulFootprint;
     }

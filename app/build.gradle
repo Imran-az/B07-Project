@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -40,9 +39,16 @@ dependencies {
     implementation libs.firebase.database
     testImplementation libs.junit
     testImplementation libs.junit.jupiter
+    testImplementation libs.ext.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation libs.jackson.databind
+
+    // Testing Libraries
+    testImplementation libs.mockito.junit.jupiter.v550
+    testImplementation libs.mockito.core.v550
+    testImplementation libs.robolectric.v49
+
 
     implementation platform(libs.firebase.bom)
 }
