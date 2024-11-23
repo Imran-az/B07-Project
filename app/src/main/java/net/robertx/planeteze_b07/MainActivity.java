@@ -1,6 +1,7 @@
 package net.robertx.planeteze_b07;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -10,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
         System.out.println("Hello, World!");
 
+        double c02 = 0;
        HousingCO2DataRetriever housingCO2DataRetriever = new HousingCO2DataRetriever();
          housingCO2DataRetriever.getSpecificCO2Value("Detached", "Under-1000-sqft", "Under-50-Dollars", "1-Occupant", "Wood")
                 .thenAccept(co2Value -> {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                      // Handle the exception
                      return null;
                 });
+
 
     }
 

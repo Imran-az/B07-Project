@@ -2,15 +2,17 @@ package net.robertx.planeteze_b07;
 
 import java.util.HashMap;
 
-public class YearlyFoodCarbonFootprintCalculator {
+public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbonFootPrint {
     private String dietType; // e.g., "Vegetarian", "Vegan", "Pescatarian", "Meat-based"
     private String beefConsumption; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String porkConsumption; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String chickenConsumption; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String fishConsumption; //"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
     private String foodWaste; // "Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"
+    double dietFootprint;
 
-    public YearlyFoodCarbonFootprintCalculator(HashMap<String, String> responses) {
+    @Override
+    public double calculateYearlyFootprint(HashMap<String, String> responses) {
         // Extract values from the HashMap
         this.dietType = responses.get("What best describes your diet?");
 
@@ -22,14 +24,13 @@ public class YearlyFoodCarbonFootprintCalculator {
         }
 
         this.foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
-    }
-
-    public double calculateYearlyFootprint() {
-        double dietFootprint = calculateDietFootprint(dietType);
 
         // If diet is meat-based, add footprints for meat consumption
         if (dietType.equalsIgnoreCase("Meat-based")) {
             dietFootprint += calculateMeatConsumptionFootprint(beefConsumption, porkConsumption, chickenConsumption, fishConsumption);
+        }
+        else{
+            dietFootprint = calculateDietFootprint(dietType);
         }
 
         // Add footprint for food waste

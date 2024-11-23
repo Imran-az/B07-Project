@@ -27,8 +27,8 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
         }
     }
 
-
-    public YearlyDrivingCarbonFootprintCalculator(HashMap<String, String> responses) {
+    @Override
+    public double calculateYearlyFootprint(HashMap<String, String> responses) {
         // Extract values from the HashMap
         if (responses.containsKey("Do you own or regularly use a car?") &&
                 responses.get("Do you own or regularly use a car?").equalsIgnoreCase("Yes")) {
@@ -42,10 +42,14 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
             this.carType = "None";
             this.distanceDriven = 0;
         }
+
+        double emissionFactor = getEmissionFactor();
+
+        // Calculate carbon footprint
+        return emissionFactor * distanceDriven;
     }
 
-    @Override
-    public double calculateYearlyFootprint() {
+    private double getEmissionFactor() {
         double emissionFactor;
 
         // Get emission factor based on car type
@@ -60,8 +64,6 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
         } else {
             emissionFactor = 0; // Unknown or no car
         }
-
-        // Calculate carbon footprint
-        return emissionFactor * distanceDriven;
+        return emissionFactor;
     }
 }

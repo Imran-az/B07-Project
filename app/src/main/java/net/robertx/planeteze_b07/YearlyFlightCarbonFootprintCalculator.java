@@ -2,17 +2,12 @@ package net.robertx.planeteze_b07;
 
 import java.util.HashMap;
 
-public class YearlyFlightCarbonFootprintCalculator {
-    private String shortHaulFlights; // e.g., "None", "1-2 flights", "3-5 flights", etc.
-    private String longHaulFlights; // e.g., "None", "1-2 flights", "3-5 flights", etc.
+public class YearlyFlightCarbonFootprintCalculator implements CalculateYearlyCarbonFootPrint {
 
-    public YearlyFlightCarbonFootprintCalculator(HashMap<String, String> responses) {
-        // Extract values from the HashMap (assuming these are always answered correctly)
-        this.shortHaulFlights = responses.get("How many short-haul flights have you taken in the past year?");
-        this.longHaulFlights = responses.get("How many long-haul flights have you taken in the past year?");
-    }
-
-    public double calculateYearlyFootprint() {
+    @Override
+    public double calculateYearlyFootprint(HashMap<String, String> responses) {
+        String shortHaulFlights = responses.get("How many short-haul flights have you taken in the past year?");
+        String longHaulFlights = responses.get("How many long-haul flights have you taken in the past year?");
         double shortHaulFootprint = calculateShortHaulFootprint(shortHaulFlights);
         double longHaulFootprint = calculateLongHaulFootprint(longHaulFlights);
         return shortHaulFootprint + longHaulFootprint;
