@@ -3,6 +3,7 @@ package net.robertx.planeteze_b07.annual_carbon_footprint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,5 +53,25 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, fragments);
         viewPager.setAdapter(adapter);
+
+        Button nextButton = findViewById(R.id.next_button);
+        Button previousButton = findViewById(R.id.previous_button);
+
+        nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
+        nextButton.setOnClickListener(v -> {
+            int currentItem = viewPager.getCurrentItem();
+            viewPager.setCurrentItem(currentItem + 1, true);
+            nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
+            previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+        });
+
+
+        previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+        previousButton.setOnClickListener(v -> {
+            int currentItem = viewPager.getCurrentItem();
+            viewPager.setCurrentItem(currentItem - 1, true);
+            nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
+            previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+        });
     }
 }

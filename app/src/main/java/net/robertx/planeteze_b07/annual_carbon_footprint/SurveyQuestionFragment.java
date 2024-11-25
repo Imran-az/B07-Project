@@ -67,32 +67,6 @@ public class SurveyQuestionFragment extends Fragment {
             optionsGroup.addOption(option);
         }
 
-        // TODO: These buttons should not be in the fragment itself lol
-        Button nextButton = view.findViewById(R.id.next_button);
-        // disable button if the next fragment is not available
-        if (viewPager != null) {
-            nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
-        }
-
-        nextButton.setOnClickListener(v -> {
-            if (viewPager != null) {
-                int currentItem = viewPager.getCurrentItem();
-                viewPager.setCurrentItem(currentItem + 1, true);
-            }
-        });
-
-        Button previousButton = view.findViewById(R.id.previous_button);
-
-        // disable button if the previous fragment is not available
-        if (viewPager != null) {
-            previousButton.setEnabled(viewPager.getCurrentItem() > 0);
-        }
-        previousButton.setOnClickListener(v -> {
-            if (viewPager != null) {
-                int currentItem = viewPager.getCurrentItem();
-                viewPager.setCurrentItem(currentItem - 1, true);
-            }
-        });
 
         return view;
     }
