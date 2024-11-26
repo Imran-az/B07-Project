@@ -50,12 +50,29 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
 
         List<SurveyQuestionFragment> fragments = new ArrayList<>();
         fragments.add(SurveyQuestionFragment.newInstance("Do you own or regularly use a car?", new String[]{"Yes", "No"}));
-        // car questions should not be displayed unless they answer yes
         fragments.add(SurveyQuestionFragment.newInstance("What type of car do you drive?", new String[]{"Gasoline", "Diesel", "Hybrid", "Electric", "I don't know"}));
-        fragments.add(SurveyQuestionFragment.newInstance("How many kilometers/miles do you drive per year?", new String[]{"Up to 5,000 km (3,000 miles)", "5,000-10,000 km (3,000 - 6,000 miles)", "10,000 - 15,000 km (6,000 - 9,000) miles", "15,000 - 20,000 km (9,000 - 12,000 mile)", "20,000 - 25,000 (12,000 - 15,000 miles)", "More than 25,000 km (15,000 miles)"}));
-
-        fragments.add(SurveyQuestionFragment.newInstance("How often do you use public transportation (bus, train, subway)?", new String[] {"Never", "Occasionally (1-2 times/week)", "Frequently (3-4 times/week)", "Always (5+ times/week)"}));
-
+        fragments.add(SurveyQuestionFragment.newInstance("How many kilometers/miles do you drive per year?", new String[]{"Up to 5,000 km (3,000 miles)", "5,000–10,000 km (3,000–6,000 miles)", "10,000–15,000 km (6,000–9,000 miles)", "15,000–20,000 km (9,000–12,000 miles)", "20,000–25,000 km (12,000–15,000 miles)", "More than 25,000 km (15,000 miles)"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you use public transportation (bus, train, subway)?", new String[]{"Never", "Occasionally (1-2 times/week)", "Frequently (3-4 times/week)", "Always (5+ times/week)"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How much time do you spend on public transport per week (bus, train, subway)?", new String[]{"Under 1 hour", "1-3 hours", "3-5 hours", "5-10 hours", "More than 10 hours"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?", new String[]{"None", "1-2 flights", "3-5 flights", "6-10 flights", "More than 10 flights"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?", new String[]{"None", "1-2 flights", "3-5 flights", "6-10 flights", "More than 10 flights"}));
+        fragments.add(SurveyQuestionFragment.newInstance("What best describes your diet?", new String[]{"Vegetarian", "Vegan", "Pescatarian (fish/seafood)", "Meat-based (eat all types of animal products)"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you eat the following animal-based products? Beef:", new String[]{"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you eat the following animal-based products? Pork:", new String[]{"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you eat the following animal-based products? Chicken:", new String[]{"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you eat the following animal-based products? Fish/Seafood:", new String[]{"Daily", "Frequently (3-5 times/week)", "Occasionally (1-2 times/week)", "Never"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you waste food or throw away uneaten leftovers?", new String[]{"Never", "Rarely", "Occasionally", "Frequently"}));
+        fragments.add(SurveyQuestionFragment.newInstance("What type of home do you live in?", new String[]{"Detached house", "Semi-detached house", "Townhouse", "Condo/Apartment", "Other"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many people live in your household?", new String[]{"1", "2", "3-4", "5 or more"}));
+        fragments.add(SurveyQuestionFragment.newInstance("What is the size of your home?", new String[]{"Under 1000 sq. ft.", "1000-2000 sq. ft.", "Over 2000 sq. ft."}));
+        fragments.add(SurveyQuestionFragment.newInstance("What type of energy do you use to heat your home?", new String[]{"Natural Gas", "Electricity", "Oil", "Propane", "Wood", "Other"}));
+        fragments.add(SurveyQuestionFragment.newInstance("What is your average monthly electricity bill?", new String[]{"Under $50", "$50-$100", "$100-$150", "$150-$200", "Over $200"}));
+        fragments.add(SurveyQuestionFragment.newInstance("What type of energy do you use to heat water in your home?", new String[]{"Natural Gas", "Electricity", "Oil", "Propane", "Solar", "Other"}));
+        fragments.add(SurveyQuestionFragment.newInstance("Do you use any renewable energy sources for electricity or heating (e.g., solar, wind)?", new String[]{"Yes, primarily (more than 50% of energy use)", "Yes, partially (less than 50% of energy use)", "No"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you buy new clothes?", new String[]{"Monthly", "Quarterly", "Annually", "Rarely"}));
+        fragments.add(SurveyQuestionFragment.newInstance("Do you buy second-hand or eco-friendly products?", new String[]{"Yes, regularly", "Yes, occasionally", "No"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many electronic devices (phones, laptops, etc.) have you purchased in the past year?", new String[]{"None", "1", "2", "3 or more"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you recycle?", new String[]{"Never", "Occasionally", "Frequently", "Always"}));
 
 
 
@@ -84,6 +101,20 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
             viewPager.setCurrentItem(currentItem + 1, true);
             nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
             previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+
+            // if the current item is 1 from the last item, show the submit button
+            if (viewPager.getCurrentItem() == viewPager.getAdapter().getItemCount() - 1) {
+                nextButton.setEnabled(true);
+                nextButton.setText("Submit");
+                nextButton.setOnClickListener(v1 -> {
+                    answers.put(fragments.get(fragments.size() - 1).getQuestion(), fragments.get(fragments.size() - 1).getSelectedOption());
+                    Toast.makeText(this, "Survey submitted!", Toast.LENGTH_SHORT).show();
+                    nextButton.setEnabled(false);
+                    previousButton.setEnabled(false);
+                    finish();
+                });
+            }
+
         });
 
 
