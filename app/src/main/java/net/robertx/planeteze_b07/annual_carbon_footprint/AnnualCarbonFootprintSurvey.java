@@ -2,6 +2,7 @@ package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +69,17 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         nextButton.setOnClickListener(v -> {
             int currentItem = viewPager.getCurrentItem();
             SurveyQuestionFragment currentFragment = fragments.get(currentItem);
+
+            if (currentItem == 0) {
+                // if they responded no to owning a car, skip the car questions
+                if (currentFragment.getSelectedOption().equals("No")) {
+                    viewPager.setCurrentItem(3, true);
+                    nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
+                    previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+                    return;
+                }
+            }
+
             answers.put(currentFragment.getQuestion(), currentFragment.getSelectedOption());
             viewPager.setCurrentItem(currentItem + 1, true);
             nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
@@ -78,6 +90,19 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         previousButton.setEnabled(viewPager.getCurrentItem() > 0);
         previousButton.setOnClickListener(v -> {
             int currentItem = viewPager.getCurrentItem();
+            SurveyQuestionFragment currentFragment = fragments.get(currentItem);
+
+            if (currentItem == 3) {
+                // if they responded no to owning a car, skip the car questions
+                if (fragments.get(0).getSelectedOption().equals("No")) {
+                    viewPager.setCurrentItem(0, true);
+                    nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
+                    previousButton.setEnabled(viewPager.getCurrentItem() > 0);
+                    return;
+                }
+            }
+
+            answers.put(currentFragment.getQuestion(), currentFragment.getSelectedOption());
             viewPager.setCurrentItem(currentItem - 1, true);
             nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
             previousButton.setEnabled(viewPager.getCurrentItem() > 0);

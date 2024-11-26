@@ -2,7 +2,10 @@ package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
@@ -56,7 +59,8 @@ public class RadioButtonSystem extends LinearLayout {
         toggleButton.setBackgroundResource(R.drawable.toggle_button_background);
 
 
-        toggleButton.setOnClickListener(onToggleClickListener);
+//        toggleButton.setOnClickListener(onToggleClickListener);
+        toggleButton.setOnCheckedChangeListener(onCheckedChangeListener);
         toggleButtons.add(toggleButton);
         addView(toggleButton);
     }
@@ -64,6 +68,7 @@ public class RadioButtonSystem extends LinearLayout {
     public void setDefaultOption(int index) {
         if (index >= 0 && index < toggleButtons.size()) {
             toggleButtons.get(index).setChecked(true);
+            toggleButtons.get(index).setEnabled(false);
         }
     }
 
@@ -89,13 +94,32 @@ public class RadioButtonSystem extends LinearLayout {
         return -1;
     }
 
+    private final CompoundButton.OnCheckedChangeListener onCheckedChangeListener = (buttonView, isChecked) -> {
+        if (isChecked) {
+            for (ToggleButton button : toggleButtons) {
+                if (button != buttonView) {
+                    button.setChecked(false);
+                    button.setEnabled(true);
+                }
+            }
+            buttonView.setEnabled(false);
+        }
+    };
+
     private final OnClickListener onToggleClickListener = view -> {
         ToggleButton clickedButton = (ToggleButton) view;
+        // prevent disabling the clicked button if it is already checked
+        if (clickedButton.isChecked()) {
+            return;
+        }
+
         for (ToggleButton button : toggleButtons) {
             if (button != clickedButton) {
+                button.setEnabled(true);
                 button.setChecked(false);
             }
         }
+        clickedButton.setEnabled(false);
     };
 
 }
