@@ -61,6 +61,12 @@ public class RadioButtonSystem extends LinearLayout {
         addView(toggleButton);
     }
 
+    public void setDefaultOption(int index) {
+        if (index >= 0 && index < toggleButtons.size()) {
+            toggleButtons.get(index).setChecked(true);
+        }
+    }
+
     /**
      * Clear the selection of all options
      */

@@ -20,7 +20,6 @@ public class SurveyQuestionFragment extends Fragment {
 
     private String question;
     private String[] options;
-    private ViewPager2 viewPager;
 
 
     public static SurveyQuestionFragment newInstance(String question, String[] options) {
@@ -35,9 +34,6 @@ public class SurveyQuestionFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof AnnualCarbonFootprintSurvey) {
-            viewPager = ((AnnualCarbonFootprintSurvey) context).findViewById(R.id.surveyPages);
-        }
     }
 
     @Override
@@ -67,7 +63,18 @@ public class SurveyQuestionFragment extends Fragment {
             optionsGroup.addOption(option);
         }
 
+        optionsGroup.setDefaultOption(0);
+
 
         return view;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getSelectedOption() {
+        RadioButtonSystem options = this.getView().findViewById(R.id.options_radio_button_system);
+        return this.options[options.getSelectedIndex()];
     }
 }

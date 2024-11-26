@@ -1,8 +1,6 @@
 package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +16,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import net.robertx.planeteze_b07.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_annual_carbon_footprint_survey);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.survey_pages_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -38,7 +37,7 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
             NavUtils.navigateUpFromSameTask(AnnualCarbonFootprintSurvey.this);
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.survey_pages_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -46,9 +45,17 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
 
         ViewPager2 viewPager = findViewById(R.id.surveyPages);
 
+        HashMap<String, String> answers = new HashMap<>();
+
         List<SurveyQuestionFragment> fragments = new ArrayList<>();
-        fragments.add(SurveyQuestionFragment.newInstance("Question 1", new String[]{"Q1 Option 1", "Q1 Option 2"}));
-        fragments.add(SurveyQuestionFragment.newInstance("Question 2", new String[]{"Q2 Option 1", "Q2 Option 2"}));
+        fragments.add(SurveyQuestionFragment.newInstance("Do you own or regularly use a car?", new String[]{"Yes", "No"}));
+        // car questions should not be displayed unless they answer yes
+        fragments.add(SurveyQuestionFragment.newInstance("What type of car do you drive?", new String[]{"Gasoline", "Diesel", "Hybrid", "Electric", "I don't know"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many kilometers/miles do you drive per year?", new String[]{"Up to 5,000 km (3,000 miles)", "5,000-10,000 km (3,000 - 6,000 miles)", "10,000 - 15,000 km (6,000 - 9,000) miles", "15,000 - 20,000 km (9,000 - 12,000 mile)", "20,000 - 25,000 (12,000 - 15,000 miles)", "More than 25,000 km (15,000 miles)"}));
+
+        fragments.add(SurveyQuestionFragment.newInstance("How often do you use public transportation (bus, train, subway)?", new String[] {"Never", "Occasionally (1-2 times/week)", "Frequently (3-4 times/week)", "Always (5+ times/week)"}));
+
+
 
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, fragments);
@@ -60,6 +67,8 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
         nextButton.setOnClickListener(v -> {
             int currentItem = viewPager.getCurrentItem();
+            SurveyQuestionFragment currentFragment = fragments.get(currentItem);
+            answers.put(currentFragment.getQuestion(), currentFragment.getSelectedOption());
             viewPager.setCurrentItem(currentItem + 1, true);
             nextButton.setEnabled(viewPager.getCurrentItem() < viewPager.getAdapter().getItemCount() - 1);
             previousButton.setEnabled(viewPager.getCurrentItem() > 0);
