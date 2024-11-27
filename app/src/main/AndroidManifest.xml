@@ -13,6 +13,18 @@
         android:theme="@style/Theme.PlanetezeB07"
         tools:targetApi="31">
         <activity
+            android:name=".DailySurvey.QuestionnairePageQ5"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ4"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ3"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ2"
+            android:exported="false" />
+        <activity
             android:name=".UserLogin.LoginPage"
             android:exported="false" />
         <activity
@@ -20,16 +32,19 @@
             android:exported="false" />
         <activity
             android:name=".UserLogin.WelcomePage"
-            android:exported="true"> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
+            android:exported="false" /> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ1"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
