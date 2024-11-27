@@ -1,7 +1,6 @@
 package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -41,9 +40,7 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         });
 
         MaterialToolbar toolbar = findViewById(R.id.materialToolbar);
-        toolbar.setNavigationOnClickListener(v -> {
-            NavUtils.navigateUpFromSameTask(AnnualCarbonFootprintSurvey.this);
-        });
+        toolbar.setNavigationOnClickListener(v -> NavUtils.navigateUpFromSameTask(AnnualCarbonFootprintSurvey.this));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.survey_pages_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -156,10 +153,6 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
 
     private void saveSurveyResults(HashMap<String, String> answers) {
         String userId = firebaseAuth.getCurrentUser().getUid();
-        firestore.collection("AnnualCarbonFootprintSurveyData").document(userId).set(answers).addOnSuccessListener(aVoid -> {
-            Toast.makeText(this, "Survey submitted successfully!", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Error submitting survey: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+        firestore.collection("AnnualCarbonFootprintSurveyData").document(userId).set(answers).addOnSuccessListener(aVoid -> Toast.makeText(this, "Survey submitted successfully!", Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(this, "Error submitting survey: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
