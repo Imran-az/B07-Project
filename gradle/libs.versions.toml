@@ -17,6 +17,7 @@ firebaseDatabase = "21.0.0"
 mockitoCore = "5.5.0"
 mockitoJunitJupiter = "4.11.0"
 mockitoJunitJupiterVersion = "5.5.0"
+mpandroidchart = "v3.1.0"
 robolectric = "4.10.3"
 robolectricVersion = "4.9"
 
@@ -39,6 +40,7 @@ mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoJuni
 mockito-core-v550 = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiter" }
 mockito-junit-jupiter-v550 = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiterVersion" }
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-v49 = { module = "org.robolectric:robolectric", version.ref = "robolectricVersion" }
 

@@ -1,7 +1,12 @@
 package net.robertx.planeteze_b07;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -12,12 +17,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.robertx.planeteze_b07.UserLogin.LoginPage;
+import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        button = findViewById(R.id.button22);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                startActivity(intent);
 
+            }
+        });
     }
 }
