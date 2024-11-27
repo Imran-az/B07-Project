@@ -75,7 +75,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
+                if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText())) && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
                     Intent intent = new Intent(QuestionnairePageQ5.this, QuestionnairePageQ6.class);
                     startActivity(intent);
 

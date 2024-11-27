@@ -119,31 +119,32 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                 answer1 = "Electricity bill not paid";
                 answer2 = "Gas bill not paid";
                 answer3 = "Water bill not paid";
-                answer4 = "";
-                answer5 = "";
-                answer6 = "";
+                answer4 = "0";
+                answer5 = "0";
+                answer6 = "0";
 
                 if(e && !TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
-                    answer1 = "Electricity bill paid, Amount Paid: ";
+                    answer1 = "Electricity bill paid";
                     answer4 = String.valueOf(q2_ans.getText());
                 }
                 if(g && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
-                    answer2 = "Gas bill paid, Amount Paid: ";
+                    answer2 = "Gas bill paid";
                     answer5 = String.valueOf(q3_ans.getText());
                 }
                 if(w && !TextUtils.isEmpty(String.valueOf(q4_ans.getText()))){
-                    answer3 = "Water bill paid, Amount Paid: ";
+                    answer3 = "Water bill paid";
                     answer6 = String.valueOf(q4_ans.getText());
                 }
 
 
-
+                Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
                 QuestionnairePageQ1.data.put(q1, answer1);
                 QuestionnairePageQ1.data.put("Electricity Paid", answer4);
                 QuestionnairePageQ1.data.put(q2, answer2);
                 QuestionnairePageQ1.data.put("Gas Paid", answer5);
                 QuestionnairePageQ1.data.put(q3, answer3);
-                QuestionnairePageQ1.data.put("Water Bill", answer6);
+                QuestionnairePageQ1.data.put("Water Paid", answer6);
+                Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
             }
         });
 
