@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
 import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;

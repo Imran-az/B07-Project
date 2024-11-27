@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07;
+package net.robertx.planeteze_b07.CarbonFootprintCalculators;
 
 import java.io.IOException;
 import java.util.HashMap;

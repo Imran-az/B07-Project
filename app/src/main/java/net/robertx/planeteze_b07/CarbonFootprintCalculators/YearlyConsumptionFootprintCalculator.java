@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07;
+package net.robertx.planeteze_b07.CarbonFootprintCalculators;
 
 import android.util.Log;
 import java.util.HashMap;
