@@ -3,10 +3,12 @@ package net.robertx.planeteze_b07.DailySurvey;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class QuestionnairePageQ9 extends AppCompatActivity {
@@ -48,6 +53,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         none_btn = findViewById(R.id.None);
         submit_btn = findViewById(R.id.submit_button);
 
+        q1_que = findViewById(R.id.question1_text_view);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
         q3_que = findViewById(R.id.question3_text_view);
@@ -100,12 +106,8 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         q3 = String.valueOf(q3_que.getText());
         q4 = String.valueOf(q4_que.getText());
 
-        submit_btn = findViewById(R.id.next_button);
-        database = FirebaseDatabase.getInstance();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child(userID);
+        submit_btn = findViewById(R.id.submit_button);
+        //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,9 +136,14 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                     answer6 = String.valueOf(q4_ans.getText());
                 }
 
-                q9_data.put(q1, answer1 + answer4);
-                q9_data.put(q2, answer2 + answer5);
-                q9_data.put(q3, answer3 + answer6);
+
+
+                QuestionnairePageQ1.data.put(q1, answer1);
+                QuestionnairePageQ1.data.put("Electricity Paid", answer4);
+                QuestionnairePageQ1.data.put(q2, answer2);
+                QuestionnairePageQ1.data.put("Gas Paid", answer5);
+                QuestionnairePageQ1.data.put(q3, answer3);
+                QuestionnairePageQ1.data.put("Water Bill", answer6);
             }
         });
 
@@ -148,6 +155,25 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        database = FirebaseDatabase.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userID = currentUser.getUid();
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//        databaseReference = database.getReference("Users").child("Daily Survey").child(currentDate).child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+//
+//        Log.d("FirebaseData", "Saving data: " + QuestionnairePageQ1.data);
+//
+//        databaseReference.updateChildren(QuestionnairePageQ1.data).addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        // Success message (optional)
+//                        Toast.makeText(QuestionnairePageQ9.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        // Error message
+//                        Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

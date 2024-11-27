@@ -3,6 +3,7 @@ package net.robertx.planeteze_b07.DailySurvey;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
     private Button yesbtn, nextbtn, prevbtn, nobtn;
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
-    Map<String, Object> question2data_transport = new HashMap<>();
+
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
@@ -65,7 +66,6 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child("Daily Survey").child("Date").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,24 +78,27 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                     ans2 = question2_answer.getText().toString();
                     ans3 = question3_answer.getText().toString();
 
-                    question2data_transport.put(q1, ans1);
-                    question2data_transport.put(q2, ans2);
-                    question2data_transport.put(q3, ans3);
 
-                    Map<String, Object> newField = new HashMap<>();
-                    newField.put("Take public transportation", "Yes");
-                    newField.put("Type of public transportation", question2_answer.getText().toString());
-                    newField.put("Time spent on public transport", question3_answer.getText().toString());
+                    //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    QuestionnairePageQ1.data.put(q1, ans1);
+                    QuestionnairePageQ1.data.put(q2, ans2);
+                    QuestionnairePageQ1.data.put(q3, ans3);
+
+//                    Map<String, Object> newField = new HashMap<>();
+//                    newField.put("Take public transportation", "Yes");
+//                    newField.put("Type of public transportation", question2_answer.getText().toString());
+//                    newField.put("Time spent on public transport", question3_answer.getText().toString());
+//
+//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            // Success message (optional)
+//                            Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            // Error message
+//                            Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
                 } else {
                     Toast.makeText(QuestionnairePageQ2.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
                 }
@@ -121,24 +124,26 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                 ans2 = 0;
                 ans3 = 0;
 
-                question2data_transport.put(q1, ans1);
-                question2data_transport.put(q2, ans2);
-                question2data_transport.put(q3, ans3);
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                Map<String, Object> newField = new HashMap<>();
-                newField.put("Take public transportation", "No");
-                newField.put("Type of public transportation", 0);
-                newField.put("Time spent on public transport", 0);
+                QuestionnairePageQ1.data.put(q1, ans1);
+                QuestionnairePageQ1.data.put(q2, ans2);
+                QuestionnairePageQ1.data.put(q3, ans3);
 
-                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Success message (optional)
-                        Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Error message
-                        Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                Map<String, Object> newField = new HashMap<>();
+//                newField.put("Take public transportation", "No");
+//                newField.put("Type of public transportation", 0);
+//                newField.put("Time spent on public transport", 0);
+//
+//                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        // Success message (optional)
+//                        Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        // Error message
+//                        Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
         prevbtn = findViewById(R.id.previous_button_Q2);

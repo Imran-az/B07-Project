@@ -29,6 +29,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
     private Button nxtbtn, yesbtn, nobtn;
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
+    public static Map<String, Object> data = new HashMap<>();
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -66,20 +67,24 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
                     Intent intent = new Intent(QuestionnairePageQ1.this, QuestionnairePageQ2.class);
                     startActivity(intent);
 
-                    Map<String, Object> newField = new HashMap<>();
-                    newField.put("Drive Personal Vehicle", "Yes");
-                    newField.put("Distance Driven", question2_answer.getText().toString());
-                    newField.put("Change vehicle type", question3_answer.getText().toString());
+                    data.put("Drive Personal Vehicle", "Yes");
+                    data.put("Distance Driven", question2_answer.getText().toString());
+                    data.put("Change vehicle type", question3_answer.getText().toString());
 
-                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//                    Map<String, Object> newField = new HashMap<>();
+//                    data.put("Drive Personal Vehicle", "Yes");
+//                    data.put("Distance Driven", question2_answer.getText().toString());
+//                    data.put("Change vehicle type", question3_answer.getText().toString());
+//
+//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            // Success message (optional)
+//                            Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            // Error message
+//                            Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
                 }
                 else {
                     Toast.makeText(QuestionnairePageQ1.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -95,20 +100,20 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
                 Intent intent = new Intent(QuestionnairePageQ1.this, QuestionnairePageQ2.class);
                 startActivity(intent);
 
-                Map<String, Object> newField = new HashMap<>();
-                newField.put("Drive Personal Vehicle", "No");
-                newField.put("Distance Driven", 0);
-                newField.put("Change vehicle type", 0);
 
-                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Success message (optional)
-                        Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Error message
-                        Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                data.put("Drive Personal Vehicle", "No");
+                data.put("Distance Driven", 0);
+                data.put("Change vehicle type", 0);
+
+//                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        // Success message (optional)
+//                        Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        // Error message
+//                        Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
 

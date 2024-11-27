@@ -70,27 +70,29 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+        //databaseReference = database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         nxtbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
                     Intent intent = new Intent(QuestionnairePageQ4.this, QuestionnairePageQ5.class);
                     startActivity(intent);
-                    Map<String, Object> newField = new HashMap<>();
-                    newField.put("Flight", option);
-                    newField.put("Number of flights taken today", question2_answer.getText().toString());
-                    newField.put("Distance traveled", question3_answer.getText().toString());
 
-                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                    QuestionnairePageQ1.data.put("Flight", option);
+                    QuestionnairePageQ1.data.put("Number of flights taken today", question2_answer.getText().toString());
+                    QuestionnairePageQ1.data.put("Distance traveled", question3_answer.getText().toString());
+
+//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            // Success message (optional)
+//                            Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            // Error message
+//                            Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
                 }
                 else {
                     Toast.makeText(QuestionnairePageQ4.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();

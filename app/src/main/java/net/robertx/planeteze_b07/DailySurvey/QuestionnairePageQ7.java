@@ -41,6 +41,7 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
         setContentView(R.layout.activity_questionnaire_page_q7);
 
         yes_btn = findViewById(R.id.yes_button);
+        q1_que = findViewById(R.id.question1_text_view);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
         q3_que = findViewById(R.id.question3_text_view);
@@ -63,7 +64,7 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child(userID);
+        //databaseReference = database.getReference("Users").child(userID);
 
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,9 +78,11 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
                     answer2 = String.valueOf(q2_ans.getText());
                     answer3 = String.valueOf(q3_ans.getText());
 
-                    q7_data.put(q1, answer1);
-                    q7_data.put(q2, answer2);
-                    q7_data.put(q3, answer3);
+                    //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                    QuestionnairePageQ1.data.put(q1, answer1);
+                    QuestionnairePageQ1.data.put(q2, answer2);
+                    QuestionnairePageQ1.data.put(q3, answer3);
                 }
                 else{
                     Toast.makeText(QuestionnairePageQ7.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -103,14 +106,17 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
                 Intent intent = new Intent(QuestionnairePageQ7.this, QuestionnairePageQ8.class);
                 startActivity(intent);
 
-                String answer1, answer2, answer3;
+                String answer1;
+                Object answer2, answer3;
                 answer1 = "No";
-                answer2 = String.valueOf(0);
-                answer3 = String.valueOf(0);
+                answer2 = 0;
+                answer3 = 0;
 
-                q7_data.put(q1, answer1);
-                q7_data.put(q2, answer2);
-                q7_data.put(q3, answer3);
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                QuestionnairePageQ1.data.put(q1, answer1);
+                QuestionnairePageQ1.data.put(q2, answer2);
+                QuestionnairePageQ1.data.put(q3, answer3);
             }
         });
 

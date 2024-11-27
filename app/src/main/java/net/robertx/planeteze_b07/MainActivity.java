@@ -10,8 +10,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.EcoTracker.DailySurvey;
-import net.robertx.planeteze_b07.questionnaire.Questionnaire;
 
 import java.util.ArrayList;
 

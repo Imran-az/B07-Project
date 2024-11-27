@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".questionnaire.QuestionnaireTwo">
+    tools:context=".DailySurvey.QuestionnairePageQ9">
 
     <!-- First Question -->
     <TextView
@@ -47,7 +48,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/gas"
+            android:id="@+id/water"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -58,7 +59,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/water"
+            android:id="@+id/gas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="136dp"
@@ -67,6 +68,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/None"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None"
+            app:layout_constraintEnd_toEndOf="@+id/gas"
+            app:layout_constraintTop_toBottomOf="@+id/gas" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,7 +88,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/None"
+        app:layout_constraintTop_toBottomOf="@id/yes_no_button_row"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -175,13 +184,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/None"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="None"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="142dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
         setContentView(R.layout.activity_questionnaire_page_q6);
 
         yes_btn = findViewById(R.id.yes_button);
+        q1_que = findViewById(R.id.question1_text_view);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
 
@@ -60,7 +61,7 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child(userID);
+        //databaseReference = database.getReference("Users").child(userID);
 
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +74,10 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
                     answer1 = "Yes";
                     answer2 = String.valueOf(q2_ans.getText());
 
-                    q6_data.put(q1, answer1);
-                    q6_data.put(q2, answer2);
+                    //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                    QuestionnairePageQ1.data.put(q1, answer1);
+                    QuestionnairePageQ1.data.put(q2, answer2);
                 }
                 else{
                     Toast.makeText(QuestionnairePageQ6.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -102,8 +105,10 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
                 answer1 = "No";
                 answer2 = String.valueOf(0);
 
-                q6_data.put(q1, answer1);
-                q6_data.put(q2, answer2);
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                QuestionnairePageQ1.data.put(q1, answer1);
+                QuestionnairePageQ1.data.put(q2, answer2);
             }
         });
 
