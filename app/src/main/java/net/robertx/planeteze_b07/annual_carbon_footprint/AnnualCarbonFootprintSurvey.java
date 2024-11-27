@@ -75,7 +75,6 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         fragments.add(SurveyQuestionFragment.newInstance("How often do you recycle?", new String[]{"Never", "Occasionally", "Frequently", "Always"}));
 
 
-
         ViewPagerAdapter adapter = new ViewPagerAdapter(this, fragments);
         viewPager.setAdapter(adapter);
 
