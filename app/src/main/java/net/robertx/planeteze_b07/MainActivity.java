@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
@@ -26,18 +28,22 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        System.out.println("Hello, World!");
+//        System.out.println("Hello, World!");
         try {
             // Initialize HousingCO2DataRetriever with context
             HousingCO2DataRetriever.initialize(this);
@@ -140,6 +146,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+
+
+        TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);
+        if (firebaseAuth.getCurrentUser() != null)
+            usernameDisplay.setText("User ID: " + firebaseAuth.getCurrentUser().getUid() + "\n" + "Email: " + firebaseAuth.getCurrentUser().getEmail());
+
+
+        findViewById(R.id.startAnnualCarbonFootprintSurvey).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
+            startActivity(intent);
         });
     }
 }
