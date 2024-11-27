@@ -73,11 +73,11 @@
         android:id="@+id/contributionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You have contributed to a total of X tons of CO2e per year based on your results."
-        android:textSize="16sp"
+        android:layout_marginBottom="28dp"
         android:gravity="center"
+        android:text="@string/yearly_co2_contribution_summary_line"
         android:textColor="#333333"
-        android:layout_marginBottom="28dp" />
+        android:textSize="16sp" />
 
     <!-- Shared Legend -->
     <GridLayout

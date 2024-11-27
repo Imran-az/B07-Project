@@ -66,6 +66,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Fetch and process data from Firebase
         fetchDataFromFirebase();
+
     }
 
     private void initializeViews() {
@@ -178,6 +179,9 @@ public class ResultsActivity extends AppCompatActivity {
                 double[] emissions = extractEmissions(snapshot);
                 String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
                 double total = snapshot.child("TotalEmissions").getValue(Double.class);
+                TextView contributionText = findViewById(R.id.contributionText);
+                String yearlyContributionText = getString(R.string.yearly_co2_contribution_summary_line, total / 1000);
+                contributionText.setText(yearlyContributionText);
 
                 populatePieChart(emissions, categories);
                 populateBarChart(emissions);
