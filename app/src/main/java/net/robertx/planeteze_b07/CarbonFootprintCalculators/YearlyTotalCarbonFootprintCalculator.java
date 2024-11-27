@@ -1,5 +1,7 @@
 package net.robertx.planeteze_b07.CarbonFootprintCalculators;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -10,7 +12,7 @@ public class YearlyTotalCarbonFootprintCalculator {
     private final YearlyPublicTransportationCarbonFootprintCalculator publicTransportCalculator = new YearlyPublicTransportationCarbonFootprintCalculator();
     private final YearlyFoodCarbonFootprintCalculator foodCalculator = new YearlyFoodCarbonFootprintCalculator();
 
-    private final YearlyHousingCarbonFootprintCalculator housingCalculator = new YearlyHousingCarbonFootprintCalculator();
+    private final YearlyHousingCarbonFootprintCalculator housingCalculator =  new YearlyHousingCarbonFootprintCalculator();
 
     private final YearlyFlightCarbonFootprintCalculator flightCalculator = new YearlyFlightCarbonFootprintCalculator();
 
@@ -22,11 +24,17 @@ public class YearlyTotalCarbonFootprintCalculator {
 
     public HashMap<String, Double> calculatePerCategoryEmission(HashMap<String, String> responses) {
         HashMap<String, Double> categoryEmissions = new HashMap<>();
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating driving emissions");
         categoryEmissions.put("DrivingEmissions", drivingCalculator.calculateYearlyFootprint(responses));
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating public transport emissions");
         categoryEmissions.put("PublicTransportEmissions", publicTransportCalculator.calculateYearlyFootprint(responses));
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating flight emissions");
         categoryEmissions.put("FlightEmissions", flightCalculator.calculateYearlyFootprint(responses));
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating housing emissions");
         categoryEmissions.put("HousingEmissions", housingCalculator.calculateYearlyFootprint(responses));
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating food emissions");
         categoryEmissions.put("FoodEmissions", foodCalculator.calculateYearlyFootprint(responses));
+        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating consumption emissions");
         categoryEmissions.put("ConsumptionEmissions", consumptionCalculator.calculateYearlyFootprint(responses));
         return categoryEmissions;
     }

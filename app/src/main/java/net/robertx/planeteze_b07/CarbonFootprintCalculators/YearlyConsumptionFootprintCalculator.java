@@ -68,7 +68,6 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
             throw new IllegalArgumentException("Invalid devices purchased: " + devicesPurchased);
         }
 
-        // TODO: incorrect logic here
         // Fetch the sub-map for recycling reductions
         Map<String, Double> reductionMap = RECYCLING_REDUCTION.get(clothesFrequency);
         if (reductionMap == null) {
