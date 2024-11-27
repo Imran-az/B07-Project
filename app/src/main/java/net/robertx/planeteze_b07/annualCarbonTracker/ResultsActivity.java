@@ -201,25 +201,22 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void populatePieChart(double[] emissions, String[] categories) {
+
         // Create entries for the Pie Chart
         ArrayList<PieEntry> entries = new ArrayList<>();
+
+        ArrayList<Integer> colors = new ArrayList<>();
 
         for (int i = 0; i < emissions.length; i++) {
             if (emissions[i] > 0) {
                 entries.add(new PieEntry((float) emissions[i], categories[i]));
+                colors.add(getLegendColors()[i]);
             }
         }
 
         // Create dataset
         PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setColors(new int[]{
-                Color.parseColor("#4CAF50"), // Forest Green
-                Color.parseColor("#8BC34A"), // Light Forest Green
-                Color.parseColor("#A1887F"), // Earthy Brown
-                Color.parseColor("#CDDC39"), // Mossy Green
-                Color.parseColor("#6D4C41"), // Wood Brown
-                Color.parseColor("#9E9D24")  // Olive Green
-        });
+        dataSet.setColors(colors);
         dataSet.setValueTextSize(12f);                     // Value text size for visibility
         dataSet.setValueTextColor(Color.BLACK);            // Value text color
         dataSet.setValueLineColor(Color.BLACK);            // Black lines for values
@@ -261,6 +258,8 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Refresh the Pie Chart
         pieChart.invalidate();
+
+        dataSet.getColors();
     }
 
 
