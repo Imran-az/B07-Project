@@ -19,7 +19,7 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         // Extract values from the HashMap
         this.dietType = responses.get("What best describes your diet?");
 
-        if (dietType.equalsIgnoreCase("Meat-based")) {
+        if (dietType.equalsIgnoreCase("Meat-based (eat all types of animal products)")) {
             this.beefConsumption = responses.get("How often do you eat the following animal-based products? Beef:");
             this.porkConsumption = responses.get("How often do you eat the following animal-based products? Pork:");
             this.chickenConsumption = responses.get("How often do you eat the following animal-based products? Chicken:");
@@ -29,7 +29,7 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         this.foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
 
         // If diet is meat-based, add footprints for meat consumption
-        if (dietType.equalsIgnoreCase("Meat-based")) {
+        if (dietType.equalsIgnoreCase("Meat-based (eat all types of animal products)")) {
             dietFootprint += calculateMeatConsumptionFootprint(beefConsumption, porkConsumption, chickenConsumption, fishConsumption);
         } else {
             dietFootprint = calculateDietFootprint(dietType);
@@ -48,7 +48,7 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
             return 1000;
         } else if (dietType.equalsIgnoreCase("Vegan")) {
             return 500;
-        } else if (dietType.equalsIgnoreCase("Pescatarian")) {
+        } else if (dietType.equalsIgnoreCase("Pescatarian (fish/seafood)")) {
             return 1500;
         }
         throw new IllegalArgumentException("Invalid diet type: " + dietType);
@@ -61,9 +61,9 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         if (beef != null) {
             if (beef.equalsIgnoreCase("Daily")) {
                 totalFootprint += 2500;
-            } else if (beef.equalsIgnoreCase("Frequently")) {
+            } else if (beef.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 1900;
-            } else if (beef.equalsIgnoreCase("Occasionally")) {
+            } else if (beef.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 1300;
             }
         }
@@ -72,9 +72,9 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         if (pork != null) {
             if (pork.equalsIgnoreCase("Daily")) {
                 totalFootprint += 1450;
-            } else if (pork.equalsIgnoreCase("Frequently")) {
+            } else if (pork.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 860;
-            } else if (pork.equalsIgnoreCase("Occasionally")) {
+            } else if (pork.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 450;
             }
         }
@@ -83,9 +83,9 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         if (chicken != null) {
             if (chicken.equalsIgnoreCase("Daily")) {
                 totalFootprint += 950;
-            } else if (chicken.equalsIgnoreCase("Frequently")) {
+            } else if (chicken.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 600;
-            } else if (chicken.equalsIgnoreCase("Occasionally")) {
+            } else if (chicken.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 200;
             }
         }
@@ -94,9 +94,9 @@ public class YearlyFoodCarbonFootprintCalculator implements CalculateYearlyCarbo
         if (fish != null) {
             if (fish.equalsIgnoreCase("Daily")) {
                 totalFootprint += 800;
-            } else if (fish.equalsIgnoreCase("Frequently")) {
+            } else if (fish.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 500;
-            } else if (fish.equalsIgnoreCase("Occasionally")) {
+            } else if (fish.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 150;
             }
         }

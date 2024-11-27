@@ -20,7 +20,7 @@ public class YearlyHousingCarbonFootprintCalculator {
         String numOccupants = responses.get("How many people live in your household?");
         String homeHeatingType = responses.get("What type of energy do you use to heat your home?");
         String waterHeatingType = responses.get("What type of energy do you use to heat water?");
-        String useRenewableEnergy = responses.get("Do you use any renewable energy sources for electricity or heating?");
+        String useRenewableEnergy = responses.get("Do you use any renewable energy sources for electricity or heating (e.g., solar, wind)?");
 
         double heatingCO2 = dataRetriever.getSpecificCO2Value(typeOfHome, sizeOfHome, electricityBill, numOccupants, homeHeatingType);
         double waterHeatingCO2 = dataRetriever.getSpecificCO2Value(typeOfHome, sizeOfHome, electricityBill, numOccupants, waterHeatingType);
@@ -33,9 +33,9 @@ public class YearlyHousingCarbonFootprintCalculator {
 
     private double adjustForRenewableEnergy(String renewableEnergy) {
         switch (renewableEnergy) {
-            case "Yes, primarily":
+            case "Yes, primarily (more than 50% of energy use)":
                 return -6000.0;
-            case "Yes, partially":
+            case "Yes, partially (less than 50% of energy use)":
                 return -4000.0;
             default:
                 return 0.0;

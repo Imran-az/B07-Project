@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -27,14 +29,26 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -45,8 +59,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-            .getReference("userAnnualSurveyData").child(userId);
+
+    FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +74,8 @@ public class ResultsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        firestore = FirebaseFirestore.getInstance();
 
         // Initialize views
         initializeViews();
@@ -106,13 +122,23 @@ public class ResultsActivity extends AppCompatActivity {
         breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        // Populate breakdown content
-        databaseReference.child("EmissionsData").get().addOnCompleteListener(task -> {
+        CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
+
+        // populate breakdown section with emission data
+        annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
-                DataSnapshot snapshot = task.getResult();
-                double[] emissions = extractEmissions(snapshot);
-                String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
-                populateBreakdown(breakdownContainer, emissions, categories);
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    try {
+                        HashMap<String, String> responses = document.toObject(HashMap.class);
+                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(responses);
+                        double[] emissions = extractEmissions(categoryEmissions);
+                        String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
+                        populateBreakdown(breakdownContainer, emissions, categories);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Parsing firestore data failed", e);
+                    }
+                }
             }
         });
     }
@@ -173,32 +199,48 @@ public class ResultsActivity extends AppCompatActivity {
      * Fetches emission data from Firebase and processes it.
      */
     private void fetchDataFromFirebase() {
-        databaseReference.child("EmissionsData").get().addOnCompleteListener(task -> {
+        CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
+        annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
-                DataSnapshot snapshot = task.getResult();
-                double[] emissions = extractEmissions(snapshot);
-                String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
-                double total = snapshot.child("TotalEmissions").getValue(Double.class);
-                TextView contributionText = findViewById(R.id.contributionText);
-                String yearlyContributionText = getString(R.string.yearly_co2_contribution_summary_line, total / 1000);
-                contributionText.setText(yearlyContributionText);
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    try {
+                        HashMap<String, String> parsedResponses = new HashMap<>();
+                        Map<String, Object> data = document.getData();
+                        Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
+                        for (String key : data.keySet()) {
+                            parsedResponses.put(key, data.get(key).toString());
+                        }
 
-                populatePieChart(emissions, categories);
-                populateBarChart(emissions);
-                createSharedLegend(categories, getLegendColors());
-                compareWithGlobalAverages(total, 4.083); // Example global average
+                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
+                        double[] emissions = extractEmissions(categoryEmissions);
+                        String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
+                        double total = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
+
+                        TextView contributionText = findViewById(R.id.contributionText);
+                        String yearlyContributionText = getString(R.string.yearly_co2_contribution_summary_line, total / 1000);
+                        contributionText.setText(yearlyContributionText);
+
+                        populatePieChart(emissions, categories);
+                        populateBarChart(emissions);
+                        createSharedLegend(categories, getLegendColors());
+                        compareWithGlobalAverages(total, 4.083); // Example global average
+                    } catch (IOException e) {
+                        throw new RuntimeException("Parsing firestore data failed", e);
+                    }
+                }
             }
         });
     }
 
-    private double[] extractEmissions(DataSnapshot snapshot) {
+    private double[] extractEmissions(HashMap<String, Double> data) {
         return new double[]{
-                snapshot.child("ConsumptionEmissions").getValue(Double.class),
-                snapshot.child("DrivingEmissions").getValue(Double.class),
-                snapshot.child("FlightEmissions").getValue(Double.class),
-                snapshot.child("FoodEmissions").getValue(Double.class),
-                snapshot.child("HousingEmissions").getValue(Double.class),
-                snapshot.child("PublicTransportEmissions").getValue(Double.class)
+                data.get("ConsumptionEmissions"),
+                data.get("DrivingEmissions"),
+                data.get("FlightEmissions"),
+                data.get("FoodEmissions"),
+                data.get("HousingEmissions"),
+                data.get("PublicTransportEmissions")
         };
     }
 

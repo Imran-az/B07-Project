@@ -146,7 +146,7 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         fragments.add(SurveyQuestionFragment.newInstance("Do you use any renewable energy sources for electricity or heating (e.g., solar, wind)?", new String[]{"Yes, primarily (more than 50% of energy use)", "Yes, partially (less than 50% of energy use)", "No"}));
         fragments.add(SurveyQuestionFragment.newInstance("How often do you buy new clothes?", new String[]{"Monthly", "Quarterly", "Annually", "Rarely"}));
         fragments.add(SurveyQuestionFragment.newInstance("Do you buy second-hand or eco-friendly products?", new String[]{"Yes, regularly", "Yes, occasionally", "No"}));
-        fragments.add(SurveyQuestionFragment.newInstance("How many electronic devices (phones, laptops, etc.) have you purchased in the past year?", new String[]{"None", "1", "2", "3 or more"}));
+        fragments.add(SurveyQuestionFragment.newInstance("How many electronic devices (phones, laptops, etc.) have you purchased in the past year?", new String[]{"None", "1", "2", "3", "4 or More"}));
         fragments.add(SurveyQuestionFragment.newInstance("How often do you recycle?", new String[]{"Never", "Occasionally", "Frequently", "Always"}));
         return fragments;
     }

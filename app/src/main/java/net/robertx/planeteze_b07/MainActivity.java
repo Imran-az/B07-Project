@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFoo
 import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
 import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
+import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
 import java.io.IOException;
 import java.util.HashMap;

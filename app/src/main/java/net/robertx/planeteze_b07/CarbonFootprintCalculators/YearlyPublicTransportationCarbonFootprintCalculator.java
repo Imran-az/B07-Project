@@ -20,7 +20,7 @@ public class YearlyPublicTransportationCarbonFootprintCalculator {
             return 0;
         }
         // Based on frequency and hours, return the corresponding value
-        if (frequency.equalsIgnoreCase("Occasionally")) {
+        if (frequency.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
             if (hours.equalsIgnoreCase("Under 1 hour")) {
                 return 246;
             } else if (hours.equalsIgnoreCase("1-3 hours")) {
@@ -32,7 +32,7 @@ public class YearlyPublicTransportationCarbonFootprintCalculator {
             } else if (hours.equalsIgnoreCase("More than 10 hours")) {
                 return 4095;
             }
-        } else if (frequency.equalsIgnoreCase("Frequently")) {
+        } else if (frequency.equalsIgnoreCase("Frequently (3-4 times/week)")) {
             if (hours.equalsIgnoreCase("Under 1 hour")) {
                 return 573;
             } else if (hours.equalsIgnoreCase("1-3 hours")) {
@@ -44,7 +44,7 @@ public class YearlyPublicTransportationCarbonFootprintCalculator {
             } else if (hours.equalsIgnoreCase("More than 10 hours")) {
                 return 9555;
             }
-        } else if (frequency.equalsIgnoreCase("Always")) {
+        } else if (frequency.equalsIgnoreCase("Always (5+ times/week)")) {
             if (hours.equalsIgnoreCase("Under 1 hour")) {
                 return 573;
             } else if (hours.equalsIgnoreCase("1-3 hours")) {

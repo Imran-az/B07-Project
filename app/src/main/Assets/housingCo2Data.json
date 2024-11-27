@@ -1,456 +1,456 @@
 {
   "HousingCO2Data": {
-    "Detached": {
-      "Under-1000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+    "Detached house": {
+      "Under 1000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 200,
-            "Natural-Gas": 2400,
+            "Natural Gas": 2400,
             "Oil": 2100,
             "Propane": 2870,
             "Wood": 2170
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 250,
-            "Natural-Gas": 2600,
+            "Natural Gas": 2600,
             "Oil": 2650,
             "Propane": 3470,
             "Wood": 2370
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 380,
-            "Natural-Gas": 2700,
+            "Natural Gas": 2700,
             "Oil": 3200,
             "Propane": 4370,
             "Wood": 2670
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 450,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 3700,
             "Propane": 5270,
             "Wood": 2970
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 400,
-            "Natural-Gas": 2440,
+            "Natural Gas": 2440,
             "Oil": 5200,
             "Propane": 4400,
             "Wood": 2340
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 500,
-            "Natural-Gas": 2640,
+            "Natural Gas": 2640,
             "Oil": 5400,
             "Propane": 4600,
             "Wood": 2540
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 550,
-            "Natural-Gas": 2940,
+            "Natural Gas": 2940,
             "Oil": 5700,
             "Propane": 4900,
             "Wood": 2840
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 600,
-            "Natural-Gas": 3240,
+            "Natural Gas": 3240,
             "Oil": 6000,
             "Propane": 5200,
             "Wood": 3140
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 2610,
+            "Natural Gas": 2610,
             "Oil": 6100,
             "Propane": 5400,
             "Wood": 2510
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1450,
-            "Natural-Gas": 2810,
+            "Natural Gas": 2810,
             "Oil": 6250,
             "Propane": 5600,
             "Wood": 2710
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1600,
-            "Natural-Gas": 3110,
+            "Natural Gas": 3110,
             "Oil": 6700,
             "Propane": 5900,
             "Wood": 3010
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1800,
-            "Natural-Gas": 3410,
+            "Natural Gas": 3410,
             "Oil": 6950,
             "Propane": 6200,
             "Wood": 3310
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1700,
-            "Natural-Gas": 2780,
+            "Natural Gas": 2780,
             "Oil": 7200,
             "Propane": 6400,
             "Wood": 2680
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1900,
-            "Natural-Gas": 2980,
+            "Natural Gas": 2980,
             "Oil": 7400,
             "Propane": 6600,
             "Wood": 2880
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2050,
-            "Natural-Gas": 3280,
+            "Natural Gas": 3280,
             "Oil": 7700,
             "Propane": 6900,
             "Wood": 3180
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2200,
-            "Natural-Gas": 3580,
+            "Natural Gas": 3580,
             "Oil": 8000,
             "Propane": 7200,
             "Wood": 3480
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2300,
-            "Natural-Gas": 3100,
+            "Natural Gas": 3100,
             "Oil": 8200,
             "Propane": 7400,
             "Wood": 3000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2500,
-            "Natural-Gas": 3100,
+            "Natural Gas": 3100,
             "Oil": 8400,
             "Propane": 7600,
             "Wood": 3200
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2700,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 8700,
             "Propane": 7900,
             "Wood": 3500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3100,
-            "Natural-Gas": 3900,
+            "Natural Gas": 3900,
             "Oil": 9000,
             "Propane": 8200,
             "Wood": 3800
           }
         }
       },
-      "1000-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "1000-2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 3800,
             "Propane": 3770,
             "Wood": 3670
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 380,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 4000,
             "Propane": 4470,
             "Wood": 4170
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 500,
-            "Natural-Gas": 3380,
+            "Natural Gas": 3380,
             "Oil": 4700,
             "Propane": 5670,
             "Wood": 4870
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 600,
-            "Natural-Gas": 3860,
+            "Natural Gas": 3860,
             "Oil": 5350,
             "Propane": 6570,
             "Wood": 5670
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 600,
-            "Natural-Gas": 5900,
+            "Natural Gas": 5900,
             "Oil": 5300,
             "Propane": 3940,
             "Wood": 3840
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 800,
-            "Natural-Gas": 6100,
+            "Natural Gas": 6100,
             "Oil": 5440,
             "Propane": 4640,
             "Wood": 4340
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1050,
-            "Natural-Gas": 6400,
+            "Natural Gas": 6400,
             "Oil": 5800,
             "Propane": 5740,
             "Wood": 5040
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1200,
-            "Natural-Gas": 6700,
+            "Natural Gas": 6700,
             "Oil": 6100,
             "Propane": 6740,
             "Wood": 5840
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 6500,
+            "Natural Gas": 6500,
             "Oil": 6200,
             "Propane": 4280,
             "Wood": 4180
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1450,
-            "Natural-Gas": 6700,
+            "Natural Gas": 6700,
             "Oil": 6400,
             "Propane": 4980,
             "Wood": 4680
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1600,
-            "Natural-Gas": 7000,
+            "Natural Gas": 7000,
             "Oil": 6700,
             "Propane": 5985,
             "Wood": 5380
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1800,
-            "Natural-Gas": 7300,
+            "Natural Gas": 7300,
             "Oil": 7000,
             "Propane": 7080,
             "Wood": 6180
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1800,
-            "Natural-Gas": 7100,
+            "Natural Gas": 7100,
             "Oil": 7200,
             "Propane": 4280,
             "Wood": 4180
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2000,
-            "Natural-Gas": 7300,
+            "Natural Gas": 7300,
             "Oil": 7400,
             "Propane": 4680,
             "Wood": 4280
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2250,
-            "Natural-Gas": 7600,
+            "Natural Gas": 7600,
             "Oil": 7700,
             "Propane": 5680,
             "Wood": 5380
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2400,
-            "Natural-Gas": 7900,
+            "Natural Gas": 7900,
             "Oil": 8000,
             "Propane": 6080,
             "Wood": 6180
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2400,
-            "Natural-Gas": 8300,
+            "Natural Gas": 8300,
             "Oil": 8200,
             "Propane": 4600,
             "Wood": 4500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2600,
-            "Natural-Gas": 8500,
+            "Natural Gas": 8500,
             "Oil": 8400,
             "Propane": 5300,
             "Wood": 5000
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2800,
-            "Natural-Gas": 8800,
+            "Natural Gas": 8800,
             "Oil": 8700,
             "Propane": 6350,
             "Wood": 5750
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3100,
-            "Natural-Gas": 9100,
+            "Natural Gas": 9100,
             "Oil": 9000,
             "Propane": 7400,
             "Wood": 6500
           }
         }
       },
-      "Over-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "Over 2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 320,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 5400,
             "Propane": 5570,
             "Wood": 4170
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 450,
-            "Natural-Gas": 2880,
+            "Natural Gas": 2880,
             "Oil": 6200,
             "Propane": 6170,
             "Wood": 4670
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 520,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 7000,
             "Propane": 6970,
             "Wood": 5270
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 675,
-            "Natural-Gas": 3230,
+            "Natural Gas": 3230,
             "Oil": 8900,
             "Propane": 7970,
             "Wood": 6170
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 600,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 10500,
             "Propane": 5740,
             "Wood": 4340
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 900,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 11000,
             "Propane": 6340,
             "Wood": 4840
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1500,
-            "Natural-Gas": 3500,
+            "Natural Gas": 3500,
             "Oil": 12500,
             "Propane": 7240,
             "Wood": 5640
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1800,
-            "Natural-Gas": 3800,
+            "Natural Gas": 3800,
             "Oil": 14000,
             "Propane": 8140,
             "Wood": 6340
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1800,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 14000,
             "Propane": 4510,
             "Wood": 4680
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2100,
-            "Natural-Gas": 3400,
+            "Natural Gas": 3400,
             "Oil": 15500,
             "Propane": 5010,
             "Wood": 5180
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2300,
-            "Natural-Gas": 3700,
+            "Natural Gas": 3700,
             "Oil": 16250,
             "Propane": 5710,
             "Wood": 5980
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2700,
-            "Natural-Gas": 4000,
+            "Natural Gas": 4000,
             "Oil": 17500,
             "Propane": 6510,
             "Wood": 6680
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 2700,
-            "Natural-Gas": 3400,
+            "Natural Gas": 3400,
             "Oil": 17500,
             "Propane": 4680,
             "Wood": 4340
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 3100,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 18100,
             "Propane": 5180,
             "Wood": 4540
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 3400,
-            "Natural-Gas": 4100,
+            "Natural Gas": 4100,
             "Oil": 20000,
             "Propane": 5980,
             "Wood": 5680
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3600,
-            "Natural-Gas": 4400,
+            "Natural Gas": 4400,
             "Oil": 21000,
             "Propane": 6680,
             "Wood": 6180
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 3600,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 21000,
             "Propane": 4600,
             "Wood": 5000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 4000,
-            "Natural-Gas": 3800,
+            "Natural Gas": 3800,
             "Oil": 22000,
             "Propane": 5300,
             "Wood": 5500
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 4200,
-            "Natural-Gas": 4100,
+            "Natural Gas": 4100,
             "Oil": 23500,
             "Propane": 6350,
             "Wood": 6250
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 5000,
-            "Natural-Gas": 4400,
+            "Natural Gas": 4400,
             "Oil": 25000,
             "Propane": 7400,
             "Wood": 7000
@@ -458,457 +458,457 @@
         }
       }
     },
-    "Semi-Detached": {
-      "Under-1000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+    "Semi-detached house": {
+      "Under 1000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2160,
+            "Natural Gas": 2160,
             "Oil": 2500,
             "Propane": 2200,
             "Wood": 2100
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 410,
-            "Natural-Gas": 2349,
+            "Natural Gas": 2349,
             "Oil": 2592,
             "Propane": 2300,
             "Wood": 2450
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 500,
-            "Natural-Gas": 2732,
+            "Natural Gas": 2732,
             "Oil": 2680,
             "Propane": 2450,
             "Wood": 2700
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 580,
-            "Natural-Gas": 3199,
+            "Natural Gas": 3199,
             "Oil": 2750,
             "Propane": 2600,
             "Wood": 3000
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 410,
-            "Natural-Gas": 2400,
+            "Natural Gas": 2400,
             "Oil": 2800,
             "Propane": 2600,
             "Wood": 2450
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 500,
-            "Natural-Gas": 2600,
+            "Natural Gas": 2600,
             "Oil": 2800,
             "Propane": 3000,
             "Wood": 3200
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 560,
-            "Natural-Gas": 2900,
+            "Natural Gas": 2900,
             "Oil": 3300,
             "Propane": 3500,
             "Wood": 3900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 600,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 3600,
             "Propane": 3800,
             "Wood": 4200
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1210,
-            "Natural-Gas": 2600,
+            "Natural Gas": 2600,
             "Oil": 3000,
             "Propane": 2800,
             "Wood": 3200
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1450,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 3200,
             "Propane": 3000,
             "Wood": 3400
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1620,
-            "Natural-Gas": 3100,
+            "Natural Gas": 3100,
             "Oil": 3500,
             "Propane": 3300,
             "Wood": 3700
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1820,
-            "Natural-Gas": 3400,
+            "Natural Gas": 3400,
             "Oil": 3800,
             "Propane": 3600,
             "Wood": 4000
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1700,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 3000,
             "Propane": 3400,
             "Wood": 3600
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1900,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 3300,
             "Propane": 3600,
             "Wood": 3800
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2000,
-            "Natural-Gas": 3300,
+            "Natural Gas": 3300,
             "Oil": 3700,
             "Propane": 3900,
             "Wood": 4000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2200,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 4000,
             "Propane": 4200,
             "Wood": 4400
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2500,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 3400,
             "Propane": 3200,
             "Wood": 3600
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2600,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 3600,
             "Propane": 3400,
             "Wood": 3800
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 3000,
-            "Natural-Gas": 3500,
+            "Natural Gas": 3500,
             "Oil": 3900,
             "Propane": 3700,
             "Wood": 4100
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3600,
-            "Natural-Gas": 3800,
+            "Natural Gas": 3800,
             "Oil": 4200,
             "Propane": 4000,
             "Wood": 4400
           }
         }
       },
-      "1000-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "1000-2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2443,
+            "Natural Gas": 2443,
             "Oil": 3400,
             "Propane": 4000,
             "Wood": 1500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 410,
-            "Natural-Gas": 2727,
+            "Natural Gas": 2727,
             "Oil": 3499,
             "Propane": 4300,
             "Wood": 1800
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 550,
-            "Natural-Gas": 3151,
+            "Natural Gas": 3151,
             "Oil": 3599,
             "Propane": 4700,
             "Wood": 2100
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 605,
-            "Natural-Gas": 3578,
+            "Natural Gas": 3578,
             "Oil": 3700,
             "Propane": 4900,
             "Wood": 2500
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 600,
-            "Natural-Gas": 4000,
+            "Natural Gas": 4000,
             "Oil": 4000,
             "Propane": 5000,
             "Wood": 2500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 800,
-            "Natural-Gas": 5200,
+            "Natural Gas": 5200,
             "Oil": 4600,
             "Propane": 6200,
             "Wood": 2700
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1050,
-            "Natural-Gas": 6800,
+            "Natural Gas": 6800,
             "Oil": 5100,
             "Propane": 7800,
             "Wood": 3500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1200,
-            "Natural-Gas": 7500,
+            "Natural Gas": 7500,
             "Oil": 6000,
             "Propane": 8500,
             "Wood": 4000
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 6100,
             "Propane": 7000,
             "Wood": 4100
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1550,
-            "Natural-Gas": 6000,
+            "Natural Gas": 6000,
             "Oil": 6900,
             "Propane": 8000,
             "Wood": 4300
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1700,
-            "Natural-Gas": 7800,
+            "Natural Gas": 7800,
             "Oil": 7300,
             "Propane": 9100,
             "Wood": 4850
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1800,
-            "Natural-Gas": 8500,
+            "Natural Gas": 8500,
             "Oil": 8500,
             "Propane": 11000,
             "Wood": 5500
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1700,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 8000,
             "Propane": 9000,
             "Wood": 5500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1900,
-            "Natural-Gas": 6500,
+            "Natural Gas": 6500,
             "Oil": 8800,
             "Propane": 10200,
             "Wood": 6000
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2250,
-            "Natural-Gas": 8800,
+            "Natural Gas": 8800,
             "Oil": 9200,
             "Propane": 11000,
             "Wood": 6800
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2400,
-            "Natural-Gas": 10000,
+            "Natural Gas": 10000,
             "Oil": 10500,
             "Propane": 12000,
             "Wood": 7100
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2400,
-            "Natural-Gas": 6000,
+            "Natural Gas": 6000,
             "Oil": 10550,
             "Propane": 12000,
             "Wood": 7220
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2500,
-            "Natural-Gas": 7800,
+            "Natural Gas": 7800,
             "Oil": 10900,
             "Propane": 13200,
             "Wood": 8000
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2800,
-            "Natural-Gas": 9800,
+            "Natural Gas": 9800,
             "Oil": 11200,
             "Propane": 14100,
             "Wood": 8600
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3200,
-            "Natural-Gas": 11000,
+            "Natural Gas": 11000,
             "Oil": 12000,
             "Propane": 15000,
             "Wood": 9100
           }
         }
       },
-      "Over-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "Over 2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2821,
+            "Natural Gas": 2821,
             "Oil": 3820,
             "Propane": 4370,
             "Wood": 3970
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 560,
-            "Natural-Gas": 3010,
+            "Natural Gas": 3010,
             "Oil": 4000,
             "Propane": 4870,
             "Wood": 4470
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 890,
-            "Natural-Gas": 3261,
+            "Natural Gas": 3261,
             "Oil": 4307,
             "Propane": 5670,
             "Wood": 5270
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1000,
-            "Natural-Gas": 3578,
+            "Natural Gas": 3578,
             "Oil": 4400,
             "Propane": 6370,
             "Wood": 5970
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 7500,
+            "Natural Gas": 7500,
             "Oil": 5500,
             "Propane": 4540,
             "Wood": 4140
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1400,
-            "Natural-Gas": 8800,
+            "Natural Gas": 8800,
             "Oil": 6000,
             "Propane": 5040,
             "Wood": 4640
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1650,
-            "Natural-Gas": 10800,
+            "Natural Gas": 10800,
             "Oil": 7200,
             "Propane": 5840,
             "Wood": 5340
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1800,
-            "Natural-Gas": 12500,
+            "Natural Gas": 12500,
             "Oil": 8500,
             "Propane": 6540,
             "Wood": 6140
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1800,
-            "Natural-Gas": 10000,
+            "Natural Gas": 10000,
             "Oil": 8500,
             "Propane": 4710,
             "Wood": 4310
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2000,
-            "Natural-Gas": 12000,
+            "Natural Gas": 12000,
             "Oil": 9200,
             "Propane": 5210,
             "Wood": 4810
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2300,
-            "Natural-Gas": 14000,
+            "Natural Gas": 14000,
             "Oil": 10200,
             "Propane": 6010,
             "Wood": 5610
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2400,
-            "Natural-Gas": 15000,
+            "Natural Gas": 15000,
             "Oil": 11000,
             "Propane": 6710,
             "Wood": 6310
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 2400,
-            "Natural-Gas": 12500,
+            "Natural Gas": 12500,
             "Oil": 11000,
             "Propane": 4880,
             "Wood": 4480
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2600,
-            "Natural-Gas": 14000,
+            "Natural Gas": 14000,
             "Oil": 12000,
             "Propane": 5380,
             "Wood": 4980
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2820,
-            "Natural-Gas": 16000,
+            "Natural Gas": 16000,
             "Oil": 13500,
             "Propane": 6180,
             "Wood": 5780
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3000,
-            "Natural-Gas": 17500,
+            "Natural Gas": 17500,
             "Oil": 14000,
             "Propane": 6880,
             "Wood": 6480
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 3000,
-            "Natural-Gas": 15000,
+            "Natural Gas": 15000,
             "Oil": 14000,
             "Propane": 5200,
             "Wood": 4800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 3500,
-            "Natural-Gas": 16800,
+            "Natural Gas": 16800,
             "Oil": 14800,
             "Propane": 5700,
             "Wood": 5300
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 4000,
-            "Natural-Gas": 18200,
+            "Natural Gas": 18200,
             "Oil": 15500,
             "Propane": 6500,
             "Wood": 6100
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 4500,
-            "Natural-Gas": 19000,
+            "Natural Gas": 19000,
             "Oil": 15500,
             "Propane": 7200,
             "Wood": 6800
@@ -917,456 +917,456 @@
       }
     },
     "Townhouse": {
-      "Under-1000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "Under 1000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 1971,
+            "Natural Gas": 1971,
             "Oil": 2400,
             "Propane": 1500,
             "Wood": 2000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 410,
-            "Natural-Gas": 2160,
+            "Natural Gas": 2160,
             "Oil": 2523,
             "Propane": 1850,
             "Wood": 2250
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 500,
-            "Natural-Gas": 2500,
+            "Natural Gas": 2500,
             "Oil": 2600,
             "Propane": 2100,
             "Wood": 2500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 550,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 2720,
             "Propane": 2500,
             "Wood": 2600
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 500,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 2800,
             "Propane": 2500,
             "Wood": 2800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 550,
-            "Natural-Gas": 2910,
+            "Natural Gas": 2910,
             "Oil": 3100,
             "Propane": 2800,
             "Wood": 3000
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 580,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 3250,
             "Propane": 3400,
             "Wood": 3300
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 600,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 3500,
             "Propane": 3800,
             "Wood": 3400
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1000,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 3600,
             "Propane": 3700,
             "Wood": 3330
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1250,
-            "Natural-Gas": 3210,
+            "Natural Gas": 3210,
             "Oil": 3750,
             "Propane": 3500,
             "Wood": 3500
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1320,
-            "Natural-Gas": 3500,
+            "Natural Gas": 3500,
             "Oil": 3900,
             "Propane": 4100,
             "Wood": 3520
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1420,
-            "Natural-Gas": 3800,
+            "Natural Gas": 3800,
             "Oil": 4050,
             "Propane": 5000,
             "Wood": 3800
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1600,
-            "Natural-Gas": 4000,
+            "Natural Gas": 4000,
             "Oil": 4500,
             "Propane": 3700,
             "Wood": 3330
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1750,
-            "Natural-Gas": 5500,
+            "Natural Gas": 5500,
             "Oil": 4600,
             "Propane": 4500,
             "Wood": 3500
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1900,
-            "Natural-Gas": 6200,
+            "Natural Gas": 6200,
             "Oil": 5100,
             "Propane": 5200,
             "Wood": 3900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2000,
-            "Natural-Gas": 8000,
+            "Natural Gas": 8000,
             "Oil": 5800,
             "Propane": 5800,
             "Wood": 4000
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2000,
-            "Natural-Gas": 8000,
+            "Natural Gas": 8000,
             "Oil": 5000,
             "Propane": 5000,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2100,
-            "Natural-Gas": 9500,
+            "Natural Gas": 9500,
             "Oil": 5200,
             "Propane": 6800,
             "Wood": 3700
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2300,
-            "Natural-Gas": 10200,
+            "Natural Gas": 10200,
             "Oil": 5300,
             "Propane": 7200,
             "Wood": 4000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3000,
-            "Natural-Gas": 12000,
+            "Natural Gas": 12000,
             "Oil": 5600,
             "Propane": 7800,
             "Wood": 4300
           }
         }
       },
-      "1000-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "1000-2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2443,
+            "Natural Gas": 2443,
             "Oil": 2590,
             "Propane": 3170,
             "Wood": 1400
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 380,
-            "Natural-Gas": 2750,
+            "Natural Gas": 2750,
             "Oil": 2620,
             "Propane": 3770,
             "Wood": 1560
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 500,
-            "Natural-Gas": 3111,
+            "Natural Gas": 3111,
             "Oil": 2730,
             "Propane": 4670,
             "Wood": 1900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 590,
-            "Natural-Gas": 3580,
+            "Natural Gas": 3580,
             "Oil": 2800,
             "Propane": 5570,
             "Wood": 2200
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 550,
-            "Natural-Gas": 4000,
+            "Natural Gas": 4000,
             "Oil": 5350,
             "Propane": 5600,
             "Wood": 2400
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 700,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 5940,
             "Propane": 6000,
             "Wood": 2600
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 950,
-            "Natural-Gas": 6500,
+            "Natural Gas": 6500,
             "Oil": 6140,
             "Propane": 6420,
             "Wood": 3300
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1100,
-            "Natural-Gas": 7300,
+            "Natural Gas": 7300,
             "Oil": 6340,
             "Propane": 6500,
             "Wood": 3800
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 4300,
+            "Natural Gas": 4300,
             "Oil": 5000,
             "Propane": 3680,
             "Wood": 3800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1350,
-            "Natural-Gas": 5500,
+            "Natural Gas": 5500,
             "Oil": 5800,
             "Propane": 4280,
             "Wood": 4220
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1520,
-            "Natural-Gas": 6800,
+            "Natural Gas": 6800,
             "Oil": 6200,
             "Propane": 5180,
             "Wood": 4500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1700,
-            "Natural-Gas": 8340,
+            "Natural Gas": 8340,
             "Oil": 6100,
             "Propane": 6080,
             "Wood": 4400
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 2000,
-            "Natural-Gas": 4800,
+            "Natural Gas": 4800,
             "Oil": 5370,
             "Propane": 3680,
             "Wood": 4000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2400,
-            "Natural-Gas": 6300,
+            "Natural Gas": 6300,
             "Oil": 5500,
             "Propane": 4310,
             "Wood": 4640
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2800,
-            "Natural-Gas": 8800,
+            "Natural Gas": 8800,
             "Oil": 5800,
             "Propane": 6100,
             "Wood": 5000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3000,
-            "Natural-Gas": 9000,
+            "Natural Gas": 9000,
             "Oil": 7400,
             "Propane": 6500,
             "Wood": 5430
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2500,
-            "Natural-Gas": 9500,
+            "Natural Gas": 9500,
             "Oil": 5370,
             "Propane": 6000,
             "Wood": 4000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2780,
-            "Natural-Gas": 10100,
+            "Natural Gas": 10100,
             "Oil": 5500,
             "Propane": 6000,
             "Wood": 4640
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 3000,
-            "Natural-Gas": 11200,
+            "Natural Gas": 11200,
             "Oil": 5800,
             "Propane": 6500,
             "Wood": 5000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3500,
-            "Natural-Gas": 14000,
+            "Natural Gas": 14000,
             "Oil": 6200,
             "Propane": 7200,
             "Wood": 5430
           }
         }
       },
-      "Over-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "Over 2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2822,
+            "Natural Gas": 2822,
             "Oil": 2810,
             "Propane": 3340,
             "Wood": 3940
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 560,
-            "Natural-Gas": 3010,
+            "Natural Gas": 3010,
             "Oil": 3000,
             "Propane": 3940,
             "Wood": 4070
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 890,
-            "Natural-Gas": 3300,
+            "Natural Gas": 3300,
             "Oil": 3468,
             "Propane": 4840,
             "Wood": 5000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1000,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 3760,
             "Propane": 5740,
             "Wood": 5600
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 1200,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 4300,
             "Propane": 5900,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1380,
-            "Natural-Gas": 3840,
+            "Natural Gas": 3840,
             "Oil": 4900,
             "Propane": 6330,
             "Wood": 3930
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1600,
-            "Natural-Gas": 3900,
+            "Natural Gas": 3900,
             "Oil": 5230,
             "Propane": 6440,
             "Wood": 4360
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1750,
-            "Natural-Gas": 5100,
+            "Natural Gas": 5100,
             "Oil": 5800,
             "Propane": 6900,
             "Wood": 5000
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1800,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 5300,
             "Propane": 3510,
             "Wood": 3800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2000,
-            "Natural-Gas": 6200,
+            "Natural Gas": 6200,
             "Oil": 5690,
             "Propane": 4110,
             "Wood": 4500
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2300,
-            "Natural-Gas": 7000,
+            "Natural Gas": 7000,
             "Oil": 6250,
             "Propane": 5010,
             "Wood": 4780
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2500,
-            "Natural-Gas": 8000,
+            "Natural Gas": 8000,
             "Oil": 6500,
             "Propane": 5910,
             "Wood": 5360
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 2400,
-            "Natural-Gas": 8000,
+            "Natural Gas": 8000,
             "Oil": 5440,
             "Propane": 3800,
             "Wood": 4200
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2600,
-            "Natural-Gas": 8300,
+            "Natural Gas": 8300,
             "Oil": 5600,
             "Propane": 4500,
             "Wood": 4640
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2800,
-            "Natural-Gas": 9000,
+            "Natural Gas": 9000,
             "Oil": 5800,
             "Propane": 5380,
             "Wood": 5000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3000,
-            "Natural-Gas": 9500,
+            "Natural Gas": 9500,
             "Oil": 6200,
             "Propane": 6200,
             "Wood": 5400
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2800,
-            "Natural-Gas": 9500,
+            "Natural Gas": 9500,
             "Oil": 5670,
             "Propane": 6200,
             "Wood": 4300
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 3000,
-            "Natural-Gas": 10100,
+            "Natural Gas": 10100,
             "Oil": 5690,
             "Propane": 6900,
             "Wood": 4700
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 3800,
-            "Natural-Gas": 10300,
+            "Natural Gas": 10300,
             "Oil": 6100,
             "Propane": 7500,
             "Wood": 5100
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 4300,
-            "Natural-Gas": 11000,
+            "Natural Gas": 11000,
             "Oil": 6350,
             "Propane": 7850,
             "Wood": 5500
@@ -1374,457 +1374,457 @@
         }
       }
     },
-    "Condo-Apartment": {
-      "Under-1000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+    "Condo/Apartment": {
+      "Under 1000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 200,
-            "Natural-Gas": 1680,
+            "Natural Gas": 1680,
             "Oil": 0,
             "Propane": 1320,
             "Wood": 1600
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 250,
-            "Natural-Gas": 1870,
+            "Natural Gas": 1870,
             "Oil": 0,
             "Propane": 1550,
             "Wood": 1850
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 380,
-            "Natural-Gas": 2170,
+            "Natural Gas": 2170,
             "Oil": 0,
             "Propane": 1800,
             "Wood": 2000
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 450,
-            "Natural-Gas": 2440,
+            "Natural Gas": 2440,
             "Oil": 0,
             "Propane": 2000,
             "Wood": 2100
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 500,
-            "Natural-Gas": 2240,
+            "Natural Gas": 2240,
             "Oil": 0,
             "Propane": 1800,
             "Wood": 2000
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 550,
-            "Natural-Gas": 2430,
+            "Natural Gas": 2430,
             "Oil": 0,
             "Propane": 2000,
             "Wood": 2100
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 580,
-            "Natural-Gas": 2719,
+            "Natural Gas": 2719,
             "Oil": 0,
             "Propane": 2300,
             "Wood": 2500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 600,
-            "Natural-Gas": 2997,
+            "Natural Gas": 2997,
             "Oil": 0,
             "Propane": 2500,
             "Wood": 2700
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 900,
-            "Natural-Gas": 2800,
+            "Natural Gas": 2800,
             "Oil": 0,
             "Propane": 3000,
             "Wood": 2800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1100,
-            "Natural-Gas": 3000,
+            "Natural Gas": 3000,
             "Oil": 0,
             "Propane": 3300,
             "Wood": 3100
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1200,
-            "Natural-Gas": 3200,
+            "Natural Gas": 3200,
             "Oil": 0,
             "Propane": 3700,
             "Wood": 3300
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1300,
-            "Natural-Gas": 3500,
+            "Natural Gas": 3500,
             "Oil": 0,
             "Propane": 4300,
             "Wood": 3500
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1400,
-            "Natural-Gas": 3700,
+            "Natural Gas": 3700,
             "Oil": 0,
             "Propane": 3700,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1600,
-            "Natural-Gas": 4100,
+            "Natural Gas": 4100,
             "Oil": 0,
             "Propane": 4600,
             "Wood": 3700
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1700,
-            "Natural-Gas": 4600,
+            "Natural Gas": 4600,
             "Oil": 0,
             "Propane": 5500,
             "Wood": 3900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 1900,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 0,
             "Propane": 5800,
             "Wood": 4000
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 1900,
-            "Natural-Gas": 5000,
+            "Natural Gas": 5000,
             "Oil": 0,
             "Propane": 5700,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2100,
-            "Natural-Gas": 7200,
+            "Natural Gas": 7200,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 3600
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2300,
-            "Natural-Gas": 8000,
+            "Natural Gas": 8000,
             "Oil": 0,
             "Propane": 6600,
             "Wood": 3900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2600,
-            "Natural-Gas": 10000,
+            "Natural Gas": 10000,
             "Oil": 0,
             "Propane": 7000,
             "Wood": 4200
           }
         }
       },
-      "1000-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "1000-2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 300,
-            "Natural-Gas": 2060,
+            "Natural Gas": 2060,
             "Oil": 0,
             "Propane": 1500,
             "Wood": 1800
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 400,
-            "Natural-Gas": 2260,
+            "Natural Gas": 2260,
             "Oil": 0,
             "Propane": 1700,
             "Wood": 2200
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 500,
-            "Natural-Gas": 2540,
+            "Natural Gas": 2540,
             "Oil": 0,
             "Propane": 2100,
             "Wood": 2500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 620,
-            "Natural-Gas": 3010,
+            "Natural Gas": 3010,
             "Oil": 0,
             "Propane": 2300,
             "Wood": 2700
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 550,
-            "Natural-Gas": 2500,
+            "Natural Gas": 2500,
             "Oil": 0,
             "Propane": 3000,
             "Wood": 2200
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 670,
-            "Natural-Gas": 2880,
+            "Natural Gas": 2880,
             "Oil": 0,
             "Propane": 3400,
             "Wood": 2500
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 780,
-            "Natural-Gas": 3110,
+            "Natural Gas": 3110,
             "Oil": 0,
             "Propane": 3800,
             "Wood": 2900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 900,
-            "Natural-Gas": 3320,
+            "Natural Gas": 3320,
             "Oil": 0,
             "Propane": 4200,
             "Wood": 3300
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1250,
-            "Natural-Gas": 3100,
+            "Natural Gas": 3100,
             "Oil": 0,
             "Propane": 4550,
             "Wood": 3100
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1450,
-            "Natural-Gas": 3300,
+            "Natural Gas": 3300,
             "Oil": 0,
             "Propane": 4950,
             "Wood": 3300
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 1750,
-            "Natural-Gas": 3500,
+            "Natural Gas": 3500,
             "Oil": 0,
             "Propane": 5350,
             "Wood": 3700
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2100,
-            "Natural-Gas": 3900,
+            "Natural Gas": 3900,
             "Oil": 0,
             "Propane": 5650,
             "Wood": 4100
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 1900,
-            "Natural-Gas": 4000,
+            "Natural Gas": 4000,
             "Oil": 0,
             "Propane": 4700,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2100,
-            "Natural-Gas": 4700,
+            "Natural Gas": 4700,
             "Oil": 0,
             "Propane": 5500,
             "Wood": 3900
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2500,
-            "Natural-Gas": 5200,
+            "Natural Gas": 5200,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 4500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3100,
-            "Natural-Gas": 5900,
+            "Natural Gas": 5900,
             "Oil": 0,
             "Propane": 7400,
             "Wood": 4700
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2300,
-            "Natural-Gas": 5350,
+            "Natural Gas": 5350,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 3900
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2500,
-            "Natural-Gas": 7550,
+            "Natural Gas": 7550,
             "Oil": 0,
             "Propane": 6300,
             "Wood": 4200
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2700,
-            "Natural-Gas": 8200,
+            "Natural Gas": 8200,
             "Oil": 0,
             "Propane": 7000,
             "Wood": 4500
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3100,
-            "Natural-Gas": 10500,
+            "Natural Gas": 10500,
             "Oil": 0,
             "Propane": 7400,
             "Wood": 4700
           }
         }
       },
-      "Over-2000-sqft": {
-        "Under-50-Dollars": {
-          "1-Occupant": {
+      "Over 2000 sq. ft.": {
+        "Under $50": {
+          "1": {
             "Electricity": 350,
-            "Natural-Gas": 2440,
+            "Natural Gas": 2440,
             "Oil": 0,
             "Propane": 1800,
             "Wood": 2300
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 570,
-            "Natural-Gas": 2727,
+            "Natural Gas": 2727,
             "Oil": 0,
             "Propane": 2100,
             "Wood": 2600
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 900,
-            "Natural-Gas": 3010,
+            "Natural Gas": 3010,
             "Oil": 0,
             "Propane": 2450,
             "Wood": 2900
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 980,
-            "Natural-Gas": 3577,
+            "Natural Gas": 3577,
             "Oil": 0,
             "Propane": 2600,
             "Wood": 3300
           }
         },
-        "50-100-Dollars": {
-          "1-Occupant": {
+        "$50-$100": {
+          "1": {
             "Electricity": 610,
-            "Natural-Gas": 2700,
+            "Natural Gas": 2700,
             "Oil": 0,
             "Propane": 3650,
             "Wood": 2600
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 690,
-            "Natural-Gas": 3100,
+            "Natural Gas": 3100,
             "Oil": 0,
             "Propane": 4050,
             "Wood": 2900
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 820,
-            "Natural-Gas": 3300,
+            "Natural Gas": 3300,
             "Oil": 0,
             "Propane": 4650,
             "Wood": 3300
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 980,
-            "Natural-Gas": 3600,
+            "Natural Gas": 3600,
             "Oil": 0,
             "Propane": 5150,
             "Wood": 3600
           }
         },
-        "100-150-Dollars": {
-          "1-Occupant": {
+        "$100-$150": {
+          "1": {
             "Electricity": 1500,
-            "Natural-Gas": 3670,
+            "Natural Gas": 3670,
             "Oil": 0,
             "Propane": 4500,
             "Wood": 3500
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 1700,
-            "Natural-Gas": 3900,
+            "Natural Gas": 3900,
             "Oil": 0,
             "Propane": 5000,
             "Wood": 3700
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2000,
-            "Natural-Gas": 4100,
+            "Natural Gas": 4100,
             "Oil": 0,
             "Propane": 5600,
             "Wood": 4200
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 2350,
-            "Natural-Gas": 4300,
+            "Natural Gas": 4300,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 4600
           }
         },
-        "150-200-Dollars": {
-          "1-Occupant": {
+        "$150-$200": {
+          "1": {
             "Electricity": 2150,
-            "Natural-Gas": 4250,
+            "Natural Gas": 4250,
             "Oil": 0,
             "Propane": 5000,
             "Wood": 3530
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 2550,
-            "Natural-Gas": 5050,
+            "Natural Gas": 5050,
             "Oil": 0,
             "Propane": 5300,
             "Wood": 3730
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 2850,
-            "Natural-Gas": 5400,
+            "Natural Gas": 5400,
             "Oil": 0,
             "Propane": 5600,
             "Wood": 4200
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 3150,
-            "Natural-Gas": 6200,
+            "Natural Gas": 6200,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 4630
           }
         },
-        "Over-200-Dollars": {
-          "1-Occupant": {
+        "Over $200": {
+          "1": {
             "Electricity": 2600,
-            "Natural-Gas": 6000,
+            "Natural Gas": 6000,
             "Oil": 0,
             "Propane": 7800,
             "Wood": 4100
           },
-          "2-Occupants": {
+          "2": {
             "Electricity": 3100,
-            "Natural-Gas": 8500,
+            "Natural Gas": 8500,
             "Oil": 0,
             "Propane": 5300,
             "Wood": 4900
           },
-          "3-4-Occupants": {
+          "3-4": {
             "Electricity": 3600,
-            "Natural-Gas": 11100,
+            "Natural Gas": 11100,
             "Oil": 0,
             "Propane": 6000,
             "Wood": 5100
           },
-          "5-Occupants": {
+          "5 or more": {
             "Electricity": 4000,
-            "Natural-Gas": 12500,
+            "Natural Gas": 12500,
             "Oil": 0,
             "Propane": 7800,
             "Wood": 5100

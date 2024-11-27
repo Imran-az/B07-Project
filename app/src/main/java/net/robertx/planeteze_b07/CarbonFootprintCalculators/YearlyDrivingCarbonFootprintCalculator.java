@@ -10,17 +10,17 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
             return 0;
         }
 
-        if (distanceStr.equalsIgnoreCase("Up to 5,000 km")) {
+        if (distanceStr.equalsIgnoreCase("Up to 5,000 km (3,000 miles)")) {
             return 5000;
-        } else if (distanceStr.equalsIgnoreCase("5,000–10,000 km")) {
+        } else if (distanceStr.equalsIgnoreCase("5,000–10,000 km (3,000–6,000 miles)")) {
             return 10000;
-        } else if (distanceStr.equalsIgnoreCase("10,000–15,000 km")) {
+        } else if (distanceStr.equalsIgnoreCase("10,000–15,000 km (6,000–9,000 miles)")) {
             return 15000;
-        } else if (distanceStr.equalsIgnoreCase("15,000–20,000 km")) {
+        } else if (distanceStr.equalsIgnoreCase("15,000–20,000 km (9,000–12,000 miles)")) {
             return 20000;
-        } else if (distanceStr.equalsIgnoreCase("20,000–25,000 km")) {
+        } else if (distanceStr.equalsIgnoreCase("20,000–25,000 km (12,000–15,000 miles)")) {
             return 25000;
-        } else if (distanceStr.equalsIgnoreCase("More than 25,000 km")) {
+        } else if (distanceStr.equalsIgnoreCase("More than 25,000 km (15,000 miles)")) {
             return 35000;
         } else {
             return 0; // Default for invalid input
@@ -54,7 +54,7 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
     }
 
     private double getEmissionFactor() {
-        double emissionFactor = 0.0;
+        double emissionFactor = 0.1;
 
         // Get emission factor based on car type
         if (carType.equalsIgnoreCase("gasoline")) {

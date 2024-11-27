@@ -13,6 +13,7 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
     private static final Map<String, Double> monthlyReduction = new HashMap<>();
     private static final Map<String, Double> annualReduction = new HashMap<>();
     private static final Map<String, Double> rarelyReduction = new HashMap<>();
+    private static final Map<String, Double> quarterlyReduction = new HashMap<>();
 
     private static final String TAG = "ConsumptionFootprint";
 
@@ -40,9 +41,14 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
         rarelyReduction.put("Frequently", 1.0);
         rarelyReduction.put("Always", 2.5);
 
+        quarterlyReduction.put("Occasionally", 30.1);
+        quarterlyReduction.put("Frequently", 20.0);
+        quarterlyReduction.put("Always", 10.5);
+
         RECYCLING_REDUCTION.put("Monthly", monthlyReduction);
         RECYCLING_REDUCTION.put("Annually", annualReduction);
         RECYCLING_REDUCTION.put("Rarely", rarelyReduction);
+        RECYCLING_REDUCTION.put("Quarterly", quarterlyReduction);
     }
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
@@ -62,6 +68,7 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
             throw new IllegalArgumentException("Invalid devices purchased: " + devicesPurchased);
         }
 
+        // TODO: incorrect logic here
         // Fetch the sub-map for recycling reductions
         Map<String, Double> reductionMap = RECYCLING_REDUCTION.get(clothesFrequency);
         if (reductionMap == null) {
@@ -82,9 +89,9 @@ public class YearlyConsumptionFootprintCalculator implements CalculateYearlyCarb
 
         // Calculate total emission
         double totalEmission;
-        if ("Regularly".equalsIgnoreCase(isEcoFriendly)) {
+        if ("Yes, regularly".equalsIgnoreCase(isEcoFriendly)) {
             totalEmission = ((clothesEmission * 0.5) + devicesEmission) - recyclingReduction;
-        } else if ("Occasionally".equalsIgnoreCase(isEcoFriendly)) {
+        } else if ("Yes, occasionally".equalsIgnoreCase(isEcoFriendly)) {
             totalEmission = ((clothesEmission * 0.7) + devicesEmission) - recyclingReduction;
         } else {
             totalEmission = (clothesEmission + devicesEmission) - recyclingReduction;

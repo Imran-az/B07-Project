@@ -20,6 +20,17 @@ public class YearlyTotalCarbonFootprintCalculator {
     public YearlyTotalCarbonFootprintCalculator() throws IOException {
     }
 
+    public HashMap<String, Double> calculatePerCategoryEmission(HashMap<String, String> responses) {
+        HashMap<String, Double> categoryEmissions = new HashMap<>();
+        categoryEmissions.put("DrivingEmissions", drivingCalculator.calculateYearlyFootprint(responses));
+        categoryEmissions.put("PublicTransportEmissions", publicTransportCalculator.calculateYearlyFootprint(responses));
+        categoryEmissions.put("FlightEmissions", flightCalculator.calculateYearlyFootprint(responses));
+        categoryEmissions.put("HousingEmissions", housingCalculator.calculateYearlyFootprint(responses));
+        categoryEmissions.put("FoodEmissions", foodCalculator.calculateYearlyFootprint(responses));
+        categoryEmissions.put("ConsumptionEmissions", consumptionCalculator.calculateYearlyFootprint(responses));
+        return categoryEmissions;
+    }
+
     // Method to calculate total emissions
     public double calculateTotalEmissions(HashMap<String, String> responses) {
         double totalEmissions = 0;
