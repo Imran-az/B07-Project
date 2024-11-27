@@ -1,0 +1,17 @@
+[33m4633600[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-test[m[33m)[m Add ResultsActivity with dynamic charts and breakdown for annual carbon footprint results
+[33mfc8062b[m B Merge remote-tracking branch 'origin/login_branch' into feature-test
+[33ma723523[m[33m ([m[1;31morigin/feature-annual-carbon-footprint[m[33m, [m[1;32mfeature-annual-carbon-footprint[m[33m)[m Refactored HousingCO2DataRetriever implementation and improved code clarity
+[33m8c0d18d[m Updated YearlyTotalCarbonFootprintCalcualtor
+[33mecf0499[m[33m ([m[1;31morigin/login_branch[m[33m)[m feat: added a new class for users and the functionality to save user information to our Firebase Realtime database
+[33mb9a60a8[m feat: added a home page and user registration page with Firebase authentication Created a home page allowing users to choose to register or login and created the registration page which allowed users to create an account and used firebase authentication to verify and register their accounts while sending an account confirmation email to the emails they registered with
+[33m75967c1[m[33m ([m[1;31morigin/feature-House-Data-Retrieval[m[33m, [m[1;32mfeature-House-Data-Retrieval[m[33m)[m Implement function to retrieve CO2 data from Firebase Realtime Database
+[33m7e792a6[m Merge remote-tracking branch 'origin/login_branch' into login_branch
+[33m2680940[m feat: added a home page and user registration page with Firebase authentication
+[33m26786d0[m Update carbon footprint calculations and add related changes
+[33m8d08a92[m Added annual carbon footprint calculations
+[33mfa3df87[m -Added implementation for login button so that once pressed it connects to firebase and authenticates the input information with information already in the database -Added implementation for reset password button so it connects to firebase and sends a password reset email to user's email -Added feature so that users can only login if their email has been verified by connecting to firebase to check email verification
+[33m2e1c121[m created welcome page, sign up page, and login page
+[33mbd34715[m[33m ([m[1;31morigin/feature-annual-carbon-footprint-user-input[m[33m, [m[1;32mmain[m[33m)[m feat: Add firebase authentication SDK
+[33m5ea6066[m fix: move google-services.json into correct directory
+[33m5edc4c6[m feat: Add firebase
+[33ma0ce87a[m initialize repository

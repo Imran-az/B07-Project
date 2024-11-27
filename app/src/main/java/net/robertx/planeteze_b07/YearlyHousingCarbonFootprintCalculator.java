@@ -1,6 +1,8 @@
 package net.robertx.planeteze_b07;
 
 
+import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
+
 import java.util.Map;
 
 public class YearlyHousingCarbonFootprintCalculator {

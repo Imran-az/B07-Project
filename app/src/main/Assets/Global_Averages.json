@@ -1,0 +1,695 @@
+{
+    "Afghanistan": {
+        "Emissions (per capita)": 0.29536375
+    },
+    "Africa": {
+        "Emissions (per capita)": 0.99422127
+    },
+    "Albania": {
+        "Emissions (per capita)": 1.7432004
+    },
+    "Algeria": {
+        "Emissions (per capita)": 3.9272263
+    },
+    "Andorra": {
+        "Emissions (per capita)": 4.6171236
+    },
+    "Angola": {
+        "Emissions (per capita)": 0.45155162
+    },
+    "Anguilla": {
+        "Emissions (per capita)": 8.752724
+    },
+    "Antigua and Barbuda": {
+        "Emissions (per capita)": 6.4218745
+    },
+    "Argentina": {
+        "Emissions (per capita)": 4.2378173
+    },
+    "Armenia": {
+        "Emissions (per capita)": 2.3045583
+    },
+    "Aruba": {
+        "Emissions (per capita)": 8.133404
+    },
+    "Asia": {
+        "Emissions (per capita)": 4.611434
+    },
+    "Asia (excl. China and India)": {
+        "Emissions (per capita)": 4.017375
+    },
+    "Australia": {
+        "Emissions (per capita)": 14.985412
+    },
+    "Austria": {
+        "Emissions (per capita)": 6.8781943
+    },
+    "Azerbaijan": {
+        "Emissions (per capita)": 3.6746833
+    },
+    "Bahamas": {
+        "Emissions (per capita)": 5.1708703
+    },
+    "Bahrain": {
+        "Emissions (per capita)": 25.672274
+    },
+    "Bangladesh": {
+        "Emissions (per capita)": 0.5964455
+    },
+    "Barbados": {
+        "Emissions (per capita)": 4.3772573
+    },
+    "Belarus": {
+        "Emissions (per capita)": 6.1669006
+    },
+    "Belgium": {
+        "Emissions (per capita)": 7.6875386
+    },
+    "Belize": {
+        "Emissions (per capita)": 1.7894346
+    },
+    "Benin": {
+        "Emissions (per capita)": 0.631487
+    },
+    "Bermuda": {
+        "Emissions (per capita)": 6.9370627
+    },
+    "Bhutan": {
+        "Emissions (per capita)": 1.3489918
+    },
+    "Bolivia": {
+        "Emissions (per capita)": 1.7583066
+    },
+    "Bonaire Sint Eustatius and Saba": {
+        "Emissions (per capita)": 4.083284
+    },
+    "Bosnia and Herzegovina": {
+        "Emissions (per capita)": 6.1034565
+    },
+    "Botswana": {
+        "Emissions (per capita)": 2.838951
+    },
+    "Brazil": {
+        "Emissions (per capita)": 2.2454574
+    },
+    "British Virgin Islands": {
+        "Emissions (per capita)": 5.0039577
+    },
+    "Brunei": {
+        "Emissions (per capita)": 23.950201
+    },
+    "Bulgaria": {
+        "Emissions (per capita)": 6.8044534
+    },
+    "Burkina Faso": {
+        "Emissions (per capita)": 0.26295447
+    },
+    "Burundi": {
+        "Emissions (per capita)": 0.06194545
+    },
+    "Cambodia": {
+        "Emissions (per capita)": 1.1900775
+    },
+    "Cameroon": {
+        "Emissions (per capita)": 0.34292704
+    },
+    "Canada": {
+        "Emissions (per capita)": 14.249212
+    },
+    "Cape Verde": {
+        "Emissions (per capita)": 0.9588915
+    },
+    "Central African Republic": {
+        "Emissions (per capita)": 0.040548485
+    },
+    "Chad": {
+        "Emissions (per capita)": 0.13367727
+    },
+    "Chile": {
+        "Emissions (per capita)": 4.3041654
+    },
+    "China": {
+        "Emissions (per capita)": 7.992761
+    },
+    "Colombia": {
+        "Emissions (per capita)": 1.9223082
+    },
+    "Comoros": {
+        "Emissions (per capita)": 0.49327007
+    },
+    "Congo": {
+        "Emissions (per capita)": 1.2447897
+    },
+    "Cook Islands": {
+        "Emissions (per capita)": 3.9950094
+    },
+    "Costa Rica": {
+        "Emissions (per capita)": 1.5226681
+    },
+    "Cote d'Ivoire": {
+        "Emissions (per capita)": 0.41668788
+    },
+    "Croatia": {
+        "Emissions (per capita)": 4.348515
+    },
+    "Cuba": {
+        "Emissions (per capita)": 1.8659163
+    },
+    "Curacao": {
+        "Emissions (per capita)": 9.189007
+    },
+    "Cyprus": {
+        "Emissions (per capita)": 5.616782
+    },
+    "Czechia": {
+        "Emissions (per capita)": 9.3357525
+    },
+    "Democratic Republic of Congo": {
+        "Emissions (per capita)": 0.036375992
+    },
+    "Denmark": {
+        "Emissions (per capita)": 4.940161
+    },
+    "Djibouti": {
+        "Emissions (per capita)": 0.40418932
+    },
+    "Dominica": {
+        "Emissions (per capita)": 2.1058853
+    },
+    "Dominican Republic": {
+        "Emissions (per capita)": 2.1051137
+    },
+    "East Timor": {
+        "Emissions (per capita)": 0.49869007
+    },
+    "Ecuador": {
+        "Emissions (per capita)": 2.3117273
+    },
+    "Egypt": {
+        "Emissions (per capita)": 2.333106
+    },
+    "El Salvador": {
+        "Emissions (per capita)": 1.2174718
+    },
+    "Equatorial Guinea": {
+        "Emissions (per capita)": 3.0307202
+    },
+    "Eritrea": {
+        "Emissions (per capita)": 0.18914719
+    },
+    "Estonia": {
+        "Emissions (per capita)": 7.77628
+    },
+    "Eswatini": {
+        "Emissions (per capita)": 1.0527312
+    },
+    "Ethiopia": {
+        "Emissions (per capita)": 0.15458965
+    },
+    "Europe": {
+        "Emissions (per capita)": 6.8578663
+    },
+    "Europe (excl. EU-27)": {
+        "Emissions (per capita)": 7.886797
+    },
+    "Europe (excl. EU-28)": {
+        "Emissions (per capita)": 8.817789
+    },
+    "European Union (27)": {
+        "Emissions (per capita)": 6.1743994
+    },
+    "European Union (28)": {
+        "Emissions (per capita)": 5.983708
+    },
+    "Faroe Islands": {
+        "Emissions (per capita)": 14.084624
+    },
+    "Fiji": {
+        "Emissions (per capita)": 1.1550449
+    },
+    "Finland": {
+        "Emissions (per capita)": 6.5267396
+    },
+    "France": {
+        "Emissions (per capita)": 4.603891
+    },
+    "French Polynesia": {
+        "Emissions (per capita)": 2.8509297
+    },
+    "Gabon": {
+        "Emissions (per capita)": 2.3882635
+    },
+    "Gambia": {
+        "Emissions (per capita)": 0.2847278
+    },
+    "Georgia": {
+        "Emissions (per capita)": 2.962545
+    },
+    "Germany": {
+        "Emissions (per capita)": 7.9837584
+    },
+    "Ghana": {
+        "Emissions (per capita)": 0.6215505
+    },
+    "Greece": {
+        "Emissions (per capita)": 5.7451057
+    },
+    "Greenland": {
+        "Emissions (per capita)": 10.473997
+    },
+    "Grenada": {
+        "Emissions (per capita)": 2.7133646
+    },
+    "Guatemala": {
+        "Emissions (per capita)": 1.0756185
+    },
+    "Guinea": {
+        "Emissions (per capita)": 0.35742033
+    },
+    "Guinea-Bissau": {
+        "Emissions (per capita)": 0.15518051
+    },
+    "Guyana": {
+        "Emissions (per capita)": 4.3736935
+    },
+    "Haiti": {
+        "Emissions (per capita)": 0.21119381
+    },
+    "High-income countries": {
+        "Emissions (per capita)": 10.132565
+    },
+    "Honduras": {
+        "Emissions (per capita)": 1.0696708
+    },
+    "Hong Kong": {
+        "Emissions (per capita)": 4.081913
+    },
+    "Hungary": {
+        "Emissions (per capita)": 4.449911
+    },
+    "Iceland": {
+        "Emissions (per capita)": 9.499798
+    },
+    "India": {
+        "Emissions (per capita)": 1.9966822
+    },
+    "Indonesia": {
+        "Emissions (per capita)": 2.6456614
+    },
+    "Iran": {
+        "Emissions (per capita)": 7.7993317
+    },
+    "Iraq": {
+        "Emissions (per capita)": 4.024638
+    },
+    "Ireland": {
+        "Emissions (per capita)": 7.7211185
+    },
+    "Israel": {
+        "Emissions (per capita)": 6.208912
+    },
+    "Italy": {
+        "Emissions (per capita)": 5.726825
+    },
+    "Jamaica": {
+        "Emissions (per capita)": 2.2945588
+    },
+    "Japan": {
+        "Emissions (per capita)": 8.501681
+    },
+    "Jordan": {
+        "Emissions (per capita)": 2.0301995
+    },
+    "Kazakhstan": {
+        "Emissions (per capita)": 13.979704
+    },
+    "Kenya": {
+        "Emissions (per capita)": 0.45998666
+    },
+    "Kiribati": {
+        "Emissions (per capita)": 0.5184742
+    },
+    "Kosovo": {
+        "Emissions (per capita)": 4.830646
+    },
+    "Kuwait": {
+        "Emissions (per capita)": 25.578102
+    },
+    "Kyrgyzstan": {
+        "Emissions (per capita)": 1.4251612
+    },
+    "Laos": {
+        "Emissions (per capita)": 3.0803475
+    },
+    "Latvia": {
+        "Emissions (per capita)": 3.561689
+    },
+    "Lebanon": {
+        "Emissions (per capita)": 4.3543963
+    },
+    "Lesotho": {
+        "Emissions (per capita)": 1.3594668
+    },
+    "Liberia": {
+        "Emissions (per capita)": 0.1653753
+    },
+    "Libya": {
+        "Emissions (per capita)": 9.242238
+    },
+    "Liechtenstein": {
+        "Emissions (per capita)": 3.8097827
+    },
+    "Lithuania": {
+        "Emissions (per capita)": 4.606163
+    },
+    "Low-income countries": {
+        "Emissions (per capita)": 0.28005043
+    },
+    "Lower-middle-income countries": {
+        "Emissions (per capita)": 1.777996
+    },
+    "Luxembourg": {
+        "Emissions (per capita)": 11.618432
+    },
+    "Macao": {
+        "Emissions (per capita)": 1.5127679
+    },
+    "Madagascar": {
+        "Emissions (per capita)": 0.14871116
+    },
+    "Malawi": {
+        "Emissions (per capita)": 0.10262384
+    },
+    "Malaysia": {
+        "Emissions (per capita)": 8.576508
+    },
+    "Maldives": {
+        "Emissions (per capita)": 3.2475724
+    },
+    "Mali": {
+        "Emissions (per capita)": 0.31153768
+    },
+    "Malta": {
+        "Emissions (per capita)": 3.1035979
+    },
+    "Marshall Islands": {
+        "Emissions (per capita)": 3.6353714
+    },
+    "Mauritania": {
+        "Emissions (per capita)": 0.957337
+    },
+    "Mauritius": {
+        "Emissions (per capita)": 3.2697906
+    },
+    "Mexico": {
+        "Emissions (per capita)": 4.0153365
+    },
+    "Micronesia (country)": {
+        "Emissions (per capita)": 1.3243006
+    },
+    "Moldova": {
+        "Emissions (per capita)": 1.6565942
+    },
+    "Mongolia": {
+        "Emissions (per capita)": 11.150772
+    },
+    "Montenegro": {
+        "Emissions (per capita)": 3.6558185
+    },
+    "Montserrat": {
+        "Emissions (per capita)": 4.8447766
+    },
+    "Morocco": {
+        "Emissions (per capita)": 1.8263615
+    },
+    "Mozambique": {
+        "Emissions (per capita)": 0.24274588
+    },
+    "Myanmar": {
+        "Emissions (per capita)": 0.6445672
+    },
+    "Namibia": {
+        "Emissions (per capita)": 1.5399038
+    },
+    "Nauru": {
+        "Emissions (per capita)": 4.1700416
+    },
+    "Nepal": {
+        "Emissions (per capita)": 0.5074035
+    },
+    "Netherlands": {
+        "Emissions (per capita)": 7.1372175
+    },
+    "New Caledonia": {
+        "Emissions (per capita)": 17.641167
+    },
+    "New Zealand": {
+        "Emissions (per capita)": 6.212154
+    },
+    "Nicaragua": {
+        "Emissions (per capita)": 0.79879653
+    },
+    "Niger": {
+        "Emissions (per capita)": 0.116688
+    },
+    "Nigeria": {
+        "Emissions (per capita)": 0.5891771
+    },
+    "Niue": {
+        "Emissions (per capita)": 3.8729508
+    },
+    "North America": {
+        "Emissions (per capita)": 10.5346775
+    },
+    "North America (excl. USA)": {
+        "Emissions (per capita)": 4.741475
+    },
+    "North Korea": {
+        "Emissions (per capita)": 1.9513915
+    },
+    "North Macedonia": {
+        "Emissions (per capita)": 3.6245701
+    },
+    "Norway": {
+        "Emissions (per capita)": 7.5093055
+    },
+    "Oceania": {
+        "Emissions (per capita)": 9.85179
+    },
+    "Oman": {
+        "Emissions (per capita)": 15.730261
+    },
+    "Pakistan": {
+        "Emissions (per capita)": 0.84893465
+    },
+    "Palau": {
+        "Emissions (per capita)": 12.123921
+    },
+    "Palestine": {
+        "Emissions (per capita)": 0.6660658
+    },
+    "Panama": {
+        "Emissions (per capita)": 2.699258
+    },
+    "Papua New Guinea": {
+        "Emissions (per capita)": 0.77131313
+    },
+    "Paraguay": {
+        "Emissions (per capita)": 1.3299496
+    },
+    "Peru": {
+        "Emissions (per capita)": 1.7891879
+    },
+    "Philippines": {
+        "Emissions (per capita)": 1.3014648
+    },
+    "Poland": {
+        "Emissions (per capita)": 8.106886
+    },
+    "Portugal": {
+        "Emissions (per capita)": 4.050785
+    },
+    "Qatar": {
+        "Emissions (per capita)": 37.601273
+    },
+    "Romania": {
+        "Emissions (per capita)": 3.739777
+    },
+    "Russia": {
+        "Emissions (per capita)": 11.416899
+    },
+    "Rwanda": {
+        "Emissions (per capita)": 0.112346195
+    },
+    "Saint Helena": {
+        "Emissions (per capita)": 3.2986484
+    },
+    "Saint Kitts and Nevis": {
+        "Emissions (per capita)": 4.708081
+    },
+    "Saint Lucia": {
+        "Emissions (per capita)": 2.6149206
+    },
+    "Saint Pierre and Miquelon": {
+        "Emissions (per capita)": 10.293288
+    },
+    "Saint Vincent and the Grenadines": {
+        "Emissions (per capita)": 2.2964725
+    },
+    "Samoa": {
+        "Emissions (per capita)": 1.1218625
+    },
+    "Sao Tome and Principe": {
+        "Emissions (per capita)": 0.5816142
+    },
+    "Saudi Arabia": {
+        "Emissions (per capita)": 18.197495
+    },
+    "Senegal": {
+        "Emissions (per capita)": 0.6738352
+    },
+    "Serbia": {
+        "Emissions (per capita)": 6.024712
+    },
+    "Seychelles": {
+        "Emissions (per capita)": 6.1495123
+    },
+    "Sierra Leone": {
+        "Emissions (per capita)": 0.13124847
+    },
+    "Singapore": {
+        "Emissions (per capita)": 8.911513
+    },
+    "Sint Maarten (Dutch part)": {
+        "Emissions (per capita)": 14.352394
+    },
+    "Slovakia": {
+        "Emissions (per capita)": 6.051555
+    },
+    "Slovenia": {
+        "Emissions (per capita)": 5.9979916
+    },
+    "Solomon Islands": {
+        "Emissions (per capita)": 0.41232163
+    },
+    "Somalia": {
+        "Emissions (per capita)": 0.03676208
+    },
+    "South Africa": {
+        "Emissions (per capita)": 6.7461643
+    },
+    "South America": {
+        "Emissions (per capita)": 2.4865332
+    },
+    "South Korea": {
+        "Emissions (per capita)": 11.598764
+    },
+    "South Sudan": {
+        "Emissions (per capita)": 0.1680176
+    },
+    "Spain": {
+        "Emissions (per capita)": 5.1644425
+    },
+    "Sri Lanka": {
+        "Emissions (per capita)": 0.7936504
+    },
+    "Sudan": {
+        "Emissions (per capita)": 0.4696261
+    },
+    "Suriname": {
+        "Emissions (per capita)": 5.8029985
+    },
+    "Sweden": {
+        "Emissions (per capita)": 3.6069093
+    },
+    "Switzerland": {
+        "Emissions (per capita)": 4.0478554
+    },
+    "Syria": {
+        "Emissions (per capita)": 1.2490375
+    },
+    "Taiwan": {
+        "Emissions (per capita)": 11.630868
+    },
+    "Tajikistan": {
+        "Emissions (per capita)": 1.0064901
+    },
+    "Tanzania": {
+        "Emissions (per capita)": 0.23771806
+    },
+    "Thailand": {
+        "Emissions (per capita)": 3.7762568
+    },
+    "Togo": {
+        "Emissions (per capita)": 0.2910665
+    },
+    "Tonga": {
+        "Emissions (per capita)": 1.7686282
+    },
+    "Trinidad and Tobago": {
+        "Emissions (per capita)": 22.423758
+    },
+    "Tunisia": {
+        "Emissions (per capita)": 2.879285
+    },
+    "Turkey": {
+        "Emissions (per capita)": 5.1052055
+    },
+    "Turkmenistan": {
+        "Emissions (per capita)": 11.03418
+    },
+    "Turks and Caicos Islands": {
+        "Emissions (per capita)": 7.636793
+    },
+    "Tuvalu": {
+        "Emissions (per capita)": 1.0004411
+    },
+    "Uganda": {
+        "Emissions (per capita)": 0.12744623
+    },
+    "Ukraine": {
+        "Emissions (per capita)": 3.5578535
+    },
+    "United Arab Emirates": {
+        "Emissions (per capita)": 25.833244
+    },
+    "United Kingdom": {
+        "Emissions (per capita)": 4.7201805
+    },
+    "United States": {
+        "Emissions (per capita)": 14.949616
+    },
+    "Upper-middle-income countries": {
+        "Emissions (per capita)": 6.2268133
+    },
+    "Uruguay": {
+        "Emissions (per capita)": 2.3060381
+    },
+    "Uzbekistan": {
+        "Emissions (per capita)": 3.4830604
+    },
+    "Vanuatu": {
+        "Emissions (per capita)": 0.6363055
+    },
+    "Venezuela": {
+        "Emissions (per capita)": 2.7168686
+    },
+    "Vietnam": {
+        "Emissions (per capita)": 3.4995174
+    },
+    "Wallis and Futuna": {
+        "Emissions (per capita)": 2.2819076
+    },
+    "World": {
+        "Emissions (per capita)": 4.658219
+    },
+    "Yemen": {
+        "Emissions (per capita)": 0.33701748
+    },
+    "Zambia": {
+        "Emissions (per capita)": 0.44570068
+    },
+    "Zimbabwe": {
+        "Emissions (per capita)": 0.542628
+    }
+}

@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07;
+package net.robertx.planeteze_b07.DataRetrievers;
 
 import android.content.Context;
 import com.fasterxml.jackson.databind.JsonNode;
