@@ -1,12 +1,19 @@
 package net.robertx.planeteze_b07;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import net.robertx.planeteze_b07.EcoTracker.DailySurvey;
+import net.robertx.planeteze_b07.questionnaire.Questionnaire;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
