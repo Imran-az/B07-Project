@@ -17,14 +17,23 @@
             android:exported="true"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".UserLogin.LoginPage"
+            android:exported="false" />
+        <activity
+            android:name=".UserLogin.SignUpPage"
+            android:exported="false" />
+        <activity
+            android:name=".UserLogin.WelcomePage"
+            android:exported="true"> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
