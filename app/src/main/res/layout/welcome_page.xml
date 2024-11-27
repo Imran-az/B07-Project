@@ -9,7 +9,7 @@
     android:background="@drawable/backgroundhomescreen">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/mainActivityUsernameDisplay"
         android:layout_width="322dp"
         android:layout_height="44dp"
         android:layout_marginTop="324dp"
@@ -33,7 +33,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/loginbutton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/mainActivityUsernameDisplay" />
 
     <Button
         android:id="@+id/loginbutton"
@@ -46,6 +46,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/signupbutton"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/mainActivityUsernameDisplay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
