@@ -18,7 +18,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -28,7 +27,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -263,9 +261,6 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void populateBarChart(double[] emissions) {
         // Create entries for the Bar Chart
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -275,14 +270,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Create a BarDataSet with custom colors
         BarDataSet dataSet = new BarDataSet(entries, ""); // Empty label to avoid "Description Label"
-        dataSet.setColors(new int[]{
-                Color.parseColor("#4CAF50"), // Forest Green
-                Color.parseColor("#8BC34A"), // Light Green
-                Color.parseColor("#A1887F"), // Earthy Brown
-                Color.parseColor("#CDDC39"), // Mossy Green
-                Color.parseColor("#6D4C41"), // Wood Brown
-                Color.parseColor("#9E9D24")  // Olive Green
-        });
+        dataSet.setColors(getLegendColors());
         dataSet.setValueTextSize(12f); // Adjust font size for bar values
         dataSet.setValueTextColor(Color.BLACK); // Set value text color
 
@@ -318,7 +306,6 @@ public class ResultsActivity extends AppCompatActivity {
         barChart.setExtraBottomOffset(10f); // Add padding below chart
         barChart.invalidate(); // Refresh the chart
     }
-
 
 
     private int[] getLegendColors() {
