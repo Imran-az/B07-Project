@@ -30,6 +30,7 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
     private Button yesbtn, nextbtn, prevbtn, nobtn;
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
+    public static Map<String, Object> data2 = new HashMap<>();
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -85,6 +86,7 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                     QuestionnairePageQ1.data.put(q2, ans2);
                     QuestionnairePageQ1.data.put(q3, ans3);
 
+
 //                    Map<String, Object> newField = new HashMap<>();
 //                    newField.put("Take public transportation", "Yes");
 //                    newField.put("Type of public transportation", question2_answer.getText().toString());
@@ -129,6 +131,7 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                 QuestionnairePageQ1.data.put(q1, ans1);
                 QuestionnairePageQ1.data.put(q2, ans2);
                 QuestionnairePageQ1.data.put(q3, ans3);
+
 
 //                Map<String, Object> newField = new HashMap<>();
 //                newField.put("Take public transportation", "No");

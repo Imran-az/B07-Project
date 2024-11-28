@@ -3,6 +3,7 @@ package net.robertx.planeteze_b07.DailySurvey;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
     public static Map<String, Object> data = new HashMap<>();
+    public static Map<String, Object> data1 = new HashMap<>();
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;

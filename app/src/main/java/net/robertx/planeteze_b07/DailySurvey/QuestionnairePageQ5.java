@@ -35,7 +35,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
     Button yes_btn, no_btn, previous_btn, next_btn;
     EditText q1_ans, q2_ans, q3_ans;
     TextView q1_que, q2_que, q3_que;
-    Map<String, Object> q5_data = new HashMap<>();
+    Map<String, Object> data5 = new HashMap<>();
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
@@ -47,6 +47,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         setContentView(R.layout.activity_questionnaire_page_q5);
 
         yes_btn = findViewById(R.id.yes_button);
+        q1_que = findViewById(R.id.question1_text_view);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
         q3_que = findViewById(R.id.question3_text_view);
@@ -60,9 +61,9 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         });
 
         String q1, q2, q3;
-        q1 = "Yes";
+        q1 = q1_que.getText().toString();
         q2 = String.valueOf(q2_que.getText());
-        q3 = String.valueOf(q3_ans.getText());
+        q3 = String.valueOf(q3_que.getText());
 
         next_btn = findViewById(R.id.next_button);
         previous_btn = findViewById(R.id.previous_button);
@@ -89,6 +90,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                     QuestionnairePageQ1.data.put(q1, answer1);
                     QuestionnairePageQ1.data.put(q2, answer2);
                     QuestionnairePageQ1.data.put(q3, answer3);
+
                 }
                 else{
                     Toast.makeText(QuestionnairePageQ5.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -124,20 +126,20 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                 QuestionnairePageQ1.data.put(q3, answer3);
             }
         });
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        databaseReference = database.getReference("Users").child("Daily Survey").child(currentDate).child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+        //String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        //databaseReference = database.getReference("Users").child("Daily Survey").child(currentDate).child("W35Qr6MzplfED39mMHhiYRLKMYO2");
 
         //Log.d("FirebaseData", "Saving data: " + QuestionnairePageQ1.data);
 
-        databaseReference.updateChildren(QuestionnairePageQ1.data).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Success message (optional)
-                Toast.makeText(QuestionnairePageQ5.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-            } else {
-                // Error message
-                Toast.makeText(QuestionnairePageQ5.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        databaseReference.updateChildren(QuestionnairePageQ1.data).addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                // Success message (optional)
+//                Toast.makeText(QuestionnairePageQ5.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+//            } else {
+//                // Error message
+//                Toast.makeText(QuestionnairePageQ5.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
