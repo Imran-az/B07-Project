@@ -36,7 +36,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
     TextView q1_que, q2_que, q3_que, q4_que;
     Map<String, Object> q9_data = new HashMap<>();
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference dailySurveyReference;
     boolean e = false;
     boolean g = false;
     boolean w = false;
@@ -60,6 +60,14 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         q3_ans = findViewById(R.id.answer3_input);
         q4_que = findViewById(R.id.question4_text_view);
         q4_ans = findViewById(R.id.answer4_input);
+
+        database = FirebaseDatabase.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userID = currentUser.getUid();
+        dailySurveyReference = database.getReference("DailySurvey");
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        dailySurveyReference = database.getReference("DailySurvey").child("W35Qr6MzplfED39mMHhiYRLKMYO2").child(currentDate);
 
         electric.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,31 +127,42 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                 answer1 = "Electricity bill not paid";
                 answer2 = "Gas bill not paid";
                 answer3 = "Water bill not paid";
-                answer4 = "";
-                answer5 = "";
-                answer6 = "";
+                answer4 = "0";
+                answer5 = "0";
+                answer6 = "0";
 
                 if(e && !TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
-                    answer1 = "Electricity bill paid, Amount Paid: ";
+                    answer1 = "Electricity bill paid";
                     answer4 = String.valueOf(q2_ans.getText());
                 }
                 if(g && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
-                    answer2 = "Gas bill paid, Amount Paid: ";
+                    answer2 = "Gas bill paid";
                     answer5 = String.valueOf(q3_ans.getText());
                 }
                 if(w && !TextUtils.isEmpty(String.valueOf(q4_ans.getText()))){
-                    answer3 = "Water bill paid, Amount Paid: ";
+                    answer3 = "Water bill paid";
                     answer6 = String.valueOf(q4_ans.getText());
                 }
 
 
-
+                //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
                 QuestionnairePageQ1.data.put(q1, answer1);
                 QuestionnairePageQ1.data.put("Electricity Paid", answer4);
                 QuestionnairePageQ1.data.put(q2, answer2);
                 QuestionnairePageQ1.data.put("Gas Paid", answer5);
                 QuestionnairePageQ1.data.put(q3, answer3);
-                QuestionnairePageQ1.data.put("Water Bill", answer6);
+                QuestionnairePageQ1.data.put("Water Paid", answer6);
+                //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
+
+                dailySurveyReference.updateChildren(QuestionnairePageQ1.data).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Success message (optional)
+                        Toast.makeText(QuestionnairePageQ9.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Error message
+                        Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -155,24 +174,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        database = FirebaseDatabase.getInstance();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String userID = currentUser.getUid();
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-//        databaseReference = database.getReference("Users").child("Daily Survey").child(currentDate).child("W35Qr6MzplfED39mMHhiYRLKMYO2");
-//
-//        Log.d("FirebaseData", "Saving data: " + QuestionnairePageQ1.data);
-//
-//        databaseReference.updateChildren(QuestionnairePageQ1.data).addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        // Success message (optional)
-//                        Toast.makeText(QuestionnairePageQ9.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        // Error message
-//                        Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

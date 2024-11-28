@@ -29,6 +29,7 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
     private Button nxtbtn, option1btn, option2btn, prevbtn;
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
+    public static Map<String, Object> data4 = new HashMap<>();
     String option;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -76,6 +77,7 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
                     Intent intent = new Intent(QuestionnairePageQ4.this, QuestionnairePageQ5.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
@@ -84,15 +86,6 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
                     QuestionnairePageQ1.data.put("Number of flights taken today", question2_answer.getText().toString());
                     QuestionnairePageQ1.data.put("Distance traveled", question3_answer.getText().toString());
 
-//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-//                        if (task.isSuccessful()) {
-//                            // Success message (optional)
-//                            Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            // Error message
-//                            Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
                 }
                 else {
                     Toast.makeText(QuestionnairePageQ4.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();

@@ -101,9 +101,10 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
                 Intent intent = new Intent(QuestionnairePageQ6.this, QuestionnairePageQ7.class);
                 startActivity(intent);
 
-                String answer1, answer2;
+                String answer1;
+                Object answer2;
                 answer1 = "No";
-                answer2 = String.valueOf(0);
+                answer2 = 0;
 
                 //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
