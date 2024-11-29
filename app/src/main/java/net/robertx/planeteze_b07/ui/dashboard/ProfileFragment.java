@@ -1,5 +1,6 @@
 package net.robertx.planeteze_b07.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import net.robertx.planeteze_b07.R;
+import net.robertx.planeteze_b07.UserLogin.WelcomePage;
 
 import java.util.Objects;
 
@@ -39,6 +41,8 @@ public class ProfileFragment extends Fragment {
         Button logoutButton = view.findViewById(R.id.button_sign_out);
         logoutButton.setOnClickListener(v -> {
             auth.signOut();
+            Intent intent = new Intent(getActivity(), WelcomePage.class);
+            startActivity(intent);
             requireActivity().finish();
         });
 

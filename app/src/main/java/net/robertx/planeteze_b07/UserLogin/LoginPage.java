@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
@@ -97,7 +98,7 @@ public class LoginPage extends AppCompatActivity {
                                         Toast.makeText(LoginPage.this, "Login Successful",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(),
-                                                MainActivity.class);
+                                                Dashboard.class);
                                         startActivity(intent);
                                         finish();
                                     }
