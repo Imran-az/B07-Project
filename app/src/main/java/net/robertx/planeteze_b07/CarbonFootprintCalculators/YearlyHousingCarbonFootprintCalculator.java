@@ -28,6 +28,10 @@ public class YearlyHousingCarbonFootprintCalculator {
         double additionalCO2 = !homeHeatingType.equals(waterHeatingType) ? 233.0 : 0.0;
         double renewableAdjustment = adjustForRenewableEnergy(useRenewableEnergy);
 
+        if(heatingCO2 + waterHeatingCO2 - additionalCO2 + renewableAdjustment < 0){
+            return 0.0;
+        }
+
         return heatingCO2 + waterHeatingCO2 - additionalCO2 + renewableAdjustment;
     }
 
