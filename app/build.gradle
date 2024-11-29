@@ -4,6 +4,11 @@ plugins {
 }
 
 android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
     namespace 'net.robertx.planeteze_b07'
     compileSdk 34
 
@@ -50,6 +55,7 @@ dependencies {
     testImplementation libs.mockito.core.v550
     testImplementation libs.robolectric.v49
     implementation libs.mpandroidchart
+    testImplementation libs.robolectric.vlatestversion
 
 
     implementation platform(libs.firebase.bom)

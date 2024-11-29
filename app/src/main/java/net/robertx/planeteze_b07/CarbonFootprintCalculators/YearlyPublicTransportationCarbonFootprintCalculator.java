@@ -33,7 +33,6 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
         // Validate the responses
         if (!areResponsesValid(responses, requiredKeys)) {
-            Log.d(TAG, "Invalid or missing responses Public Transportation Footprint");
             return 0.0;
         }
 

@@ -45,7 +45,6 @@ public class YearlyConsumptionFootprintCalculator extends CalculateYearlyCarbonF
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
         if(!areResponsesValid(responses, requiredKeys)) {
-            Log.d(TAG, "Invalid or missing responses Consumption Footprint");
             return 0.0; // Return 0 if any required key is missing or invalid
         }
 
@@ -62,11 +61,6 @@ public class YearlyConsumptionFootprintCalculator extends CalculateYearlyCarbonF
         double clothesEmission = CLOTHES_EMISSION.get(clothesFrequency);
         double devicesEmission = DEVICES_EMISSION.get(devicesPurchased);
         double recyclingReduction = getRecyclingReduction(clothesFrequency, recyclingFrequency);
-
-        // Log intermediate values
-        Log.d(TAG, "Clothes Emission pop: " + clothesEmission);
-        Log.d(TAG, "Devices Emission: " + devicesEmission);
-        Log.d(TAG, "Recycling Reduction: " + recyclingReduction);
 
         // Calculate the total emissions with adjustments for eco-friendly habits
         double totalEmission = calculateTotalEmission(clothesEmission, devicesEmission, recyclingReduction, isEcoFriendly);
