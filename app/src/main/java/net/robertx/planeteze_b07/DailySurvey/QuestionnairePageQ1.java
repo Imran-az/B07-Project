@@ -73,20 +73,6 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
                     data.put("Distance Driven", question2_answer.getText().toString());
                     data.put("Change vehicle type", question3_answer.getText().toString());
 
-//                    Map<String, Object> newField = new HashMap<>();
-//                    data.put("Drive Personal Vehicle", "Yes");
-//                    data.put("Distance Driven", question2_answer.getText().toString());
-//                    data.put("Change vehicle type", question3_answer.getText().toString());
-//
-//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-//                        if (task.isSuccessful()) {
-//                            // Success message (optional)
-//                            Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            // Error message
-//                            Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
                 }
                 else {
                     Toast.makeText(QuestionnairePageQ1.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -107,15 +93,6 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
                 data.put("Distance Driven", 0);
                 data.put("Change vehicle type", 0);
 
-//                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        // Success message (optional)
-//                        Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        // Error message
-//                        Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
             }
         });
 
