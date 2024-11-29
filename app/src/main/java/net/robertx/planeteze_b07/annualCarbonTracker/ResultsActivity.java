@@ -130,8 +130,13 @@ public class ResultsActivity extends AppCompatActivity {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
-                        HashMap<String, String> responses = document.toObject(HashMap.class);
-                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(responses);
+                        HashMap<String, String> parsedResponses = new HashMap<>();
+                        Map<String, Object> data = document.getData();
+                        Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
+                        for (String key : data.keySet()) {
+                            parsedResponses.put(key, data.get(key).toString());
+                        }
+                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
                         double[] emissions = extractEmissions(categoryEmissions);
                         String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
                         populateBreakdown(breakdownContainer, emissions, categories);
