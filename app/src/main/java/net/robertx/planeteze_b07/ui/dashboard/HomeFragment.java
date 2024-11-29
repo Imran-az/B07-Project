@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
         });
 
         view.findViewById(R.id.cardViewSurveyResults).setEnabled(false);
+        view.findViewById(R.id.viewSurveyResultsCardIcon).setEnabled(false);
 
         if (auth.getCurrentUser() != null) {
             CollectionReference collection = db.collection("AnnualCarbonFootprintSurveyData");
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
                         view.findViewById(R.id.textAlreadyTakenSurvey).setVisibility(View.VISIBLE);
                         view.findViewById(R.id.textCantViewResultsWithoutTakingSurvey).setVisibility(View.INVISIBLE);
                         view.findViewById(R.id.cardViewSurveyResults).setEnabled(true);
+                        view.findViewById(R.id.viewSurveyResultsCardIcon).setEnabled(true);
                     }
                 }
             });
