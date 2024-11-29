@@ -47,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button = findViewById(R.id.button22);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
-                startActivity(intent);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+            startActivity(intent);
 
-            }
+        });
+
+        findViewById(R.id.openDashboardBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Dashboard.class);
+            startActivity(intent);
         });
 
 
