@@ -1,5 +1,7 @@
 [versions]
 agp = "8.7.2"
+cardview = "1.0.0"
+core = "1.15.0"
 firebaseBom = "33.5.1"
 jacksonDatabind = "2.15.0"
 junit = "4.13.2"
@@ -15,6 +17,7 @@ firebaseAuth = "23.1.0"
 firebaseFirestore = "25.1.1"
 junitJupiter = "5.8.1"
 firebaseDatabase = "21.0.0"
+materialVersion = "1.8.0"
 mockitoCore = "5.5.0"
 mockitoJunitJupiter = "4.11.0"
 mockitoJunitJupiterVersion = "5.5.0"
@@ -22,8 +25,11 @@ mpandroidchart = "v3.1.0"
 robolectric = "4.10.3"
 robolectricRobolectric = "<latest-version>"
 robolectricVersion = "4.9"
+cardviewV7 = "28.0.0"
 
 [libraries]
+cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+core = { module = "androidx.core:core", version.ref = "core" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -39,6 +45,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+material-v180 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoJunitJupiter" }
 mockito-core-v550 = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiter" }
@@ -47,6 +54,7 @@ mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-v49 = { module = "org.robolectric:robolectric", version.ref = "robolectricVersion" }
 robolectric-vlatestversion = { module = "org.robolectric:robolectric", version.ref = "robolectricRobolectric" }
+cardview-v7 = { group = "com.android.support", name = "cardview-v7", version.ref = "cardviewV7" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
