@@ -16,5 +16,6 @@
     <color name="app_theme_light">#f6fbff</color>
     <color name="edit_text_border">#03A9F4</color>
     <color name="edit_text_background">#f6fbff</color>
+    <color name="highlight_teal">#66CCCC</color>
 
 </resources>
