@@ -2,7 +2,13 @@ package net.robertx.planeteze_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +16,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseAuth;
+
+import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
+import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
+import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
+import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+
+    private Button button;
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +43,33 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        button = findViewById(R.id.button22);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);
+        if (firebaseAuth.getCurrentUser() != null)
+            usernameDisplay.setText("User ID: " + firebaseAuth.getCurrentUser().getUid() + "\n" + "Email: " + firebaseAuth.getCurrentUser().getEmail());
+
+
+        findViewById(R.id.startAnnualCarbonFootprintSurvey).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
+            startActivity(intent);
         });
     }
 }

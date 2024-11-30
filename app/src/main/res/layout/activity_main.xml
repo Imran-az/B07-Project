@@ -5,28 +5,62 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D1DAE2"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/mainActivityUsernameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Username of user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_survey"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/temporaryButtonsForTesting"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="161dp"
-        android:text="To Survey"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@id/mainActivityUsernameDisplay">
+
+        <Button
+            android:id="@+id/startAnnualCarbonFootprintSurvey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Annual Carbon Footprint Survey" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To Survey" />
+
+        <Button
+            android:id="@+id/button22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Annual footprint charts"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.62" />
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
