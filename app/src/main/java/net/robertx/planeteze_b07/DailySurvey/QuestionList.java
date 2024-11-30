@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +34,19 @@ public class QuestionList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.question_list);
+        setContentView(R.layout.activity_question_list);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+
 
         recyclerView = findViewById(R.id.recyclerView_widget);
         String date = CalendarPage.SelectedDate;
@@ -47,6 +59,7 @@ public class QuestionList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MainAdapter(this, list);
         recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);
         Log.d("RecyclerView", "Adapter attached with initial list size: " + adapter.getItemCount());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -82,14 +95,6 @@ public class QuestionList extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("FirebaseError", "Data retrieval cancelled: " + error.getMessage());
             }
-        });
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
         });
     }
 }
