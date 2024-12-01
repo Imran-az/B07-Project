@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
 import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
@@ -28,7 +29,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Button button;
+    private Button button, button2;
 
     private FirebaseAuth firebaseAuth;
 
@@ -55,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        button2 = findViewById(R.id.button_survey);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, QuestionnairePageQ1.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);

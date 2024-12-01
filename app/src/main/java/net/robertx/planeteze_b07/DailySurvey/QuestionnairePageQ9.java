@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import EcoTracker.EcoTrackerDisplay;
+import EcoTracker.CO2EmissionUpdater;
 
 public class QuestionnairePageQ9 extends AppCompatActivity {
 
@@ -47,6 +47,11 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        // Start the CO2EmissionUpdater for all users
+        CO2EmissionUpdater updater = new CO2EmissionUpdater();
+        updater.startListeningForAllUsers();
+
         setContentView(R.layout.activity_questionnaire_page_q9);
 
         electric = findViewById(R.id.electricity);
@@ -69,7 +74,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         String userID = currentUser.getUid();
         dailySurveyReference = database.getReference("DailySurvey");
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child("fauW90QPLwSLWqGxMDhArStU0o03").child(currentDate);
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
         electric.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +127,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ9.this, EcoTrackerDisplay.class);
+                Intent intent = new Intent(QuestionnairePageQ9.this,QuestionnairePageQ9.class);
                 startActivity(intent);
 
                 String answer1, answer2, answer3, answer4, answer5, answer6;

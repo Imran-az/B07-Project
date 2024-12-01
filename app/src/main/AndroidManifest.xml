@@ -13,9 +13,6 @@
         android:theme="@style/Theme.PlanetezeB07"
         tools:targetApi="31">
         <activity
-            android:name="EcoTracker.EcoTrackerDisplay"
-            android:exported="false" />
-        <activity
             android:name=".DailySurvey.QuestionnairePageQ9"
             android:exported="false" />
         <activity
@@ -47,18 +44,18 @@
             android:exported="false" />
         <activity
             android:name=".UserLogin.WelcomePage"
-            android:exported="false" /> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
+            android:exported="true"> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DailySurvey.QuestionnairePageQ1"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
     </application>
 

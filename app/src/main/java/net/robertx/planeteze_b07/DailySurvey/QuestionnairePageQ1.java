@@ -61,7 +61,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child("fauW90QPLwSLWqGxMDhArStU0o03");
+        databaseReference = database.getReference("Users").child("userID");
         nxtbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
