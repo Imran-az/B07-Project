@@ -131,10 +131,10 @@ public class Calculations {
         int num = Integer.parseInt(time);
 
         String taken = responses.get("Flight");
-        if (taken.equals("Long-haul")){
+        String newTaken = taken.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        if (newTaken.equals("longhaul")){
             return longHaulFlight(num);
         }
-
         return shortHaulFlight(num);
     }
 

@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import EcoTracker.EcoTrackerDisplay;
+
 public class QuestionnairePageQ9 extends AppCompatActivity {
 
     Button electric, gas, water, none_btn, previous_btn, submit_btn;
@@ -120,7 +122,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ9.this, QuestionnairePageQ9.class);
+                Intent intent = new Intent(QuestionnairePageQ9.this, EcoTrackerDisplay.class);
                 startActivity(intent);
 
                 String answer1, answer2, answer3, answer4, answer5, answer6;

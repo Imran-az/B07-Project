@@ -2,10 +2,4 @@
     <string name="app_name">Planeteze-B07</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <resources>
-        <!-- Updated keys -->
-        <string name="Drive Personal Vehicle">Q11</string>
-        <string name="Distance Driven">Q12</string>
-        <string name="Change vehicle type">Q13</string>
-    </resources>
 </resources>

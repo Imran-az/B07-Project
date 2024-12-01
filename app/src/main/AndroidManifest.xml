@@ -16,12 +16,6 @@
             android:name="EcoTracker.EcoTrackerDisplay"
             android:exported="false" />
         <activity
-            android:name=".DailySurvey.ActivityList"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.CalendarPage"
-            android:exported="false" />
-        <activity
             android:name=".DailySurvey.QuestionnairePageQ9"
             android:exported="false" />
         <activity
