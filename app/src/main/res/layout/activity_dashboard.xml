@@ -24,5 +24,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:itemIconTint="@color/navigation_view_colored"
         app:menu="@menu/dashboard_options" />
 </androidx.constraintlayout.widget.ConstraintLayout>
