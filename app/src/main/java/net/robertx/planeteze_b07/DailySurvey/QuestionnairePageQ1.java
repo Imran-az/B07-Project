@@ -61,7 +61,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        databaseReference = database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+        databaseReference = database.getReference("Users").child("fauW90QPLwSLWqGxMDhArStU0o03");
         nxtbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +90,8 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
 
 
                 data.put("Drive Personal Vehicle", "No");
-                data.put("Distance Driven", 0);
-                data.put("Change vehicle type", 0);
+                data.put("Distance Driven", "0");
+                data.put("Change vehicle type", "No");
 
             }
         });

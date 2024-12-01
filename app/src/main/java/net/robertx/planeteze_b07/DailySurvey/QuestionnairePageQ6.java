@@ -104,7 +104,7 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
                 String answer1;
                 Object answer2;
                 answer1 = "No";
-                answer2 = 0;
+                answer2 = "0";
 
                 //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 

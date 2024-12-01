@@ -123,8 +123,8 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                 String ans1;
                 Object ans2, ans3;
                 ans1 = "No";
-                ans2 = 0;
-                ans3 = 0;
+                ans2 = "0";
+                ans3 = "0";
 
                 //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 

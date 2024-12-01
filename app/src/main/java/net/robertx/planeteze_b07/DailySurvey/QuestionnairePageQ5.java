@@ -116,8 +116,8 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                 String answer1;
                 Object answer2, answer3;
                 answer1 = "No";
-                answer2 = 0;
-                answer3 = 0;
+                answer2 = "None";
+                answer3 = "0";
 
                 //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 

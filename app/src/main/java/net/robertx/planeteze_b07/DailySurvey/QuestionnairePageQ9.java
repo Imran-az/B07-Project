@@ -67,7 +67,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         String userID = currentUser.getUid();
         dailySurveyReference = database.getReference("DailySurvey");
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child("W35Qr6MzplfED39mMHhiYRLKMYO2").child(currentDate);
+        dailySurveyReference = database.getReference("DailySurvey").child("fauW90QPLwSLWqGxMDhArStU0o03").child(currentDate);
 
         electric.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +146,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
 
 
                 //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
-                QuestionnairePageQ1.data.put(q1, answer1);
+                QuestionnairePageQ1.data.put(q1, answer1 + ", " + answer2 + ", " + answer3);
                 QuestionnairePageQ1.data.put("Electricity Paid", answer4);
                 QuestionnairePageQ1.data.put(q2, answer2);
                 QuestionnairePageQ1.data.put("Gas Paid", answer5);
