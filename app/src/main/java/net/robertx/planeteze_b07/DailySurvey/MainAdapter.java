@@ -35,7 +35,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the item layout (change R.layout.activity_item_adapter to your actual layout)
-        View view = LayoutInflater.from(context).inflate(R.layout.activity, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_cardview, parent, false);
         return new MainViewHolder(view);
     }
 

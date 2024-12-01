@@ -7,68 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".DailySurvey.QuestionnairePageQ2">
 
-    <TextView
-        android:id="@+id/question1Text_Q2"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_question_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="127dp"
-        android:text="Do you Take Public Transportation"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:background="#009999"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/yes_no_button_row_Q2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question1Text_Q2">
-
-        <!-- Swapped Yes/No Button Positions -->
-
-        <Button
-            android:id="@+id/no_button_Q2"
+        <TextView
+            android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="No"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_gravity="center"
+            android:text="Daily Survey"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-        <Button
-            android:id="@+id/yes_button_Q2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:text="Yes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/question2Text_Q2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="16dp"
         android:text="Type of Public Transportation"
+        android:textColor="@color/dark_gray_blue"
         android:textSize="20sp"
-        android:visibility="invisible"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/yes_no_button_row_Q2"
-        app:layout_constraintStart_toStartOf="@id/yes_no_button_row_Q2"
-        app:layout_constraintTop_toBottomOf="@+id/yes_no_button_row_Q2" />
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question_list" />
 
     <EditText
         android:id="@+id/answer2_input_Q2"
@@ -77,8 +54,8 @@
         android:layout_margin="16dp"
         android:layout_marginTop="136dp"
         android:hint="e.g., Bus, Train, Subway"
-        android:visibility="invisible"
         android:inputType="text"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question2Text_Q2" />
@@ -90,9 +67,10 @@
         android:layout_margin="16dp"
         android:layout_marginTop="182dp"
         android:text="Time Spent on Public Transport"
-        android:visibility="invisible"
+        android:textColor="@color/dark_gray_blue"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answer2_input_Q2" />
@@ -102,11 +80,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="186dp"
+        android:layout_marginTop="168dp"
         android:hint="e.g. in Hours"
-        android:visibility="invisible"
         android:inputType="text"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question3_text_view_Q2" />
 
@@ -119,25 +98,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/previous_button_Q2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Previous"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <Button
-            android:id="@+id/next_button_Q2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/submit_button_Q2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/teal"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer3_input_Q2" />
+
+    <Button
+        android:id="@+id/back_button_Q2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/teal"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button_Q2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,56 +8,34 @@
     android:layout_height="match_parent"
     tools:context=".DailySurvey.QuestionnairePageQ5">
 
-    <!-- First Question -->
-    <TextView
-        android:id="@+id/question1_text_view"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_question_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Have you had a meal yet?"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="#009999"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Meal"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- First Question -->
 
     <!-- Yes/No Buttons After Question 1 Input -->
 
     <!-- Second Question -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/yes_no_button_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question1_text_view">
-
-        <!-- Swapped Yes/No Button Positions -->
-
-        <Button
-            android:id="@+id/no_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="No"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/yes_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:text="Yes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/question2_text_view"
@@ -67,10 +45,10 @@
         android:text="What type of protein did you eat?"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/yes_no_button_row"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question_list" />
 
     <EditText
         android:id="@+id/answer2_input"
@@ -79,10 +57,10 @@
         android:layout_margin="16dp"
         android:hint="beef, pork,chicken, fish, etc"
         android:inputType="text"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/question2_text_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/question2_text_view" />
 
     <TextView
         android:id="@+id/question3_text_view"
@@ -92,52 +70,45 @@
         android:text="How many servings did you eat?"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/answer2_input"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/answer2_input" />
 
     <EditText
         android:id="@+id/answer3_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Enter your second answer here"
+        android:hint="e.g., 1, 2, 3"
         android:inputType="text"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/question3_text_view"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/question3_text_view" />
+    <Button
+        android:id="@+id/submit_button_Q5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/teal"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer3_input" />
 
-    <!-- Navigation Buttons -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/previous_next_button_row"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/back_button_Q5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/teal"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/submit_button_Q5" />
 
-        <Button
-            android:id="@+id/previous_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Previous"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <Button
-            android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Navigation Buttons -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

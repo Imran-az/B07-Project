@@ -2,6 +2,7 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,6 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.robertx.planeteze_b07.R;
 
+import org.w3c.dom.Text;
+
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class QuestionList extends AppCompatActivity {
@@ -29,12 +33,14 @@ public class QuestionList extends AppCompatActivity {
     DatabaseReference databaseReference;
     MainAdapter adapter;
 
+    TextView PickedDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_question_list);
+        setContentView(R.layout.question_answer_recyclerview);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -46,14 +52,15 @@ public class QuestionList extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
         toolbar.setNavigationOnClickListener(v -> finish());
 
+        PickedDate = findViewById(R.id.ChosenDate);
+
+        PickedDate.setText(MessageFormat.format("{0}/{1}/{2}",CalendarPage.ChosenDay, CalendarPage.ChosenMonth, CalendarPage.ChosenYear));
 
 
         recyclerView = findViewById(R.id.recyclerView_widget);
         String date = CalendarPage.SelectedDate;
-        databaseReference = FirebaseDatabase.getInstance().getReference("DailySurvey").child("W35Qr6MzplfED39mMHhiYRLKMYO2").child(date);
+        databaseReference = FirebaseDatabase.getInstance().getReference("DailySurvey").child("TestUser").child(date);
         list = new ArrayList<>();
-
-
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

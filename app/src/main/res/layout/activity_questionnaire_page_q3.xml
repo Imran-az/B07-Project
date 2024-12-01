@@ -7,54 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".DailySurvey.QuestionnairePageQ3">
 
-    <TextView
-        android:id="@+id/question1Text_Q3"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_question_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="127dp"
-        android:text="Cycling or Walking"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:background="#009999"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/options_button_row_Q3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question1Text_Q3">
-
-        <!-- Swapped Yes/No Button Positions -->
-
-        <Button
-            android:id="@+id/Cycling_button_Q3"
+        <TextView
+            android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="Cycling"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            android:layout_gravity="center"
+            android:text="Cycling or Walking"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-        <Button
-            android:id="@+id/Walking_button_Q3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:text="Walking"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/question2Text_Q3"
@@ -64,11 +39,11 @@
         android:layout_marginTop="58dp"
         android:text="Distance Cycled or Walked"
         android:textSize="20sp"
-        android:visibility="invisible"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/options_button_row_Q3"
-        app:layout_constraintStart_toStartOf="@id/options_button_row_Q3"
-        app:layout_constraintTop_toBottomOf="@+id/options_button_row_Q3" />
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/toolbar_question_list"
+        app:layout_constraintStart_toStartOf="@id/toolbar_question_list"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question_list" />
 
     <EditText
         android:id="@+id/answer2_input_Q3"
@@ -77,40 +52,34 @@
         android:layout_margin="16dp"
         android:layout_marginTop="136dp"
         android:hint="e.g., in Kilometers or Miles"
-        android:visibility="invisible"
         android:inputType="text"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question2Text_Q3" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/previous_next_button_row"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/submit_button_Q3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/teal"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/answer2_input_Q3" />
 
-        <Button
-            android:id="@+id/previous_button_Q3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Previous"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+    <Button
+        android:id="@+id/back_button_Q3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/teal"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button_Q3" />
 
-        <Button
-            android:id="@+id/next_button_Q3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

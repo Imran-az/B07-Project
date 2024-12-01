@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@drawable/backgroundhomescreen"
     android:layout_height="match_parent"
     tools:context=".DailySurvey.QuestionList">
 
@@ -21,10 +22,10 @@
         app:navigationIconTint="@color/white">
 
         <TextView
-            android:id="@+id/textDateQuestionList"
+            android:id="@+id/ChosenDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="ChosenDate"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -46,7 +47,7 @@
             android:id="@+id/recyclerView_widget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/activity" />
+            tools:listitem="@layout/activity_cardview" />
 
     </androidx.core.widget.NestedScrollView>
 

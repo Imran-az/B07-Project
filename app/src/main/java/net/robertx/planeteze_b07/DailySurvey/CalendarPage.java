@@ -34,6 +34,8 @@ public class CalendarPage extends AppCompatActivity {
     List<MainModel> activityList;
     static String SelectedDate;
 
+    static String ChosenYear, ChosenDay, ChosenMonth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,8 @@ public class CalendarPage extends AppCompatActivity {
         Button button = findViewById(R.id.datePicker);
         TextView displayDate = findViewById(R.id.displayDate);
         SelectedDate = "";
+
+        displayDate.setText("Calendar");
 
 //        recyclerView = findViewById(R.id.recyclerView);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,9 +72,11 @@ public class CalendarPage extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         displayDate.setText(MessageFormat.format("{0}/{1}/{2}", String.valueOf(dayOfMonth), String.valueOf(month + 1), String.valueOf(year)));
                         SelectedDate =  String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
+                        ChosenDay = String.valueOf(dayOfMonth);
+                        ChosenYear = String.valueOf(year);
+                        ChosenMonth = String.valueOf(month + 1);
                         Intent intent = new Intent(CalendarPage.this, QuestionList.class);
                         startActivity(intent);
-                        finish();
                     }
                 }, year, month, day);
                 dialog.show();
