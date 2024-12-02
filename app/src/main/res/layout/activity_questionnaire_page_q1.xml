@@ -5,66 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#009999"
     tools:context=".DailySurvey.QuestionnairePageQ1">
 
-    <!-- First Question -->
-
-    <!-- Yes/No Buttons After Question 1 Input -->
-
-    <!-- Second Question -->
-
-    <!-- Third Question -->
-
-    <!-- Navigation Buttons -->
-
-    <TextView
-        android:id="@+id/question1Text"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_question_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="127dp"
-        android:text="Do you drive a personal vehicle"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:background="#009999"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Drive Personal Vehicle"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/yes_no_button_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question1Text">
-
-        <!-- Swapped Yes/No Button Positions -->
-
-        <Button
-            android:id="@+id/no_button_Q1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="No"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            android:id="@+id/yes_button_Q1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:text="Yes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        tools:layout_editor_absoluteY="79dp" />
 
     <TextView
         android:id="@+id/question2Text_Q1"
@@ -72,13 +45,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="58dp"
+        android:fontFamily="sans-serif-black"
         android:text="Distance Driven"
+        android:textColor="@color/dark_gray_blue"
         android:textSize="20sp"
-        android:visibility="invisible"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/yes_no_button_row"
-        app:layout_constraintStart_toStartOf="@id/yes_no_button_row"
-        app:layout_constraintTop_toBottomOf="@+id/yes_no_button_row" />
+        app:layout_constraintEnd_toEndOf="@id/toolbar_question_list"
+        app:layout_constraintStart_toStartOf="@id/toolbar_question_list"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question_list" />
 
     <EditText
         android:id="@+id/answer2_input_Q1"
@@ -87,7 +61,6 @@
         android:layout_margin="16dp"
         android:layout_marginTop="136dp"
         android:hint="e.g., in kilometers"
-        android:visibility="invisible"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,8 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="182dp"
+        android:fontFamily="sans-serif-black"
         android:text="Change vehicle type?"
-        android:visibility="invisible"
+        android:textColor="@color/dark_gray_blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +88,6 @@
         android:layout_margin="16dp"
         android:layout_marginTop="186dp"
         android:hint="e.g. gasoline, disel, hybrid, electric, idk"
-        android:visibility="invisible"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,28 +99,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/previous_button_Q1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Previous"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <Button
-            android:id="@+id/next_button_Q1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/submit_button_Q1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#009999"
+        android:fontFamily="sans-serif-black"
+        android:text="Submit"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer3_input_Q1" />
+
+    <Button
+        android:id="@+id/back_button_Q1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/teal"
+        android:fontFamily="sans-serif-black"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button_Q1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

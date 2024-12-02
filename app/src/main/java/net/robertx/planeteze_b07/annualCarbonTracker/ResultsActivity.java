@@ -56,6 +56,7 @@ public class ResultsActivity extends AppCompatActivity {
     private EditText countryEditText;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
     FirebaseFirestore firestore;
 
@@ -90,6 +91,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Initialize views
         initializeViews();
+
         // Fetch and process data from Firebase
         fetchDataFromFirebase();
         fetchTotalEmissions(totalEmissions -> {

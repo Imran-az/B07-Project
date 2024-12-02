@@ -22,17 +22,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class QuestionnairePageQ4 extends AppCompatActivity {
-    private Button nxtbtn, option1btn, option2btn, prevbtn;
-    private EditText question2_answer, question3_answer;
-    private TextView question2, question3;
+    public Button submitbtn, backbtn;
+    public EditText question2_answer, question3_answer;
+    public TextView question2, question3;
     public static Map<String, Object> data4 = new HashMap<>();
     String option;
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference dailySurveyReference;
 
 
     @Override
@@ -41,50 +44,58 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questionnaire_page_q4);
 
-        //yesbtn
-        option1btn = findViewById(R.id.option1_button_Q4);
-        option2btn = findViewById(R.id.option2_button_Q4);
         question2 = findViewById(R.id.question2Text_Q4);
         question2_answer = findViewById(R.id.answer2_input_Q4);
 
         question3 = findViewById(R.id.question3_text_view_Q4);
         question3_answer = findViewById(R.id.answer3_input_Q4);
 
-        option1btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                helperMethods.setVisibility1(question2, question3, question2_answer, question3_answer);
-                option = "Long-haul";
-            }
-        });
-        option2btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                helperMethods.setVisibility1(question2, question3, question2_answer, question3_answer);
-                option = "Short-haul";
-            }
-        });
-
         //next button
-        nxtbtn = findViewById(R.id.next_button_Q4);
+        submitbtn = findViewById(R.id.submit_button_Q4);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        //databaseReference = database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
-        nxtbtn.setOnClickListener(new View.OnClickListener() {
+        database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+        dailySurveyReference = database.getReference("DailySurvey");
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
+            currentDate = QuestionnairePageQ1.ChangedDate;
+        }
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
+        submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
-                    Intent intent = new Intent(QuestionnairePageQ4.this, QuestionnairePageQ5.class);
+                    Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                    QuestionnairePageQ1.data.put("Flight", option);
-                    QuestionnairePageQ1.data.put("Number of flights taken today", question2_answer.getText().toString());
-                    QuestionnairePageQ1.data.put("Distance traveled", question3_answer.getText().toString());
+                    //data4.put("Flight", option);
+                    data4.put("Number of flights taken today", question2_answer.getText().toString());
+                    int distance_travelled = Integer.parseInt(question3_answer.getText().toString());
+
+                    String answer;
+
+                    if (distance_travelled >= 1500){
+                        answer  = "Long-Haul";
+                    }
+                    else{
+                        answer = "Short-Haul";
+                    }
+                    data4.put("Distance traveled", answer);
+
+                    dailySurveyReference.updateChildren(data4).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Success message (optional)
+                            Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Error message
+                            Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }
                 else {
@@ -92,11 +103,11 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
                 }
             }
         });
-        prevbtn = findViewById(R.id.previous_button_Q4);
-        prevbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn = findViewById(R.id.back_button_Q4);
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ4.this, QuestionnairePageQ3.class);
+                Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
                 startActivity(intent);
             }
         });

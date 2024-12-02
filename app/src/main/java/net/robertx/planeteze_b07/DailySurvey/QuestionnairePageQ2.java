@@ -23,17 +23,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class QuestionnairePageQ2 extends AppCompatActivity {
-    private Button yesbtn, nextbtn, prevbtn, nobtn;
+    private Button submitbtn, backbtn;
     private EditText question2_answer, question3_answer;
     private TextView question2, question3;
     public static Map<String, Object> data2 = new HashMap<>();
 
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference dailySurveyReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +44,10 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questionnaire_page_q2);
 
-        //yesbtn
-        yesbtn = findViewById(R.id.yes_button_Q2);
         question2 = findViewById(R.id.question2Text_Q2);
         question2_answer = findViewById(R.id.answer2_input_Q2);
-
-        question3 = findViewById(R.id.question3_text_view_Q2);
+        question3 = findViewById(R.id.answer3_input_Q2);
         question3_answer = findViewById(R.id.answer3_input_Q2);
-
-        yesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                helperMethods.setVisibility1(question2, question3, question2_answer, question3_answer);
-            }
-        });
 
         String q1, q2, q3;
         q1 = "Take public transportation";
@@ -62,16 +55,23 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
         q3 = "Time spent on public transport";
 
         //next button
-        nextbtn = findViewById(R.id.next_button_Q2);
+        submitbtn = findViewById(R.id.submit_button_Q2);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        nextbtn.setOnClickListener(new View.OnClickListener() {
+        database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
+        dailySurveyReference = database.getReference("DailySurvey");
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
+            currentDate = QuestionnairePageQ1.ChangedDate;
+        }
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
+        submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(question2_answer.getText().toString()) || !TextUtils.isEmpty(question3_answer.getText().toString())) {
-                    Intent intent = new Intent(QuestionnairePageQ2.this, QuestionnairePageQ3.class);
+                    Intent intent = new Intent(QuestionnairePageQ2.this, DailySurveyHomePage.class);
                     startActivity(intent);
 
                     String ans1, ans2, ans3;
@@ -82,39 +82,28 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                    QuestionnairePageQ1.data.put(q1, ans1);
-                    QuestionnairePageQ1.data.put(q2, ans2);
-                    QuestionnairePageQ1.data.put(q3, ans3);
+                    data2.put(q1, ans1);
+                    data2.put(q2, ans2);
+                    data2.put(q3, ans3);
 
 
-//                    Map<String, Object> newField = new HashMap<>();
-//                    newField.put("Take public transportation", "Yes");
-//                    newField.put("Type of public transportation", question2_answer.getText().toString());
-//                    newField.put("Time spent on public transport", question3_answer.getText().toString());
-//
-//                    databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-//                        if (task.isSuccessful()) {
-//                            // Success message (optional)
-//                            Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            // Error message
-//                            Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
+dailySurveyReference.updateChildren(data2).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Success message (optional)
+                            Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Error message
+                            Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(QuestionnairePageQ2.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        //No button
-        nobtn = findViewById(R.id.no_button_Q2);
-        nobtn.setOnClickListener(new View.OnClickListener() {
+        backbtn = findViewById(R.id.back_button_Q2);
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionnairePageQ2.this, QuestionnairePageQ3.class);
@@ -133,27 +122,13 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                 QuestionnairePageQ1.data.put(q3, ans3);
 
 
-//                Map<String, Object> newField = new HashMap<>();
-//                newField.put("Take public transportation", "No");
-//                newField.put("Type of public transportation", 0);
-//                newField.put("Time spent on public transport", 0);
-//
-//                databaseReference.updateChildren(newField).addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        // Success message (optional)
-//                        Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        // Error message
-//                        Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
             }
         });
-        prevbtn = findViewById(R.id.previous_button_Q2);
-        prevbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn = findViewById(R.id.back_button_Q2);
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ2.this, QuestionnairePageQ1.class);
+                Intent intent = new Intent(QuestionnairePageQ2.this, DailySurveyHomePage.class);
                 startActivity(intent);
             }
         });
