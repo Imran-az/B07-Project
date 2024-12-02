@@ -30,11 +30,9 @@ public class ProfileFragment extends Fragment {
 
     private FirebaseUser currentUser = auth.getCurrentUser();
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         TextView profileFirstName = view.findViewById(R.id.profile_first_name);
         TextView profileLastName = view.findViewById(R.id.profile_last_name);
         TextView profileUserId = view.findViewById(R.id.profile_user_id);
@@ -66,7 +64,12 @@ public class ProfileFragment extends Fragment {
             startActivity(intent);
             requireActivity().finish();
         });
+    }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         return view;
     }
 }
