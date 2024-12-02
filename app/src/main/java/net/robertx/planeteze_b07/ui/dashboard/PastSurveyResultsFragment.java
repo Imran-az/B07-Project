@@ -27,6 +27,7 @@ import com.kizitonwose.calendar.view.ViewContainer;
 
 import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
 import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
+import net.robertx.planeteze_b07.DailySurvey.QuestionList;
 import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.R;
 
@@ -71,10 +72,22 @@ public class PastSurveyResultsFragment extends Fragment {
             public void bind(@NonNull ViewContainer container, CalendarDay calendarDay) {
                 container.getView().setOnClickListener(v -> {
                     LocalDate date = calendarDay.getDate();
+                    // extremely hacky code to go to the correct day for the Question List
+                    // or daily survey home page because of poor design
                     QuestionnairePageQ1.ChangedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     CalendarPage.datedisplay = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    Intent intent = new Intent(getContext(), DailySurveyHomePage.class);
-                    startActivity(intent);
+                    CalendarPage.SelectedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    CalendarPage.ChosenDay = String.valueOf(date.getDayOfMonth());
+                    CalendarPage.ChosenMonth = String.valueOf(date.getMonthValue());
+                    CalendarPage.ChosenYear = String.valueOf(date.getYear());
+
+                    if (daysWithSurveyTaken.contains(date)) {
+                        Intent intent = new Intent(getContext(), QuestionList.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getContext(), DailySurveyHomePage.class);
+                        startActivity(intent);
+                    }
                 });
                 TextView dayText = container.getView().findViewById(R.id.calendarDayText);
                 View dayDot = container.getView().findViewById(R.id.dayDot);
