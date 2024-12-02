@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -36,8 +37,9 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
     public static Map<String, Object> data = new HashMap<>();
     public static Map<String, Object> data1 = new HashMap<>();
 
+    static String currentDate;
 
-
+    static String ChangedDate = "";
     FirebaseDatabase database;
     DatabaseReference dailySurveyReference;
 
@@ -53,15 +55,18 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
         question3 = findViewById(R.id.question3_text_Q1);
         question3_answer = findViewById(R.id.answer3_input_Q1);
 
+
         submitbtn = findViewById(R.id.submit_button_Q1);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         dailySurveyReference = database.getReference("DailySurvey");
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child("TestUser").child(currentDate);
+        currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
+            currentDate = QuestionnairePageQ1.ChangedDate;
+        }
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
 
         submitbtn.setOnClickListener(new View.OnClickListener() {

@@ -75,7 +75,7 @@
             android:exported="false" />
         <activity
             android:name=".UserLogin.WelcomePage"
-            android:exported="false" /> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
+            android:exported="true" /> <!-- To ensure that welcomepage is the first page that opens when the app launches -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />

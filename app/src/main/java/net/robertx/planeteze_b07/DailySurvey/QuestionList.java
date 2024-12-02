@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,18 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.robertx.planeteze_b07.R;
 
-import org.w3c.dom.Text;
-
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
 public class QuestionList extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<MainModel> list;
-    DatabaseReference databaseReference;
+    static ArrayList<MainModel> list;
+    DatabaseReference dailySurveyDbRef;
     MainAdapter adapter;
 
-    TextView PickedDate;
+    static TextView PickedDate;
 
 
     @Override
@@ -59,7 +59,11 @@ public class QuestionList extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView_widget);
         String date = CalendarPage.SelectedDate;
-        databaseReference = FirebaseDatabase.getInstance().getReference("DailySurvey").child("TestUser").child(date);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userID = currentUser.getUid();
+        dailySurveyDbRef = FirebaseDatabase.getInstance().getReference("DailySurvey").child(userID).child(date);
+        DatabaseReference dailySurveyCO2 = FirebaseDatabase.getInstance().getReference("DailySurveyCO2").child(userID).child(date);
         list = new ArrayList<>();
 
 
@@ -68,14 +72,16 @@ public class QuestionList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
         Log.d("RecyclerView", "Adapter attached with initial list size: " + adapter.getItemCount());
+        //Log.d("data", "value" + databaseReference);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        dailySurveyDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String question = dataSnapshot.getKey();
                     Object value = dataSnapshot.getValue();
+
 
                     if (value != null) {
                         String answer;
@@ -101,6 +107,34 @@ public class QuestionList extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("FirebaseError", "Data retrieval cancelled: " + error.getMessage());
+            }
+        });
+
+        dailySurveyCO2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String question = dataSnapshot.getKey();
+                    Object value = dataSnapshot.getValue();
+
+                    if (value != null) {
+                        if (question != null) {
+                            question = question.replace("CO2", "");
+                            for (int i = 0; i < list.size(); i++) {
+                                if (list.get(i).getQuestion().equals(question)) {
+                                    list.get(i).setCO2_answer(question);
+                                }
+                            }
+                        }
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

@@ -2,8 +2,10 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +18,15 @@ import com.google.android.material.appbar.MaterialToolbar;
 import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
+
 public class DailySurveyHomePage extends AppCompatActivity {
     Button q1, q2, q3, q4, q5, q6, q7, q8, q9;
+
+    TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +44,20 @@ public class DailySurveyHomePage extends AppCompatActivity {
         q8 = findViewById(R.id.Question8_DailySurvey);
         q9 = findViewById(R.id.Question9_DailySurvey);
 
+        date = findViewById(R.id.CurrentDateDailySurvey);
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        if (!(currentDate != CalendarPage.datedisplay) || !(CalendarPage.datedisplay == null)){
+            date.setText(CalendarPage.datedisplay);
+        }
+        else {
+            //String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            date.setText(currentDate);
+        }
+
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
         toolbar.setNavigationOnClickListener(v -> {
             // Create an Intent to go to the other Activity
-            Intent intent = new Intent(DailySurveyHomePage.this, MainActivity.class);
+            Intent intent = new Intent(DailySurveyHomePage.this, CalendarPage.class);
             startActivity(intent);  // Start the new Activity
 
             // Optionally finish the current Activity

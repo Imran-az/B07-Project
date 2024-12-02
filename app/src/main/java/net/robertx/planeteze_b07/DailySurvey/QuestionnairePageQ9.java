@@ -54,20 +54,15 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         q4_que = findViewById(R.id.question4_text_view);
         q4_ans = findViewById(R.id.answer4_input);
 
+
+
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
         dailySurveyReference = database.getReference("DailySurvey");
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child("TestUser").child(currentDate);
-
-
-        String q1, q2, q3, q4;
-//        q1 = String.valueOf(q1_que.getText());
-//        q2 = String.valueOf(q2_que.getText());
-//        q3 = String.valueOf(q3_que.getText());
-//        q4 = String.valueOf(q4_que.getText());
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
         submitbtn = findViewById(R.id.submit_button_Q9);
         //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
@@ -78,18 +73,32 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                 Intent intent = new Intent(QuestionnairePageQ9.this, DailySurveyHomePage.class);
                 startActivity(intent);
 
-                String answer1, answer2, answer3, answer4, answer5, answer6;
-                answer1 = "Electricity bill not paid";
-                answer2 = "Gas bill not paid";
-                answer3 = "Water bill not paid";
-                answer4 = "0";
-                answer5 = "0";
-                answer6 = "0";
+                String q2, q3, q4;
+                q2 = q2_ans.getText().toString();
+                q3 = q3_ans.getText().toString();
+                q4 = q4_ans.getText().toString();
+
+                String answer1, answer2, answer3;
+                answer1 = "0";
+                answer2 = "0";
+                answer3 = "0";
+
+                if(!q2.equals("0")){
+                    answer1 = q2;
+                }
+
+                if(!q3.equals("0")){
+                    answer2 = q3;
+                }
+
+                if(!q4.equals("0")){
+                    answer3 = q4;
+                }
 
                 //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
-                data9.put("Electricity Paid", answer4);
-                data9.put("Gas Paid", answer5);
-                QuestionnairePageQ1.data.put("Water Paid", answer6);
+                data9.put("Electricity Paid", answer1);
+                data9.put("Gas Paid", answer2);
+                data9.put("Water Paid", answer3);
                 //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
 
                 dailySurveyReference.updateChildren(data9).addOnCompleteListener(task -> {

@@ -65,7 +65,10 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         dailySurveyReference = database.getReference("DailySurvey");
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child("TestUser").child(currentDate);
+        if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
+            currentDate = QuestionnairePageQ1.ChangedDate;
+        }
+        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override

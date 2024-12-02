@@ -1,5 +1,7 @@
 package net.robertx.planeteze_b07.DailySurvey;
 
+import static net.robertx.planeteze_b07.DailySurvey.QuestionList.list;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
@@ -13,10 +15,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
+
+import java.util.Calendar;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
@@ -24,6 +30,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
      List<MainModel> mainModelList;
      Context context;
     DatabaseReference databaseReference;
+
+    FirebaseDatabase database;
 
     // Constructor that accepts the list of MainModel
     public MainAdapter(Context context,List<MainModel> mainModelList) {
@@ -43,15 +51,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         MainModel model = mainModelList.get(position);
 
-        Log.d("MainAdapter", "Binding Question: " + model.getQuestion() + ", Answer: " + model.getAnswer());
-
         // Set the data to the TextViews
         holder.questionTextView.setText(model.getQuestion());
         holder.answerTextView.setText(model.getAnswer());
+        holder.deletebtn.setOnClickListener(v -> {
+            ShowDeleteActivity(model, position);
+        });
+
 
         holder.editbtn.setOnClickListener(v -> {
             showEditAnswerDialog(model, position);
-
         });
     }
 
@@ -60,34 +69,38 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         return mainModelList.size();
     }
 
-    // ViewHolder class to hold references to views for performance
     public static class MainViewHolder extends RecyclerView.ViewHolder {
-        TextView questionTextView, answerTextView;
+        TextView questionTextView, answerTextView, CO2Emission_Answer, CO2_Emission;
         Button editbtn, deletebtn;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Find the views from the item layout
+
             questionTextView = itemView.findViewById(R.id.Question);
             answerTextView = itemView.findViewById(R.id.Answer);
             editbtn = itemView.findViewById(R.id.Edit);
             deletebtn = itemView.findViewById(R.id.Delete);
+            //CO2Emission_Answer = itemView.findViewById(R.id.CO2Emission_Answer);
+            //CO2_Emission = itemView.findViewById(R.id.CO2_Emission);
 
 
         }
     }
     private void updateAnswerInDatabase(String itemId, String newAnswer) {
-        // Ensure that itemId is not null
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userID = currentUser.getUid();
+        String date = CalendarPage.SelectedDate;
+        Log.d("date", "current: " + date);
+
         if (itemId == null || itemId.isEmpty()) {
-            Log.d("MainAdapter", "Error: itemId is null or empty.");
-            return;  // Exit if the ID is not valid
+            return;
         }
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("DailySurvey")
+                .child(userID).child(date);
 
-        // Get a reference to the database
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("DailySurvey");
 
-        // Update the answer for the item with the given ID
-        databaseRef.child(itemId).child("answer").setValue(newAnswer)
+        databaseRef.child(itemId).setValue(newAnswer)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("MainAdapter", "Answer updated successfully in database.");
@@ -99,10 +112,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
 
     private void showEditAnswerDialog(MainModel model, int position) {
-        // Create an EditText to get the new answer from the user
         EditText editText = new EditText(context);
-        editText.setText(model.getAnswer());  // Pre-fill with the current answer
-        editText.setSelection(editText.getText().length()); // Move cursor to the end
+        editText.setText(model.getAnswer());
+        editText.setSelection(editText.getText().length());
 
         // Show the dialog
         new AlertDialog.Builder(context)
@@ -110,27 +122,56 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                 .setMessage("Enter the new answer:")
                 .setView(editText)
                 .setPositiveButton("OK", (dialog, which) -> {
-                    // Get the new answer from the EditText
+
                     String newAnswer = editText.getText().toString().trim();
                     if (!newAnswer.isEmpty()) {
-                        // Update the model's answer in the list
+
                         model.setAnswer(newAnswer);
 
-                        // Notify the adapter that data has changed
                         notifyItemChanged(position);
 
-                        // Update the answer in Firebase
-                        updateAnswerInDatabase(model.getId(), newAnswer);  // Pass the model's ID to update the database
+                        updateAnswerInDatabase(model.getQuestion(), newAnswer);
+                        Log.d("tester", "id: " + model.getQuestion());
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
+    private void ShowDeleteActivity(MainModel model, int position) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String userID = currentUser.getUid();
+        String date = CalendarPage.SelectedDate;
 
+        // Show the dialog
+        new AlertDialog.Builder(context)
+                .setTitle("Are you Sure you Want to Delete Activity?")
+                .setMessage("This action cannot be undone.")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Step 1: Remove from Firebase
+                    DatabaseReference databaseRef = FirebaseDatabase.getInstance()
+                            .getReference("DailySurvey")
+                            .child(userID).child(date).child(model.getQuestion()); // Replace "DailySurvey" with the correct root
 
-    // Optionally, if you need to update the data in the adapter
-    public void updateData(List<MainModel> newData) {
-        this.mainModelList = newData;
-        notifyDataSetChanged();
+                    databaseRef.removeValue()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    // Step 2: Remove from local list
+                                    list.remove(position);
+
+                                    // Step 3: Notify adapter about removal
+                                    notifyItemRemoved(position);
+
+                                    // Log success
+                                    Log.d("DeleteActivity", "Activity deleted successfully.");
+                                } else {
+                                    // Handle failure
+                                    Log.e("DeleteActivity", "Failed to delete activity: " + task.getException());
+                                }
+                            });
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
+
 }

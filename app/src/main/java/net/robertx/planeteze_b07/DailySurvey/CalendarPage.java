@@ -15,6 +15,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,6 +37,8 @@ public class CalendarPage extends AppCompatActivity {
     List<MainModel> activityList;
     static String SelectedDate;
 
+    static String datedisplay;
+
     static String ChosenYear, ChosenDay, ChosenMonth;
 
     @Override
@@ -45,6 +50,7 @@ public class CalendarPage extends AppCompatActivity {
         Button button = findViewById(R.id.datePicker);
         TextView displayDate = findViewById(R.id.displayDate);
         SelectedDate = "";
+
 
         displayDate.setText("Calendar");
 
@@ -65,6 +71,9 @@ public class CalendarPage extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = auth.getCurrentUser();
+                String userID = currentUser.getUid();
 
 
                 DatePickerDialog dialog = new DatePickerDialog(CalendarPage.this, new DatePickerDialog.OnDateSetListener() {
@@ -72,11 +81,29 @@ public class CalendarPage extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         displayDate.setText(MessageFormat.format("{0}/{1}/{2}", String.valueOf(dayOfMonth), String.valueOf(month + 1), String.valueOf(year)));
                         SelectedDate =  String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
+                        datedisplay = String.format("%02d-%02d-%04d", dayOfMonth, month + 1, year);
                         ChosenDay = String.valueOf(dayOfMonth);
                         ChosenYear = String.valueOf(year);
                         ChosenMonth = String.valueOf(month + 1);
-                        Intent intent = new Intent(CalendarPage.this, QuestionList.class);
-                        startActivity(intent);
+
+                        databaseReference = database.getInstance().getReference("DailySurvey").child(userID).child(SelectedDate);
+
+                        databaseReference.get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                DataSnapshot snapshot = task.getResult();
+                                if (snapshot.exists()) {
+                                    Intent intent = new Intent(CalendarPage.this, QuestionList.class);
+                                    startActivity(intent);
+                                } else {
+                                    QuestionnairePageQ1.ChangedDate = SelectedDate;
+                                    System.out.print(QuestionnairePageQ1.ChangedDate);
+                                    Intent intent = new Intent(CalendarPage.this, DailySurveyHomePage.class);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                System.out.println("Error checking node: " + task.getException().getMessage());
+                            }
+                        });
                     }
                 }, year, month, day);
                 dialog.show();
