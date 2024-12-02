@@ -66,7 +66,7 @@ public class SignUpPage extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignUpPage.this, LoginPage.class);
+                Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
                 startActivity(intent);
                 finish();
             }
@@ -135,7 +135,7 @@ public class SignUpPage extends AppCompatActivity {
                                                     // Notify the user and navigate to the login page
                                                     Toast.makeText(SignUpPage.this, "User registered successfully. Please verify your email.",
                                                             Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(SignUpPage.this, LoginPage.class);
+                                                    Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
                                                     startActivity(intent);
                                                     finish();
                                                 } else {

@@ -55,7 +55,7 @@ public class ForgotPasswordPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to the LoginPage activity
-                Intent intent = new Intent(ForgotPasswordPage.this, LoginPage.class);
+                Intent intent = new Intent(ForgotPasswordPage.this, LoginPageView.class);
                 startActivity(intent);
                 finish();
             }

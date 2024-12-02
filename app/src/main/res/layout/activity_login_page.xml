@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundhomescreen"
-    tools:context=".UserLogin.LoginPage">
+    tools:context=".UserLogin.LoginPageView">
 
     <!-- Logo -->
     <ImageView

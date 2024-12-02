@@ -45,7 +45,7 @@ public class WelcomePage extends AppCompatActivity {
         logininbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomePage.this, LoginPage.class);
+                Intent intent = new Intent(WelcomePage.this, LoginPageView.class);
                 startActivity(intent);
             }
         });
