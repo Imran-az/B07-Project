@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/navBtnCalendar"
-        android:icon="@drawable/baseline_settings_24"
-        android:title="Calendar" />
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="Daily Surveys" />
 
     <item
         android:id="@+id/navBtnHome"
