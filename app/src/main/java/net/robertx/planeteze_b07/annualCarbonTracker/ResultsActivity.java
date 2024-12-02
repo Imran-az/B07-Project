@@ -74,9 +74,6 @@ public class ResultsActivity extends AppCompatActivity {
             return insets;
         });
 
-        MaterialToolbar toolbar = findViewById(R.id.annualCarbonFootprintResultsToolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
-
         firestore = FirebaseFirestore.getInstance();
         try {
             EmissionsDataRetriever.initialize(this);

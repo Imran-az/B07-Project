@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
@@ -50,17 +48,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Dashboard.class);
             startActivity(intent);
         });
-
-        button2 = findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, QuestionnairePageQ1.class);
-                startActivity(intent);
-            }
-        });
-
-
 
 
         TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);

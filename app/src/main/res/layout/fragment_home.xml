@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/palette_teal"
+                android:background="@color/teal"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/scaled_edit_note"

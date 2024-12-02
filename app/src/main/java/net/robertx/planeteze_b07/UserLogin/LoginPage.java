@@ -57,7 +57,6 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-    Button backbutton2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
