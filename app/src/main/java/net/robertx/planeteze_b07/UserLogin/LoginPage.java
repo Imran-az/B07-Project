@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.robertx.planeteze_b07.DailySurvey.QuestionList;
 import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
@@ -63,7 +64,7 @@ public class LoginPage extends AppCompatActivity {
         backbutton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this, WelcomePage.class);
+                Intent intent = new Intent(LoginPage.this, QuestionList.class);
                 startActivity(intent);
             }
         });

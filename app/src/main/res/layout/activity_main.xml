@@ -41,6 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
+
+        <Button
+            android:id="@+id/button_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To Survey" />
+
         <Button
             android:id="@+id/button22"
             android:layout_width="wrap_content"
@@ -52,6 +59,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.62" />
     </LinearLayout>
+
 
 
 
