@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        findViewById(R.id.startAnnualCarbonFootprintSurvey).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
+            startActivity(intent);
+        });
+
         button = findViewById(R.id.button22);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
