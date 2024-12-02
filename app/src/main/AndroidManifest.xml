@@ -16,30 +16,65 @@
             android:name=".Dashboard"
             android:exported="true" />
         <!-- Other activities -->
+
         <activity
-            android:name=".annual_carbon_footprint.AnnualCarbonFootprintSurvey"
-            android:exported="true"
-            android:parentActivityName=".MainActivity" />
+            android:name=".DailySurvey.QuestionList"
+            android:exported="false" />
         <activity
-            android:name=".UserLogin.LoginPage"
+            android:name=".DailySurvey.ActivityList"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionList"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.ActivityList"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.CalendarPage"
+            android:exported="false"/>
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ9"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ8"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ7"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ6"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ5"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ4"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ3"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.QuestionnairePageQ2"
             android:exported="false" />
         <activity
             android:name=".UserLogin.SignUpPage"
             android:exported="false" />
+        <activity android:name=".UserLogin.LoginPageView"
+            android:exported="false" />
+        <activity android:name=".UserLogin.ForgotPasswordPage"
+            android:exported="false" />
+
         <activity
             android:name=".UserLogin.WelcomePage"
             android:exported="true">
 
-            <!-- To ensure that WelcomePage is the first page that opens when the app launches -->
+            <!-- To ensure that welcomepage is the first page that opens when the app launches -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" /> <!-- Add ResultsActivity here -->
         <activity
             android:name=".annualCarbonTracker.ResultsActivity"
             android:exported="true" />

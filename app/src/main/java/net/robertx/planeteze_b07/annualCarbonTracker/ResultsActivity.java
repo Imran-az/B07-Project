@@ -8,6 +8,8 @@ import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
 import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.R;
 
@@ -49,6 +52,9 @@ public class ResultsActivity extends AppCompatActivity {
     private BarChart barChart;
     private TextView comparisonText;
     private GridLayout sharedLegendContainer;
+
+    private Button compareButton;
+    private EditText countryEditText;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -72,6 +78,12 @@ public class ResultsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         firestore = FirebaseFirestore.getInstance();
+        try {
+            EmissionsDataRetriever.initialize(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to initialize EmissionsDataRetriever.");
+        }
 
         // Initialize HousingCO2DataRetriever
         try {
@@ -80,80 +92,273 @@ public class ResultsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        firestore = FirebaseFirestore.getInstance();
 
         // Initialize views
         initializeViews();
 
         // Fetch and process data from Firebase
         fetchDataFromFirebase();
-
+        fetchTotalEmissions(totalEmissions -> {
+            compareButton.setOnClickListener(v -> {
+                String country = countryEditText.getText().toString().trim();
+                if (!country.isEmpty()) {
+                    // Perform comparison and display the result
+                    compareWithCountryEmissions(country, totalEmissions);
+                } else {
+                    // Show error message and make TextView visible
+                    comparisonText.setText("Please enter a valid country name.");
+                    comparisonText.setVisibility(View.VISIBLE);
+                }
+            });
+        });
     }
 
+    /**
+     * Initializes the UI components used in the activity.
+     */
     private void initializeViews() {
         pieChart = findViewById(R.id.pieChart);
         barChart = findViewById(R.id.barChart);
         comparisonText = findViewById(R.id.comparisonText);
         sharedLegendContainer = findViewById(R.id.sharedLegendContainer);
+
+
+        compareButton = findViewById(R.id.compareButton);
+        countryEditText = findViewById(R.id.editTextTextCountryName);
     }
 
     /**
-     * Expands or collapses the breakdown section dynamically.
+     * Fetches the user's total annual carbon emissions from Firebase Firestore and invokes a callback with the result.
+     * The method retrieves the user's saved survey data from the "AnnualCarbonFootprintSurveyData" Firestore collection,
+     * parses the data into category-specific emissions, calculates the total emissions, and converts it to tons.
+     *
+     * If the data retrieval or parsing fails, the method throws a runtime exception with detailed error information.
+     *
+     * @param callback A callback interface {@link DataFetchCallback} that processes the total emissions value
+     *                 once the data is successfully fetched and calculated. The value is passed in tons.
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void expand(View view) {
-        LinearLayout breakdownContainer = findViewById(R.id.breakdownContainer);
-        boolean isVisible = breakdownContainer.getVisibility() == View.VISIBLE;
-
-        TransitionManager.beginDelayedTransition((ViewGroup) view, new AutoTransition());
-
-        if (isVisible) {
-            collapseSection(breakdownContainer);
-        } else {
-            expandSection(breakdownContainer);
-        }
-    }
-
-    private void collapseSection(LinearLayout breakdownContainer) {
-        breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 0));
-        breakdownContainer.setVisibility(View.GONE);
-    }
-
-    private void expandSection(LinearLayout breakdownContainer) {
-        breakdownContainer.setAlpha(0f);
-        breakdownContainer.setVisibility(View.VISIBLE);
-        breakdownContainer.animate().alpha(1f).setDuration(300).start();
-        breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
+    private void fetchTotalEmissions(DataFetchCallback callback) {
+        // Reference to the Firestore collection containing the user's carbon footprint data
         CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
 
-        // populate breakdown section with emission data
+        // Fetch the document associated with the current user's unique ID
         annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
-                        HashMap<String, String> parsedResponses = new HashMap<>();
+                        // Retrieve and parse the Firestore data into a usable format
                         Map<String, Object> data = document.getData();
-                        Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
+                        HashMap<String, String> parsedResponses = new HashMap<>();
                         for (String key : data.keySet()) {
                             parsedResponses.put(key, data.get(key).toString());
                         }
-                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
-                        double[] emissions = extractEmissions(categoryEmissions);
-                        String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
-                        populateBreakdown(breakdownContainer, emissions, categories);
+
+                        // Calculate emissions for each category using the parsed responses
+                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator()
+                                .calculatePerCategoryEmission(parsedResponses);
+
+                        // Calculate the total emissions in kilograms and convert to tons
+                        double totalKg = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
+                        double totalTons = totalKg / 1000; // Convert kg to tons
+
+                        // Pass the calculated total emissions to the callback
+                        callback.onDataFetched(totalTons);
                     } catch (IOException e) {
-                        throw new RuntimeException("Parsing firestore data failed", e);
+                        // Handle parsing errors and throw a runtime exception
+                        throw new RuntimeException("Parsing Firestore data failed", e);
                     }
                 }
             }
         });
     }
 
+
     /**
-     * Populates the breakdown section dynamically with emission data.
+     * Compares the user's total emissions with the average emissions of a specified country.
+     * The method retrieves the average emission value for the specified country, formats the country name to ensure proper capitalization,
+     * and determines whether the user's emissions are higher or lower than the country's average.
+     *
+     * The result of the comparison is displayed in the `comparisonText` view with a clear message about the difference.
+     * If no valid emission data is available for the specified country, an appropriate error message is displayed.
+     *
+     * @param country       The name of the country to compare the user's emissions with.
+     *                      The input is case-insensitive and will be formatted with the first letter capitalized.
+     * @param userEmissions The total emissions of the user in tons. This value will be compared to the country's average.
+     */
+    private void compareWithCountryEmissions(String country, double userEmissions) {
+        EmissionsDataRetriever dataRetriever = new EmissionsDataRetriever();
+
+        try {
+            // Format the country name: capitalize the first letter, lowercase the rest
+            String formattedCountry = country.trim().substring(0, 1).toUpperCase() + country.trim().substring(1).toLowerCase();
+
+            // Retrieve the average emission value for the specified country
+            double countryEmission = dataRetriever.getEmissionValue(formattedCountry);
+
+            // Ensure the retrieved emission value is valid
+            if (countryEmission > 0) {
+                String message;
+
+                // Compare user's emissions with the country's average
+                if (userEmissions > countryEmission) {
+                    message = String.format("Your emissions are %.2f tons higher than %s's average of %.2f tons.",
+                            userEmissions - countryEmission, formattedCountry, countryEmission);
+                } else {
+                    message = String.format("Your emissions are %.2f tons lower than %s's average of %.2f tons.",
+                            countryEmission - userEmissions, formattedCountry, countryEmission);
+                }
+
+                // Display the comparison result in the TextView
+                comparisonText.setText(message);
+                comparisonText.setVisibility(View.VISIBLE); // Make the TextView visible
+            } else {
+                throw new IllegalArgumentException("No valid emission data available for " + formattedCountry);
+            }
+        } catch (IllegalArgumentException e) {
+            // Handle cases where no emission data is available for the specified country
+            comparisonText.setText(String.format("Data for %s is not available.", country));
+            comparisonText.setVisibility(View.VISIBLE); // Make the TextView visible
+        }
+    }
+
+
+    /**
+     * Resets the comparison text to its default state.
+     */
+    private void resetComparisonText() {
+        comparisonText.setVisibility(View.GONE); // Hide the TextView
+    }
+
+    /**
+     * Callback interface for fetching data from Firebase.
+     */
+    public interface DataFetchCallback {
+        void onDataFetched(double totalEmissions);
+    }
+
+
+    /**
+     * Dynamically expands or collapses the breakdown section in the UI based on its current visibility state.
+     * This method toggles the visibility of the `breakdownContainer` between `VISIBLE` and `GONE`.
+     * When expanding, it calls {@link #expandSection(LinearLayout)} to dynamically populate the section with emission data.
+     * When collapsing, it calls {@link #collapseSection(LinearLayout)} to hide the section and reset its layout.
+     *
+     * A smooth transition animation is applied to enhance the user experience, leveraging the `TransitionManager`.
+     *
+     * @param view The triggering view (e.g., a button) that invokes this method.
+     *             This view is used as the parent for the transition animation.
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void expand(View view) {
+        // Find the container for the breakdown section
+        LinearLayout breakdownContainer = findViewById(R.id.breakdownContainer);
+
+        // Check the current visibility state of the breakdown section
+        boolean isVisible = breakdownContainer.getVisibility() == View.VISIBLE;
+
+        // Apply a smooth transition animation for layout changes
+        TransitionManager.beginDelayedTransition((ViewGroup) view, new AutoTransition());
+
+        // Toggle between expanding and collapsing the breakdown section
+        if (isVisible) {
+            // Collapse the breakdown section if it is currently visible
+            collapseSection(breakdownContainer);
+        } else {
+            // Expand the breakdown section if it is currently hidden
+            expandSection(breakdownContainer);
+        }
+    }
+
+
+    /**
+     * Collapses the breakdown section.
+     * @param breakdownContainer
+     */
+    private void collapseSection(LinearLayout breakdownContainer) {
+        breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0));
+        breakdownContainer.setVisibility(View.GONE);
+    }
+
+    /**
+     * Expands the breakdown section in the UI to dynamically display detailed emission data.
+     * This method sets the visibility of the `breakdownContainer` to `VISIBLE`, animates its appearance,
+     * and dynamically populates the container with emission data retrieved from Firebase Firestore.
+     *
+     * The animation smoothly fades the section into view, and the layout is updated to wrap its content.
+     * The breakdown section shows data for various categories such as "Consumption," "Driving," and more.
+     *
+     * @param breakdownContainer The `LinearLayout` container to be expanded. This container will hold
+     *                           detailed emission data for each category after it is populated dynamically.
+     */
+    private void expandSection(LinearLayout breakdownContainer) {
+        // Initialize the container's alpha for the fade-in animation
+        breakdownContainer.setAlpha(0f);
+
+        // Make the container visible before starting the animation
+        breakdownContainer.setVisibility(View.VISIBLE);
+
+        // Animate the fade-in effect for the breakdown section
+        breakdownContainer.animate().alpha(1f).setDuration(300).start();
+
+        // Update the container's layout parameters to wrap its content
+        breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        // Reference to Firestore collection for annual carbon footprint data
+        CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
+
+        // Fetch data from Firestore and populate the breakdown section
+        annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    try {
+                        // Parse Firestore data into a HashMap
+                        HashMap<String, String> parsedResponses = new HashMap<>();
+                        Map<String, Object> data = document.getData();
+                        Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
+
+                        // Convert Firestore data to a usable format for calculations
+                        for (String key : data.keySet()) {
+                            parsedResponses.put(key, data.get(key).toString());
+                        }
+
+                        // Calculate category-specific emissions
+                        HashMap<String, Double> categoryEmissions =
+                                new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
+
+                        // Extract emission values and categories for UI population
+                        double[] emissions = extractEmissions(categoryEmissions);
+                        String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
+
+                        // Populate the breakdown section with detailed emission data
+                        populateBreakdown(breakdownContainer, emissions, categories);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Parsing Firestore data failed", e);
+                    }
+                }
+            }
+        });
+    }
+
+
+    /**
+     * Populates a breakdown section dynamically with detailed emission data.
+     * Each emission value is paired with its corresponding category and displayed as a formatted text entry.
+     * This method creates and adds a `TextView` for each category's emission data to the provided container.
+     *
+     * The container is cleared before populating to ensure there are no duplicate or old entries.
+     *
+     * @param container  The `LinearLayout` container where the breakdown information will be displayed.
+     *                   This layout will dynamically hold the emission data for each category.
+     * @param emissions  An array of emission values (in tons) for each category. The values correspond
+     *                   directly to the `categories` array.
+     * @param categories A string array of category names representing each emission source, such as
+     *                   "Consumption," "Driving," "Flight," etc. Each category matches with an emission value
+     *                   from the `emissions` array by index.
      */
     private void populateBreakdown(LinearLayout container, double[] emissions, String[] categories) {
         container.removeAllViews();
@@ -165,84 +370,173 @@ public class ResultsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a dynamically styled `TextView` with the provided text.
+     * This method initializes a new `TextView`, applies default styling such as text size, color, and layout parameters,
+     * and sets the provided text as its content. It is commonly used for displaying formatted information
+     * in dynamic layouts like a breakdown of emissions.
+     *
+     * @param text The text to display in the `TextView`. This text will be set as the content of the newly created `TextView`.
+     * @return A newly created `TextView` instance with the provided text and default styling applied.
+     */
     private TextView createTextView(String text) {
+        // Create a new TextView instance
         TextView textView = new TextView(this);
+
+        // Set layout parameters: full width and height wrapping its content
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
         textView.setTextSize(16f);
+
         textView.setTextColor(Color.DKGRAY);
+
+        // Assign the provided text to the TextView
         textView.setText(text);
+
         return textView;
     }
 
+
     /**
-     * Creates a shared legend for both the Pie and Bar charts.
+     * Dynamically creates and populates a shared legend for both the Pie and Bar charts.
+     * This method generates a legend based on the provided categories and corresponding colors.
+     * Each legend entry consists of a color box and its associated category label.
+     *
+     * @param categories An array of category names that will appear as labels in the legend.
+     *                   Each category corresponds to a section of the charts.
+     * @param colors     An array of colors where each color corresponds to a category.
+     *                   The order of colors should match the order of categories.
      */
     private void createSharedLegend(String[] categories, int[] colors) {
+        // Clear any existing legend items to avoid duplication
         sharedLegendContainer.removeAllViews();
+
+        // Iterate through categories and colors to create and add legend entries
         for (int i = 0; i < categories.length; i++) {
+            // Create a legend entry and add it to the container
             sharedLegendContainer.addView(createLegendItem(colors[i], categories[i]));
         }
     }
 
+
+    /**
+     * Creates a legend item consisting of a color box and a label.
+     * This method dynamically generates a horizontal layout containing:
+     * - A color box that visually represents the category's color.
+     * - A text label describing the category.
+     *
+     * @param color The color of the legend item's color box. This should correspond to the category it represents.
+     * @param label The text label for the legend item, describing the category.
+     * @return A `View` representing the complete legend item, including the color box and text label.
+     */
     private View createLegendItem(int color, String label) {
+        // Create a horizontal LinearLayout to hold the legend item
         LinearLayout item = new LinearLayout(this);
         item.setOrientation(LinearLayout.HORIZONTAL);
 
+        // Create a square View for the color box and set its size and margins
         View colorBox = new View(this);
         LinearLayout.LayoutParams boxParams = new LinearLayout.LayoutParams(40, 40);
         boxParams.setMargins(8, 8, 16, 8);
         colorBox.setLayoutParams(boxParams);
-        colorBox.setBackgroundColor(color);
+        colorBox.setBackgroundColor(color); // Set the background color for the box
 
+        // Create a TextView for the label and set its text and style
         TextView labelText = createTextView(label);
-        labelText.setTextSize(14f);
-        labelText.setTextColor(Color.BLACK);
+        labelText.setTextSize(14f); // Adjust text size for better readability
+        labelText.setTextColor(Color.BLACK); // Set text color to black
 
+        // Add the color box and label to the LinearLayout
         item.addView(colorBox);
         item.addView(labelText);
+
+        // Return the fully constructed legend item
         return item;
     }
 
+
     /**
-     * Fetches emission data from Firebase and processes it.
+     * Fetches user emission data from Firebase Firestore and populates the UI with the retrieved data.
+     * This method retrieves a document associated with the current user's ID from the "AnnualCarbonFootprintSurveyData" collection,
+     * parses the data into emission categories, and updates various UI components like charts and contribution text.
+     *
+     * @throws RuntimeException If parsing Firestore data fails due to an I/O error.
      */
     private void fetchDataFromFirebase() {
+        // Reference to Firestore collection containing user carbon footprint data
         CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
+
+        // Fetch the document corresponding to the current user's unique ID
         annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
+                        // Parse Firestore document into a HashMap for processing
                         HashMap<String, String> parsedResponses = new HashMap<>();
                         Map<String, Object> data = document.getData();
                         Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
+
+                        // Convert Firestore data to a usable format for calculations
                         for (String key : data.keySet()) {
                             parsedResponses.put(key, data.get(key).toString());
                         }
 
-                        HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
+                        // Calculate emissions for each category using the parsed responses
+                        HashMap<String, Double> categoryEmissions =
+                                new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
+
+                        // Extract emission values and categories for visualization
                         double[] emissions = extractEmissions(categoryEmissions);
                         String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
+
+                        // Calculate the total emissions in kilograms and convert to tons
                         double total = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
 
+                        // Update the summary text view with the user's yearly CO2 contribution
                         TextView contributionText = findViewById(R.id.contributionText);
                         String yearlyContributionText = getString(R.string.yearly_co2_contribution_summary_line, total / 1000);
                         contributionText.setText(yearlyContributionText);
 
+                        // Populate the PieChart and BarChart with calculated data
                         populatePieChart(emissions, categories);
                         populateBarChart(emissions);
+
+                        // Create a shared legend for both charts
                         createSharedLegend(categories, getLegendColors());
+
+                        // Compare the user's total emissions with a global average
                         compareWithGlobalAverages(total, 4.083); // Example global average
                     } catch (IOException e) {
-                        throw new RuntimeException("Parsing firestore data failed", e);
+                        // Throw a runtime exception if data parsing fails
+                        throw new RuntimeException("Parsing Firestore data failed", e);
                     }
                 }
             }
         });
     }
 
+
+
+    /**
+     * Extracts emission values for specific categories from a given data map.
+     * This method retrieves the values associated with predefined keys representing different emission categories
+     * and returns them as an array of doubles. The categories include:
+     * - "ConsumptionEmissions"
+     * - "DrivingEmissions"
+     * - "FlightEmissions"
+     * - "FoodEmissions"
+     * - "HousingEmissions"
+     * - "PublicTransportEmissions"
+     *
+     * @param data A `HashMap` where keys are category names (e.g., "ConsumptionEmissions") and values are their corresponding emissions in tons.
+     * @return A `double[]` array containing the emissions for each predefined category in the following order:
+     *         [Consumption, Driving, Flight, Food, Housing, Public Transport].
+     * @throws NullPointerException If a required key is missing or its value is `null` in the input map.
+     */
     private double[] extractEmissions(HashMap<String, Double> data) {
+        // Extract and return emission values for the predefined categories
         return new double[]{
                 data.get("ConsumptionEmissions"),
                 data.get("DrivingEmissions"),
@@ -252,6 +546,7 @@ public class ResultsActivity extends AppCompatActivity {
                 data.get("PublicTransportEmissions")
         };
     }
+
 
     private void populatePieChart(double[] emissions, String[] categories) {
 
@@ -372,11 +667,15 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void compareWithGlobalAverages(double userTotal, double globalAverage) {
-        String message = userTotal > globalAverage
-                ? String.format("Your emissions are %.2f tons above the global average.", userTotal - globalAverage)
-                : String.format("Your emissions are %.2f tons below the global average.", globalAverage - userTotal);
+        String message;
+        if (userTotal > globalAverage) {
+            message = String.format("Your emissions are %.2f tons above the global average.", userTotal - globalAverage);
+        } else {
+            message = String.format("Your emissions are %.2f tons below the global average.", globalAverage - userTotal);
+        }
         comparisonText.setText(message);
     }
+
 }
 
 
