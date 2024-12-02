@@ -5,7 +5,8 @@
 
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -26,7 +27,7 @@
                 android:id="@+id/materialToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:background="@color/teal"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:navigationIcon="?android:homeAsUpIndicator">
@@ -36,8 +37,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
+                    android:fontFamily="sans-serif-black"
                     android:text="Annual Carbon Footprint Survey"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/dark_gray_blue"
                     android:textSize="18sp" />
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -82,28 +84,40 @@
 
                 <Button
                     android:id="@+id/previous_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="17dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
+                    android:backgroundTint="@color/teal"
+                    android:fontFamily="sans-serif-black"
                     android:text="Previous"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@id/next_button" />
 
                 <Button
                     android:id="@+id/next_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
                     android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/teal"
+                    android:fontFamily="sans-serif-black"
                     android:text="Next"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@id/previous_button" />
+
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

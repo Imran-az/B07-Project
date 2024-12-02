@@ -86,7 +86,8 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                     data2.put(q2, ans2);
                     data2.put(q3, ans3);
 
-                    dailySurveyReference.updateChildren(data2).addOnCompleteListener(task -> {
+
+dailySurveyReference.updateChildren(data2).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Success message (optional)
                             Toast.makeText(QuestionnairePageQ2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
@@ -101,6 +102,28 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
             }
         });
 
+        backbtn = findViewById(R.id.back_button_Q2);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionnairePageQ2.this, QuestionnairePageQ3.class);
+                startActivity(intent);
+
+                String ans1;
+                Object ans2, ans3;
+                ans1 = "No";
+                ans2 = "0";
+                ans3 = "0";
+
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                QuestionnairePageQ1.data.put(q1, ans1);
+                QuestionnairePageQ1.data.put(q2, ans2);
+                QuestionnairePageQ1.data.put(q3, ans3);
+
+
+            }
+        });
         backbtn = findViewById(R.id.back_button_Q2);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override

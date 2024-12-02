@@ -1,6 +1,7 @@
 package net.robertx.planeteze_b07.annual_carbon_footprint;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.robertx.planeteze_b07.R;
 
@@ -56,6 +58,7 @@ public class RadioButtonSystem extends LinearLayout {
         params.setMargins(16, 0, 16, 16);
         toggleButton.setLayoutParams(params);
 
+
         toggleButton.setBackgroundResource(R.drawable.toggle_button_background);
 
 
@@ -100,11 +103,21 @@ public class RadioButtonSystem extends LinearLayout {
                 if (button != buttonView) {
                     button.setChecked(false);
                     button.setEnabled(true);
+                    // Reset unselected buttons to default (no tint applied)
+                    button.setBackgroundTintList(null);
                 }
             }
+            // Highlight the selected button with lighter teal
+            buttonView.setBackgroundTintList(
+                    ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.highlight_teal))
+            );
             buttonView.setEnabled(false);
+        } else {
+            // Reset the button back to default if deselected
+            buttonView.setBackgroundTintList(null);
         }
     };
+
 
     private final OnClickListener onToggleClickListener = view -> {
         ToggleButton clickedButton = (ToggleButton) view;

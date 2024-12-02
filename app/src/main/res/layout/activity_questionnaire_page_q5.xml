@@ -55,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="beef, pork,chicken, fish, etc"
+        android:hint="beef, pork, chicken, fish, etc"
         android:inputType="text"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"

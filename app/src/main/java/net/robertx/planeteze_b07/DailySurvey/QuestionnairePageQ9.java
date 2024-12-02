@@ -62,7 +62,7 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         String userID = currentUser.getUid();
         dailySurveyReference = database.getReference("DailySurvey");
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
+        dailySurveyReference = database.getReference("DailySurvey").child("TestUser").child(currentDate);
 
         submitbtn = findViewById(R.id.submit_button_Q9);
         //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();

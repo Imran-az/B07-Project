@@ -51,8 +51,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         q3_ans = findViewById(R.id.answer3_input);
 
 
-        String q1, q2, q3;
-        q1 = "Meal";
+        String q2, q3;
         q2 = String.valueOf(q2_que.getText());
         q3 = String.valueOf(q3_que.getText());
 
@@ -77,25 +76,14 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                     Intent intent = new Intent(QuestionnairePageQ5.this, DailySurveyHomePage.class);
                     startActivity(intent);
 
-                    String answer1, answer2, answer3;
-                    answer1 = "Yes";
+                    String answer2, answer3;
                     answer2 = String.valueOf(q2_ans.getText());
                     answer3 = String.valueOf(q3_ans.getText());
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-                    data5.put(q1, answer1);
-                    data5.put(q2, answer2);
-                    data5.put(q3, answer3);
 
-                    dailySurveyReference.updateChildren(data5).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            Toast.makeText(QuestionnairePageQ5.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ5.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    QuestionnairePageQ1.data.put(q2, answer2);
+                    QuestionnairePageQ1.data.put(q3, answer3);
 
                 }
                 else{
@@ -103,6 +91,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                 }
             }
         });
+
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,16 +1,35 @@
 package net.robertx.planeteze_b07.CarbonFootprintCalculators;
+
 import java.util.HashMap;
 
-public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCarbonFootPrint {
-    public String carType; // Gasoline, Diesel, Hybrid, Electric
-    public double distanceDriven; // Distance driven in kilometers
+/**
+ * Calculates the yearly carbon footprint for driving based on the car type and distance driven.
+ */
+public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbonFootPrint {
 
+    // Car type and distance-driven fields
+    private String carType; // Gasoline, Diesel, Hybrid, Electric
+    private double distanceDriven; // Distance driven in kilometers
+
+    // Required keys for this calculator
+    private static final String[] requiredKeys = {
+            "Do you own or regularly use a car?",
+            "What type of car do you drive?",
+            "How many kilometers/miles do you drive per year?"
+    };
+
+    /**
+     * Parses the distance string from user input into a numeric value in kilometers.
+     *
+     * @param distanceStr The distance string (e.g., "Up to 5,000 km (3,000 miles)").
+     * @return The parsed distance in kilometers or 0 for invalid input.
+     */
     private double parseDistance(String distanceStr) {
         if (distanceStr == null || distanceStr.isEmpty()) {
             return 0;
         }
 
-        if (distanceStr.equalsIgnoreCase("Up to 5,000 km (3,000 miles)")) {
+        if (distanceStr.equalsIgnoreCase("up to 5,000 km (3,000 miles)")) {
             return 5000;
         } else if (distanceStr.equalsIgnoreCase("5,000–10,000 km (3,000–6,000 miles)")) {
             return 10000;
@@ -20,52 +39,64 @@ public class YearlyDrivingCarbonFootprintCalculator implements CalculateYearlyCa
             return 20000;
         } else if (distanceStr.equalsIgnoreCase("20,000–25,000 km (12,000–15,000 miles)")) {
             return 25000;
-        } else if (distanceStr.equalsIgnoreCase("More than 25,000 km (15,000 miles)")) {
+        } else if (distanceStr.equalsIgnoreCase("more than 25,000 km (15,000 miles)")) {
             return 35000;
         } else {
             return 0; // Default for invalid input
         }
     }
 
-    @Override
-    public double calculateYearlyFootprint(HashMap<String, String> responses) {
 
-        if (responses.containsKey("Do you own or regularly use a car?") &&
-                responses.get("Do you own or regularly use a car?").equalsIgnoreCase("No")) {
-            return 0;
+    /**
+     * Retrieves the emission factor for the given car type.
+     *
+     * @return The emission factor in kg CO2 per kilometer.
+     */
+    private double getEmissionFactor() {
+        if (carType.equalsIgnoreCase("gasoline")) {
+            return 0.24; // kg CO2 per km
+        } else if (carType.equalsIgnoreCase("diesel")) {
+            return 0.27; // kg CO2 per km
+        } else if (carType.equalsIgnoreCase("hybrid")) {
+            return 0.16; // kg CO2 per km
+        } else if (carType.equalsIgnoreCase("electric")) {
+            return 0.05; // kg CO2 per km
+        } else {
+            return 0.1; // Default emission factor
         }
-
-        if (responses.containsKey("Do you own or regularly use a car?") &&
-                responses.get("Do you own or regularly use a car?").equalsIgnoreCase("Yes")) {
-            this.carType = responses.get("What type of car do you drive?");
-            String distanceStr = responses.get("How many kilometers/miles do you drive per year?");
-
-            // Convert distance string to numeric value (default to 0 if missing or invalid)
-            this.distanceDriven = parseDistance(distanceStr);
-
-            double emissionFactor = getEmissionFactor();
-
-            // Calculate and return carbon footprint
-            return emissionFactor * distanceDriven;
-        }
-
-        // Default return in case the key doesn't exist or has unexpected values
-        return 0;
     }
 
-    private double getEmissionFactor() {
-        double emissionFactor = 0.1;
 
-        // Get emission factor based on car type
-        if (carType.equalsIgnoreCase("gasoline")) {
-            emissionFactor = 0.24; // kg CO2 per km
-        } else if (carType.equalsIgnoreCase("diesel")) {
-            emissionFactor = 0.27; // kg CO2 per km
-        } else if (carType.equalsIgnoreCase("hybrid")) {
-            emissionFactor = 0.16; // kg CO2 per km
-        } else if (carType.equalsIgnoreCase("electric")) {
-            emissionFactor = 0.05; // kg CO2 per km
+    /**
+     * Calculates the yearly carbon footprint for driving.
+     *
+     * @param responses A map containing user responses to survey questions.
+     *                  The map must contain keys such as:
+     *                  - "Do you own or regularly use a car?"
+     *                  - "What type of car do you drive?"
+     *                  - "How many kilometers/miles do you drive per year?"
+     * @return The calculated yearly carbon footprint in kg CO2.
+     */
+    @Override
+    public double calculateYearlyFootprint(HashMap<String, String> responses) {
+        // Validate the responses using the inherited validation method
+        if (!areResponsesValid(responses, requiredKeys)) {
+            return 0.0;
         }
-        return emissionFactor;
+
+        // Check if the user owns or regularly uses a car
+        String ownsCar = responses.get("Do you own or regularly use a car?");
+        if (ownsCar.equalsIgnoreCase("No")) {
+            return 0.0; // No footprint if no car usage
+        }
+
+        // Extract car type and distance driven from responses
+        carType = responses.get("What type of car do you drive?");
+        String distanceStr = responses.get("How many kilometers/miles do you drive per year?");
+        distanceDriven = parseDistance(distanceStr);
+
+        // Calculate and return the yearly footprint
+        double emissionFactor = getEmissionFactor();
+        return emissionFactor * distanceDriven;
     }
 }

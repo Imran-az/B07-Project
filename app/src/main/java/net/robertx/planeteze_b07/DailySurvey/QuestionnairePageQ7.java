@@ -107,6 +107,18 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
                 startActivity(intent);
+
+                String answer1;
+                Object answer2, answer3;
+                answer1 = "No";
+                answer2 = "None";
+                answer3 = "0";
+
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                QuestionnairePageQ1.data.put(q1, answer1);
+                QuestionnairePageQ1.data.put(q2, answer2);
+                QuestionnairePageQ1.data.put(q3, answer3);
             }
         });
 

@@ -107,11 +107,15 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionnairePageQ1.this, DailySurveyHomePage.class);
                 startActivity(intent);
+
+
+                data.put("Drive Personal Vehicle", "No");
+                data.put("Distance Driven", "0");
+                data.put("Change vehicle type", "No");
+
+
             }
         });
-
-
-
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
