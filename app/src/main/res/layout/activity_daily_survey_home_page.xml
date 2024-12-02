@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DailySurvey.DailySurveyHomePage">
+
+  <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar_question_list"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="#009999"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="@drawable/baseline_arrow_back_24"
+      app:navigationIconTint="@color/white">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Survey"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <Button
+      android:id="@+id/Question1_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="92dp"
+      android:backgroundTint="#009999"
+      android:text="Drive Personal Vehicle"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/toolbar_question_list"
+      app:layout_constraintHorizontal_bias="0.605"
+      app:layout_constraintStart_toStartOf="@id/toolbar_question_list"
+      app:layout_constraintTop_toTopOf="@id/toolbar_question_list" />
+
+  <Button
+      android:id="@+id/Question2_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Take Public Transportation"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question1_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question1_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question1_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question3_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Cycling or Walking"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question2_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question2_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question2_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question4_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Flight (Short-Haul or Long-Haul)"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question3_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question3_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question3_DailySurvey"/>
+
+  <Button
+      android:id="@+id/Question5_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Meal"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question4_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question4_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question4_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question6_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Buy New Clothes"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question5_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question5_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question5_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question7_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Buy Electronics"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question6_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question6_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question6_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question8_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Other Purches"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question7_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question7_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question7_DailySurvey" />
+
+  <Button
+      android:id="@+id/Question9_DailySurvey"
+      android:layout_width="292dp"
+      android:layout_height="53dp"
+      android:layout_marginTop="68dp"
+      android:backgroundTint="#009999"
+      android:text="Energy Bills"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="@id/Question8_DailySurvey"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/Question8_DailySurvey"
+      app:layout_constraintTop_toTopOf="@id/Question8_DailySurvey" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
