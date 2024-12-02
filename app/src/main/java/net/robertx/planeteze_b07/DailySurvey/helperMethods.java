@@ -31,6 +31,4 @@ public class helperMethods {
         question1.setVisibility(View.INVISIBLE);
         question1_answer.setVisibility(View.INVISIBLE);
     }
-
-    public static void getCorrespondingKey(String )
 }

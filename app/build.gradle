@@ -38,23 +38,21 @@ dependencies {
     implementation libs.firebase.auth
     implementation libs.firebase.database
     implementation libs.firebase.firestore
-    implementation libs.cardview.v7
+    implementation libs.jackson.databind
+    implementation libs.mpandroidchart
+    implementation libs.core
+    implementation platform(libs.firebase.bom)
+
+    // Testing Libraries
     testImplementation libs.junit
     testImplementation libs.junit.jupiter
     testImplementation libs.ext.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-    implementation libs.jackson.databind
-    implementation libs.mpandroidchart
-
-    // Testing Libraries
     testImplementation libs.junit.jupiter.v5102
     testImplementation libs.mockito.junit.jupiter.v550
     testImplementation libs.mockito.core.v550
     testImplementation libs.robolectric.v49
     testImplementation libs.robolectric.vlatestversion
-    implementation libs.material.v180
-    implementation libs.material
-    implementation libs.core
-    implementation platform(libs.firebase.bom)
+
 }

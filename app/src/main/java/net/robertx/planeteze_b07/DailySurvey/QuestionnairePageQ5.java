@@ -45,16 +45,13 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questionnaire_page_q5);
 
-        yes_btn = findViewById(R.id.yes_button);
-        q1_que = findViewById(R.id.question1_text_view);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
         q3_que = findViewById(R.id.question3_text_view);
         q3_ans = findViewById(R.id.answer3_input);
 
 
-        String q1, q2, q3;
-        q1 = q1_que.getText().toString();
+        String q2, q3;
         q2 = String.valueOf(q2_que.getText());
         q3 = String.valueOf(q3_que.getText());
 
@@ -79,14 +76,12 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
                     Intent intent = new Intent(QuestionnairePageQ5.this, DailySurveyHomePage.class);
                     startActivity(intent);
 
-                    String answer1, answer2, answer3;
-                    answer1 = "Yes";
+                    String answer2, answer3;
                     answer2 = String.valueOf(q2_ans.getText());
                     answer3 = String.valueOf(q3_ans.getText());
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                    QuestionnairePageQ1.data.put(q1, answer1);
                     QuestionnairePageQ1.data.put(q2, answer2);
                     QuestionnairePageQ1.data.put(q3, answer3);
 
@@ -97,34 +92,6 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
             }
         });
 
-        previous_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ5.this, QuestionnairePageQ4.class);
-                startActivity(intent);
-            }
-        });
-
-        no_btn = findViewById(R.id.no_button);
-        no_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ5.this, QuestionnairePageQ6.class);
-                startActivity(intent);
-
-                String answer1;
-                Object answer2, answer3;
-                answer1 = "No";
-                answer2 = "None";
-                answer3 = "0";
-
-                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-
-                QuestionnairePageQ1.data.put(q1, answer1);
-                QuestionnairePageQ1.data.put(q2, answer2);
-                QuestionnairePageQ1.data.put(q3, answer3);
-            }
-        });
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
