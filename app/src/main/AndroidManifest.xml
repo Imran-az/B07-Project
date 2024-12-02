@@ -48,6 +48,8 @@
         <activity
             android:name=".DailySurvey.QuestionnairePageQ2"
             android:exported="false" />
+        <activity android:name=".DailySurvey.QuestionnairePageQ1"
+            android:exported="false" />
         <activity
             android:name=".UserLogin.SignUpPage"
             android:exported="false" />

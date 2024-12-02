@@ -39,7 +39,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
 
     static String currentDate;
 
-    static String ChangedDate = "";
+    public static String ChangedDate = "";
     FirebaseDatabase database;
     DatabaseReference dailySurveyReference;
 

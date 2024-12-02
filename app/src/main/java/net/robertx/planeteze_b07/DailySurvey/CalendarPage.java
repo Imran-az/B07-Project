@@ -37,7 +37,7 @@ public class CalendarPage extends AppCompatActivity {
     List<MainModel> activityList;
     static String SelectedDate;
 
-    static String datedisplay;
+    public static String datedisplay;
 
     static String ChosenYear, ChosenDay, ChosenMonth;
 

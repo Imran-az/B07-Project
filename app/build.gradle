@@ -42,10 +42,10 @@ dependencies {
     implementation libs.mpandroidchart
     implementation libs.core
     implementation platform(libs.firebase.bom)
+    implementation libs.view
 
     // Testing Libraries
     testImplementation libs.junit
-    testImplementation libs.junit.jupiter
     testImplementation libs.ext.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -53,6 +53,5 @@ dependencies {
     testImplementation libs.mockito.junit.jupiter.v550
     testImplementation libs.mockito.core.v550
     testImplementation libs.robolectric.v49
-    testImplementation libs.robolectric.vlatestversion
 
 }

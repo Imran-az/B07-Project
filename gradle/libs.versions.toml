@@ -26,6 +26,7 @@ robolectric = "4.10.3"
 robolectricRobolectric = "<latest-version>"
 robolectricVersion = "4.9"
 cardviewV7 = "28.0.0"
+view = "2.6.0"
 
 [libraries]
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
@@ -49,12 +50,13 @@ material-v180 = { module = "com.google.android.material:material", version.ref =
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoJunitJupiter" }
 mockito-core-v550 = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiter" }
-mockito-junit-jupiter-v550 = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoJunitJupiterVersion" }
+mockito-junit-jupiter-v550 = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockitoCore" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-v49 = { module = "org.robolectric:robolectric", version.ref = "robolectricVersion" }
 robolectric-vlatestversion = { module = "org.robolectric:robolectric", version.ref = "robolectricRobolectric" }
 cardview-v7 = { group = "com.android.support", name = "cardview-v7", version.ref = "cardviewV7" }
+view = { group = "com.kizitonwose.calendar", name = "view", version.ref = "view" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

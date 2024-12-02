@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
@@ -84,7 +85,7 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void navigateToMainPage() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
         finish();
     }

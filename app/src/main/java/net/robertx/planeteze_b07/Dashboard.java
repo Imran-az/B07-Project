@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.robertx.planeteze_b07.ui.dashboard.HomeFragment;
+import net.robertx.planeteze_b07.ui.dashboard.PastSurveyResultsFragment;
 import net.robertx.planeteze_b07.ui.dashboard.ProfileFragment;
 
 public class Dashboard extends AppCompatActivity {
@@ -37,6 +38,9 @@ public class Dashboard extends AppCompatActivity {
                 return true;
             } else if (item.getItemId() == R.id.navBtnHome) {
                 replaceFragment(new HomeFragment());
+                return true;
+            } else if (item.getItemId() == R.id.navBtnCalendar) {
+                replaceFragment(new PastSurveyResultsFragment());
                 return true;
             }
             return false;
