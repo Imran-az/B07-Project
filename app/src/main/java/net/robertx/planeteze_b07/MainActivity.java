@@ -2,12 +2,6 @@ package net.robertx.planeteze_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,29 +13,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
-import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
-import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
-
-import java.io.IOException;
-import java.util.HashMap;
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyHousingCarbonFootprintCalculator;
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
-import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
-import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
-import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
-import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -74,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button2 = findViewById(R.id.button_survey);
+        button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
