@@ -56,11 +56,6 @@ public class DailySurveyHomePage extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
         toolbar.setNavigationOnClickListener(v -> {
-            // Create an Intent to go to the other Activity
-            Intent intent = new Intent(DailySurveyHomePage.this, CalendarPage.class);
-            startActivity(intent);  // Start the new Activity
-
-            // Optionally finish the current Activity
             finish();
         });
 

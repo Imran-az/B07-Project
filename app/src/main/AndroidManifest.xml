@@ -15,23 +15,15 @@
         <activity
             android:name=".Dashboard"
             android:exported="true" />
-        <!-- Other activities -->
-
         <activity
             android:name=".DailySurvey.QuestionList"
             android:exported="false" />
         <activity
-            android:name=".DailySurvey.ActivityList"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionList"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.ActivityList"
+            android:name=".DailySurvey.DailySurveyHomePage"
             android:exported="false" />
         <activity
             android:name=".DailySurvey.CalendarPage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".DailySurvey.QuestionnairePageQ9"
             android:exported="false" />
@@ -59,19 +51,19 @@
         <activity
             android:name=".UserLogin.SignUpPage"
             android:exported="false" />
-        <activity android:name=".UserLogin.LoginPageView"
+        <activity
+            android:name=".UserLogin.LoginPageView"
             android:exported="false" />
-        <activity android:name=".UserLogin.ForgotPasswordPage"
+        <activity
+            android:name=".UserLogin.ForgotPasswordPage"
             android:exported="false" />
 
         <activity
             android:name=".UserLogin.WelcomePage"
             android:exported="true">
 
-            <!-- To ensure that welcomepage is the first page that opens when the app launches -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

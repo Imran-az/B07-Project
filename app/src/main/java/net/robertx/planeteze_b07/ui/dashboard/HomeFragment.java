@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
+import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
 import net.robertx.planeteze_b07.R;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
@@ -29,7 +31,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        view.findViewById(R.id.cardView).setOnClickListener(v -> {
+        view.findViewById(R.id.card_annual_footprint).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AnnualCarbonFootprintSurvey.class);
             startActivity(intent);
         });
@@ -55,6 +57,16 @@ public class HomeFragment extends Fragment {
 
         view.findViewById(R.id.cardViewSurveyResults).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ResultsActivity.class);
+            startActivity(intent);
+        });
+
+        view.findViewById(R.id.card_take_daily_survey).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DailySurveyHomePage.class);
+            startActivity(intent);
+        });
+
+        view.findViewById(R.id.card_view_past_daily_survey).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CalendarPage.class);
             startActivity(intent);
         });
 
