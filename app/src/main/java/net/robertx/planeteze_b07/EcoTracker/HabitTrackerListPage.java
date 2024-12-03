@@ -54,9 +54,6 @@ public class HabitTrackerListPage extends AppCompatActivity {
     public static Map<String, ArrayList<String>> impactFilter = new HashMap<>();
     String contributorGreatest;
 
-    public HabitTrackerListPage(Button personalizedButton) {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
