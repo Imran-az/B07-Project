@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07.UserLogin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.MainActivity;
+import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.R;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,12 +25,9 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class LoginPageView extends AppCompatActivity implements LoginContract.View {
     private EditText emailaddress_login, password_login;
-    private Button loginbutton, forgotPasswordButton, signupForAccountButton, backbutton2;
     private ProgressBar progressBar;
 
     private LoginContract.Presenter presenter;
-
-    private static final String TAG = "LoginPageViewLoginPageView";
 
     /**
      * Called when the activity is first created. Initializes the UI components, Firebase, and the presenter.
@@ -60,11 +56,11 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
         // Initialize UI components
         emailaddress_login = findViewById(R.id.emailaddress_login2);
         password_login = findViewById(R.id.emailaddress_forgotpassword);
-        loginbutton = findViewById(R.id.resetPasswordButton);
-        forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
-        signupForAccountButton = findViewById(R.id.signupbutton_login2);
+        Button loginbutton = findViewById(R.id.resetPasswordButton);
+        Button forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
+        Button signupForAccountButton = findViewById(R.id.signupbutton_login2);
         progressBar = findViewById(R.id.progressbar_login);
-        backbutton2 = findViewById(R.id.backbutton_login2);
+        Button backbutton2 = findViewById(R.id.backbutton_login2);
 
         // Set button listeners
         backbutton2.setOnClickListener(v -> presenter.onBackButtonClicked());
@@ -108,7 +104,7 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
      */
     @Override
     public void navigateToMainPage() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
         finish();
     }

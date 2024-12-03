@@ -1,7 +1,6 @@
 package net.robertx.planeteze_b07.annualCarbonTracker;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -15,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -44,8 +42,8 @@ import net.robertx.planeteze_b07.R;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class ResultsActivity extends AppCompatActivity {
     private PieChart pieChart;
@@ -62,7 +60,6 @@ public class ResultsActivity extends AppCompatActivity {
     private Button compareSubmitButton;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
     FirebaseFirestore firestore;
 
@@ -72,6 +69,8 @@ public class ResultsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_results);
 
+        findViewById(R.id.returnHome).setOnClickListener(v -> finish());
+
         // Apply insets for system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainScrollView), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -79,6 +78,7 @@ public class ResultsActivity extends AppCompatActivity {
             return insets;
         });
 
+        firestore = FirebaseFirestore.getInstance();
         try {
             EmissionsDataRetriever.initialize(this);
         } catch (IOException e) {
@@ -142,7 +142,7 @@ public class ResultsActivity extends AppCompatActivity {
      * Fetches the user's total annual carbon emissions from Firebase Firestore and invokes a callback with the result.
      * The method retrieves the user's saved survey data from the "AnnualCarbonFootprintSurveyData" Firestore collection,
      * parses the data into category-specific emissions, calculates the total emissions, and converts it to tons.
-     *
+     * <br>
      * If the data retrieval or parsing fails, the method throws a runtime exception with detailed error information.
      *
      * @param callback A callback interface {@link DataFetchCallback} that processes the total emissions value
@@ -189,7 +189,7 @@ public class ResultsActivity extends AppCompatActivity {
      * Compares the user's total emissions with the average emissions of a specified country.
      * The method retrieves the average emission value for the specified country, formats the country name to ensure proper capitalization,
      * and determines whether the user's emissions are higher or lower than the country's average.
-     *
+     * <br>
      * The result of the comparison is displayed in the `comparisonText` view with a clear message about the difference.
      * If no valid emission data is available for the specified country, an appropriate error message is displayed.
      *
@@ -214,10 +214,10 @@ public class ResultsActivity extends AppCompatActivity {
                 // Create a comparison message
                 String message;
                 if (userEmissionsKg > countryEmissionsKg) {
-                    message = String.format("Your emissions are %.2f%% higher than %s's average of %.2f kg.",
+                    message = String.format(Locale.getDefault(), "Your emissions are %.2f%% higher than %s's average of %.2f kg.",
                             percentageDifference, formattedCountry, countryEmissionsKg);
                 } else {
-                    message = String.format("Your emissions are %.2f%% lower than %s's average of %.2f kg.",
+                    message = String.format(Locale.getDefault(), "Your emissions are %.2f%% lower than %s's average of %.2f kg.",
                             Math.abs(percentageDifference), formattedCountry, countryEmissionsKg);
                 }
 
@@ -287,13 +287,6 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     /**
-     * Resets the comparison text to its default state.
-     */
-    private void resetComparisonText() {
-        comparisonText.setVisibility(View.GONE); // Hide the TextView
-    }
-
-    /**
      * Callback interface for fetching data from Firebase.
      */
     public interface DataFetchCallback {
@@ -306,13 +299,12 @@ public class ResultsActivity extends AppCompatActivity {
      * This method toggles the visibility of the `breakdownContainer` between `VISIBLE` and `GONE`.
      * When expanding, it calls {@link #expandSection(LinearLayout)} to dynamically populate the section with emission data.
      * When collapsing, it calls {@link #collapseSection(LinearLayout)} to hide the section and reset its layout.
-     *
+     * <br>
      * A smooth transition animation is applied to enhance the user experience, leveraging the `TransitionManager`.
      *
      * @param view The triggering view (e.g., a button) that invokes this method.
      *             This view is used as the parent for the transition animation.
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void expand(View view) {
         // Find the container for the breakdown section
         LinearLayout breakdownContainer = findViewById(R.id.breakdownContainer);
@@ -336,7 +328,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     /**
      * Collapses the breakdown section.
-     * @param breakdownContainer
+     * @param breakdownContainer The `LinearLayout` container to be collapsed.
      */
     private void collapseSection(LinearLayout breakdownContainer) {
         breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
@@ -348,7 +340,7 @@ public class ResultsActivity extends AppCompatActivity {
      * Expands the breakdown section in the UI to dynamically display detailed emission data.
      * This method sets the visibility of the `breakdownContainer` to `VISIBLE`, animates its appearance,
      * and dynamically populates the container with emission data retrieved from Firebase Firestore.
-     *
+     * <br>
      * The animation smoothly fades the section into view, and the layout is updated to wrap its content.
      * The breakdown section shows data for various categories such as "Consumption," "Driving," and more.
      *
@@ -411,7 +403,7 @@ public class ResultsActivity extends AppCompatActivity {
      * Populates a breakdown section dynamically with detailed emission data.
      * Each emission value is paired with its corresponding category and displayed as a formatted text entry.
      * This method creates and adds a `TextView` for each category's emission data to the provided container.
-     *
+     * <br>
      * The container is cleared before populating to ensure there are no duplicate or old entries.
      *
      * @param container  The `LinearLayout` container where the breakdown information will be displayed.
@@ -427,7 +419,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         for (int i = 0; i < emissions.length; i++) {
             TextView textView = createTextView(
-                    String.format("You have contributed %.2f tons of CO2 emissions from %s.", emissions[i], categories[i]));
+                    String.format(Locale.getDefault(), "You have contributed %.2f tons of CO2 emissions from %s.", emissions[i], categories[i]));
             container.addView(textView);
         }
     }
@@ -665,8 +657,6 @@ public class ResultsActivity extends AppCompatActivity {
 
         // Refresh the Pie Chart
         pieChart.invalidate();
-
-        dataSet.getColors();
     }
 
 
@@ -725,8 +715,15 @@ public class ResultsActivity extends AppCompatActivity {
         };
     }
 
-
-
+    private void compareWithGlobalAverages(double userTotal, double globalAverage) {
+        String message;
+        if (userTotal > globalAverage) {
+            message = String.format(Locale.getDefault(), "Your emissions are %.2f tons above the global average.", userTotal - globalAverage);
+        } else {
+            message = String.format(Locale.getDefault(), "Your emissions are %.2f tons below the global average.", globalAverage - userTotal);
+        }
+        comparisonText.setText(message);
+    }
 
 }
 

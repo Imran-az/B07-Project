@@ -42,7 +42,7 @@ public class Calculations {
         }
 
         String ownVehicle = responses.get("Drive Personal Vehicle");
-        if (ownVehicle.equals("No")){
+        if (!ownVehicle.equals("Yes")){
             return 0.0;
         }
 
@@ -79,7 +79,7 @@ public class Calculations {
         }
 
         String taken = responses.get("Take public transportation");
-        if (taken.equals("No")){
+        if (!taken.equals("Yes")){
             return 0.0;
         }
 
@@ -122,7 +122,7 @@ public class Calculations {
     }
 
     public static double flightCO2(HashMap<String, String> responses){
-        String[] requiredKeys = {"Flight", "Number of flights taken today"};
+        String[] requiredKeys = {"Distance traveled", "Number of flights taken today"};
         if (!validResponses(responses, requiredKeys)){
             return 0.0;
         }
@@ -130,11 +130,11 @@ public class Calculations {
         String time = responses.get("Number of flights taken today");
         int num = Integer.parseInt(time);
 
-        String taken = responses.get("Flight");
-        if (taken.equals("Long-haul")){
+        String taken = responses.get("Distance traveled");
+        String newTaken = taken.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        if (newTaken.equals("longhaul")){
             return longHaulFlight(num);
         }
-
         return shortHaulFlight(num);
     }
 
@@ -161,18 +161,18 @@ public class Calculations {
     }
 
     public static double meatCO2(HashMap<String, String> responses){
-        String[] requiredKeys = {"Have you had a meal yet?", "What type of protein did you eat?", "How many servings did you eat?"};
+        String[] requiredKeys = {"Meal", "What type of protein did you eat?", "How many servings did you eat?"};
         if (!validResponses(responses, requiredKeys)){
             return 0.0;
         }
 
-        String taken = responses.get("Have you had a meal yet?");
-        if (taken.equals("No")){
+        String taken = responses.get("Meal");
+        if (!taken.equals("Yes")){
             return 0.0;
         }
 
         String protein = responses.get("What type of protein did you eat?");
-        if (taken.equals("None")){
+        if (taken.equals("")){
             return 0.0;
         }
 
@@ -187,13 +187,13 @@ public class Calculations {
     }
 
     public static double clothesCO2(HashMap<String, String> responses){
-        String[] requiredKeys = {"Did you buy new clothes today?", "How many clothing items did you purchase?"};
+        String[] requiredKeys = {"Buy New Clothes", "How many clothing items did you purchase?"};
         if (!validResponses(responses, requiredKeys)){
             return 0.0;
         }
 
-        String taken = responses.get("Did you buy new clothes today?");
-        if (taken.equals("No")){
+        String taken = responses.get("Buy New Clothes");
+        if (!taken.equals("Yes")){
             return 0.0;
         }
 
@@ -220,18 +220,18 @@ public class Calculations {
     }
 
     public static double electronicsCO2(HashMap<String, String> responses){
-        String[] requiredKeys = {"Did you buy electronics today?", "What types of electronics did you buy?", "How many electronics did you buy?"};
+        String[] requiredKeys = {"Buy Electronics", "What types of electronics did you buy?", "How many electronics did you buy?"};
         if (!validResponses(responses, requiredKeys)){
             return 0.0;
         }
 
-        String taken = responses.get("Did you buy electronics today?");
-        if (taken.equals("No")){
+        String taken = responses.get("Buy Electronics");
+        if (!taken.equals("Yes")){
             return 0.0;
         }
 
         String type = responses.get("What types of electronics did you buy?");
-        if (taken.equals("None")){
+        if (!type.isEmpty()){
             return 0.0;
         }
 
@@ -332,5 +332,26 @@ public class Calculations {
 
         double newPaid = Double.parseDouble(paid);
         return waterBill(newPaid);
+    }
+
+    public static double otherPurchases(int num){
+        return num * 300;
+    }
+
+    public static double otherPurchasesCO2(HashMap<String, String> responses){
+        String[] requiredKeys = {"Other Purchases", "How many clothing items did you purchase?"};
+        if (!validResponses(responses, requiredKeys)){
+            return 0.0;
+        }
+
+        String taken = responses.get("Other Purchases");
+        if (!taken.equals("Yes")){
+            return 0.0;
+        }
+
+        String num = responses.get("How many things have you purchased?");
+        int newNum = Integer.parseInt(num);
+
+        return otherPurchases(newNum);
     }
 }
