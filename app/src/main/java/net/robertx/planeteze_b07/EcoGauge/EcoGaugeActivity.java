@@ -67,7 +67,12 @@ public class EcoGaugeActivity extends AppCompatActivity {
         timeFrameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTimeFrame = parent.getItemAtPosition(position).toString().toLowerCase();
+                String newTimeFrame = parent.getItemAtPosition(position).toString().toLowerCase();
+                if (newTimeFrame.equals(selectedTimeFrame)) {
+                    return;
+                }
+                selectedTimeFrame = newTimeFrame;
+
                 TextView timeFrameIndicator = findViewById(R.id.text_time_frame);
                 LocalDate today = LocalDate.now();
                 LocalDate earliestDateToConsider = today.minusDays(getDuration(selectedTimeFrame));
