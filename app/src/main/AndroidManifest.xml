@@ -46,6 +46,7 @@
         <activity android:name=".EcoGauge.EcoGaugeActivity" />
         <activity android:name=".EcoTracker.HabitLoggingPage" />
         <activity android:name=".annual_carbon_footprint.AnnualCarbonFootprintSurvey" />
+        <activity android:name="net.robertx.planeteze_b07.UserLogin.LoginPage" />
     </application>
 
 </manifest>

@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseUser;
 import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.R;
 
-import net.robertx.planeteze_b07.EcoTracker.CO2EmissionUpdater;
-
 public class WelcomePage extends AppCompatActivity {
     Button logininbutton;
     Button signinbutton;
