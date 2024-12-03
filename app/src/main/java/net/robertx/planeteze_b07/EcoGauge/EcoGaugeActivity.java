@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,12 +53,16 @@ public class EcoGaugeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ecogauge);
 
-        lineChart = findViewById(R.id.line_chart);
-        pieChart = findViewById(R.id.pie_chart);
+        MaterialToolbar toolbar = findViewById(R.id.eco_gauge_toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        lineChart = findViewById(R.id.eco_gauge_line_chart);
+        pieChart = findViewById(R.id.eco_gauge_pie_chart);
         totalEmissionsTextView = findViewById(R.id.total_emissions_text_view);
         Spinner timeFrameSpinner = findViewById(R.id.time_frame_spinner);
-
-
+        TextView timeFrameIndicator = findViewById(R.id.text_time_frame);
+        String initialTimeframe = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        timeFrameIndicator.setText(String.format(Locale.getDefault(), "Time frame: %s to %s", initialTimeframe, initialTimeframe));
         databaseReference = FirebaseDatabase.getInstance().getReference().child("DailySurveyCO2").child(userId);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -69,14 +73,12 @@ public class EcoGaugeActivity extends AppCompatActivity {
         timeFrameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                LocalDate today = LocalDate.now();
                 String newTimeFrame = parent.getItemAtPosition(position).toString().toLowerCase();
                 if (newTimeFrame.equals(selectedTimeFrame)) {
                     return;
                 }
                 selectedTimeFrame = newTimeFrame;
-
-                TextView timeFrameIndicator = findViewById(R.id.text_time_frame);
-                LocalDate today = LocalDate.now();
                 LocalDate earliestDateToConsider = today.minusDays(getDuration(selectedTimeFrame));
                 timeFrameIndicator.setText(String.format(Locale.getDefault(), "Time frame: %s to %s", earliestDateToConsider.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) , today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
