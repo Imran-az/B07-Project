@@ -16,10 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
+import EcoTracker.HabitTrackerListPage;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Button button, button2;
+    private Button button, button2, button3;
 
     private FirebaseAuth firebaseAuth;
 
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        findViewById(R.id.startAnnualCarbonFootprintSurvey).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
+            startActivity(intent);
+        });
+
         button = findViewById(R.id.button22);
         button.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
@@ -47,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.openDashboardBtn).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, Dashboard.class);
             startActivity(intent);
+        });
+
+        button2 = findViewById(R.id.button99);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
+                startActivity(intent);
+            }
         });
 
 

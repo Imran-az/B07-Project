@@ -16,6 +16,12 @@
             android:name=".Dashboard"
             android:exported="true" />
         <activity
+            android:name="EcoTracker.HabitTrackerListPage"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.ActivityList"
+            android:exported="false" />
+        <activity
             android:name=".DailySurvey.QuestionList"
             android:exported="false" />
         <activity
@@ -59,11 +65,9 @@
         <activity
             android:name=".UserLogin.ForgotPasswordPage"
             android:exported="false" />
-
         <activity
             android:name=".UserLogin.WelcomePage"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

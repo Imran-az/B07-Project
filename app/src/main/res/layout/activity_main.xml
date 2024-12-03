@@ -27,7 +27,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/button_survey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/mainActivityUsernameDisplay">
@@ -39,19 +38,33 @@
             android:text="Annual Carbon Footprint Survey" />
 
         <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
             android:id="@+id/openDashboardBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Open dashboard" />
+
         <Button
             android:id="@+id/button22"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Annual footprint charts"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button99"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintTop_toBottomOf="@+id/button22" />
     </LinearLayout>
 
 
