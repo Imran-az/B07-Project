@@ -2,6 +2,7 @@ package net.robertx.planeteze_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -57,12 +58,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button2 = findViewById(R.id.button99);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
-                startActivity(intent);
-            }
+        button2.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
+            startActivity(intent);
         });
 
 
