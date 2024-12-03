@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
+import net.robertx.planeteze_b07.dailySurvey.DailySurveyHomePage;
 import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
 import net.robertx.planeteze_b07.EcoTracker.HabitDecision;
 import net.robertx.planeteze_b07.R;

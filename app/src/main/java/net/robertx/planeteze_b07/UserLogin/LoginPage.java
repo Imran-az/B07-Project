@@ -15,7 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.DailySurvey.QuestionList;
+import net.robertx.planeteze_b07.dailySurvey.QuestionList;
 import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.R;
 

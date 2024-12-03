@@ -1,11 +1,11 @@
-package net.robertx.planeteze_b07.DailySurvey;
+package net.robertx.planeteze_b07.dailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,33 +28,41 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class QuestionnairePageQ1 extends AppCompatActivity {
-    private EditText question2_answer, question3_answer;
-    public static final Map<String, Object> data = new HashMap<>();
-    public static final Map<String, Object> data1 = new HashMap<>();
+public class QuestionnairePageQ5 extends AppCompatActivity {
 
-    static String currentDate;
-
-    public static String ChangedDate = "";
+    EditText q2_ans;
+    EditText q3_ans;
+    TextView q2_que;
+    TextView q3_que;
+    final Map<String, Object> data5 = new HashMap<>();
     FirebaseDatabase database;
+
+    String currentDate;
     DatabaseReference dailySurveyReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_questionnaire_page_q1);
+        setContentView(R.layout.activity_questionnaire_page_q5);
 
-        question2_answer = findViewById(R.id.answer2_input_Q1);
-        question3_answer = findViewById(R.id.answer3_input_Q1);
+        q2_que = findViewById(R.id.question2_text_view);
+        q2_ans = findViewById(R.id.answer2_input);
+        q3_que = findViewById(R.id.question3_text_view);
+        q3_ans = findViewById(R.id.answer3_input);
 
 
-        Button submitbtn = findViewById(R.id.submit_button_Q1);
+        String q2, q3;
+        q2 = String.valueOf(q2_que.getText());
+        q3 = String.valueOf(q3_que.getText());
+
+        Button submitButton = findViewById(R.id.submit_button_Q5);
+        Button backButton = findViewById(R.id.back_button_Q5);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String userID = currentUser.getUid();
-        Log.d("TAG", "userID" + userID);
+        database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         dailySurveyReference = database.getReference("DailySurvey");
         currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
@@ -62,50 +70,42 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
         }
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
-
-        submitbtn.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(question2_answer.getText().toString()) || !TextUtils.isEmpty(question3_answer.getText().toString())) {
-                Intent intent = new Intent(QuestionnairePageQ1.this, DailySurveyHomePage.class);
+        submitButton.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText())) && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
+                Intent intent = new Intent(QuestionnairePageQ5.this, DailySurveyHomePage.class);
                 startActivity(intent);
 
+                String answer2, answer3;
+                answer2 = String.valueOf(q2_ans.getText());
+                answer3 = String.valueOf(q3_ans.getText());
 
-                data1.put("Drive Personal Vehicle", "Yes");
-                data1.put("Distance Driven", question2_answer.getText().toString());
-                data1.put("Change vehicle type", question3_answer.getText().toString());
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
+                data5.put(q2, answer2);
+                data5.put(q3, answer3);
 
-                dailySurveyReference.updateChildren(data1).addOnCompleteListener(task -> {
+                dailySurveyReference.updateChildren(data5).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
                         // Success message (optional)
-                        Toast.makeText(QuestionnairePageQ1.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
+                        Toast.makeText(QuestionnairePageQ5.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
                     } else {
                         // Error message
-                        Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionnairePageQ5.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-
             }
-           else {
-                Toast.makeText(QuestionnairePageQ1.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
+            else{
+                Toast.makeText(QuestionnairePageQ5.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
-
         });
 
-        Button backbtn = findViewById(R.id.back_button_Q1);
-        backbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ1.this, DailySurveyHomePage.class);
+
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ5.this, DailySurveyHomePage.class);
             startActivity(intent);
-
-
-            data.put("Drive Personal Vehicle", "No");
-            data.put("Distance Driven", "0");
-            data.put("Change vehicle type", "No");
-
-
         });
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

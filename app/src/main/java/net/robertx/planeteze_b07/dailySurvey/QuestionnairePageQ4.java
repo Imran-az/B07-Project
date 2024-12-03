@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.DailySurvey;
+package net.robertx.planeteze_b07.dailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,36 +28,31 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class QuestionnairePageQ7 extends AppCompatActivity {
-
-    EditText q2_ans;
-    EditText q3_ans;
-    TextView q2_que;
-    TextView q3_que;
-    final Map<String, Object> data7 = new HashMap<>();
-    FirebaseDatabase database;
+public class QuestionnairePageQ4 extends AppCompatActivity {
+    public Button submitButton, backButton;
+    public EditText question2_answer, question3_answer;
+    public TextView question2, question3;
+    public static final Map<String, Object> data4 = new HashMap<>();
 
     String currentDate;
+    FirebaseDatabase database;
     DatabaseReference dailySurveyReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_questionnaire_page_q7);
+        setContentView(R.layout.activity_questionnaire_page_q4);
 
-        q2_que = findViewById(R.id.question2_text_view);
-        q2_ans = findViewById(R.id.answer2_input);
-        q3_que = findViewById(R.id.question3_text_view);
-        q3_ans = findViewById(R.id.answer3_input);
+        question2 = findViewById(R.id.question2Text_Q4);
+        question2_answer = findViewById(R.id.answer2_input_Q4);
 
+        question3 = findViewById(R.id.question3_text_view_Q4);
+        question3_answer = findViewById(R.id.answer3_input_Q4);
 
-        String q1, q2, q3;
-        q1 = "Buy Electronics";
-        q2 = String.valueOf(q2_que.getText());
-        q3 = String.valueOf(q3_que.getText());
-
-        Button submitButton = findViewById(R.id.submit_button_Q7);
+        //next button
+        submitButton = findViewById(R.id.submit_button_Q4);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -69,56 +64,47 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
             currentDate = QuestionnairePageQ1.ChangedDate;
         }
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
-
         submitButton.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText())) && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
-                Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
+            if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
+                Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
-                String answer1, answer2, answer3;
-                answer1 = "Yes";
-                answer2 = String.valueOf(q2_ans.getText());
-                answer3 = String.valueOf(q3_ans.getText());
+                data4.put("Number of flights taken today", question2_answer.getText().toString());
+                int distance_travelled = Integer.parseInt(question3_answer.getText().toString());
 
-                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+                String answer;
 
-                data7.put(q1, answer1);
-                data7.put(q2, answer2);
-                data7.put(q3, answer3);
+                if (distance_travelled >= 1500){
+                    answer  = "Long-Haul";
+                }
+                else{
+                    answer = "Short-Haul";
+                }
+                data4.put("Distance traveled", answer);
 
-                dailySurveyReference.updateChildren(data7).addOnCompleteListener(task -> {
+                dailySurveyReference.updateChildren(data4).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // Success message (optional)
                         CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
-                        Toast.makeText(QuestionnairePageQ7.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
                     } else {
                         // Error message
-                        Toast.makeText(QuestionnairePageQ7.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
             }
-            else{
-                Toast.makeText(QuestionnairePageQ7.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(QuestionnairePageQ4.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Button backButton = findViewById(R.id.back_button_Q7);
+        backButton = findViewById(R.id.back_button_Q4);
         backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
+            Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
             startActivity(intent);
-
-            String answer1;
-            Object answer2, answer3;
-            answer1 = "No";
-            answer2 = "None";
-            answer3 = "0";
-
-            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-
-            QuestionnairePageQ1.data.put(q1, answer1);
-            QuestionnairePageQ1.data.put(q2, answer2);
-            QuestionnairePageQ1.data.put(q3, answer3);
         });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

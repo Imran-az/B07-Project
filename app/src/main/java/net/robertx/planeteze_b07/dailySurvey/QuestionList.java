@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.DailySurvey;
+package net.robertx.planeteze_b07.dailySurvey;
 
 import android.os.Bundle;
 import android.util.Log;

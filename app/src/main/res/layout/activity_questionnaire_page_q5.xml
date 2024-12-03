@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DailySurvey.QuestionnairePageQ5">
+    tools:context=".dailySurvey.QuestionnairePageQ5">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_question_list"

@@ -25,10 +25,10 @@ import com.kizitonwose.calendar.view.MonthDayBinder;
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder;
 import com.kizitonwose.calendar.view.ViewContainer;
 
-import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
-import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
-import net.robertx.planeteze_b07.DailySurvey.QuestionList;
-import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
+import net.robertx.planeteze_b07.dailySurvey.CalendarPage;
+import net.robertx.planeteze_b07.dailySurvey.DailySurveyHomePage;
+import net.robertx.planeteze_b07.dailySurvey.QuestionList;
+import net.robertx.planeteze_b07.dailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.R;
 
 import java.time.DayOfWeek;

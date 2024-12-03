@@ -1,10 +1,11 @@
-package net.robertx.planeteze_b07.DailySurvey;
+package net.robertx.planeteze_b07.dailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,28 +28,36 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class QuestionnairePageQ3 extends AppCompatActivity {
+public class QuestionnairePageQ7 extends AppCompatActivity {
 
-    private EditText question2_answer;
+    EditText q2_ans;
+    EditText q3_ans;
+    TextView q2_que;
+    TextView q3_que;
+    final Map<String, Object> data7 = new HashMap<>();
+    FirebaseDatabase database;
 
     String currentDate;
-    public static final Map<String, Object> data3 = new HashMap<>();
-
-    FirebaseDatabase database;
     DatabaseReference dailySurveyReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_questionnaire_page_q3);
+        setContentView(R.layout.activity_questionnaire_page_q7);
 
-        question2_answer = findViewById(R.id.answer2_input_Q3);
+        q2_que = findViewById(R.id.question2_text_view);
+        q2_ans = findViewById(R.id.answer2_input);
+        q3_que = findViewById(R.id.question3_text_view);
+        q3_ans = findViewById(R.id.answer3_input);
 
 
+        String q1, q2, q3;
+        q1 = "Buy Electronics";
+        q2 = String.valueOf(q2_que.getText());
+        q3 = String.valueOf(q3_que.getText());
 
-        //next button
-        Button submitbtn = findViewById(R.id.submit_button_Q3);
+        Button submitButton = findViewById(R.id.submit_button_Q7);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -60,34 +69,55 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
             currentDate = QuestionnairePageQ1.ChangedDate;
         }
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
-        submitbtn.setOnClickListener(v -> {
-            if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
-                Intent intent = new Intent(QuestionnairePageQ3.this, DailySurveyHomePage.class);
+
+        submitButton.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText())) && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
+                Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
                 startActivity(intent);
 
-                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-                data3.put("Distance cycled or walked", question2_answer.getText().toString());
+                String answer1, answer2, answer3;
+                answer1 = "Yes";
+                answer2 = String.valueOf(q2_ans.getText());
+                answer3 = String.valueOf(q3_ans.getText());
 
-                dailySurveyReference.updateChildren(data3).addOnCompleteListener(task -> {
+                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+                data7.put(q1, answer1);
+                data7.put(q2, answer2);
+                data7.put(q3, answer3);
+
+                dailySurveyReference.updateChildren(data7).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // Success message (optional)
                         CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
-                        Toast.makeText(QuestionnairePageQ3.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionnairePageQ7.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
                     } else {
                         // Error message
-                        Toast.makeText(QuestionnairePageQ3.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionnairePageQ7.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-            else {
-                Toast.makeText(QuestionnairePageQ3.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
+            else{
+                Toast.makeText(QuestionnairePageQ7.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
         });
 
-        Button backbtn = findViewById(R.id.back_button_Q3);
-        backbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ3.this, DailySurveyHomePage.class);
+        Button backButton = findViewById(R.id.back_button_Q7);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
             startActivity(intent);
+
+            String answer1;
+            Object answer2, answer3;
+            answer1 = "No";
+            answer2 = "None";
+            answer3 = "0";
+
+            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+            QuestionnairePageQ1.data.put(q1, answer1);
+            QuestionnairePageQ1.data.put(q2, answer2);
+            QuestionnairePageQ1.data.put(q3, answer3);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
