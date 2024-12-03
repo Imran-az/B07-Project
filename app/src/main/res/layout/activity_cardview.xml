@@ -52,6 +52,7 @@
         <!-- Right Section: Buttons -->
         <LinearLayout
             android:id="@+id/linearLayout3"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -65,19 +66,21 @@
 
             <Button
                 android:id="@+id/Edit"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#009999"
-                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
                 android:layout_marginRight="4dp"
                 android:text="Edit" />
 
             <Button
                 android:id="@+id/Delete"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#009999"
-                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
                 android:text="Delete" />
 
         </LinearLayout>
