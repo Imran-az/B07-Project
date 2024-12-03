@@ -28,23 +28,28 @@ public class LoginPresenter implements LoginContract.Presenter {
         model.login(email, password,
                 user -> {
                     view.hideProgress();
-                    view.showToast("Login Successful");
-                    view.navigateToMainPage();
+                    if (user == null) {
+                        view.showToast("An unknown error occurred during login.");
+                    } else {
+                        view.showToast("Login Successful");
+                        view.navigateToMainPage();
+                    }
                 },
                 exception -> {
                     view.hideProgress();
                     String errorMessage = exception.getMessage();
-
                     if (errorMessage != null) {
-                        if (errorMessage.contains("password is invalid")) {
-                            view.showToast("Incorrect password. Please try again.");
-                        } else if (errorMessage.contains("no user record")) {
-                            view.showToast("No account found with this email.");
-                        } else if (errorMessage.contains("Verify your email")) {
+                        if (errorMessage.contains("The supplied auth credential is incorrect, malformed or has expired")) {
+                            view.showToast("Incorrect email or password");
+                        } else if (errorMessage.contains("The email address is badly formatted.")) {
+                            view.showToast("Invalid email format");
+                        } else if (errorMessage.contains("Verify your email before you login")) {
                             view.showToast("Verify your email before you login");
                         } else {
-                            view.showToast(errorMessage); // Fallback for other exceptions
+                            view.showToast(errorMessage);
                         }
+                    } else {
+                        view.showToast("An unexpected error occurred");
                     }
                 }
         );

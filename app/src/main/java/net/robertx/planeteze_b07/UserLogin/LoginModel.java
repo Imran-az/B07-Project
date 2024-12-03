@@ -31,17 +31,17 @@ public class LoginModel {
                 .addOnFailureListener(exception -> {
                     String message = exception.getMessage();
                     if (message != null) {
-                        // Match Firebase Auth error messages
-                        if (message.toLowerCase().contains("password is invalid")) {
-                            onFailureListener.onFailure(new Exception("Incorrect password. Please try again."));
-                        } else if (message.toLowerCase().contains("no user record")) {
-                            onFailureListener.onFailure(new Exception("No account found with this email."));
-                        } else {
-                            onFailureListener.onFailure(new Exception("Login failed: " + message));
-                        }
-                    } else {
-                        onFailureListener.onFailure(new Exception("An unexpected error occurred during login."));
+                        onFailureListener.onFailure(exception);
+                        return;
                     }
+                    else if (message.contains("The supplied auth credential is incorrect, malformed or has expired")) {
+                        onFailureListener.onFailure(new Exception("The supplied auth credential is incorrect, malformed or has expired"));
+                    } else if (message.contains("The email address is badly formatted.")) {
+                        onFailureListener.onFailure(new Exception("The email address is badly formatted."));
+                    } else {
+                        onFailureListener.onFailure(exception);
+                    }
+                    onFailureListener.onFailure(exception);
                 });
     }
 }
