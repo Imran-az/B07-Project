@@ -41,18 +41,21 @@ public class HabitTrackerListPage extends AppCompatActivity {
 
     private Button confirmButton;
     private Button cancelButton;
-    private Button personalizedButton;
-    private List<String> habitList, filteredHabitList, personalizedList;
+    private List<String> habitList;
+    private List<String> filteredHabitList;
     private ArrayAdapter<String> dialogAdapter;
     private String selectedHabit = "";
     TextView customSpinner, resultText;
     FirebaseDatabase logDatabase;
     DatabaseReference habitLogReference;
-    private DatabaseReference habitLogsRef, dailyHabitTrackerRef;
+    private DatabaseReference dailyHabitTrackerRef;
     private String userID;
     public static Map<String, ArrayList<String>> typeFilter = new HashMap<>();
     public static Map<String, ArrayList<String>> impactFilter = new HashMap<>();
     String contributorGreatest;
+
+    public HabitTrackerListPage(Button personalizedButton) {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

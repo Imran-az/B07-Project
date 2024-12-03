@@ -128,7 +128,7 @@ public class HabitLoggingPage extends AppCompatActivity {
     private void updateProgressBar() {
         habitRef.child("startDate").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot startSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot startSnapshot) {
                 if (startSnapshot.exists()) {
                     String startDate = startSnapshot.getValue(String.class);
                     try {

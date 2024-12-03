@@ -50,9 +50,7 @@ public class DailySurveyHomePage extends AppCompatActivity {
         }
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
-        toolbar.setNavigationOnClickListener(v -> {
-            finish();
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         q1.setOnClickListener(v -> {
             Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ1.class);
