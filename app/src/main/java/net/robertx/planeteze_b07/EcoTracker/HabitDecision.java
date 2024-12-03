@@ -28,20 +28,14 @@ public class HabitDecision extends AppCompatActivity {
         button1 = findViewById(R.id.oldhabit);
         button2 = findViewById(id.newhabit);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HabitDecision.this, HabitLoggingPage.class);
-                startActivity(intent);
-            }
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(HabitDecision.this, HabitLoggingPage.class);
+            startActivity(intent);
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HabitDecision.this, HabitTrackerListPage.class);
-                startActivity(intent);
-            }
+        button2.setOnClickListener(view -> {
+            Intent intent = new Intent(HabitDecision.this, HabitTrackerListPage.class);
+            startActivity(intent);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

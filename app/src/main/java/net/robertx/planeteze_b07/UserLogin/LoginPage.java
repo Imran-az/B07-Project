@@ -19,11 +19,6 @@ import net.robertx.planeteze_b07.DailySurvey.QuestionList;
 import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.R;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,8 +31,6 @@ public class LoginPage extends AppCompatActivity {
 
     // UI Components for login and navigation
     private EditText emailaddress_login, password_login;
-    private Button loginbutton, forgotPasswordButton, signupForAccountButton;
-    private Button backbutton2;
     private ProgressBar progressBar;
 
     // Firebase Authentication
@@ -68,85 +61,70 @@ public class LoginPage extends AppCompatActivity {
         // Initialize UI components
         emailaddress_login = findViewById(R.id.emailaddress_login2);
         password_login = findViewById(R.id.emailaddress_forgotpassword);
-        loginbutton = findViewById(R.id.resetPasswordButton);
-        forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
-        signupForAccountButton = findViewById(R.id.signupbutton_login2);
+        Button loginbutton = findViewById(R.id.resetPasswordButton);
+        Button forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
+        Button signupForAccountButton = findViewById(R.id.signupbutton_login2);
         progressBar = findViewById(R.id.progressbar_login);
-        backbutton2 = findViewById(R.id.backbutton_login2);
+        Button backbutton2 = findViewById(R.id.backbutton_login2);
 
         // Back button: Navigate to the WelcomePage
-        backbutton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this, QuestionList.class);
-                startActivity(intent);
-            }
+        backbutton2.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginPage.this, QuestionList.class);
+            startActivity(intent);
         });
 
         // Signup button: Navigate to the SignUpPage
-        signupForAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this, SignUpPage.class);
-                startActivity(intent);
-            }
+        signupForAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginPage.this, SignUpPage.class);
+            startActivity(intent);
         });
 
         // Login button: Attempt to authenticate with email and password
-        loginbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Retrieve input from text fields
-                String email = String.valueOf(emailaddress_login.getText());
-                String password = String.valueOf(password_login.getText());
-                progressBar.setVisibility(View.VISIBLE);
+        loginbutton.setOnClickListener(v -> {
+            // Retrieve input from text fields
+            String email = String.valueOf(emailaddress_login.getText());
+            String password = String.valueOf(password_login.getText());
+            progressBar.setVisibility(View.VISIBLE);
 
-                // Validate email input
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(LoginPage.this, "Enter an email", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    return;
-                }
-
-                // Validate password input
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginPage.this, "Enter a password", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    return;
-                }
-
-                // Attempt login with Firebase Authentication
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    if (user != null && user.isEmailVerified()) {
-                                        Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(LoginPage.this, "Verify your email before you login",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(LoginPage.this, "Login failed.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            // Validate email input
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(LoginPage.this, "Enter an email", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
             }
+
+            // Validate password input
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(LoginPage.this, "Enter a password", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                return;
+            }
+
+            // Attempt login with Firebase Authentication
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null && user.isEmailVerified()) {
+                                Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginPage.this, "Verify your email before you login",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginPage.this, "Login failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
         // Forgot Password button: Navigate to the ForgotPasswordPage
-        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this, ForgotPasswordPage.class);
-                startActivity(intent);
-            }
+        forgotPasswordButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginPage.this, ForgotPasswordPage.class);
+            startActivity(intent);
         });
 
         // Adjust layout for system window insets (edge-to-edge experience)

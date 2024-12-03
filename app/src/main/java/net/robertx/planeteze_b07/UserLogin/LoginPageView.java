@@ -25,8 +25,6 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
 
     private LoginContract.Presenter presenter;
 
-    private static final String TAG = "LoginPageViewLoginPageView";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
