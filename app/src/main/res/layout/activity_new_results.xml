@@ -40,7 +40,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Annual CarbonFoot Print Results"
                 android:textColor="@color/dark_gray_blue"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -262,6 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:importantForAutofill="no"
                     android:hint="Enter a Country"
                     android:inputType="text" />
 
@@ -283,6 +284,7 @@
 
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -293,6 +295,7 @@
 
             <Button
                 android:id="@+id/returnHome"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
@@ -308,6 +311,7 @@
 
             <Button
                 android:id="@+id/returnbruh"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"

@@ -31,14 +31,6 @@
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/yes_no_button_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="79dp" />
-
     <TextView
         android:id="@+id/question2Text_Q1"
         android:layout_width="0dp"

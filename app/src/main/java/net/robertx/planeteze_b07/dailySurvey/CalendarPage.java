@@ -46,16 +46,6 @@ public class CalendarPage extends AppCompatActivity {
 
         displayDate.setText("Calendar");
 
-//        recyclerView = findViewById(R.id.recyclerView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//
-//        FirebaseRecyclerOptions<MainModel> options = new FirebaseRecyclerOptions.Builder<MainModel>()
-//                .setQuery(FirebaseDatabase.getInstance().getReference().child("DailySurvey").child("W35Qr6MzplfED39mMHhiYRLKMYO2").child("2024-11-27"), MainModel.class).build();
-//
-//        mainAdapter = new MainAdapter(options);
-//        recyclerView.setAdapter(mainAdapter);
-
         button.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);

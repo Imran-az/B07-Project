@@ -114,7 +114,7 @@
                 android:drawableTint="@color/teal"
                 android:ems="10"
                 android:hint="Email Address"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
