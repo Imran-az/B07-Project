@@ -12,12 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanetezeB07"
         tools:targetApi="31">
-
+        <activity
+            android:name="EcoTracker.HabitTrackerListPage"
+            android:exported="false" />
         <activity
             android:name=".DailySurvey.QuestionList"
             android:exported="false" />
         <activity
-            android:name=".DailySurvey.DailySurveyHomePage"
+            android:name=".DailySurvey.QuestionList"
+            android:exported="false" />
+        <activity
+            android:name=".DailySurvey.ActivityList"
             android:exported="false" />
         <activity
             android:name=".DailySurvey.CalendarPage"
@@ -49,11 +54,12 @@
         <activity
             android:name=".UserLogin.SignUpPage"
             android:exported="false" />
-        <activity android:name=".UserLogin.LoginPageView"
+        <activity
+            android:name=".UserLogin.LoginPageView"
             android:exported="false" />
-        <activity android:name=".UserLogin.ForgotPasswordPage"
+        <activity
+            android:name=".UserLogin.ForgotPasswordPage"
             android:exported="false" />
-
         <activity
             android:name=".UserLogin.WelcomePage"
             android:exported="true">
@@ -67,8 +73,7 @@
             android:exported="false" />
         <activity
             android:name=".DailySurvey.QuestionnairePageQ1"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".annualCarbonTracker.ResultsActivity"
             android:exported="true" />

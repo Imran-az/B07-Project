@@ -26,10 +26,6 @@ public class WelcomePage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.welcome_page);
 
-        // Start the CO2EmissionUpdater for all users
-        CO2EmissionUpdater updater = new CO2EmissionUpdater();
-        updater.startListeningForAllUsers();
-
         //sends user to sign up page
         signinbutton= findViewById(R.id.signupbutton);
         signinbutton.setOnClickListener(new View.OnClickListener() {
