@@ -37,7 +37,7 @@
             android:fontFamily="sans-serif-black"
             android:text="Annual CarbonFoot Print Results"
             android:textColor="@color/dark_gray_blue"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -293,17 +293,17 @@
 
         <Button
             android:id="@+id/returnHome"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
+            android:layout_weight="1"
             android:autofillHints="none"
             android:backgroundTint="@color/teal"
             android:fontFamily="sans-serif-black"
             android:text="Back"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_weight="1" />
+            android:textStyle="bold" />
 
 
       </LinearLayout>
