@@ -41,6 +41,13 @@
             android:spinnerMode="dropdown" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/personalized_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Personalized Habits"
+        android:layout_marginTop="8dp" />
+
     <!-- Habit List -->
     <ListView
         android:id="@+id/list_view"
