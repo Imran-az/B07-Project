@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,9 @@ public class HabitLoggingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_logging_page);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         // Initialize Firebase references
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -50,7 +54,6 @@ public class HabitLoggingPage extends AppCompatActivity {
         // Initialize UI elements
         trackingHabitText = findViewById(R.id.tracking_habit_text);
         completeHabitButton = findViewById(R.id.complete_habit_button);
-        Button backButton = findViewById(R.id.back_button);
         Button changeButton = findViewById(R.id.change_habit);
 
         // Fetch and display the selected habit name
@@ -92,11 +95,6 @@ public class HabitLoggingPage extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(HabitLoggingPage.this, "Failed to check completion status: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
-
-        backButton.setOnClickListener(view -> {
-            Intent intent = new Intent(HabitLoggingPage.this, HabitDecision.class);
-            startActivity(intent);
         });
 
         changeButton.setOnClickListener(view -> {

@@ -10,13 +10,8 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_question_list"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:background="#009999"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
@@ -24,6 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
         app:navigationIconTint="@color/white">
 
         <TextView
@@ -123,23 +119,12 @@
         android:text="Log Habit for the Day"
         android:textColor="@android:color/white"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/teal"
-        android:text="Back"
-        android:textColor="@android:color/white"
-        android:visibility="visible"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

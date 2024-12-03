@@ -78,6 +78,7 @@
             android:name=".annualCarbonTracker.ResultsActivity"
             android:exported="true" />
         <activity android:name=".EcoGauge.EcoGaugeActivity" />
+        <activity android:name="net.robertx.planeteze_b07.EcoTracker.HabitLoggingPage" />
     </application>
 
 </manifest>

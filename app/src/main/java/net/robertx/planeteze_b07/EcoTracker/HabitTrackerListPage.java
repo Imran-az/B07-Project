@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -59,6 +60,9 @@ public class HabitTrackerListPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_tracker_list_page);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         logDatabase = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -74,7 +78,6 @@ public class HabitTrackerListPage extends AppCompatActivity {
         resultText = findViewById(R.id.result_text);
         confirmButton = findViewById(R.id.confirm_button);
         cancelButton = findViewById(R.id.cancel_button);
-        Button backButton = findViewById(R.id.back_button);
         Button logButton = findViewById(R.id.log_button);
 
         habitLogsRef.child(currentDate).get().addOnCompleteListener(task -> {
@@ -152,13 +155,9 @@ public class HabitTrackerListPage extends AppCompatActivity {
             customSpinner.setText("");
         });
 
-        backButton.setOnClickListener(view -> {
-            Intent intent = new Intent(HabitTrackerListPage.this, HabitDecision.class);
-            startActivity(intent);
-        });
 
         logButton.setOnClickListener(view -> {
-            Intent intent = new Intent(HabitTrackerListPage.this, HabitLoggingPage.class);
+            Intent intent = new Intent(getApplicationContext(), HabitLoggingPage.class);
             startActivity(intent);
         });
     }
