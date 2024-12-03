@@ -54,7 +54,7 @@ public class QuestionList extends AppCompatActivity {
 
         PickedDate = findViewById(R.id.ChosenDate);
 
-        PickedDate.setText(MessageFormat.format("{0}/{1}/{2}",CalendarPage.ChosenDay, CalendarPage.ChosenMonth, CalendarPage.ChosenYear));
+        PickedDate.setText(MessageFormat.format("Answers for {0}/{1}/{2}",CalendarPage.ChosenDay, CalendarPage.ChosenMonth, CalendarPage.ChosenYear));
 
 
         recyclerView = findViewById(R.id.recyclerView_widget);
