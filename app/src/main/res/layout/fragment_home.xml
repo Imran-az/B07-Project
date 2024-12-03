@@ -145,7 +145,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_take_daily_survey"
+        android:id="@+id/card_eco_tracker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -170,7 +170,7 @@
                 android:paddingEnd="8dp"
                 app:tint="@color/white"
                 android:background="@color/card_icon_background_color"
-                android:src="@drawable/scaled_input" />
+                android:src="@drawable/scaled_energy_savings_leaf" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,21 +184,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Take daily survey"
+                    android:text="Start Eco Tracker"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tap on this card to take the daily survey" />
+                    android:text="Tap on this card to go to the eco tracker" />
 
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view_past_daily_survey"
+        android:id="@+id/card_eco_gauge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -208,7 +208,7 @@
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_take_daily_survey">
+        app:layout_constraintTop_toBottomOf="@+id/card_eco_tracker">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -223,7 +223,7 @@
                 android:paddingEnd="8dp"
                 app:tint="@color/white"
                 android:background="@color/card_icon_background_color"
-                android:src="@drawable/scaled_bar_chart" />
+                android:src="@drawable/scaled_pie_chart" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -237,14 +237,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View past survey results"
+                    android:text="View Eco Gauge"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tap on this card to view past survey results" />
+                    android:text="Tap on this card to go to eco gauge" />
 
             </LinearLayout>
         </LinearLayout>
