@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,18 +13,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
-import EcoTracker.HabitDecision;
-import EcoTracker.HabitTrackerListPage;
+import net.robertx.planeteze_b07.EcoTracker.HabitDecision;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
 
-    private Button button, button2, button3, openEcoGaugeButton;
+    private Button button;
+    private Button button2;
+    private Button openEcoGaugeButton;
 
     private FirebaseAuth firebaseAuth;
 

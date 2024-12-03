@@ -1,4 +1,4 @@
-package EcoTracker;
+package net.robertx.planeteze_b07.EcoTracker;
 
 import static net.robertx.planeteze_b07.R.*;
 
@@ -13,7 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
 public class HabitDecision extends AppCompatActivity {

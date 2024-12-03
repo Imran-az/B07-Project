@@ -16,10 +16,10 @@
             android:name=".Dashboard"
             android:exported="true" />
         <activity
-            android:name="EcoTracker.HabitTrackerListPage"
+            android:name=".EcoTracker.HabitTrackerListPage"
             android:exported="false" />
         <activity
-            android:name="EcoTracker.HabitDecision"
+            android:name=".EcoTracker.HabitDecision"
             android:exported="false" />
         <activity
             android:name=".DailySurvey.ActivityList"
