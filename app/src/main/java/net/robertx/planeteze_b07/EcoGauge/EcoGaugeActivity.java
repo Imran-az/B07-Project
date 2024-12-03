@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -30,6 +31,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -124,8 +126,56 @@ public class EcoGaugeActivity extends AppCompatActivity {
         return new int[]{
                 Color.parseColor("#4CAF50"), Color.parseColor("#8BC34A"),
                 Color.parseColor("#A1887F"), Color.parseColor("#CDDC39"),
-                Color.parseColor("#6D4C41"), Color.parseColor("#9E9D24")
+                Color.parseColor("#6D4C41"), Color.parseColor("#9E9D24"),
+                Color.parseColor("#FFC107"), Color.parseColor("#FF5722")
         };
+    }
+
+    private int getLegendColor(String categoryKey) {
+        int[] colors = getLegendColors();
+        switch (categoryKey) {
+            case "Clothes":
+                return colors[0];
+            case "Driving Personal Vehicle":
+                return colors[1];
+            case "Electronics":
+                return colors[2];
+            case "Energy Bill":
+                return colors[3];
+            case "Flights":
+                return colors[4];
+            case "Meals":
+                return colors[5];
+            case "Other Purchases":
+                return colors[6];
+            case "Public Transportation":
+                return colors[7];
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    private int getDataSetIndexForLabel(String label) {
+        switch (label) {
+            case "Clothes":
+                return 0;
+            case "Driving Personal Vehicle":
+                return 1;
+            case "Electronics":
+                return 2;
+            case "Energy Bill":
+                return 3;
+            case "Flights":
+                return 4;
+            case "Meals":
+                return 5;
+            case "Other Purchases":
+                return 6;
+            case "Public Transportation":
+                return 7;
+            default:
+                return -1;
+        }
     }
 
     private int getDuration(String timeFrame) {
@@ -143,62 +193,88 @@ public class EcoGaugeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Convert firebase numeric type to a double
+     * @param value The value to convert
+     * @return The value as a double
+     */
+    private double convertFirebaseNumerics(Object value) {
+        if (value instanceof Long) {
+            return ((Long) value).doubleValue();
+        } else if (value instanceof Double) {
+            return (double) value;
+        } else {
+            return 0;
+        }
+    }
+
 
     private void loadDataFromFirebase() {
         databaseReference.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DataSnapshot dataSnapshot = task.getResult();
+                double totalEmissions = 0;
                 if (dataSnapshot.exists()) {
-                    ArrayList<Entry> lineChartEntries = new ArrayList<>();
+                    LineDataSet lineDataSet = new LineDataSet(new ArrayList<>(), "CO2 Emissions");
                     ArrayList<PieEntry> pieChartEntries = new ArrayList<>();
-                    float totalEmissions = 0;
+                    ArrayList<Integer> colorsForPieChart = new ArrayList<>();
+
                     LocalDate earliestDateToConsider = LocalDate.now().minusDays(getDuration(selectedTimeFrame));
+
+                    HashMap<String, Double> breakdownMap = new HashMap<>();
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         LocalDate entryDate = LocalDate.parse(snapshot.getKey(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                         if (entryDate.isBefore(earliestDateToConsider)) {
                             continue;
                         }
-
                         Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
 
-                        double dailyTotal = data.get("dailyTotal") != null ? (double) data.get("dailyTotal") : 0;
-
-                        // Add data point to line chart
+                        // Add data point for the given date to line chart
+                        double dailyTotal = convertFirebaseNumerics(data.get("dailyTotal"));
+                        totalEmissions += dailyTotal;
                         String key = snapshot.getKey();
                         float xValue = getDateAsXValue(key);
-                        lineChartEntries.add(new Entry(xValue, (float) dailyTotal));
+                        lineDataSet.addEntry(new Entry(xValue, (float) dailyTotal));
 
-                        // Sum total emissions
-                        totalEmissions += dailyTotal;
-
-                        // Add breakdown to pie chart
                         for (Map.Entry<String, Object> entry : data.entrySet()) {
-                            double value = 0;
-                            if (entry.getValue() instanceof Long) {
-                                Long l = (Long) entry.getValue();
-                                value = l.doubleValue();
-                            } else if (entry.getValue() instanceof Double) {
-                                value = (double) entry.getValue();
+                            double value = convertFirebaseNumerics(entry.getValue());
+                            String category = getCategory(entry.getKey());
+                            if (breakdownMap.containsKey(category)) {
+                                breakdownMap.put(category, breakdownMap.get(category) + value);
+                            } else {
+                                breakdownMap.put(category, value);
                             }
+                        }
 
-                            if (!entry.getKey().equals("dailyTotal")) {
-                                pieChartEntries.add(new PieEntry((float) value, getCategory(entry.getKey())));
-                            }
+                    }
+                    // populate pie chart data
+                    for (Map.Entry<String, Double> entry : breakdownMap.entrySet()) {
+                        if (!entry.getKey().equals("Total Daily Emissions") && entry.getValue() > 0) {
+                            pieChartEntries.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
+                            colorsForPieChart.add(getLegendColor(entry.getKey()));
                         }
                     }
 
                     // Update line chart
-                    LineDataSet lineDataSet = new LineDataSet(lineChartEntries, "CO2 Emissions");
-                    lineDataSet.setColors(getLegendColors());
-                    lineChart.setData(new LineData(lineDataSet));
+                    lineChart.clear();
+                    LineData lineData = new LineData(lineDataSet);
+                    Description lineChartDesc = new Description();
+                    lineChartDesc.setText("CO2 Emissions Over Time");
+                    lineChart.setDescription(lineChartDesc);
+                    lineChart.setData(lineData);
                     lineChart.invalidate();
 
                     // Update pie chart
-                    PieDataSet pieDataSet = new PieDataSet(pieChartEntries, "Emissions Breakdown");
-                    pieDataSet.setColors(getLegendColors());
+                    pieChart.clear();
+                    PieDataSet pieDataSet = new PieDataSet(pieChartEntries, "Emissions category");
+                    pieDataSet.setColors(colorsForPieChart);
+                    Description pieChartDesc = new Description();
+                    pieChartDesc.setText("Emissions Breakdown");
+                    pieChart.setDescription(pieChartDesc);
                     pieChart.setData(new PieData(pieDataSet));
                     pieChart.setDrawEntryLabels(false);
+                    pieChart.getLegend().setWordWrapEnabled(true);
                     pieChart.invalidate();
 
                     // Update total emissions text
