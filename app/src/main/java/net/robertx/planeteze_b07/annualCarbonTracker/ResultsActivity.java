@@ -30,6 +30,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,6 +55,11 @@ public class ResultsActivity extends AppCompatActivity {
 
     private Button compareButton;
     private EditText countryEditText;
+
+    private BarChart comparisonBarChart;
+    private TextView comparisonResult;
+    private EditText editTextCountry;
+    private Button compareSubmitButton;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
@@ -95,33 +101,42 @@ public class ResultsActivity extends AppCompatActivity {
         // Fetch and process data from Firebase
         fetchDataFromFirebase();
         fetchTotalEmissions(totalEmissions -> {
-            compareButton.setOnClickListener(v -> {
-                String country = countryEditText.getText().toString().trim();
+            // Hide the chart initially
+            comparisonBarChart.setVisibility(View.GONE);
+
+            // Set up button click logic
+            compareSubmitButton.setOnClickListener(v -> {
+                String country = editTextCountry.getText().toString().trim();
                 if (!country.isEmpty()) {
-                    // Perform comparison and display the result
+
                     compareWithCountryEmissions(country, totalEmissions);
                 } else {
-                    // Show error message and make TextView visible
-                    comparisonText.setText("Please enter a valid country name.");
-                    comparisonText.setVisibility(View.VISIBLE);
+                    comparisonResult.setText("Please enter a valid country name.");
+                    comparisonResult.setVisibility(View.VISIBLE);
+                    comparisonBarChart.setVisibility(View.GONE);
                 }
             });
+
         });
     }
 
     /**
      * Initializes the UI components used in the activity.
      */
+
     private void initializeViews() {
+        comparisonBarChart = findViewById(R.id.comparisonBarChart);
+        comparisonResult = findViewById(R.id.comparisonResult);
+        editTextCountry = findViewById(R.id.editTextCountry);
+        compareSubmitButton = findViewById(R.id.compareSubmitButton);
         pieChart = findViewById(R.id.pieChart);
         barChart = findViewById(R.id.barChart);
-        comparisonText = findViewById(R.id.comparisonText);
         sharedLegendContainer = findViewById(R.id.sharedLegendContainer);
 
-
-        compareButton = findViewById(R.id.compareButton);
-        countryEditText = findViewById(R.id.editTextTextCountryName);
     }
+
+
+
 
     /**
      * Fetches the user's total annual carbon emissions from Firebase Firestore and invokes a callback with the result.
@@ -156,7 +171,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                         // Calculate the total emissions in kilograms and convert to tons
                         double totalKg = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
-                        double totalTons = totalKg / 1000; // Convert kg to tons
+                        double totalTons = totalKg; // Convert kg to tons
 
                         // Pass the calculated total emissions to the callback
                         callback.onDataFetched(totalTons);
@@ -180,42 +195,94 @@ public class ResultsActivity extends AppCompatActivity {
      *
      * @param country       The name of the country to compare the user's emissions with.
      *                      The input is case-insensitive and will be formatted with the first letter capitalized.
-     * @param userEmissions The total emissions of the user in tons. This value will be compared to the country's average.
+     * @param userEmissionsKg The total emissions of the user in tons. This value will be compared to the country's average.
      */
-    private void compareWithCountryEmissions(String country, double userEmissions) {
+    private void compareWithCountryEmissions(String country, double userEmissionsKg) {
         EmissionsDataRetriever dataRetriever = new EmissionsDataRetriever();
 
         try {
-            // Format the country name: capitalize the first letter, lowercase the rest
-            String formattedCountry = country.trim().substring(0, 1).toUpperCase() + country.trim().substring(1).toLowerCase();
+            // Format the country name
+            String formattedCountry = country.substring(0, 1).toUpperCase() + country.substring(1).toLowerCase();
 
-            // Retrieve the average emission value for the specified country
-            double countryEmission = dataRetriever.getEmissionValue(formattedCountry);
+            // Retrieve country emissions in tons and convert to kilograms
+            double countryEmissionsKg = dataRetriever.getEmissionValue(formattedCountry) * 1000;
 
-            // Ensure the retrieved emission value is valid
-            if (countryEmission > 0) {
+            if (countryEmissionsKg > 0) {
+                // Calculate percentage difference
+                double percentageDifference = ((userEmissionsKg - countryEmissionsKg) / countryEmissionsKg) * 100;
+
+                // Create a comparison message
                 String message;
-
-                // Compare user's emissions with the country's average
-                if (userEmissions > countryEmission) {
-                    message = String.format("Your emissions are %.2f tons higher than %s's average of %.2f tons.",
-                            userEmissions - countryEmission, formattedCountry, countryEmission);
+                if (userEmissionsKg > countryEmissionsKg) {
+                    message = String.format("Your emissions are %.2f%% higher than %s's average of %.2f kg.",
+                            percentageDifference, formattedCountry, countryEmissionsKg);
                 } else {
-                    message = String.format("Your emissions are %.2f tons lower than %s's average of %.2f tons.",
-                            countryEmission - userEmissions, formattedCountry, countryEmission);
+                    message = String.format("Your emissions are %.2f%% lower than %s's average of %.2f kg.",
+                            Math.abs(percentageDifference), formattedCountry, countryEmissionsKg);
                 }
 
-                // Display the comparison result in the TextView
-                comparisonText.setText(message);
-                comparisonText.setVisibility(View.VISIBLE); // Make the TextView visible
+                // Update the comparison result
+                comparisonResult.setText(message);
+                comparisonResult.setVisibility(View.VISIBLE);
+
+                // Populate and display the bar chart
+                double[] emissions = {userEmissionsKg, countryEmissionsKg};
+                String[] labels = {"Yours (Kg)", formattedCountry + " Avg (kg)"};
+                updateComparisonBarChart(emissions, labels);
+                comparisonBarChart.setVisibility(View.VISIBLE);
             } else {
                 throw new IllegalArgumentException("No valid emission data available for " + formattedCountry);
             }
         } catch (IllegalArgumentException e) {
-            // Handle cases where no emission data is available for the specified country
-            comparisonText.setText(String.format("Data for %s is not available.", country));
-            comparisonText.setVisibility(View.VISIBLE); // Make the TextView visible
+            comparisonResult.setText(String.format("Data for %s is not available.", country));
+            comparisonResult.setVisibility(View.VISIBLE);
+            comparisonBarChart.setVisibility(View.GONE);
         }
+    }
+
+    private void updateComparisonBarChart(double[] emissions, String[] labels) {
+        // Create entries for the Bar Chart
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        for (int i = 0; i < emissions.length; i++) {
+            entries.add(new BarEntry(i, (float) emissions[i]));
+        }
+
+        // Create a BarDataSet with custom colors
+        BarDataSet dataSet = new BarDataSet(entries, "Comparison");
+        dataSet.setColors(Color.parseColor("#4CAF50"), Color.parseColor("#FF5722")); // Green and red
+        dataSet.setValueTextSize(12f); // Adjust font size for bar values
+        dataSet.setValueTextColor(Color.BLACK); // Set value text color
+
+        // Configure the BarData
+        BarData data = new BarData(dataSet);
+        data.setBarWidth(0.8f); // Adjust bar width for a sleek look
+        comparisonBarChart.setData(data);
+
+        // Style the Bar Chart
+        comparisonBarChart.getDescription().setEnabled(false); // Remove the "Description Label"
+        comparisonBarChart.setFitBars(true); // Ensure bars are fitted nicely
+        comparisonBarChart.getLegend().setEnabled(false); // Hide the legend
+        comparisonBarChart.animateY(1000); // Add animation for a modern feel
+
+        // Configure X-Axis
+        XAxis xAxis = comparisonBarChart.getXAxis();
+        xAxis.setGranularity(1f); // Ensure labels are spaced evenly
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Position labels at the bottom
+        xAxis.setDrawGridLines(false); // Remove grid lines
+        xAxis.setTextSize(12f); // Adjust font size
+        xAxis.setTextColor(Color.DKGRAY); // Set label color
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels)); // Set custom labels
+
+        // Configure Y-Axis
+        comparisonBarChart.getAxisLeft().setDrawGridLines(false); // Remove left-axis grid lines
+        comparisonBarChart.getAxisLeft().setTextSize(12f); // Adjust font size
+        comparisonBarChart.getAxisLeft().setTextColor(Color.DKGRAY); // Set text color
+        comparisonBarChart.getAxisLeft().setAxisMinimum(0f); // Start at 0
+
+        comparisonBarChart.getAxisRight().setEnabled(false); // Disable right Y-axis
+
+        // Refresh the chart
+        comparisonBarChart.invalidate();
     }
 
 
@@ -500,9 +567,6 @@ public class ResultsActivity extends AppCompatActivity {
 
                         // Create a shared legend for both charts
                         createSharedLegend(categories, getLegendColors());
-
-                        // Compare the user's total emissions with a global average
-                        compareWithGlobalAverages(total, 4.083); // Example global average
                     } catch (IOException e) {
                         // Throw a runtime exception if data parsing fails
                         throw new RuntimeException("Parsing Firestore data failed", e);
@@ -661,15 +725,8 @@ public class ResultsActivity extends AppCompatActivity {
         };
     }
 
-    private void compareWithGlobalAverages(double userTotal, double globalAverage) {
-        String message;
-        if (userTotal > globalAverage) {
-            message = String.format("Your emissions are %.2f tons above the global average.", userTotal - globalAverage);
-        } else {
-            message = String.format("Your emissions are %.2f tons below the global average.", globalAverage - userTotal);
-        }
-        comparisonText.setText(message);
-    }
+
+
 
 }
 
