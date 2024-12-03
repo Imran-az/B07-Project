@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import net.robertx.planeteze_b07.EcoTracker.CO2EmissionUpdater;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +35,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
     private EditText question2_answer;
     private TextView question2;
 
+    String currentDate;
     public static Map<String, Object> data3 = new HashMap<>();
 
     String buttonClicked;
@@ -59,7 +61,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
         String userID = currentUser.getUid();
         database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         dailySurveyReference = database.getReference("DailySurvey");
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
             currentDate = QuestionnairePageQ1.ChangedDate;
         }
@@ -77,6 +79,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
                     dailySurveyReference.updateChildren(data3).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Success message (optional)
+                            CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
                             Toast.makeText(QuestionnairePageQ3.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
                         } else {
                             // Error message

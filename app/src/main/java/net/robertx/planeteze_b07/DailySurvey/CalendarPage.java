@@ -31,10 +31,6 @@ public class CalendarPage extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;
-    RecyclerView recyclerView;
-    MainAdapter mainAdapter;
-
-    List<MainModel> activityList;
     static String SelectedDate;
 
     static String datedisplay;

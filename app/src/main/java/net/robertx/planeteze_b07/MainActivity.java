@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
 import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
@@ -21,7 +22,7 @@ import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSu
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Button button, button2;
+    private Button button, button2, DailySurveyButton;
 
     private FirebaseAuth firebaseAuth;
 
@@ -37,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        DailySurveyButton = findViewById(R.id.DailySurveyButton);
+        DailySurveyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarPage.class);
+                startActivity(intent);
+            }
         });
 
         button = findViewById(R.id.button22);

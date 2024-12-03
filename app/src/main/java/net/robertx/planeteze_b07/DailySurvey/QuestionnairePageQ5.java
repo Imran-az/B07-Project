@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import net.robertx.planeteze_b07.EcoTracker.CO2EmissionUpdater;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +38,8 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
     TextView q1_que, q2_que, q3_que;
     Map<String, Object> data5 = new HashMap<>();
     FirebaseDatabase database;
+
+    String currentDate;
     DatabaseReference dailySurveyReference;
 
     @Override
@@ -63,7 +66,7 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
         String userID = currentUser.getUid();
         database.getReference("Users").child("W35Qr6MzplfED39mMHhiYRLKMYO2");
         dailySurveyReference = database.getReference("DailySurvey");
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if (currentDate != QuestionnairePageQ1.ChangedDate && QuestionnairePageQ1.ChangedDate != ""){
             currentDate = QuestionnairePageQ1.ChangedDate;
         }
@@ -82,8 +85,19 @@ public class QuestionnairePageQ5 extends AppCompatActivity {
 
                     //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-                    QuestionnairePageQ1.data.put(q2, answer2);
-                    QuestionnairePageQ1.data.put(q3, answer3);
+                    data5.put(q2, answer2);
+                    data5.put(q3, answer3);
+
+                    dailySurveyReference.updateChildren(data5).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Success message (optional)
+                            CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
+                            Toast.makeText(QuestionnairePageQ5.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Error message
+                            Toast.makeText(QuestionnairePageQ5.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }
                 else{

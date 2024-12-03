@@ -17,6 +17,9 @@
             android:name=".DailySurvey.QuestionList"
             android:exported="false" />
         <activity
+            android:name=".DailySurvey.DailySurveyHomePage"
+            android:exported="false" />
+        <activity
             android:name=".DailySurvey.ActivityList"
             android:exported="false" />
         <activity

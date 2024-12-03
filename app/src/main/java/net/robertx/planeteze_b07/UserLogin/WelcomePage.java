@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import net.robertx.planeteze_b07.R;
 
-import EcoTracker.CO2EmissionUpdater;
+import net.robertx.planeteze_b07.EcoTracker.CO2EmissionUpdater;
 
 public class WelcomePage extends AppCompatActivity {
     Button logininbutton;
@@ -26,9 +26,6 @@ public class WelcomePage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.welcome_page);
 
-        // Start the CO2EmissionUpdater for all users
-        CO2EmissionUpdater updater = new CO2EmissionUpdater();
-        updater.startListeningForAllUsers();
 
         //sends user to sign up page
         signinbutton= findViewById(R.id.signupbutton);
