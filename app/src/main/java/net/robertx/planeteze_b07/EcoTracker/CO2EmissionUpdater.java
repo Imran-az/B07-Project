@@ -2,8 +2,6 @@ package net.robertx.planeteze_b07.EcoTracker;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

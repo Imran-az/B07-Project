@@ -1,7 +1,5 @@
 package net.robertx.planeteze_b07.UserLogin;
 
-import android.util.Log;
-
 /**
  * The LoginPresenter class implements the LoginContract.Presenter interface.
  * It handles user actions and delegates tasks between the LoginContract.View and @link LoginModel.

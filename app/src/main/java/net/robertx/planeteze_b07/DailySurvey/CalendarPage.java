@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +24,6 @@ import net.robertx.planeteze_b07.R;
 
 import java.text.MessageFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class CalendarPage extends AppCompatActivity {
 
