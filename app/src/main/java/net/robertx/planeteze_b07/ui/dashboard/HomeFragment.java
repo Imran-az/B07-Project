@@ -14,18 +14,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
-import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
-import net.robertx.planeteze_b07.EcoTracker.HabitDecision;
+import net.robertx.planeteze_b07.dailySurvey.DailySurveyHomePage;
+import net.robertx.planeteze_b07.ecoGauge.EcoGaugeActivity;
+import net.robertx.planeteze_b07.ecoTracker.HabitDecision;
 import net.robertx.planeteze_b07.R;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
 public class HomeFragment extends Fragment {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Nullable
     @Override

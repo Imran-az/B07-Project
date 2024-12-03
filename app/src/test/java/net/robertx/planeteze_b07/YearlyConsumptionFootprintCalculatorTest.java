@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyConsumptionFootprintCalculator;
+import net.robertx.planeteze_b07.carbonFootprintCalculators.YearlyConsumptionFootprintCalculator;
 
 import java.util.HashMap;
 

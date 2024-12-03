@@ -25,26 +25,25 @@ import com.kizitonwose.calendar.view.MonthDayBinder;
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder;
 import com.kizitonwose.calendar.view.ViewContainer;
 
-import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
-import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
-import net.robertx.planeteze_b07.DailySurvey.QuestionList;
-import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
+import net.robertx.planeteze_b07.dailySurvey.CalendarPage;
+import net.robertx.planeteze_b07.dailySurvey.DailySurveyHomePage;
+import net.robertx.planeteze_b07.dailySurvey.QuestionList;
+import net.robertx.planeteze_b07.dailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.R;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
 public class PastSurveyResultsFragment extends Fragment {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Nullable
     @Override

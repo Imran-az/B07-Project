@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,16 +18,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
-import net.robertx.planeteze_b07.UserLogin.WelcomePage;
+import net.robertx.planeteze_b07.userLogin.WelcomePage;
 
 public class ProfileFragment extends Fragment {
 
     private String firstName, lastName;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private FirebaseUser currentUser = auth.getCurrentUser();
+    private final FirebaseUser currentUser = auth.getCurrentUser();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

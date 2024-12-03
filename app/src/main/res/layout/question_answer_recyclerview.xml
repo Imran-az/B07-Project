@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/backgroundhomescreen"
     android:layout_height="match_parent"
-    tools:context=".DailySurvey.QuestionList">
+    tools:context=".dailySurvey.QuestionList">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_question_list"

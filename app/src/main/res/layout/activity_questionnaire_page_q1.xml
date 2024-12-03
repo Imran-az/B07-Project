@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#009999"
-    tools:context=".DailySurvey.QuestionnairePageQ1">
+    tools:context=".dailySurvey.QuestionnairePageQ1">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_question_list"
@@ -30,14 +30,6 @@
             android:textSize="24sp"
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/yes_no_button_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="79dp" />
 
     <TextView
         android:id="@+id/question2Text_Q1"

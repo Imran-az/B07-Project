@@ -1,8 +1,8 @@
 package net.robertx.planeteze_b07;
 
-import net.robertx.planeteze_b07.UserLogin.LoginContract;
-import net.robertx.planeteze_b07.UserLogin.LoginModel;
-import net.robertx.planeteze_b07.UserLogin.LoginPresenter;
+import net.robertx.planeteze_b07.userLogin.LoginContract;
+import net.robertx.planeteze_b07.userLogin.LoginModel;
+import net.robertx.planeteze_b07.userLogin.LoginPresenter;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,7 +51,7 @@ public class LoginPresenterTest {
         // Arrange
         doAnswer(invocation -> {
             OnSuccessListener<FirebaseUser> successListener = invocation.getArgument(2);
-            successListener.onSuccess(mock(FirebaseUser.class)); // No need to stub isEmailVerified
+            successListener.onSuccess(mock(FirebaseUser.class));
             return null;
         }).when(mockModel).login(eq(email), eq(password), any(), any());
 
@@ -65,11 +65,8 @@ public class LoginPresenterTest {
         verify(mockView).navigateToMainPage();
     }
 
-
-
     @Test
     public void testLoginWithUnverifiedEmail() {
-        // Arrange
         String email = "unverified@example.com";
         String password = "password";
 
@@ -79,62 +76,12 @@ public class LoginPresenterTest {
             return null;
         }).when(mockModel).login(eq(email), eq(password), any(), any());
 
-        // Act
         presenter.onLoginButtonClicked(email, password);
 
-        // Assert
         verify(mockView).showProgress();
         verify(mockView).hideProgress();
         verify(mockView).showToast("Verify your email before you login");
         verify(mockView, never()).navigateToMainPage();
-    }
-
-    @Test
-    public void testLoginWithIncorrectPassword() {
-        String email = "email@example.com";
-        String password = "wrongpassword";
-
-        doAnswer(invocation -> {
-            OnFailureListener failureListener = invocation.getArgument(3);
-            failureListener.onFailure(new Exception("The password is invalid or the user does not have a password."));
-            return null;
-        }).when(mockModel).login(eq(email), eq(password), any(), any());
-
-        presenter.onLoginButtonClicked(email, password);
-
-        verify(mockView).showToast("Incorrect password. Please try again.");
-    }
-
-    @Test
-    public void testLoginWithNonexistentEmail() {
-        String email = "nonexistent@example.com";
-        String password = "password";
-
-        doAnswer(invocation -> {
-            OnFailureListener failureListener = invocation.getArgument(3);
-            failureListener.onFailure(new Exception("There is no user record corresponding to this identifier."));
-            return null;
-        }).when(mockModel).login(eq(email), eq(password), any(), any());
-
-        presenter.onLoginButtonClicked(email, password);
-
-        verify(mockView).showToast("No account found with this email.");
-    }
-
-    @Test
-    public void testLoginWithServerError() {
-        String email = "email@example.com";
-        String password = "password";
-
-        doAnswer(invocation -> {
-            OnFailureListener failureListener = invocation.getArgument(3);
-            failureListener.onFailure(new Exception("A server error occurred. Please try again later."));
-            return null;
-        }).when(mockModel).login(eq(email), eq(password), any(), any());
-
-        presenter.onLoginButtonClicked(email, password);
-
-        verify(mockView).showToast("A server error occurred. Please try again later.");
     }
 
     @Test
@@ -154,6 +101,119 @@ public class LoginPresenterTest {
         presenter.onBackButtonClicked();
         verify(mockView).navigateToWelcomePage();
     }
+
+    @Test
+    public void testLoginWithInvalidEmailFormat() {
+        String email = "invalid-email";
+        String password = "password";
+
+        doAnswer(invocation -> {
+            OnFailureListener onFailureListener = invocation.getArgument(3);
+            onFailureListener.onFailure(new Exception("The email address is badly formatted."));
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("Invalid email format");
+    }
+
+    @Test
+    public void testLoginWithInvalidCredentials() {
+        String email = "user@example.com";
+        String password = "wrongpassword";
+
+        doAnswer(invocation -> {
+            OnFailureListener onFailureListener = invocation.getArgument(3);
+            onFailureListener.onFailure(new Exception("The supplied auth credential is incorrect, malformed or has expired"));
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("Incorrect email or password");
+    }
+
+    @Test
+    public void testLoginWithUnknownError() {
+        String email = "user@example.com";
+        String password = "password";
+
+        doAnswer(invocation -> {
+            OnFailureListener onFailureListener = invocation.getArgument(3);
+            onFailureListener.onFailure(new Exception("An unknown error occurred."));
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("An unknown error occurred.");
+    }
+
+    @Test
+    public void testLoginWithNullFirebaseUser() {
+        String email = "email@example.com";
+        String password = "password";
+
+        doAnswer(invocation -> {
+            OnSuccessListener<FirebaseUser> successListener = invocation.getArgument(2);
+            successListener.onSuccess(null); // Simulating null user
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("An unknown error occurred during login.");
+        verify(mockView, never()).navigateToMainPage();
+    }
+
+    @Test
+    public void testLoginWithUnhandledErrorMessage() {
+        String email = "email@example.com";
+        String password = "password";
+
+        doAnswer(invocation -> {
+            OnFailureListener onFailureListener = invocation.getArgument(3);
+            onFailureListener.onFailure(new Exception("Unhandled error message"));
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("Unhandled error message");
+    }
+
+
+    @Test
+    public void testLoginWithExceptionNoMessage() {
+        String email = "email@example.com";
+        String password = "password";
+
+        doAnswer(invocation -> {
+            OnFailureListener onFailureListener = invocation.getArgument(3);
+            onFailureListener.onFailure(new Exception()); // Exception with no message
+            return null;
+        }).when(mockModel).login(eq(email), eq(password), any(), any());
+
+        presenter.onLoginButtonClicked(email, password);
+
+        verify(mockView).showProgress();
+        verify(mockView).hideProgress();
+        verify(mockView).showToast("An unexpected error occurred");
+    }
+
+
+
 }
 
 

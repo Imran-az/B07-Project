@@ -5,7 +5,7 @@
     android:id="@+id/layout_eco_gauge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EcoGauge.EcoGaugeActivity">
+    tools:context=".ecoGauge.EcoGaugeActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/eco_gauge_toolbar"

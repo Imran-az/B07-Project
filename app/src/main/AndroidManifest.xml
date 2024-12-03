@@ -15,72 +15,38 @@
         <activity
             android:name=".Dashboard"
             android:exported="true" />
+        <activity android:name=".dailySurvey.QuestionList" />
+        <activity android:name=".ecoTracker.HabitTrackerListPage" />
+        <activity android:name=".dailySurvey.DailySurveyHomePage" />
+        <activity android:name=".ecoTracker.HabitDecision" />
+        <activity android:name=".dailySurvey.CalendarPage" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ9" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ8" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ7" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ6" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ5" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ4" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ3" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ2" />
+        <activity android:name=".dailySurvey.QuestionnairePageQ1" />
+        <activity android:name=".userLogin.SignUpPage" />
+        <activity android:name=".userLogin.LoginPageView" />
+        <activity android:name=".userLogin.ForgotPasswordPage" />
         <activity
-            android:name=".DailySurvey.QuestionList"
-            android:exported="false" />
-        <activity
-            android:name=".EcoTracker.HabitTrackerListPage"
-            android:exported="false" />
-        <activity
-            android:name=".EcoTracker.HabitDecision"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.DailySurveyHomePage"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.CalendarPage"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ9"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ8"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ7"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ6"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ5"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ4"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ3"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ2"
-            android:exported="false" />
-        <activity
-            android:name=".DailySurvey.QuestionnairePageQ1"
-            android:exported="false" />
-        <activity
-            android:name=".UserLogin.SignUpPage"
-            android:exported="false" />
-        <activity
-            android:name=".UserLogin.LoginPageView"
-            android:exported="false" />
-        <activity
-            android:name=".UserLogin.ForgotPasswordPage"
-            android:exported="false" />
-        <activity
-            android:name=".UserLogin.WelcomePage"
+            android:name=".userLogin.WelcomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".annualCarbonTracker.ResultsActivity"
             android:exported="true" />
-        <activity android:name=".EcoGauge.EcoGaugeActivity" />
-        <activity android:name="net.robertx.planeteze_b07.EcoTracker.HabitLoggingPage" />
-        <activity android:name="net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey" />
+        <activity android:name=".ecoGauge.EcoGaugeActivity" />
+        <activity android:name=".ecoTracker.HabitLoggingPage" />
+        <activity android:name=".annual_carbon_footprint.AnnualCarbonFootprintSurvey" />
+        <activity android:name="net.robertx.planeteze_b07.userLogin.LoginPage" />
     </application>
 
 </manifest>
