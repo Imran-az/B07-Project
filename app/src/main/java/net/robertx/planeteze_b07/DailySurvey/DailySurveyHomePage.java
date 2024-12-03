@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,13 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class DailySurveyHomePage extends AppCompatActivity {
     Button q1, q2, q3, q4, q5, q6, q7, q8, q9;

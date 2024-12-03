@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07.UserLogin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import net.robertx.planeteze_b07.Dashboard;
-import net.robertx.planeteze_b07.MainActivity;
 import net.robertx.planeteze_b07.R;
 
 import com.google.firebase.auth.FirebaseAuth;
