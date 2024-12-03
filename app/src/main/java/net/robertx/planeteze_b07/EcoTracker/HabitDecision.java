@@ -1,10 +1,9 @@
-package EcoTracker;
+package net.robertx.planeteze_b07.EcoTracker;
 
 import static net.robertx.planeteze_b07.R.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -13,7 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import net.robertx.planeteze_b07.MainActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+
 import net.robertx.planeteze_b07.R;
 
 public class HabitDecision extends AppCompatActivity {
@@ -29,20 +29,17 @@ public class HabitDecision extends AppCompatActivity {
         button1 = findViewById(R.id.oldhabit);
         button2 = findViewById(id.newhabit);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HabitDecision.this, HabitLoggingPage.class);
-                startActivity(intent);
-            }
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_habit_decision);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(HabitDecision.this, HabitLoggingPage.class);
+            startActivity(intent);
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HabitDecision.this, HabitTrackerListPage.class);
-                startActivity(intent);
-            }
+        button2.setOnClickListener(view -> {
+            Intent intent = new Intent(HabitDecision.this, HabitTrackerListPage.class);
+            startActivity(intent);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

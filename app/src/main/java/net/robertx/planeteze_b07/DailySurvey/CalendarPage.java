@@ -35,11 +35,11 @@ public class CalendarPage extends AppCompatActivity {
     MainAdapter mainAdapter;
 
     List<MainModel> activityList;
-    static String SelectedDate;
+    public static String SelectedDate;
 
-    static String datedisplay;
+    public static String datedisplay;
 
-    static String ChosenYear, ChosenDay, ChosenMonth;
+    public static String ChosenYear, ChosenDay, ChosenMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

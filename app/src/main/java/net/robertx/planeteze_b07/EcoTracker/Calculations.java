@@ -1,4 +1,4 @@
-package EcoTracker;
+package net.robertx.planeteze_b07.EcoTracker;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -231,7 +231,7 @@ public class Calculations {
         }
 
         String type = responses.get("What types of electronics did you buy?");
-        if (!type.equals("")){
+        if (!type.isEmpty()){
             return 0.0;
         }
 

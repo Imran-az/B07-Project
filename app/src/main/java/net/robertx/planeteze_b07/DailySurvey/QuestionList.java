@@ -33,8 +33,6 @@ public class QuestionList extends AppCompatActivity {
     DatabaseReference dailySurveyDbRef;
     MainAdapter adapter;
 
-    static TextView PickedDate;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +50,8 @@ public class QuestionList extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        PickedDate = findViewById(R.id.ChosenDate);
-
-        PickedDate.setText(MessageFormat.format("{0}/{1}/{2}",CalendarPage.ChosenDay, CalendarPage.ChosenMonth, CalendarPage.ChosenYear));
+        TextView PickedDate = findViewById(R.id.ChosenDate);
+        PickedDate.setText(MessageFormat.format("Answers for {0}/{1}/{2}",CalendarPage.ChosenDay, CalendarPage.ChosenMonth, CalendarPage.ChosenYear));
 
 
         recyclerView = findViewById(R.id.recyclerView_widget);
