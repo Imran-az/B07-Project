@@ -3,7 +3,6 @@ package net.robertx.planeteze_b07.DailySurvey;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,11 +29,10 @@ import java.util.Locale;
 import java.util.Map;
 
 public class QuestionnairePageQ4 extends AppCompatActivity {
-    public Button submitbtn, backbtn;
+    public Button submitButton, backButton;
     public EditText question2_answer, question3_answer;
     public TextView question2, question3;
     public static Map<String, Object> data4 = new HashMap<>();
-    String option;
 
     String currentDate;
     FirebaseDatabase database;
@@ -54,7 +52,7 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
         question3_answer = findViewById(R.id.answer3_input_Q4);
 
         //next button
-        submitbtn = findViewById(R.id.submit_button_Q4);
+        submitButton = findViewById(R.id.submit_button_Q4);
         database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -66,54 +64,45 @@ public class QuestionnairePageQ4 extends AppCompatActivity {
             currentDate = QuestionnairePageQ1.ChangedDate;
         }
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
-        submitbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
-                    Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+        submitButton.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
+                Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
-                    //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+                data4.put("Number of flights taken today", question2_answer.getText().toString());
+                int distance_travelled = Integer.parseInt(question3_answer.getText().toString());
 
-                    //data4.put("Flight", option);
-                    data4.put("Number of flights taken today", question2_answer.getText().toString());
-                    int distance_travelled = Integer.parseInt(question3_answer.getText().toString());
+                String answer;
 
-                    String answer;
-
-                    if (distance_travelled >= 1500){
-                        answer  = "Long-Haul";
-                    }
-                    else{
-                        answer = "Short-Haul";
-                    }
-                    data4.put("Distance traveled", answer);
-
-                    dailySurveyReference.updateChildren(data4).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
-                            Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                if (distance_travelled >= 1500){
+                    answer  = "Long-Haul";
                 }
-                else {
-                    Toast.makeText(QuestionnairePageQ4.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
+                else{
+                    answer = "Short-Haul";
                 }
+                data4.put("Distance traveled", answer);
+
+                dailySurveyReference.updateChildren(data4).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Success message (optional)
+                        CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
+                        Toast.makeText(QuestionnairePageQ4.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Error message
+                        Toast.makeText(QuestionnairePageQ4.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+            else {
+                Toast.makeText(QuestionnairePageQ4.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
         });
-        backbtn = findViewById(R.id.back_button_Q4);
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
-                startActivity(intent);
-            }
+        backButton = findViewById(R.id.back_button_Q4);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ4.this, DailySurveyHomePage.class);
+            startActivity(intent);
         });
 
 

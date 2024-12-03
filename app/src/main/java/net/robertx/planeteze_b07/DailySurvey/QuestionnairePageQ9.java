@@ -2,8 +2,6 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +30,12 @@ import java.util.Map;
 
 public class QuestionnairePageQ9 extends AppCompatActivity {
 
-    private Button submitbtn, backbtn;
-    EditText q1_ans, q2_ans, q3_ans, q4_ans;
-    TextView q1_que, q2_que, q3_que, q4_que;
+    EditText q2_ans;
+    EditText q3_ans;
+    EditText q4_ans;
+    TextView q2_que;
+    TextView q3_que;
+    TextView q4_que;
     Map<String, Object> data9 = new HashMap<>();
     FirebaseDatabase database;
 
@@ -67,10 +68,10 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         dailySurveyReference = database.getReference("DailySurvey").child("TestUser").child(currentDate);
 
-        submitbtn = findViewById(R.id.submit_button_Q9);
+        Button submitButton = findViewById(R.id.submit_button_Q9);
         //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-        submitbtn.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionnairePageQ9.this, DailySurveyHomePage.class);
@@ -117,13 +118,10 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
             }
         });
 
-        backbtn = findViewById(R.id.back_button_Q9);
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ9.this, QuestionnairePageQ8.class);
-                startActivity(intent);
-            }
+        Button backButton = findViewById(R.id.back_button_Q9);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ9.this, QuestionnairePageQ8.class);
+            startActivity(intent);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

@@ -31,9 +31,8 @@ import java.util.Map;
 
 public class QuestionnairePageQ6 extends AppCompatActivity {
 
-    private Button submitbtn, backbtn;
-    EditText q1_ans, q2_ans;
-    TextView q1_que, q2_que;
+    EditText q2_ans;
+    TextView q2_que;
     Map<String, Object> data6 = new HashMap<>();
     FirebaseDatabase database;
 
@@ -46,16 +45,11 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questionnaire_page_q6);
 
-        submitbtn = findViewById(R.id.submit_button_Q6);
+        Button submitButton = findViewById(R.id.submit_button_Q6);
         q2_que = findViewById(R.id.question2_text_view);
         q2_ans = findViewById(R.id.answer2_input);
 
-        submitbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                helperMethods.setVisibility2(q2_que, q2_ans);
-            }
-        });
+        submitButton.setOnClickListener(v -> helperMethods.setVisibility2(q2_que, q2_ans));
 
         String q1, q2;
         q1 = "Buy New Clothes";
@@ -74,54 +68,48 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
         }
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
 
-        submitbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
-                    Intent intent = new Intent(QuestionnairePageQ6.this, DailySurveyHomePage.class);
-                    startActivity(intent);
-
-                    String answer1, answer2;
-                    answer1 = "Yes";
-                    answer2 = String.valueOf(q2_ans.getText());
-
-                    data6.put(q1, answer1);
-                    data6.put(q2, answer2);
-
-                    dailySurveyReference.updateChildren(data6).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Success message (optional)
-                            CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
-                            Toast.makeText(QuestionnairePageQ6.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Error message
-                            Toast.makeText(QuestionnairePageQ6.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(QuestionnairePageQ6.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        backbtn = findViewById(R.id.back_button_Q6);
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submitButton.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
                 Intent intent = new Intent(QuestionnairePageQ6.this, DailySurveyHomePage.class);
                 startActivity(intent);
 
-                String answer1;
-                Object answer2;
-                answer1 = "No";
-                answer2 = "0";
+                String answer1, answer2;
+                answer1 = "Yes";
+                answer2 = String.valueOf(q2_ans.getText());
 
-                //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+                data6.put(q1, answer1);
+                data6.put(q2, answer2);
 
-                QuestionnairePageQ1.data.put(q1, answer1);
-                QuestionnairePageQ1.data.put(q2, answer2);
+                dailySurveyReference.updateChildren(data6).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Success message (optional)
+                        CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
+                        Toast.makeText(QuestionnairePageQ6.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Error message
+                        Toast.makeText(QuestionnairePageQ6.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+            else{
+                Toast.makeText(QuestionnairePageQ6.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button backButton = findViewById(R.id.back_button_Q6);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ6.this, DailySurveyHomePage.class);
+            startActivity(intent);
+
+            String answer1;
+            Object answer2;
+            answer1 = "No";
+            answer2 = "0";
+
+            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
+
+            QuestionnairePageQ1.data.put(q1, answer1);
+            QuestionnairePageQ1.data.put(q2, answer2);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
