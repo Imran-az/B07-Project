@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginPageView extends AppCompatActivity implements LoginContract.View {
     private EditText emailaddress_login, password_login;
-    private Button loginbutton, forgotPasswordButton, signupForAccountButton, backbutton2;
     private ProgressBar progressBar;
 
     private LoginContract.Presenter presenter;
@@ -49,11 +48,11 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
         // Initialize UI components
         emailaddress_login = findViewById(R.id.emailaddress_login2);
         password_login = findViewById(R.id.emailaddress_forgotpassword);
-        loginbutton = findViewById(R.id.resetPasswordButton);
-        forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
-        signupForAccountButton = findViewById(R.id.signupbutton_login2);
+        Button loginbutton = findViewById(R.id.resetPasswordButton);
+        Button forgotPasswordButton = findViewById(R.id.resetPasswordbutton2);
+        Button signupForAccountButton = findViewById(R.id.signupbutton_login2);
         progressBar = findViewById(R.id.progressbar_login);
-        backbutton2 = findViewById(R.id.backbutton_login2);
+        Button backbutton2 = findViewById(R.id.backbutton_login2);
 
         // Set button listeners
         backbutton2.setOnClickListener(v -> presenter.onBackButtonClicked());

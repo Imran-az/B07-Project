@@ -39,7 +39,9 @@ import java.util.HashMap;
 
 public class HabitTrackerListPage extends AppCompatActivity {
 
-    private Button confirmButton, cancelButton, backButton, logButton, personalizedButton;
+    private Button confirmButton;
+    private Button cancelButton;
+    private Button personalizedButton;
     private List<String> habitList, filteredHabitList, personalizedList;
     private ArrayAdapter<String> dialogAdapter;
     private String selectedHabit = "";
@@ -72,8 +74,8 @@ public class HabitTrackerListPage extends AppCompatActivity {
         resultText = findViewById(R.id.result_text);
         confirmButton = findViewById(R.id.confirm_button);
         cancelButton = findViewById(R.id.cancel_button);
-        backButton = findViewById(R.id.back_button);
-        logButton = findViewById(R.id.log_button);
+        Button backButton = findViewById(R.id.back_button);
+        Button logButton = findViewById(R.id.log_button);
 
         habitLogsRef.child(currentDate).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && !task.getResult().exists()) {

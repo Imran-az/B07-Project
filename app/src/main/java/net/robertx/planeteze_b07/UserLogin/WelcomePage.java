@@ -19,9 +19,6 @@ import net.robertx.planeteze_b07.R;
 public class WelcomePage extends AppCompatActivity {
     Button logininbutton;
     Button signinbutton;
-    private static final String TAG = "WelcomePage";
-
-    private FirebaseAuth auth;
 
 
     @Override
@@ -30,7 +27,7 @@ public class WelcomePage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.welcome_page);
 
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null) {

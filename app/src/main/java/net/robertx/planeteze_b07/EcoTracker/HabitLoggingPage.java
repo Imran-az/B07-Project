@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +28,8 @@ public class HabitLoggingPage extends AppCompatActivity {
 
     private DatabaseReference habitRef;
     private DatabaseReference habitLogsRef;
-    private String userID;
     private TextView trackingHabitText;
-    private Button completeHabitButton, backButton, changeButton;
+    private Button completeHabitButton;
     private boolean isHabitSelected = false; // Flag to track if a habit is selected
 
     @Override
@@ -41,7 +41,7 @@ public class HabitLoggingPage extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
-        userID = currentUser != null ? currentUser.getUid() : null;
+        String userID = currentUser != null ? currentUser.getUid() : null;
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         habitRef = database.getReference("DailyHabitTracker").child(userID).child("SelectedHabit");
@@ -50,13 +50,13 @@ public class HabitLoggingPage extends AppCompatActivity {
         // Initialize UI elements
         trackingHabitText = findViewById(R.id.tracking_habit_text);
         completeHabitButton = findViewById(R.id.complete_habit_button);
-        backButton = findViewById(R.id.back_button);
-        changeButton = findViewById(R.id.change_habit);
+        Button backButton = findViewById(R.id.back_button);
+        Button changeButton = findViewById(R.id.change_habit);
 
         // Fetch and display the selected habit name
         habitRef.child("habitName").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String habitName = dataSnapshot.getValue(String.class);
                     trackingHabitText.setText("Habit: " + habitName);
@@ -68,7 +68,7 @@ public class HabitLoggingPage extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 trackingHabitText.setText("Habit: Error Loading");
                 isHabitSelected = false; // Treat as no habit selected
                 Toast.makeText(HabitLoggingPage.this, "Failed to load habit: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
@@ -78,7 +78,7 @@ public class HabitLoggingPage extends AppCompatActivity {
         // Check and update button status based on completion
         habitLogsRef.child(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && "Completed".equals(dataSnapshot.getValue(String.class))) {
                     completeHabitButton.setText("Completed for the Day");
                     completeHabitButton.setEnabled(false);
@@ -89,7 +89,7 @@ public class HabitLoggingPage extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(HabitLoggingPage.this, "Failed to check completion status: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -148,7 +148,7 @@ public class HabitLoggingPage extends AppCompatActivity {
 
                             habitLogsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(DataSnapshot logSnapshot) {
+                                public void onDataChange(@NonNull DataSnapshot logSnapshot) {
                                     int completedDays = 0;
 
                                     for (DataSnapshot log : logSnapshot.getChildren()) {
@@ -170,12 +170,12 @@ public class HabitLoggingPage extends AppCompatActivity {
                                     progressBar.setProgress((int) progress);
                                     progressBar.setVisibility(View.VISIBLE);
 
-                                    progressText.setText(String.format("You’ve logged your habit %.2f%% of the time!", progress));
+                                    progressText.setText(String.format(Locale.getDefault(), "You’ve logged your habit %.2f%% of the time!", progress));
                                     progressText.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
                                     Toast.makeText(HabitLoggingPage.this, "Failed to load logs: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -190,7 +190,7 @@ public class HabitLoggingPage extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(HabitLoggingPage.this, "Failed to load start date: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -2,7 +2,6 @@ package net.robertx.planeteze_b07.DailySurvey;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,11 +42,10 @@ public class DailySurveyHomePage extends AppCompatActivity {
 
         date = findViewById(R.id.CurrentDateDailySurvey);
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        if (!(currentDate != CalendarPage.datedisplay) || !(CalendarPage.datedisplay == null)){
+        if (currentDate.equals(CalendarPage.datedisplay) || !(CalendarPage.datedisplay == null)){
             date.setText(CalendarPage.datedisplay);
         }
         else {
-            //String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             date.setText(currentDate);
         }
 

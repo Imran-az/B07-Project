@@ -231,7 +231,7 @@ public class Calculations {
         }
 
         String type = responses.get("What types of electronics did you buy?");
-        if (!type.equals("")){
+        if (!type.isEmpty()){
             return 0.0;
         }
 
