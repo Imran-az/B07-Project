@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import net.robertx.planeteze_b07.R;
 
 public class HabitDecision extends AppCompatActivity {
@@ -26,6 +28,9 @@ public class HabitDecision extends AppCompatActivity {
 
         button1 = findViewById(R.id.oldhabit);
         button2 = findViewById(id.newhabit);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_habit_decision);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         button1.setOnClickListener(view -> {
             Intent intent = new Intent(HabitDecision.this, HabitLoggingPage.class);

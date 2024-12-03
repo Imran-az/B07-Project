@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.robertx.planeteze_b07.DailySurvey.CalendarPage;
 import net.robertx.planeteze_b07.DailySurvey.DailySurveyHomePage;
 import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
+import net.robertx.planeteze_b07.EcoTracker.HabitDecision;
 import net.robertx.planeteze_b07.R;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
@@ -68,6 +69,11 @@ public class HomeFragment extends Fragment {
 
         view.findViewById(R.id.card_eco_gauge).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EcoGaugeActivity.class);
+            startActivity(intent);
+        });
+
+        view.findViewById(R.id.card_habit_tracker).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), HabitDecision.class);
             startActivity(intent);
         });
 
