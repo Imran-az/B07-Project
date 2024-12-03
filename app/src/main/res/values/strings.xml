@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Planeteze-B07</string>
     <string name="yearly_co2_contribution_summary_line">You have contributed to a total of %1$.2f tons of CO2e per year based on your results.</string>
+    <string-array name="time_frames">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
 </resources>

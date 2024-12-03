@@ -14,15 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
+import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
+import EcoTracker.HabitDecision;
 import EcoTracker.HabitTrackerListPage;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Button button, button2, button3;
+    private Button button, button2, button3, openEcoGaugeButton;
 
     private FirebaseAuth firebaseAuth;
 
@@ -59,10 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
         button2 = findViewById(R.id.button99);
         button2.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
+            Intent intent = new Intent(MainActivity.this, HabitDecision.class);
             startActivity(intent);
         });
-
+        openEcoGaugeButton = findViewById(R.id.openEcoGaugeButton);  // Button defined in the XML
+        openEcoGaugeButton.setOnClickListener(v -> {
+            // Create an Intent to navigate to EcoGaugeActivity
+            Intent intent = new Intent(MainActivity.this, EcoGaugeActivity.class);
+            startActivity(intent);  // Start EcoGaugeActivity
+        });
 
         TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);
         if (firebaseAuth.getCurrentUser() != null)
@@ -73,5 +81,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AnnualCarbonFootprintSurvey.class);
             startActivity(intent);
         });
+
     }
 }
