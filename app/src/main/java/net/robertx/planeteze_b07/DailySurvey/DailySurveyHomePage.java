@@ -56,68 +56,41 @@ public class DailySurveyHomePage extends AppCompatActivity {
             finish();
         });
 
-        q1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ1.class);
-                startActivity(intent);
-            }
+        q1.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ1.class);
+            startActivity(intent);
         });
-        q2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ2.class);
-                startActivity(intent);
-            }
+        q2.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ2.class);
+            startActivity(intent);
         });
-        q3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ3.class);
-                startActivity(intent);
-            }
+        q3.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ3.class);
+            startActivity(intent);
         });
-        q4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ4.class);
-                startActivity(intent);
-            }
+        q4.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ4.class);
+            startActivity(intent);
         });
-        q5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ5.class);
-                startActivity(intent);
-            }
+        q5.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ5.class);
+            startActivity(intent);
         });
-        q6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ6.class);
-                startActivity(intent);
-            }
+        q6.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ6.class);
+            startActivity(intent);
         });
-        q7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ7.class);
-                startActivity(intent);
-            }
+        q7.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ7.class);
+            startActivity(intent);
         });
-        q8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ8.class);
-                startActivity(intent);
-            }
+        q8.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ8.class);
+            startActivity(intent);
         });
-        q9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ9.class);
-                startActivity(intent);
-            }
+        q9.setOnClickListener(v -> {
+            Intent intent = new Intent(DailySurveyHomePage.this, QuestionnairePageQ9.class);
+            startActivity(intent);
         });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
