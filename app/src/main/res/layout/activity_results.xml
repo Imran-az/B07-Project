@@ -304,19 +304,6 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_weight="1" />
-        <Button
-            android:id="@+id/returnbruh"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:autofillHints="none"
-            android:backgroundTint="@color/teal"
-            android:fontFamily="sans-serif-black"
-            android:text="Back"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_weight="1" />
 
 
       </LinearLayout>

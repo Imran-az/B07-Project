@@ -21,9 +21,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Eco Gauge"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:text="Eco Gauge" />
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="21dp" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 

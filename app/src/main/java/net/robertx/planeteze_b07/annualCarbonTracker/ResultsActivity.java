@@ -67,6 +67,8 @@ public class ResultsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_results);
 
+        findViewById(R.id.returnHome).setOnClickListener(v -> finish());
+
         // Apply insets for system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainScrollView), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
