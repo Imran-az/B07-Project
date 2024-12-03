@@ -40,4 +40,16 @@
         android:text="Total CO2e: 0.00 kg"
         android:textSize="18sp"
         android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/text_time_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total_emissions_text_view"
+        android:layout_alignStart="@+id/total_emissions_text_view"
+        android:layout_alignEnd="@+id/total_emissions_text_view"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="0dp"
+        tools:text="2024-01-01 to 2024-01-07" />
 </RelativeLayout>

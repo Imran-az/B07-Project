@@ -1,5 +1,6 @@
 package net.robertx.planeteze_b07.EcoGauge;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import net.robertx.planeteze_b07.R;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -64,6 +68,11 @@ public class EcoGaugeActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTimeFrame = parent.getItemAtPosition(position).toString().toLowerCase();
+                TextView timeFrameIndicator = findViewById(R.id.text_time_frame);
+                LocalDate today = LocalDate.now();
+                LocalDate earliestDateToConsider = today.minusDays(getDuration(selectedTimeFrame));
+                timeFrameIndicator.setText(String.format(Locale.getDefault(), "Time frame: %s to %s", earliestDateToConsider.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) , today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+
                 loadDataFromFirebase();
             }
 
@@ -76,6 +85,60 @@ public class EcoGaugeActivity extends AppCompatActivity {
         loadDataFromFirebase();
     }
 
+    /**
+     * Obtains the category of the CO2 emitted from the database keys
+     * @param key The key in the DB
+     * @return the category of the CO2 emitted
+     */
+    public static String getCategory(String key) {
+        switch (key) {
+            case "ClothesDailyCO2":
+                return "Clothes";
+            case "DrivePersonalVehicleDailyCO2":
+                return "Driving Personal Vehicle";
+            case "ElectronicsDailyCO2":
+                return "Electronics";
+            case "EnergyBillDailyCO2":
+                return "Energy Bill";
+            case "Flight (Short-Haul or Long-Haul)DailyCO2":
+                return "Flights";
+            case "MealDailyCO2":
+                return "Meals";
+            case "OtherPurchasesDailyCO2":
+                return "Other Purchases";
+            case "TakePublicTransportationDailyCO2":
+                return "Public Transportation";
+            case "dailyTotal":
+                return "Total Daily Emissions";
+            default:
+                return "Unknown Key";
+        }
+    }
+
+    private int[] getLegendColors() {
+        return new int[]{
+                Color.parseColor("#4CAF50"), Color.parseColor("#8BC34A"),
+                Color.parseColor("#A1887F"), Color.parseColor("#CDDC39"),
+                Color.parseColor("#6D4C41"), Color.parseColor("#9E9D24")
+        };
+    }
+
+    private int getDuration(String timeFrame) {
+        switch (timeFrame) {
+            case "daily":
+                return 0;
+            case "weekly":
+                return 7;
+            case "monthly":
+                return 30;
+            case "yearly":
+                return 365;
+            default:
+                return 1;
+        }
+    }
+
+
     private void loadDataFromFirebase() {
         databaseReference.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -84,35 +147,53 @@ public class EcoGaugeActivity extends AppCompatActivity {
                     ArrayList<Entry> lineChartEntries = new ArrayList<>();
                     ArrayList<PieEntry> pieChartEntries = new ArrayList<>();
                     float totalEmissions = 0;
+                    LocalDate earliestDateToConsider = LocalDate.now().minusDays(getDuration(selectedTimeFrame));
 
-                    for (DataSnapshot dateSnapshot : dataSnapshot.getChildren()) {
-                        Map<String, Double> dailyData = (Map<String, Double>) dateSnapshot.getValue();
-                        double dailyTotal = dailyData.get("dailyTotal");
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        LocalDate entryDate = LocalDate.parse(snapshot.getKey(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        if (entryDate.isBefore(earliestDateToConsider)) {
+                            continue;
+                        }
+
+                        Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+
+                        double dailyTotal = data.get("dailyTotal") != null ? (double) data.get("dailyTotal") : 0;
 
                         // Add data point to line chart
-                        String date = dateSnapshot.getKey();
-                        float xValue = getDateAsXValue(date);
+                        String key = snapshot.getKey();
+                        float xValue = getDateAsXValue(key);
                         lineChartEntries.add(new Entry(xValue, (float) dailyTotal));
 
                         // Sum total emissions
                         totalEmissions += dailyTotal;
 
                         // Add breakdown to pie chart
-                        for (Map.Entry<String, Double> entry : dailyData.entrySet()) {
+                        for (Map.Entry<String, Object> entry : data.entrySet()) {
+                            double value = 0;
+                            if (entry.getValue() instanceof Long) {
+                                Long l = (Long) entry.getValue();
+                                value = l.doubleValue();
+                            } else if (entry.getValue() instanceof Double) {
+                                value = (double) entry.getValue();
+                            }
+
                             if (!entry.getKey().equals("dailyTotal")) {
-                                pieChartEntries.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
+                                pieChartEntries.add(new PieEntry((float) value, getCategory(entry.getKey())));
                             }
                         }
                     }
 
                     // Update line chart
                     LineDataSet lineDataSet = new LineDataSet(lineChartEntries, "CO2 Emissions");
+                    lineDataSet.setColors(getLegendColors());
                     lineChart.setData(new LineData(lineDataSet));
                     lineChart.invalidate();
 
                     // Update pie chart
                     PieDataSet pieDataSet = new PieDataSet(pieChartEntries, "Emissions Breakdown");
+                    pieDataSet.setColors(getLegendColors());
                     pieChart.setData(new PieData(pieDataSet));
+                    pieChart.setDrawEntryLabels(false);
                     pieChart.invalidate();
 
                     // Update total emissions text
