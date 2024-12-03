@@ -13,9 +13,6 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
             "How much time do you spend on public transport per week (bus, train, subway)?"
     };
 
-    private String frequency; // e.g., "Never", "Occasionally", "Frequently", "Always"
-    private String hoursPerWeek; // e.g., "Under 1 hour", "1-3 hours", "3-5 hours", etc.
-
     private static final String TAG = "YearlyPublicTransportationCarbonFootprintCalculator";
 
     /**
@@ -35,8 +32,10 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
         }
 
         // Extract values from the HashMap
-        this.frequency = responses.get("How often do you use public transportation (bus, train, subway)?");
-        this.hoursPerWeek = responses.get("How much time do you spend on public transport per week (bus, train, subway)?");
+        // e.g., "Never", "Occasionally", "Frequently", "Always"
+        String frequency = responses.get("How often do you use public transportation (bus, train, subway)?");
+        // e.g., "Under 1 hour", "1-3 hours", "3-5 hours", etc.
+        String hoursPerWeek = responses.get("How much time do you spend on public transport per week (bus, train, subway)?");
 
         // Calculate and return the carbon footprint
         return calculateFootprint(frequency, hoursPerWeek);

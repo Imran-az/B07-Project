@@ -71,51 +71,48 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         Button submitButton = findViewById(R.id.submit_button_Q9);
         //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionnairePageQ9.this, DailySurveyHomePage.class);
-                startActivity(intent);
+        submitButton.setOnClickListener(v -> {
+            Intent intent = new Intent(QuestionnairePageQ9.this, DailySurveyHomePage.class);
+            startActivity(intent);
 
-                String q2, q3, q4;
-                q2 = q2_ans.getText().toString();
-                q3 = q3_ans.getText().toString();
-                q4 = q4_ans.getText().toString();
+            String q2, q3, q4;
+            q2 = q2_ans.getText().toString();
+            q3 = q3_ans.getText().toString();
+            q4 = q4_ans.getText().toString();
 
-                String answer1, answer2, answer3;
-                answer1 = "0";
-                answer2 = "0";
-                answer3 = "0";
+            String answer1, answer2, answer3;
+            answer1 = "0";
+            answer2 = "0";
+            answer3 = "0";
 
-                if(!q2.equals("0")){
-                    answer1 = q2;
-                }
-
-                if(!q3.equals("0")){
-                    answer2 = q3;
-                }
-
-                if(!q4.equals("0")){
-                    answer3 = q4;
-                }
-
-                //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
-                data9.put("Electricity Paid", answer1);
-                data9.put("Gas Paid", answer2);
-                data9.put("Water Paid", answer3);
-                //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
-
-                dailySurveyReference.updateChildren(data9).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Success message (optional)
-                        CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
-                        Toast.makeText(QuestionnairePageQ9.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Error message
-                        Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            if(!q2.equals("0")){
+                answer1 = q2;
             }
+
+            if(!q3.equals("0")){
+                answer2 = q3;
+            }
+
+            if(!q4.equals("0")){
+                answer3 = q4;
+            }
+
+            //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
+            data9.put("Electricity Paid", answer1);
+            data9.put("Gas Paid", answer2);
+            data9.put("Water Paid", answer3);
+            //Log.d("HashMapData", "Current data: " + QuestionnairePageQ1.data.toString());
+
+            dailySurveyReference.updateChildren(data9).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // Success message (optional)
+                    CO2EmissionUpdater.fetchDataAndRecalculate(userID, currentDate);
+                    Toast.makeText(QuestionnairePageQ9.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Error message
+                    Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         Button backButton = findViewById(R.id.back_button_Q9);

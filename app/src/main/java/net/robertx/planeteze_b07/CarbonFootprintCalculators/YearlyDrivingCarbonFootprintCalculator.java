@@ -9,7 +9,6 @@ public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbo
 
     // Car type and distance-driven fields
     private String carType; // Gasoline, Diesel, Hybrid, Electric
-    private double distanceDriven; // Distance driven in kilometers
 
     // Required keys for this calculator
     private static final String[] requiredKeys = {
@@ -93,7 +92,8 @@ public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbo
         // Extract car type and distance driven from responses
         carType = responses.get("What type of car do you drive?");
         String distanceStr = responses.get("How many kilometers/miles do you drive per year?");
-        distanceDriven = parseDistance(distanceStr);
+        // Distance driven in kilometers
+        double distanceDriven = parseDistance(distanceStr);
 
         // Calculate and return the yearly footprint
         double emissionFactor = getEmissionFactor();

@@ -35,7 +35,6 @@ public class SignUpPage extends AppCompatActivity {
 
     // UI Components for user inputs and buttons
     private EditText emailInput, passwordInput, firstNameInput, lastNameInput;
-    private Button registerButton, loginButton, backButton;
     private ProgressBar registrationProgressBar;
 
     // Firebase Authentication and Realtime Database
@@ -57,113 +56,95 @@ public class SignUpPage extends AppCompatActivity {
         passwordInput = findViewById(R.id.password_signup2);
         firstNameInput = findViewById(R.id.firstname2);
         lastNameInput = findViewById(R.id.lastname2);
-        registerButton = findViewById(R.id.signup_confirm2);
+        Button registerButton = findViewById(R.id.signup_confirm2);
         registrationProgressBar = findViewById(R.id.progressbar_signup);
-        loginButton = findViewById(R.id.loginbutton_signup2);
-        backButton = findViewById(R.id.returnhomescreen_signup2);
+        Button loginButton = findViewById(R.id.loginbutton_signup2);
+        Button backButton = findViewById(R.id.returnhomescreen_signup2);
 
         // Redirect to the login page when the login button is clicked
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
-                startActivity(intent);
-                finish();
-            }
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
+            startActivity(intent);
+            finish();
         });
 
         // Handle user registration when the register button is clicked
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrationProgressBar.setVisibility(View.VISIBLE);
-                String email = emailInput.getText().toString().trim();
-                String password = passwordInput.getText().toString().trim();
+        registerButton.setOnClickListener(v -> {
+            registrationProgressBar.setVisibility(View.VISIBLE);
+            String email = emailInput.getText().toString().trim();
+            String password = passwordInput.getText().toString().trim();
 
-                // Validate user input for email and password
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(SignUpPage.this, "Enter email", Toast.LENGTH_SHORT).show();
-                    registrationProgressBar.setVisibility(View.GONE);
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(SignUpPage.this, "Enter password", Toast.LENGTH_SHORT).show();
-                    registrationProgressBar.setVisibility(View.GONE);
-                    return;
-                }
+            // Validate user input for email and password
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(SignUpPage.this, "Enter email", Toast.LENGTH_SHORT).show();
+                registrationProgressBar.setVisibility(View.GONE);
+                return;
+            }
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(SignUpPage.this, "Enter password", Toast.LENGTH_SHORT).show();
+                registrationProgressBar.setVisibility(View.GONE);
+                return;
+            }
 
-                // Register the user with Firebase Authentication
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                registrationProgressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    // Get the current authenticated user
-                                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            // Register the user with Firebase Authentication
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        registrationProgressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            // Get the current authenticated user
+                            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-                                    if (currentUser != null) {
-                                        // Send email verification
-                                        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> emailTask) {
-                                                if (emailTask.isSuccessful()) {
-                                                    String firstName = firstNameInput.getText().toString().trim();
-                                                    String lastName = lastNameInput.getText().toString().trim();
-                                                    String userId = currentUser.getUid();
+                            if (currentUser != null) {
+                                // Send email verification
+                                currentUser.sendEmailVerification().addOnCompleteListener(emailTask -> {
+                                    if (emailTask.isSuccessful()) {
+                                        String firstName = firstNameInput.getText().toString().trim();
+                                        String lastName = lastNameInput.getText().toString().trim();
+                                        String userId = currentUser.getUid();
 
-                                                    // Store user details in Realtime Database
-                                                    if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
-                                                        User newUser = new User(userId, firstName, lastName, email, password);
-                                                        firebaseDatabase = FirebaseDatabase.getInstance();
-                                                        usersDatabaseReference = firebaseDatabase.getReference("Users");
-                                                        usersDatabaseReference.child(userId).setValue(newUser)
-                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<Void> databaseTask) {
-                                                                        if (databaseTask.isSuccessful()) {
-                                                                            // Clear input fields after successful registration
-                                                                            firstNameInput.setText("");
-                                                                            lastNameInput.setText("");
-                                                                            emailInput.setText("");
-                                                                            passwordInput.setText("");
-                                                                        }
-                                                                    }
-                                                                });
-                                                    }
+                                        // Store user details in Realtime Database
+                                        if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
+                                            User newUser = new User(userId, firstName, lastName, email, password);
+                                            firebaseDatabase = FirebaseDatabase.getInstance();
+                                            usersDatabaseReference = firebaseDatabase.getReference("Users");
+                                            usersDatabaseReference.child(userId).setValue(newUser)
+                                                    .addOnCompleteListener(databaseTask -> {
+                                                        if (databaseTask.isSuccessful()) {
+                                                            // Clear input fields after successful registration
+                                                            firstNameInput.setText("");
+                                                            lastNameInput.setText("");
+                                                            emailInput.setText("");
+                                                            passwordInput.setText("");
+                                                        }
+                                                    });
+                                        }
 
-                                                    // Notify the user and navigate to the login page
-                                                    Toast.makeText(SignUpPage.this, "User registered successfully. Please verify your email.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(SignUpPage.this, "Failed to send email verification.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                        // Notify the user and navigate to the login page
+                                        Toast.makeText(SignUpPage.this, "User registered successfully. Please verify your email.",
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
+                                        startActivity(intent);
+                                        finish();
                                     } else {
-                                        Toast.makeText(SignUpPage.this, "Authentication failed.",
+                                        Toast.makeText(SignUpPage.this, "Failed to send email verification.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
-                                } else {
-                                    Toast.makeText(SignUpPage.this, "Registration failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                                });
+                            } else {
+                                Toast.makeText(SignUpPage.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        });
-            }
+                        } else {
+                            Toast.makeText(SignUpPage.this, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
         // Redirect to the welcome screen when the back button is clicked
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUpPage.this, WelcomePage.class);
-                startActivity(intent);
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpPage.this, WelcomePage.class);
+            startActivity(intent);
         });
 
         // Adjust layout padding for system window insets

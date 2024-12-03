@@ -58,50 +58,44 @@ public class CalendarPage extends AppCompatActivity {
 //        mainAdapter = new MainAdapter(options);
 //        recyclerView.setAdapter(mainAdapter);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = auth.getCurrentUser();
-                String userID = currentUser.getUid();
+        button.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = auth.getCurrentUser();
+            String userID = currentUser.getUid();
 
 
-                DatePickerDialog dialog = new DatePickerDialog(CalendarPage.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        displayDate.setText(MessageFormat.format("{0}/{1}/{2}", String.valueOf(dayOfMonth), String.valueOf(month + 1), String.valueOf(year)));
-                        SelectedDate =  String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
-                        datedisplay = String.format("%02d-%02d-%04d", dayOfMonth, month + 1, year);
-                        ChosenDay = String.valueOf(dayOfMonth);
-                        ChosenYear = String.valueOf(year);
-                        ChosenMonth = String.valueOf(month + 1);
+            DatePickerDialog dialog = new DatePickerDialog(CalendarPage.this, (view, year1, month1, dayOfMonth) -> {
+                displayDate.setText(MessageFormat.format("{0}/{1}/{2}", String.valueOf(dayOfMonth), String.valueOf(month1 + 1), String.valueOf(year1)));
+                SelectedDate =  String.format("%04d-%02d-%02d", year1, month1 + 1, dayOfMonth);
+                datedisplay = String.format("%02d-%02d-%04d", dayOfMonth, month1 + 1, year1);
+                ChosenDay = String.valueOf(dayOfMonth);
+                ChosenYear = String.valueOf(year1);
+                ChosenMonth = String.valueOf(month1 + 1);
 
-                        databaseReference = database.getInstance().getReference("DailySurvey").child(userID).child(SelectedDate);
+                databaseReference = database.getInstance().getReference("DailySurvey").child(userID).child(SelectedDate);
 
-                        databaseReference.get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                DataSnapshot snapshot = task.getResult();
-                                if (snapshot.exists()) {
-                                    Intent intent = new Intent(CalendarPage.this, QuestionList.class);
-                                    startActivity(intent);
-                                } else {
-                                    QuestionnairePageQ1.ChangedDate = SelectedDate;
-                                    System.out.print(QuestionnairePageQ1.ChangedDate);
-                                    Intent intent = new Intent(CalendarPage.this, DailySurveyHomePage.class);
-                                    startActivity(intent);
-                                }
-                            } else {
-                                System.out.println("Error checking node: " + task.getException().getMessage());
-                            }
-                        });
+                databaseReference.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DataSnapshot snapshot = task.getResult();
+                        if (snapshot.exists()) {
+                            Intent intent = new Intent(CalendarPage.this, QuestionList.class);
+                            startActivity(intent);
+                        } else {
+                            QuestionnairePageQ1.ChangedDate = SelectedDate;
+                            System.out.print(QuestionnairePageQ1.ChangedDate);
+                            Intent intent = new Intent(CalendarPage.this, DailySurveyHomePage.class);
+                            startActivity(intent);
+                        }
+                    } else {
+                        System.out.println("Error checking node: " + task.getException().getMessage());
                     }
-                }, year, month, day);
-                dialog.show();
-            }
+                });
+            }, year, month, day);
+            dialog.show();
         });
 
 

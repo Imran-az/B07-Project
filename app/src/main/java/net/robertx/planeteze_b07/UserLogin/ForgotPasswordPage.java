@@ -51,56 +51,44 @@ public class ForgotPasswordPage extends AppCompatActivity {
         backButton = findViewById(R.id.backbutton_forgotpassword);
         gotoLoginButton = findViewById(R.id.resetPasswordLogin);
 
-        gotoLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the LoginPage activity
-                Intent intent = new Intent(ForgotPasswordPage.this, LoginPageView.class);
-                startActivity(intent);
-                finish();
-            }
+        gotoLoginButton.setOnClickListener(v -> {
+            // Navigate to the LoginPage activity
+            Intent intent = new Intent(ForgotPasswordPage.this, LoginPageView.class);
+            startActivity(intent);
+            finish();
         });
 
         // Set up the Reset Password button functionality
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get the entered email address
-                String email = emailAddressInput.getText().toString().trim();
+        resetPasswordButton.setOnClickListener(v -> {
+            // Get the entered email address
+            String email = emailAddressInput.getText().toString().trim();
 
-                // Validate email input
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(ForgotPasswordPage.this, "Enter an email",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Send a password reset email using FirebaseAuth
-                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(ForgotPasswordPage.this,
-                                            "Password reset email sent", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(ForgotPasswordPage.this,
-                                            "Failed to send password reset email", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            // Validate email input
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(ForgotPasswordPage.this, "Enter an email",
+                        Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Send a password reset email using FirebaseAuth
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ForgotPasswordPage.this,
+                                    "Password reset email sent", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ForgotPasswordPage.this,
+                                    "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
         // Set up the Back button functionality
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate back to the WelcomePage activity
-                Intent intent = new Intent(ForgotPasswordPage.this, WelcomePage.class);
-                startActivity(intent);
-                finish();
-            }
+        backButton.setOnClickListener(v -> {
+            // Navigate back to the WelcomePage activity
+            Intent intent = new Intent(ForgotPasswordPage.this, WelcomePage.class);
+            startActivity(intent);
+            finish();
         });
         // Adjust layout padding for system window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

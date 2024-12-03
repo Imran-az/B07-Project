@@ -20,13 +20,12 @@ import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 @RunWith(AndroidJUnit4.class)
 public class YearlyTotalCarbonFootprintCalculatorInstrumentationTest {
 
-    private Context context;
     private YearlyTotalCarbonFootprintCalculator totalCalculator;
 
     @Before
     public void setUp() throws IOException {
         // Use the context of the app under test
-        context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         // Verify the context is not null
         assertNotNull("Context is null", context);

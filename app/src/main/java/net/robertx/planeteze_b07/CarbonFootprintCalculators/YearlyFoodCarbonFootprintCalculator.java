@@ -20,14 +20,6 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
             "How often do you waste food or throw away uneaten leftovers?"
     };
 
-    // Fields to hold responses
-    private String dietType;
-    private String beefConsumption;
-    private String porkConsumption;
-    private String chickenConsumption;
-    private String fishConsumption;
-    private String foodWaste;
-
     private static final String TAG = "YearlyFoodCarbonFootprintCalculator";
 
     /**
@@ -51,18 +43,19 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
         }
 
         // Extract responses
-        this.dietType = responses.get("What best describes your diet?");
-        this.foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
+        // Fields to hold responses
+        String dietType = responses.get("What best describes your diet?");
+        String foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
 
         // Calculate the diet footprint
         double dietFootprint = 0;
 
         // If diet is meat-based, add meat consumption footprint
         if (dietType.equalsIgnoreCase("Meat-based (eat all types of animal products)")) {
-            this.beefConsumption = responses.get("How often do you eat the following animal-based products? Beef:");
-            this.porkConsumption = responses.get("How often do you eat the following animal-based products? Pork:");
-            this.chickenConsumption = responses.get("How often do you eat the following animal-based products? Chicken:");
-            this.fishConsumption = responses.get("How often do you eat the following animal-based products? Fish/Seafood:");
+            String beefConsumption = responses.get("How often do you eat the following animal-based products? Beef:");
+            String porkConsumption = responses.get("How often do you eat the following animal-based products? Pork:");
+            String chickenConsumption = responses.get("How often do you eat the following animal-based products? Chicken:");
+            String fishConsumption = responses.get("How often do you eat the following animal-based products? Fish/Seafood:");
             dietFootprint += calculateMeatConsumptionFootprint(beefConsumption, porkConsumption, chickenConsumption, fishConsumption);
         }
         else{

@@ -23,11 +23,11 @@ import net.robertx.planeteze_b07.UserLogin.WelcomePage;
 public class ProfileFragment extends Fragment {
 
     private String firstName, lastName;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private FirebaseUser currentUser = auth.getCurrentUser();
+    private final FirebaseUser currentUser = auth.getCurrentUser();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

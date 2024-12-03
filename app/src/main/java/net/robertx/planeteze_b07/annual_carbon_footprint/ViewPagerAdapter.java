@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
-    private List<SurveyQuestionFragment> fragments;
+    private final List<SurveyQuestionFragment> fragments;
 
     public ViewPagerAdapter(FragmentActivity activity, List<SurveyQuestionFragment> fragments) {
         super(activity);
