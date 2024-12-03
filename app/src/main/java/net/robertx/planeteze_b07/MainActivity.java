@@ -19,6 +19,7 @@ import net.robertx.planeteze_b07.EcoGauge.EcoGaugeActivity;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
+import EcoTracker.HabitDecision;
 import EcoTracker.HabitTrackerListPage;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
+                Intent intent = new Intent(MainActivity.this, HabitDecision.class);
                 startActivity(intent);
             }
         });
