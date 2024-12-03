@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.carbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
 import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
 
 @RunWith(AndroidJUnit4.class)

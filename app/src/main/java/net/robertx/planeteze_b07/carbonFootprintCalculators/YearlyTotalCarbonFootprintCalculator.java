@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.CarbonFootprintCalculators;
+package net.robertx.planeteze_b07.carbonFootprintCalculators;
 
 import android.util.Log;
 

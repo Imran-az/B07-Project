@@ -4,7 +4,7 @@ package net.robertx.planeteze_b07;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import net.robertx.planeteze_b07.CarbonFootprintCalculators.YearlyFlightCarbonFootprintCalculator;
+import net.robertx.planeteze_b07.carbonFootprintCalculators.YearlyFlightCarbonFootprintCalculator;
 
 import java.util.HashMap;
 

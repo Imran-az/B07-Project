@@ -172,7 +172,7 @@ public class Calculations {
         }
 
         String protein = responses.get("What type of protein did you eat?");
-        if (taken.equals("")){
+        if (taken.isEmpty()){
             return 0.0;
         }
 
