@@ -15,7 +15,8 @@
         <activity
             android:name=".Dashboard"
             android:exported="true" />
-        <activity android:name=".DailySurvey.QuestionList"
+        <activity
+            android:name=".DailySurvey.QuestionList"
             android:exported="false" />
         <activity
             android:name=".EcoTracker.HabitTrackerListPage"
@@ -79,6 +80,7 @@
             android:exported="true" />
         <activity android:name=".EcoGauge.EcoGaugeActivity" />
         <activity android:name="net.robertx.planeteze_b07.EcoTracker.HabitLoggingPage" />
+        <activity android:name="net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey" />
     </application>
 
 </manifest>

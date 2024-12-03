@@ -40,7 +40,7 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         });
 
         MaterialToolbar toolbar = findViewById(R.id.materialToolbar);
-        toolbar.setNavigationOnClickListener(v -> NavUtils.navigateUpFromSameTask(AnnualCarbonFootprintSurvey.this));
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.survey_pages_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
