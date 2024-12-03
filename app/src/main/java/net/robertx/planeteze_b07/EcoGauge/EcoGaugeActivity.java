@@ -53,7 +53,7 @@ public class EcoGaugeActivity extends AppCompatActivity {
         Spinner timeFrameSpinner = findViewById(R.id.time_frame_spinner);
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("DailySurveyCO2").child(userId);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.time_frames, android.R.layout.simple_spinner_item);
