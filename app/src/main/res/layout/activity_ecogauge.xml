@@ -32,9 +32,10 @@
         android:id="@+id/time_frame_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:entries="@array/time_frames"
+        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/eco_gauge_toolbar" />
 
@@ -42,8 +43,8 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/eco_gauge_line_chart"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginStart="4dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,12 +55,10 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/eco_gauge_pie_chart"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="235dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/eco_gauge_line_chart" />
@@ -80,9 +79,9 @@
         android:id="@+id/text_time_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/total_emissions_text_view"
-        tools:text="2024-01-01 to 2024-01-07" />
+        tools:text="Time frame: 2024-01-01 to 2024-01-07" />
 </androidx.constraintlayout.widget.ConstraintLayout>
