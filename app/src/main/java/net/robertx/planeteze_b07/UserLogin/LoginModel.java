@@ -5,13 +5,31 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+/**
+ * This class handles user login functionality using Firebase Authentication.
+ */
 public class LoginModel {
     private final FirebaseAuth mAuth;
 
+    /**
+     * Constructs a new LoginModel instance.
+     *
+     * @param mAuth The FirebaseAuth instance to handle authentication operations.
+     */
     public LoginModel(FirebaseAuth mAuth) {
         this.mAuth = mAuth;
     }
 
+    /**
+     * Logs in a user with the specified email and password.
+     *
+     * @param email             The email address of the user.
+     * @param password          The password associated with the email address.
+     * @param onSuccessListener A callback to handle a successful login.
+     *                          The FirebaseUser object is passed to this listener.
+     * @param onFailureListener A callback to handle login failure.
+     *                          An Exception object with the error details is passed to this listener.
+     */
     public void login(String email, String password,
                       OnSuccessListener<FirebaseUser> onSuccessListener,
                       OnFailureListener onFailureListener) {
@@ -28,6 +46,7 @@ public class LoginModel {
                         onFailureListener.onFailure(new Exception("An unknown error occurred during login."));
                     }
                 })
+
                 .addOnFailureListener(exception -> {
                     String message = exception.getMessage();
                     if (message != null) {
@@ -45,4 +64,3 @@ public class LoginModel {
                 });
     }
 }
-
