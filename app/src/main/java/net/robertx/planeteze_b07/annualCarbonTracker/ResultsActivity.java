@@ -35,8 +35,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.robertx.planeteze_b07.carbonFootprintCalculators.YearlyTotalCarbonFootprintCalculator;
-import net.robertx.planeteze_b07.DataRetrievers.EmissionsDataRetriever;
-import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
+import net.robertx.planeteze_b07.dataRetrievers.EmissionsDataRetriever;
+import net.robertx.planeteze_b07.dataRetrievers.HousingCO2DataRetriever;
 import net.robertx.planeteze_b07.R;
 
 import java.io.IOException;

@@ -1,8 +1,8 @@
 package net.robertx.planeteze_b07;
 
-import net.robertx.planeteze_b07.UserLogin.LoginContract;
-import net.robertx.planeteze_b07.UserLogin.LoginModel;
-import net.robertx.planeteze_b07.UserLogin.LoginPresenter;
+import net.robertx.planeteze_b07.userLogin.LoginContract;
+import net.robertx.planeteze_b07.userLogin.LoginModel;
+import net.robertx.planeteze_b07.userLogin.LoginPresenter;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnFailureListener;

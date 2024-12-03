@@ -2,7 +2,7 @@ package net.robertx.planeteze_b07.carbonFootprintCalculators;
 
 import android.util.Log;
 
-import net.robertx.planeteze_b07.DataRetrievers.HousingCO2DataRetriever;
+import net.robertx.planeteze_b07.dataRetrievers.HousingCO2DataRetriever;
 
 import java.util.Map;
 

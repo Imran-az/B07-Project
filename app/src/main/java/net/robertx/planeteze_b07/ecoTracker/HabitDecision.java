@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.EcoTracker;
+package net.robertx.planeteze_b07.ecoTracker;
 
 import static net.robertx.planeteze_b07.R.*;
 

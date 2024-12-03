@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.EcoGauge;
+package net.robertx.planeteze_b07.ecoGauge;
 
 import android.graphics.Color;
 import android.os.Bundle;

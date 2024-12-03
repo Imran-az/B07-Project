@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.EcoTracker;
+package net.robertx.planeteze_b07.ecoTracker;
 
 import android.content.Intent;
 import android.os.Bundle;

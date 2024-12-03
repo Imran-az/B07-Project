@@ -1,4 +1,4 @@
-package net.robertx.planeteze_b07.UserLogin;
+package net.robertx.planeteze_b07.userLogin;
 
 import android.content.Intent;
 import android.os.Bundle;

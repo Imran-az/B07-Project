@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.robertx.planeteze_b07.R;
-import net.robertx.planeteze_b07.UserLogin.WelcomePage;
+import net.robertx.planeteze_b07.userLogin.WelcomePage;
 
 public class ProfileFragment extends Fragment {
 

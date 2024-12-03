@@ -16,9 +16,9 @@
             android:name=".Dashboard"
             android:exported="true" />
         <activity android:name=".dailySurvey.QuestionList" />
-        <activity android:name=".EcoTracker.HabitTrackerListPage" />
+        <activity android:name=".ecoTracker.HabitTrackerListPage" />
         <activity android:name=".dailySurvey.DailySurveyHomePage" />
-        <activity android:name=".EcoTracker.HabitDecision" />
+        <activity android:name=".ecoTracker.HabitDecision" />
         <activity android:name=".dailySurvey.CalendarPage" />
         <activity android:name=".dailySurvey.QuestionnairePageQ9" />
         <activity android:name=".dailySurvey.QuestionnairePageQ8" />
@@ -29,11 +29,11 @@
         <activity android:name=".dailySurvey.QuestionnairePageQ3" />
         <activity android:name=".dailySurvey.QuestionnairePageQ2" />
         <activity android:name=".dailySurvey.QuestionnairePageQ1" />
-        <activity android:name=".UserLogin.SignUpPage" />
-        <activity android:name=".UserLogin.LoginPageView" />
-        <activity android:name=".UserLogin.ForgotPasswordPage" />
+        <activity android:name=".userLogin.SignUpPage" />
+        <activity android:name=".userLogin.LoginPageView" />
+        <activity android:name=".userLogin.ForgotPasswordPage" />
         <activity
-            android:name=".UserLogin.WelcomePage"
+            android:name=".userLogin.WelcomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,10 +43,10 @@
         <activity
             android:name=".annualCarbonTracker.ResultsActivity"
             android:exported="true" />
-        <activity android:name=".EcoGauge.EcoGaugeActivity" />
-        <activity android:name=".EcoTracker.HabitLoggingPage" />
+        <activity android:name=".ecoGauge.EcoGaugeActivity" />
+        <activity android:name=".ecoTracker.HabitLoggingPage" />
         <activity android:name=".annual_carbon_footprint.AnnualCarbonFootprintSurvey" />
-        <activity android:name="net.robertx.planeteze_b07.UserLogin.LoginPage" />
+        <activity android:name="net.robertx.planeteze_b07.userLogin.LoginPage" />
     </application>
 
 </manifest>

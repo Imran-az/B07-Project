@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import net.robertx.planeteze_b07.EcoTracker.CO2EmissionUpdater;
+import net.robertx.planeteze_b07.ecoTracker.CO2EmissionUpdater;
 import net.robertx.planeteze_b07.R;
 
 import java.util.List;
