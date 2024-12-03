@@ -18,10 +18,12 @@ import net.robertx.planeteze_b07.DailySurvey.QuestionnairePageQ1;
 import net.robertx.planeteze_b07.annualCarbonTracker.ResultsActivity;
 import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSurvey;
 
+import EcoTracker.HabitTrackerListPage;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Button button, button2;
+    private Button button, button2, button3;
 
     private FirebaseAuth firebaseAuth;
 
@@ -58,7 +60,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        button2 = findViewById(R.id.button99);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HabitTrackerListPage.class);
+                startActivity(intent);
+            }
+        });
 
 
         TextView usernameDisplay = findViewById(R.id.mainActivityUsernameDisplay);
