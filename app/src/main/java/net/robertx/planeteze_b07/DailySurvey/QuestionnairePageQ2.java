@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class QuestionnairePageQ2 extends AppCompatActivity {
     private EditText question2_answer, question3_answer;
-    public static Map<String, Object> data2 = new HashMap<>();
+    public static final Map<String, Object> data2 = new HashMap<>();
     String currentDate;
 
     FirebaseDatabase database;

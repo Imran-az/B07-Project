@@ -51,8 +51,8 @@ public class HabitTrackerListPage extends AppCompatActivity {
     DatabaseReference habitLogReference;
     private DatabaseReference dailyHabitTrackerRef;
     private String userID;
-    public static Map<String, ArrayList<String>> typeFilter = new HashMap<>();
-    public static Map<String, ArrayList<String>> impactFilter = new HashMap<>();
+    public static final Map<String, ArrayList<String>> typeFilter = new HashMap<>();
+    public static final Map<String, ArrayList<String>> impactFilter = new HashMap<>();
     String contributorGreatest;
 
     @Override

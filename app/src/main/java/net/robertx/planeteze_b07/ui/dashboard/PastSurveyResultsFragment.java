@@ -41,9 +41,9 @@ import java.util.Set;
 
 public class PastSurveyResultsFragment extends Fragment {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Nullable
     @Override

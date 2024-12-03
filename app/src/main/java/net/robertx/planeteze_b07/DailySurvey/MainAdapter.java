@@ -54,8 +54,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     }
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
-        TextView questionTextView, answerTextView;
-        Button editbtn;
+        final TextView questionTextView;
+        final TextView answerTextView;
+        final Button editbtn;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);

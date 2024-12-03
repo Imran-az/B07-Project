@@ -59,7 +59,7 @@ public class ResultsActivity extends AppCompatActivity {
     private EditText editTextCountry;
     private Button compareSubmitButton;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     FirebaseFirestore firestore;
 

@@ -32,7 +32,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
     private EditText question2_answer;
 
     String currentDate;
-    public static Map<String, Object> data3 = new HashMap<>();
+    public static final Map<String, Object> data3 = new HashMap<>();
 
     FirebaseDatabase database;
     DatabaseReference dailySurveyReference;

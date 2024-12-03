@@ -23,9 +23,9 @@ import net.robertx.planeteze_b07.annual_carbon_footprint.AnnualCarbonFootprintSu
 
 public class HomeFragment extends Fragment {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Nullable
     @Override

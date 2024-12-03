@@ -44,8 +44,8 @@ public class EcoGaugeActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+    final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    final String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
     private String selectedTimeFrame = "daily";
 
     @Override

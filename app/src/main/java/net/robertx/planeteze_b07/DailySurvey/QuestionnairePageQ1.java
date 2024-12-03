@@ -30,8 +30,8 @@ import java.util.Map;
 
 public class QuestionnairePageQ1 extends AppCompatActivity {
     private EditText question2_answer, question3_answer;
-    public static Map<String, Object> data = new HashMap<>();
-    public static Map<String, Object> data1 = new HashMap<>();
+    public static final Map<String, Object> data = new HashMap<>();
+    public static final Map<String, Object> data1 = new HashMap<>();
 
     static String currentDate;
 
