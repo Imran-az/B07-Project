@@ -9,15 +9,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
  * This class handles user login functionality using Firebase Authentication.
  */
 public class LoginModel {
-    private final FirebaseAuth mAuth;
+    private final FirebaseAuth firebaseAuth;
 
     /**
      * Constructs a new LoginModel instance.
      *
-     * @param mAuth The FirebaseAuth instance to handle authentication operations.
+     * @param firebaseAuth The FirebaseAuth instance to handle authentication operations.
      */
-    public LoginModel(FirebaseAuth mAuth) {
-        this.mAuth = mAuth;
+    public LoginModel(FirebaseAuth firebaseAuth) {
+        this.firebaseAuth = firebaseAuth;
     }
 
     /**
@@ -33,7 +33,7 @@ public class LoginModel {
     public void login(String email, String password,
                       OnSuccessListener<FirebaseUser> onSuccessListener,
                       OnFailureListener onFailureListener) {
-        mAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser user = authResult.getUser();
                     if (user != null) {
@@ -50,17 +50,16 @@ public class LoginModel {
                 .addOnFailureListener(exception -> {
                     String message = exception.getMessage();
                     if (message != null) {
-                        onFailureListener.onFailure(exception);
-                        return;
-                    }
-                    else if (message.contains("The supplied auth credential is incorrect, malformed or has expired")) {
-                        onFailureListener.onFailure(new Exception("The supplied auth credential is incorrect, malformed or has expired"));
-                    } else if (message.contains("The email address is badly formatted.")) {
-                        onFailureListener.onFailure(new Exception("The email address is badly formatted."));
+                        if (message.contains("The supplied auth credential is incorrect, malformed or has expired")) {
+                            onFailureListener.onFailure(new Exception("The supplied auth credential is incorrect, malformed or has expired"));
+                        } else if (message.contains("The email address is badly formatted.")) {
+                            onFailureListener.onFailure(new Exception("The email address is badly formatted."));
+                        } else {
+                            onFailureListener.onFailure(exception); // Default case for other errors
+                        }
                     } else {
-                        onFailureListener.onFailure(exception);
+                        onFailureListener.onFailure(exception); // Handle null messages
                     }
-                    onFailureListener.onFailure(exception);
                 });
     }
 }

@@ -10,12 +10,25 @@ import java.util.Map;
  */
 public class YearlyConsumptionFootprintCalculator extends CalculateYearlyCarbonFootPrint {
 
-    // Predefined emission values for clothes and devices
+    /**
+     * Emission values for different frequencies of buying clothes.
+     * The keys represent the frequency (e.g., "Monthly", "Quarterly") and the values are the emissions in kg CO2.
+     */
     private static final Map<String, Double> CLOTHES_EMISSION = new HashMap<>();
-    private static final Map<String, Double> DEVICES_EMISSION = new HashMap<>();
-    // Predefined reduction values for recycling based on frequency
-    private static final Map<String, Map<String, Double>> RECYCLING_REDUCTION = new HashMap<>();
 
+    /**
+     * Emission values for the number of electronic devices purchased.
+     * The keys represent the number of devices (e.g., "1", "2") and the values are the emissions in kg CO2.
+     */
+    private static final Map<String, Double> DEVICES_EMISSION = new HashMap<>();
+
+    /**
+     * Reduction values for recycling habits based on the frequency of buying clothes.
+     * The outer map keys represent the frequency of buying clothes (e.g., "Monthly"),
+     * and the inner map keys represent the frequency of recycling (e.g., "Always").
+     * The values are the reductions in kg CO2.
+     */
+    private static final Map<String, Map<String, Double>> RECYCLING_REDUCTION = new HashMap<>();
     private static final String[] requiredKeys = {
             "How often do you buy new clothes?",
             "Do you buy second-hand or eco-friendly products?",
@@ -24,7 +37,6 @@ public class YearlyConsumptionFootprintCalculator extends CalculateYearlyCarbonF
 
     private static final String TAG = "ConsumptionFootprint";
 
-    // Static block for initializing emissions and reductions
     static {
         initializeEmissions();
         initializeRecyclingReductions();
@@ -44,24 +56,20 @@ public class YearlyConsumptionFootprintCalculator extends CalculateYearlyCarbonF
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
         if(!areResponsesValid(responses, requiredKeys)) {
-            return 0.0; // Return 0 if any required key is missing or invalid
+            return 0.0;
         }
 
-        // Extract responses or assign defaults if not provided
         String clothesFrequency = responses.getOrDefault("How often do you buy new clothes?", "Rarely");
         String devicesPurchased = responses.getOrDefault("How many electronic devices (phones, laptops, etc.) have you purchased in the past year?", "None");
         String recyclingFrequency = responses.getOrDefault("How often do you recycle?", "Never");
         String isEcoFriendly = responses.getOrDefault("Do you buy second-hand or eco-friendly products?", "No");
 
-        // Validate inputs
         validateInput(clothesFrequency, devicesPurchased);
 
-        // Calculate emissions and reductions
         double clothesEmission = CLOTHES_EMISSION.get(clothesFrequency);
         double devicesEmission = DEVICES_EMISSION.get(devicesPurchased);
         double recyclingReduction = getRecyclingReduction(clothesFrequency, recyclingFrequency);
 
-        // Calculate the total emissions with adjustments for eco-friendly habits
         double totalEmission = calculateTotalEmission(clothesEmission, devicesEmission, recyclingReduction, isEcoFriendly);
 
         return Math.max(totalEmission, 0.0); // Ensure no negative emissions

@@ -39,18 +39,55 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * Fragment for displaying past survey results.
+ *
+ * This class provides a calendar view that highlights the days when surveys were taken
+ * and allows users to navigate to detailed results or the survey home page. It integrates
+ * with Firebase Realtime Database and Authentication to fetch and manage user-specific survey data.
+ */
 public class PastSurveyResultsFragment extends Fragment {
 
+    /**
+     * Instance of Firebase Realtime Database used for accessing and managing
+     * user-specific survey data.
+     */
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+    /**
+     * Instance of Firebase Authentication used for managing user authentication
+     * and retrieving the current authenticated user.
+     */
     final FirebaseAuth auth = FirebaseAuth.getInstance();
 
+    /**
+     * Initializes the view for the Past Survey Results fragment.
+     *
+     * This method inflates the layout for the fragment, setting up the user interface
+     * for displaying the calendar and survey results.
+     *
+     * @param inflater the {@link LayoutInflater} used to inflate the fragment's layout.
+     * @param container the parent {@link ViewGroup} that the fragment's UI will be attached to, or null.
+     * @param savedInstanceState a {@link Bundle} containing the fragment's previously saved state, or null if none.
+     * @return the root {@link View} for the fragment's UI.
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_past_survey_results, container, false);
     }
 
+    /**
+     * Sets up the calendar view and survey data for the Past Survey Results fragment.
+     *
+     * This method initializes the calendar with a range of months, binds day and month
+     * views with custom functionality, and fetches user-specific survey data from Firebase.
+     * The calendar highlights the days on which surveys were completed and allows navigation
+     * to detailed survey results or the survey home page based on user interactions.
+     *
+     * @param view the root {@link View} for the fragment's UI.
+     * @param savedInstanceState a {@link Bundle} containing the fragment's previously saved state, or null if none.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 

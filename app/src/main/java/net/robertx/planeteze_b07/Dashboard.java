@@ -27,11 +27,22 @@ import net.robertx.planeteze_b07.ui.dashboard.HomeFragment;
 import net.robertx.planeteze_b07.ui.dashboard.PastSurveyResultsFragment;
 import net.robertx.planeteze_b07.ui.dashboard.ProfileFragment;
 
+/**
+ * The Dashboard activity is the main screen of the application after the user logs in.
+ * It contains a bottom navigation view to switch between different fragments such as
+ * Home, Profile, and Past Survey Results.
+ */
 public class Dashboard extends AppCompatActivity {
 
     private BroadcastReceiver messageReceiver;
 
 
+    /**
+     * Called when the activity is first created. Initializes the UI components and fragments.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

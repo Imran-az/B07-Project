@@ -5,7 +5,14 @@ package net.robertx.planeteze_b07.userLogin;
  * It handles user actions and delegates tasks between the LoginContract.View and @link LoginModel.
  */
 public class LoginPresenter implements LoginContract.Presenter {
+    /**
+     * The view interface to communicate with the UI.
+     */
     private final LoginContract.View view;
+
+    /**
+     * The model handling the login logic.
+     */
     private final LoginModel model;
 
     /**

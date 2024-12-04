@@ -24,9 +24,25 @@ import com.google.firebase.auth.FirebaseAuth;
  * It handles user interactions and delegates tasks to the presenter.
  */
 public class LoginPageView extends AppCompatActivity implements LoginContract.View {
-    private EditText emailaddress_login, password_login;
+
+    /**
+     * EditText for the user's email address input.
+     */
+    private EditText emailaddress_login;
+
+    /**
+     * EditText for the user's password input.
+     */
+    private EditText password_login;
+
+    /**
+     * ProgressBar to indicate loading state during login.
+     */
     private ProgressBar progressBar;
 
+    /**
+     * Presenter for handling user interactions and business logic.
+     */
     private LoginContract.Presenter presenter;
 
     /**
@@ -41,19 +57,16 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_page);
 
-        // Adjust layout for system window insets (edge-to-edge experience)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Initialize Firebase, Model, and Presenter
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         LoginModel model = new LoginModel(mAuth);
-        presenter = new LoginPresenter(this, model);
 
-        // Initialize UI components
+        presenter = new LoginPresenter(this, model);
         emailaddress_login = findViewById(R.id.emailaddress_login2);
         password_login = findViewById(R.id.emailaddress_forgotpassword);
         Button loginbutton = findViewById(R.id.resetPasswordButton);
@@ -62,7 +75,6 @@ public class LoginPageView extends AppCompatActivity implements LoginContract.Vi
         progressBar = findViewById(R.id.progressbar_login);
         Button backbutton2 = findViewById(R.id.backbutton_login2);
 
-        // Set button listeners
         backbutton2.setOnClickListener(v -> presenter.onBackButtonClicked());
         signupForAccountButton.setOnClickListener(v -> presenter.onSignUpButtonClicked());
         forgotPasswordButton.setOnClickListener(v -> presenter.onForgotPasswordButtonClicked());

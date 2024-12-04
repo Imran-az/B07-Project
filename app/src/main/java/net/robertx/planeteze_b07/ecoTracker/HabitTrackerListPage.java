@@ -38,23 +38,64 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Activity for managing and tracking user habits.
+ * Allows users to select a habit, apply filters, and view personalized suggestions.
+ */
 public class HabitTrackerListPage extends AppCompatActivity {
 
+    /** Button for confirming the selected habit. */
     private Button confirmButton;
+
+    /** Button for canceling the current selection. */
     private Button cancelButton;
+
+    /** List of all habits. */
     private List<String> habitList;
+
+    /** Filtered list of habits based on user criteria. */
     private List<String> filteredHabitList;
+
+    /** Adapter for displaying habits in a dialog. */
     private ArrayAdapter<String> dialogAdapter;
+
+    /** Currently selected habit. */
     private String selectedHabit = "";
+
+    /** Custom TextView for displaying selected habit information. */
     TextView customSpinner, resultText;
+
+    /** Firebase database instance. */
     FirebaseDatabase logDatabase;
+
+    /** Firebase reference for tracking selected habit. */
     DatabaseReference habitLogReference;
+
+    /** Firebase reference for daily habit tracking data. */
     private DatabaseReference dailyHabitTrackerRef;
+
+    /** User's Firebase ID. */
     private String userID;
+
+    /** Static map for categorizing habits by type. */
     public static final Map<String, ArrayList<String>> typeFilter = new HashMap<>();
+
+    /** Static map for categorizing habits by impact level. */
     public static final Map<String, ArrayList<String>> impactFilter = new HashMap<>();
+
+    /** Name of the highest contributor to CO2 emissions. */
     String contributorGreatest;
 
+    /**
+     * Initializes the Habit Tracker List Page activity.
+     *
+     * This method sets up the UI, initializes Firebase references, configures
+     * event listeners for various UI elements, and prepares the application state
+     * for the user to interact with the habit tracking system.
+     *
+     * @param savedInstanceState a {@link Bundle} containing the activity's previously saved state,
+     *                           or null if this is a new instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +203,14 @@ public class HabitTrackerListPage extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initializes and displays a searchable dialog for habit selection.
+     *
+     * This method sets up a custom dialog with search and filter functionality,
+     * integrates Firebase to fetch personalized recommendations, and allows users
+     * to select a habit. It also configures event listeners for various UI elements
+     * within the dialog to handle user interactions.
+     */
     private void showSearchableDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View customView = getLayoutInflater().inflate(R.layout.dialog_searchable_spinner, null);
@@ -316,7 +365,17 @@ public class HabitTrackerListPage extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Filters the habit list based on user input and selected criteria.
+     *
+     * This method applies a text search filter, as well as type and impact filters,
+     * to narrow down the list of habits. It updates the filtered habit list and refreshes
+     * the adapter to display the results in the dialog.
+     *
+     * @param searchText the text input used to search for habits by name.
+     * @param selectedType the selected habit type to filter the habits (e.g., "Transportation", "Food").
+     * @param selectedImpact the selected impact level to filter the habits (e.g., "Low Impact", "High Impact").
+     */
     private void applyFilters(String searchText, String selectedType, String selectedImpact) {
         filteredHabitList.clear();
 
@@ -351,6 +410,13 @@ public class HabitTrackerListPage extends AppCompatActivity {
         dialogAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Initializes filters for categorizing habits by type and impact.
+     *
+     * This method populates the {@code typeFilter} and {@code impactFilter} maps with predefined
+     * categories and their associated habits. These filters are used to narrow down the list
+     * of habits displayed to the user based on selected criteria.
+     */
     private void initializeFilters() {
         typeFilter.put("Transportation", new ArrayList<>(List.of(
                 "Walk to work/school/destinations",
