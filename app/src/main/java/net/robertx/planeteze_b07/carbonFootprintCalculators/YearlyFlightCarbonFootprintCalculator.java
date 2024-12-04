@@ -7,8 +7,10 @@ import java.util.HashMap;
  * and long-haul flights taken in the past year.
  */
 public class YearlyFlightCarbonFootprintCalculator extends CalculateYearlyCarbonFootPrint {
-
-    // Required keys for validation
+    /**
+     * Required keys for the user responses map.
+     * These keys are used to validate the input data.
+     */
     private final String[] requiredKeys = {
             "How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?",
             "How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?"
@@ -25,20 +27,16 @@ public class YearlyFlightCarbonFootprintCalculator extends CalculateYearlyCarbon
      */
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        // Validate the responses using the inherited validation method
         if (!areResponsesValid(responses, requiredKeys)) {
             return 0.0;
         }
 
-        // Retrieve short-haul and long-haul flight responses
         String shortHaulFlights = responses.get("How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?");
         String longHaulFlights = responses.get("How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?");
 
-        // Calculate individual carbon footprints
         double shortHaulFootprint = calculateShortHaulFootprint(shortHaulFlights);
         double longHaulFootprint = calculateLongHaulFootprint(longHaulFlights);
 
-        // Return the total footprint
         return shortHaulFootprint + longHaulFootprint;
     }
 
@@ -46,7 +44,9 @@ public class YearlyFlightCarbonFootprintCalculator extends CalculateYearlyCarbon
      * Calculates the carbon footprint for short-haul flights based on user input.
      *
      * @param flights The user-provided input for short-haul flights.
+     *                Expected values are "None", "1-2 flights", "3-5 flights", "6-10 flights", or "More than 10 flights".
      * @return The carbon footprint in kg CO2 for short-haul flights.
+     * @throws IllegalArgumentException if the input is null or invalid.
      */
     private double calculateShortHaulFootprint(String flights) {
         if (flights == null) {
@@ -66,12 +66,13 @@ public class YearlyFlightCarbonFootprintCalculator extends CalculateYearlyCarbon
         }
         throw new IllegalArgumentException("Invalid short-haul flights input: " + flights);
     }
-
     /**
      * Calculates the carbon footprint for long-haul flights based on user input.
      *
      * @param flights The user-provided input for long-haul flights.
+     *                Expected values are "None", "1-2 flights", "3-5 flights", "6-10 flights", or "More than 10 flights".
      * @return The carbon footprint in kg CO2 for long-haul flights.
+     * @throws IllegalArgumentException if the input is null or invalid.
      */
     private double calculateLongHaulFootprint(String flights) {
         if (flights == null) {

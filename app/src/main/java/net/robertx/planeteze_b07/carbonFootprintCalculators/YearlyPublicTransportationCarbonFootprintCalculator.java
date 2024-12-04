@@ -8,12 +8,15 @@ import java.util.HashMap;
  */
 public class YearlyPublicTransportationCarbonFootprintCalculator extends CalculateYearlyCarbonFootPrint {
 
+    /**
+     * Required keys for the user responses map.
+     * These keys are used to validate the input data.
+     */
     private static final String[] requiredKeys = {
             "How often do you use public transportation (bus, train, subway)?",
             "How much time do you spend on public transport per week (bus, train, subway)?"
     };
 
-    private static final String TAG = "YearlyPublicTransportationCarbonFootprintCalculator";
 
     /**
      * Calculates the yearly carbon footprint for public transportation.
@@ -26,18 +29,13 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
      */
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        // Validate the responses
         if (!areResponsesValid(responses, requiredKeys)) {
             return 0.0;
         }
 
-        // Extract values from the HashMap
-        // e.g., "Never", "Occasionally", "Frequently", "Always"
         String frequency = responses.get("How often do you use public transportation (bus, train, subway)?");
-        // e.g., "Under 1 hour", "1-3 hours", "3-5 hours", etc.
         String hoursPerWeek = responses.get("How much time do you spend on public transport per week (bus, train, subway)?");
 
-        // Calculate and return the carbon footprint
         return calculateFootprint(frequency, hoursPerWeek);
     }
 
@@ -45,15 +43,16 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
      * Calculates the carbon footprint based on the frequency of public transportation usage
      * and the hours spent on public transportation per week.
      *
-     * @param frequency The frequency of public transportation usage (e.g., "Never", "Occasionally").
-     * @param hours     The hours spent on public transportation per week.
+     * @param frequency The frequency of public transportation usage (e.g., "Never", "Occasionally (1-2 times/week)").
+     * @param hours     The hours spent on public transportation per week (e.g., "Under 1 hour", "1-3 hours").
      * @return The carbon footprint in kg CO2.
+     * @throws IllegalArgumentException if the frequency or hours input is invalid.
      */
     private double calculateFootprint(String frequency, String hours) {
         if (frequency.equalsIgnoreCase("Never")) {
             return 0.0;
         }
-        // Carbon footprint values based on frequency and hours
+
         if (frequency.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
             return calculateOccasionalFootprint(hours);
         } else if (frequency.equalsIgnoreCase("Frequently (3-4 times/week)")) {
@@ -70,7 +69,9 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
      * Calculates the carbon footprint for "Occasionally" frequency.
      *
      * @param hours The hours spent on public transportation per week.
+     *              Expected values are "Under 1 hour", "1-3 hours", "3-5 hours", "5-10 hours", or "More than 10 hours".
      * @return The carbon footprint in kg CO2.
+     * @throws IllegalArgumentException if the hours input is invalid.
      */
     private double calculateOccasionalFootprint(String hours) {
         if (hours.equalsIgnoreCase("Under 1 hour")) {
@@ -91,7 +92,9 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
      * Calculates the carbon footprint for "Frequently" frequency.
      *
      * @param hours The hours spent on public transportation per week.
+     *              Expected values are "Under 1 hour", "1-3 hours", "3-5 hours", "5-10 hours", or "More than 10 hours".
      * @return The carbon footprint in kg CO2.
+     * @throws IllegalArgumentException if the hours input is invalid.
      */
     private double calculateFrequentFootprint(String hours) {
         if (hours.equalsIgnoreCase("Under 1 hour")) {
@@ -112,7 +115,9 @@ public class YearlyPublicTransportationCarbonFootprintCalculator extends Calcula
      * Calculates the carbon footprint for "Always" frequency.
      *
      * @param hours The hours spent on public transportation per week.
+     *              Expected values are "Under 1 hour", "1-3 hours", "3-5 hours", "5-10 hours", or "More than 10 hours".
      * @return The carbon footprint in kg CO2.
+     * @throws IllegalArgumentException if the hours input is invalid.
      */
     private double calculateAlwaysFootprint(String hours) {
         if (hours.equalsIgnoreCase("Under 1 hour")) {

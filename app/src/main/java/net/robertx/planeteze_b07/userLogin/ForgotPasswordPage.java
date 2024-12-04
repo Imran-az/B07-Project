@@ -23,50 +23,65 @@ import net.robertx.planeteze_b07.R;
  */
 public class ForgotPasswordPage extends AppCompatActivity {
 
-    // UI components for email input and buttons
+    /**
+     * Input field for the user's email address.
+     */
     public EditText emailAddressInput;
-    public Button resetPasswordButton;
-    public Button backButton, gotoLoginButton;
 
+    /**
+     * Button to initiate the password reset process.
+     */
+    public Button resetPasswordButton;
+
+    /**
+     * Button to navigate back to the previous page.
+     */
+    public Button backButton;
+
+    /**
+     * Button to navigate to the login page.
+     */
+    public Button gotoLoginButton;
+
+    /**
+     * Initializes the ForgotPasswordPage activity.
+     * Sets up the UI, handles user interactions, and integrates Firebase authentication for password reset functionality.
+     *<br>
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_forgot_password_page);
 
-        // Adjust the layout for system window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Initialize UI components
         emailAddressInput = findViewById(R.id.emailaddress_forgotpassword);
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
         backButton = findViewById(R.id.backbutton_forgotpassword);
         gotoLoginButton = findViewById(R.id.resetPasswordLogin);
 
         gotoLoginButton.setOnClickListener(v -> {
-            // Navigate to the LoginPage activity
             Intent intent = new Intent(ForgotPasswordPage.this, LoginPageView.class);
             startActivity(intent);
             finish();
         });
 
-        // Set up the Reset Password button functionality
         resetPasswordButton.setOnClickListener(v -> {
-            // Get the entered email address
             String email = emailAddressInput.getText().toString().trim();
 
-            // Validate email input
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(ForgotPasswordPage.this, "Enter an email",
                         Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Send a password reset email using FirebaseAuth
             FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -79,14 +94,11 @@ public class ForgotPasswordPage extends AppCompatActivity {
                     });
         });
 
-        // Set up the Back button functionality
         backButton.setOnClickListener(v -> {
-            // Navigate back to the WelcomePage activity
             Intent intent = new Intent(ForgotPasswordPage.this, WelcomePage.class);
             startActivity(intent);
             finish();
         });
-        // Adjust layout padding for system window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

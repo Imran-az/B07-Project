@@ -7,10 +7,16 @@ import java.util.HashMap;
  */
 public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbonFootPrint {
 
-    // Car type and distance-driven fields
-    private String carType; // Gasoline, Diesel, Hybrid, Electric
 
-    // Required keys for this calculator
+    /**
+     * The type of car driven by the user (e.g., gasoline, diesel, hybrid, electric).
+     */
+    private String carType;
+
+    /**
+     * Required keys for the user responses map.
+     * These keys are used to validate the input data.
+     */
     private static final String[] requiredKeys = {
             "Do you own or regularly use a car?",
             "What type of car do you drive?",
@@ -41,7 +47,7 @@ public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbo
         } else if (distanceStr.equalsIgnoreCase("more than 25,000 km (15,000 miles)")) {
             return 35000;
         } else {
-            return 0; // Default for invalid input
+            return 0;
         }
     }
 
@@ -74,29 +80,25 @@ public class YearlyDrivingCarbonFootprintCalculator extends CalculateYearlyCarbo
      *                  - "Do you own or regularly use a car?"
      *                  - "What type of car do you drive?"
      *                  - "How many kilometers/miles do you drive per year?"
-     * @return The calculated yearly carbon footprint in kg CO2.
+     * @return The calculated yearly carbon footprint in kg CO2. returns 0 for invalid responses.
      */
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        // Validate the responses using the inherited validation method
         if (!areResponsesValid(responses, requiredKeys)) {
             return 0.0;
         }
 
-        // Check if the user owns or regularly uses a car
         String ownsCar = responses.get("Do you own or regularly use a car?");
         if (ownsCar.equalsIgnoreCase("No")) {
-            return 0.0; // No footprint if no car usage
+            return 0.0;
         }
 
-        // Extract car type and distance driven from responses
         carType = responses.get("What type of car do you drive?");
         String distanceStr = responses.get("How many kilometers/miles do you drive per year?");
-        // Distance driven in kilometers
-        double distanceDriven = parseDistance(distanceStr);
 
-        // Calculate and return the yearly footprint
+        double distanceDriven = parseDistance(distanceStr);
         double emissionFactor = getEmissionFactor();
+
         return emissionFactor * distanceDriven;
     }
 }

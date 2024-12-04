@@ -29,25 +29,60 @@ import net.robertx.planeteze_b07.R;
  */
 public class SignUpPage extends AppCompatActivity {
 
-    // UI Components for user inputs and buttons
-    private EditText emailInput, passwordInput, firstNameInput, lastNameInput;
+    /**
+     * EditText for the user's email input.
+     */
+    private EditText emailInput;
+
+    /**
+     * EditText for the user's password input.
+     */
+    private EditText passwordInput;
+
+    /**
+     * EditText for the user's first name input.
+     */
+    private EditText firstNameInput;
+
+    /**
+     * EditText for the user's last name input.
+     */
+    private EditText lastNameInput;
+
+    /**
+     * ProgressBar to indicate the registration process.
+     */
     private ProgressBar registrationProgressBar;
 
-    // Firebase Authentication and Realtime Database
+    /**
+     * Firebase Authentication instance.
+     */
     private FirebaseAuth firebaseAuth;
+
+    /**
+     * Firebase Database instance.
+     */
     private FirebaseDatabase firebaseDatabase;
+
+    /**
+     * Database reference for the users node.
+     */
     private DatabaseReference usersDatabaseReference;
 
+    /**
+     * Called when the activity is first created. Initializes the UI components, Firebase, and sets up event listeners.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up_page);
 
-        // Initialize Firebase Authentication
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // Initialize UI components
         emailInput = findViewById(R.id.emailbox_signup2);
         passwordInput = findViewById(R.id.password_signup2);
         firstNameInput = findViewById(R.id.firstname2);
@@ -57,20 +92,17 @@ public class SignUpPage extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginbutton_signup2);
         Button backButton = findViewById(R.id.returnhomescreen_signup2);
 
-        // Redirect to the login page when the login button is clicked
         loginButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
             startActivity(intent);
             finish();
         });
 
-        // Handle user registration when the register button is clicked
         registerButton.setOnClickListener(v -> {
             registrationProgressBar.setVisibility(View.VISIBLE);
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
 
-            // Validate user input for email and password
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(SignUpPage.this, "Enter email", Toast.LENGTH_SHORT).show();
                 registrationProgressBar.setVisibility(View.GONE);
@@ -82,23 +114,18 @@ public class SignUpPage extends AppCompatActivity {
                 return;
             }
 
-            // Register the user with Firebase Authentication
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         registrationProgressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            // Get the current authenticated user
                             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
                             if (currentUser != null) {
-                                // Send email verification
                                 currentUser.sendEmailVerification().addOnCompleteListener(emailTask -> {
                                     if (emailTask.isSuccessful()) {
                                         String firstName = firstNameInput.getText().toString().trim();
                                         String lastName = lastNameInput.getText().toString().trim();
                                         String userId = currentUser.getUid();
 
-                                        // Store user details in Realtime Database
                                         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
                                             User newUser = new User(userId, firstName, lastName, email, password);
                                             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -115,7 +142,6 @@ public class SignUpPage extends AppCompatActivity {
                                                     });
                                         }
 
-                                        // Notify the user and navigate to the login page
                                         Toast.makeText(SignUpPage.this, "User registered successfully. Please verify your email.",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(SignUpPage.this, LoginPageView.class);
@@ -137,13 +163,11 @@ public class SignUpPage extends AppCompatActivity {
                     });
         });
 
-        // Redirect to the welcome screen when the back button is clicked
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpPage.this, WelcomePage.class);
             startActivity(intent);
         });
 
-        // Adjust layout padding for system window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
