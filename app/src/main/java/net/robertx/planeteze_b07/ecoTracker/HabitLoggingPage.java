@@ -25,14 +25,38 @@ import java.util.*;
 
 import net.robertx.planeteze_b07.R;
 
+/**
+ * Activity for logging and tracking a user's daily habit progress.
+ *
+ * This class sets up the user interface, integrates with Firebase for habit tracking,
+ * and allows users to log their habits, view progress, and manage habit data.
+ */
 public class HabitLoggingPage extends AppCompatActivity {
 
+    /** Firebase reference to the user's selected habit. */
     private DatabaseReference habitRef;
-    private DatabaseReference habitLogsRef;
-    private TextView trackingHabitText;
-    private Button completeHabitButton;
-    private boolean isHabitSelected = false; // Flag to track if a habit is selected
 
+    /** Firebase reference to the user's habit logs. */
+    private DatabaseReference habitLogsRef;
+
+    /** TextView to display the selected habit name. */
+    private TextView trackingHabitText;
+
+    /** Button to mark the habit as completed. */
+    private Button completeHabitButton;
+
+    /** Flag to determine whether a habit is selected. */
+    private boolean isHabitSelected = false;
+
+    /**
+     * Initializes the Habit Logging Page activity.
+     *
+     * This method sets up the user interface, initializes Firebase references,
+     * and configures event listeners for logging habits, checking progress, and
+     * navigating to the habit selection page.
+     *
+     * @param savedInstanceState a {@link Bundle} containing the activity's previously saved state, or null if this is a new instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +65,6 @@ public class HabitLoggingPage extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar_question_list);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Initialize Firebase references
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -51,34 +74,31 @@ public class HabitLoggingPage extends AppCompatActivity {
         habitRef = database.getReference("DailyHabitTracker").child(userID).child("SelectedHabit");
         habitLogsRef = database.getReference("DailyHabitTracker").child(userID).child("HabitLogs");
 
-        // Initialize UI elements
         trackingHabitText = findViewById(R.id.tracking_habit_text);
         completeHabitButton = findViewById(R.id.complete_habit_button);
         Button changeButton = findViewById(R.id.change_habit);
 
-        // Fetch and display the selected habit name
         habitRef.child("habitName").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String habitName = dataSnapshot.getValue(String.class);
                     trackingHabitText.setText("Habit: " + habitName);
-                    isHabitSelected = true; // Mark habit as selected
+                    isHabitSelected = true;
                 } else {
                     trackingHabitText.setText("Habit: None Selected");
-                    isHabitSelected = false; // No habit is selected
+                    isHabitSelected = false;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 trackingHabitText.setText("Habit: Error Loading");
-                isHabitSelected = false; // Treat as no habit selected
+                isHabitSelected = false;
                 Toast.makeText(HabitLoggingPage.this, "Failed to load habit: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Check and update button status based on completion
         habitLogsRef.child(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -102,11 +122,10 @@ public class HabitLoggingPage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Handle button click to mark as completed
         completeHabitButton.setOnClickListener(v -> {
             if (!isHabitSelected) {
                 Toast.makeText(HabitLoggingPage.this, "No habit selected. Please select a habit first.", Toast.LENGTH_SHORT).show();
-                return; // Prevent logging without a selected habit
+                return;
             }
 
             habitLogsRef.child(currentDate).setValue("Completed").addOnCompleteListener(task -> {
@@ -123,6 +142,14 @@ public class HabitLoggingPage extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates the progress bar based on the user's habit logging history.
+     *
+     * This method calculates the percentage of days the habit has been logged
+     * since the start date and updates the progress bar and progress text accordingly.
+     * It retrieves data from Firebase to determine the start date and the number
+     * of completed habit logs.
+     */
     private void updateProgressBar() {
         habitRef.child("startDate").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -130,14 +157,12 @@ public class HabitLoggingPage extends AppCompatActivity {
                 if (startSnapshot.exists()) {
                     String startDate = startSnapshot.getValue(String.class);
                     try {
-                        // Parse start date
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         Date start = sdf.parse(startDate);
                         Date current = new Date();
 
                         if (start != null) {
-                            // Calculate total days between startDate and current date
-                            long totalDays = (current.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) + 1; // Include today
+                            long totalDays = (current.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) + 1;
 
                             if (totalDays <= 0) {
                                 Toast.makeText(HabitLoggingPage.this, "Invalid total days calculation.", Toast.LENGTH_SHORT).show();
@@ -155,13 +180,10 @@ public class HabitLoggingPage extends AppCompatActivity {
                                         }
                                     }
 
-                                    // Calculate progress based on completed days and total days
                                     float progress = (completedDays / (float) totalDays) * 100;
 
-                                    // Limit to 100%
                                     progress = Math.min(progress, 100);
 
-                                    // Update the progress bar and text
                                     ProgressBar progressBar = findViewById(R.id.habit_progress_bar);
                                     TextView progressText = findViewById(R.id.progress_text);
 
