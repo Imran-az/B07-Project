@@ -65,9 +65,6 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
 
         submitbtn.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(question2_answer.getText().toString()) || !TextUtils.isEmpty(question3_answer.getText().toString())) {
-                Intent intent = new Intent(QuestionnairePageQ1.this, DailySurveyHomePage.class);
-                startActivity(intent);
-
 
                 data1.put("Drive Personal Vehicle", "Yes");
                 data1.put("Distance Driven", question2_answer.getText().toString());
@@ -84,7 +81,7 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
                         Toast.makeText(QuestionnairePageQ1.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                finish();
 
             }
            else {
@@ -93,18 +90,8 @@ public class QuestionnairePageQ1 extends AppCompatActivity {
 
         });
 
-        Button backbtn = findViewById(R.id.back_button_Q1);
-        backbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ1.this, DailySurveyHomePage.class);
-            startActivity(intent);
-
-
-            data.put("Drive Personal Vehicle", "No");
-            data.put("Distance Driven", "0");
-            data.put("Change vehicle type", "No");
-
-
-        });
+        Button backButton = findViewById(R.id.back_button_Q1);
+        backButton.setOnClickListener(v -> finish());
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

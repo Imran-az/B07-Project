@@ -72,9 +72,6 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
 
         submitButton.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText())) && !TextUtils.isEmpty(String.valueOf(q3_ans.getText()))){
-                Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
-                startActivity(intent);
-
                 String answer1, answer2, answer3;
                 answer1 = "Yes";
                 answer2 = String.valueOf(q2_ans.getText());
@@ -96,6 +93,7 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
                         Toast.makeText(QuestionnairePageQ7.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                finish();
             }
             else{
                 Toast.makeText(QuestionnairePageQ7.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -103,22 +101,7 @@ public class QuestionnairePageQ7 extends AppCompatActivity {
         });
 
         Button backButton = findViewById(R.id.back_button_Q7);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ7.this, DailySurveyHomePage.class);
-            startActivity(intent);
-
-            String answer1;
-            Object answer2, answer3;
-            answer1 = "No";
-            answer2 = "None";
-            answer3 = "0";
-
-            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-
-            QuestionnairePageQ1.data.put(q1, answer1);
-            QuestionnairePageQ1.data.put(q2, answer2);
-            QuestionnairePageQ1.data.put(q3, answer3);
-        });
+        backButton.setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

@@ -71,9 +71,6 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
         //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
 
         submitButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ9.this, DailySurveyHomePage.class);
-            startActivity(intent);
-
             String q2, q3, q4;
             q2 = q2_ans.getText().toString();
             q3 = q3_ans.getText().toString();
@@ -112,13 +109,12 @@ public class QuestionnairePageQ9 extends AppCompatActivity {
                     Toast.makeText(QuestionnairePageQ9.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+            finish();
         });
 
+
         Button backButton = findViewById(R.id.back_button_Q9);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ9.this, QuestionnairePageQ8.class);
-            startActivity(intent);
-        });
+        backButton.setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

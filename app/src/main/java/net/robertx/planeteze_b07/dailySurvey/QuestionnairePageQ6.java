@@ -69,9 +69,6 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
 
         submitButton.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(String.valueOf(q2_ans.getText()))){
-                Intent intent = new Intent(QuestionnairePageQ6.this, DailySurveyHomePage.class);
-                startActivity(intent);
-
                 String answer1, answer2;
                 answer1 = "Yes";
                 answer2 = String.valueOf(q2_ans.getText());
@@ -93,23 +90,11 @@ public class QuestionnairePageQ6 extends AppCompatActivity {
             else{
                 Toast.makeText(QuestionnairePageQ6.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
+            finish();
         });
 
         Button backButton = findViewById(R.id.back_button_Q6);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ6.this, DailySurveyHomePage.class);
-            startActivity(intent);
-
-            String answer1;
-            Object answer2;
-            answer1 = "No";
-            answer2 = "0";
-
-            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-
-            QuestionnairePageQ1.data.put(q1, answer1);
-            QuestionnairePageQ1.data.put(q2, answer2);
-        });
+        backButton.setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

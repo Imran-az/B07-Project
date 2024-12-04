@@ -62,9 +62,6 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
         submitbtn.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(question2_answer.getText().toString())) {
-                Intent intent = new Intent(QuestionnairePageQ3.this, DailySurveyHomePage.class);
-                startActivity(intent);
-
                 //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
                 data3.put("Distance cycled or walked", question2_answer.getText().toString());
 
@@ -78,6 +75,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
                         Toast.makeText(QuestionnairePageQ3.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                finish();
             }
             else {
                 Toast.makeText(QuestionnairePageQ3.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
@@ -85,10 +83,7 @@ public class QuestionnairePageQ3 extends AppCompatActivity {
         });
 
         Button backbtn = findViewById(R.id.back_button_Q3);
-        backbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ3.this, DailySurveyHomePage.class);
-            startActivity(intent);
-        });
+        backbtn.setOnClickListener(v -> finish());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

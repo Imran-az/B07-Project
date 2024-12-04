@@ -61,9 +61,6 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
         dailySurveyReference = database.getReference("DailySurvey").child(userID).child(currentDate);
         submitButton.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(question2_answer.getText().toString()) || !TextUtils.isEmpty(question3_answer.getText().toString())) {
-                Intent intent = new Intent(QuestionnairePageQ2.this, DailySurveyHomePage.class);
-                startActivity(intent);
-
                 String ans1, ans2, ans3;
                 ans1 = "Yes";
                 ans2 = question2_answer.getText().toString();
@@ -87,34 +84,13 @@ public class QuestionnairePageQ2 extends AppCompatActivity {
                         Toast.makeText(QuestionnairePageQ2.this, "Failed to save data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                finish();
             } else {
                 Toast.makeText(QuestionnairePageQ2.this, "Please fill out the required fields", Toast.LENGTH_SHORT).show();
             }
         });
 
         Button backButton = findViewById(R.id.back_button_Q2);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ2.this, QuestionnairePageQ3.class);
-            startActivity(intent);
-
-            String ans1;
-            Object ans2, ans3;
-            ans1 = "No";
-            ans2 = "0";
-            ans3 = "0";
-
-            //QuestionnairePageQ1 prev_data = new QuestionnairePageQ1();
-
-            QuestionnairePageQ1.data.put(q1, ans1);
-            QuestionnairePageQ1.data.put(q2, ans2);
-            QuestionnairePageQ1.data.put(q3, ans3);
-
-
-        });
-        backButton = findViewById(R.id.back_button_Q2);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(QuestionnairePageQ2.this, DailySurveyHomePage.class);
-            startActivity(intent);
-        });
+        backButton.setOnClickListener(v -> finish());
     }
 }
