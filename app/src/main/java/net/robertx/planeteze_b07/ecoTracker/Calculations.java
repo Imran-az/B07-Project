@@ -3,8 +3,20 @@ package net.robertx.planeteze_b07.ecoTracker;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains various utility methods to calculate CO2 emissions
+ * based on different activities and categories.
+ */
 public class Calculations {
 
+    /**
+     * Validates if the given responses map contains all the required keys and whether or not the
+     * key is valid.
+     *
+     * @param responses     A map of responses with key-value pairs.
+     * @param requiredKeys  An array of required keys to validate against.
+     * @return true if all required keys are present and non-null, false otherwise.
+     */
     public static boolean validResponses(Map<String, String> responses, String[] requiredKeys) {
         if (responses == null || responses.isEmpty()) {
             return false;
@@ -18,6 +30,13 @@ public class Calculations {
         return true;
     }
 
+    /**
+     * Calculates CO2 emissions for a personal vehicle based on its type and distance traveled.
+     *
+     * @param type      The type of vehicle (e.g., gas, electric, hybrid).
+     * @param distance  The distance traveled in miles/kilometers.
+     * @return CO2 emissions in kilograms.
+     */
     public static double personalVehicle(String type, double distance){
         String type_fixed = type.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         if (type_fixed.contains("gas")){
@@ -35,6 +54,12 @@ public class Calculations {
         return 0.0;
     }
 
+    /**
+     * Calculates CO2 emissions for personal vehicle usage based on user responses.
+     *
+     * @param responses A map of responses containing vehicle type and distance.
+     * @return CO2 emissions in kilograms.
+     */
     public static double personalVehicleCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Drive Personal Vehicle", "Distance Driven", "Change vehicle type"};
         if (!validResponses(responses, requiredKeys)){
@@ -53,6 +78,12 @@ public class Calculations {
         return personalVehicle(carType, newDistance);
     }
 
+    /**
+     * Calculates CO2 emissions for public transportation usage based on hours spent.
+     *
+     * @param hours The time spent on public transport in hours.
+     * @return CO2 emissions in kilograms.
+     */
     public static double publicTransport(double hours){
         if(hours == 1){
             return 0.67;
@@ -72,6 +103,12 @@ public class Calculations {
         return 0.0;
     }
 
+    /**
+     * Calculates CO2 emissions for public transport usage based on user responses.
+     *
+     * @param responses A map of responses containing transportation details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double publicTransportCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Take public transportation", "Type of public transportation", "Time spent on public transport"};
         if (!validResponses(responses, requiredKeys)){
@@ -89,6 +126,12 @@ public class Calculations {
         return publicTransport(newTime);
     }
 
+    /**
+     * Calculates CO2 emissions for short-haul flights based on the number of flights taken.
+     *
+     * @param number The number of short-haul flights.
+     * @return CO2 emissions in kilograms.
+     */
     public static double shortHaulFlight(int number){
         if(1 <= number && number <= 2){
             return 225;
@@ -105,6 +148,12 @@ public class Calculations {
         return 0;
     }
 
+    /**
+     * Calculates CO2 emissions for long-haul flights based on the number of flights taken.
+     *
+     * @param number The number of long-haul flights.
+     * @return CO2 emissions in kilograms.
+     */
     public static double longHaulFlight(int number){
         if(1 <= number && number <= 2){
             return 825;
@@ -121,6 +170,12 @@ public class Calculations {
         return 0;
     }
 
+    /**
+     * Calculates CO2 emissions for flights based on user responses.
+     *
+     * @param responses A map of responses containing flight details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double flightCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Distance traveled", "Number of flights taken today"};
         if (!validResponses(responses, requiredKeys)){
@@ -138,6 +193,13 @@ public class Calculations {
         return shortHaulFlight(num);
     }
 
+    /**
+     * Calculates CO2 emissions for a specific type of meat based on servings consumed.
+     *
+     * @param type      The type of meat (e.g., beef, chicken, fish).
+     * @param servings  The number of servings consumed.
+     * @return CO2 emissions in kilograms.
+     */
     public static double meat(String type, double servings){
         type = type.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         if (type.contains("beef")){
@@ -160,6 +222,12 @@ public class Calculations {
         }
     }
 
+    /**
+     * Calculates CO2 emissions for meals based on user responses.
+     *
+     * @param responses A map of responses containing meal details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double meatCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Meal", "What type of protein did you eat?", "How many servings did you eat?"};
         if (!validResponses(responses, requiredKeys)){
@@ -172,7 +240,7 @@ public class Calculations {
         }
 
         String protein = responses.get("What type of protein did you eat?");
-        if (taken.isEmpty()){
+        if (taken.equals("")){
             return 0.0;
         }
 
@@ -182,10 +250,22 @@ public class Calculations {
         return meat(protein, newServings);
     }
 
+    /**
+     * Calculates CO2 emissions for clothing purchases based on the number of items bought.
+     *
+     * @param num The number of clothing items purchased.
+     * @return CO2 emissions in kilograms.
+     */
     public static double clothes(int num){
         return (0.5 * num) * 27.88;
     }
 
+    /**
+     * Calculates CO2 emissions for clothing purchases based on user responses.
+     *
+     * @param responses A map of responses containing clothing purchase details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double clothesCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Buy New Clothes", "How many clothing items did you purchase?"};
         if (!validResponses(responses, requiredKeys)){
@@ -203,6 +283,12 @@ public class Calculations {
         return clothes(newNum);
     }
 
+    /**
+     * Calculates CO2 emissions for electronics purchases based on the number of items bought.
+     *
+     * @param num The number of electronics purchased.
+     * @return CO2 emissions in kilograms.
+     */
     public static double electronics(int num){
         if (num == 1){
             return 300;
@@ -219,6 +305,12 @@ public class Calculations {
         return 0.0;
     }
 
+    /**
+     * Calculates CO2 emissions for electronics purchases based on user responses.
+     *
+     * @param responses A map of responses containing electronics purchase details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double electronicsCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Buy Electronics", "What types of electronics did you buy?", "How many electronics did you buy?"};
         if (!validResponses(responses, requiredKeys)){
@@ -231,7 +323,7 @@ public class Calculations {
         }
 
         String type = responses.get("What types of electronics did you buy?");
-        if (!type.isEmpty()){
+        if (!type.equals("")){
             return 0.0;
         }
 
@@ -241,6 +333,12 @@ public class Calculations {
         return electronics(newNum);
     }
 
+    /**
+     * Calculates CO2 emissions for gas bills based on the amount paid.
+     *
+     * @param paid The amount paid for the gas bill.
+     * @return CO2 emissions in kilograms.
+     */
     public static double gasBill(double paid){
         if (paid < 50){
             return 7.78;
@@ -257,6 +355,12 @@ public class Calculations {
         return 18.78;
     }
 
+    /**
+     * Calculates CO2 emissions for gas bills based on user responses.
+     *
+     * @param responses A map of responses containing gas bill details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double gasBillCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Gas Paid"};
         if (!validResponses(responses, requiredKeys)){
@@ -272,6 +376,12 @@ public class Calculations {
         return gasBill(newPaid);
     }
 
+    /**
+     * Calculates CO2 emissions for electricity bills based on the amount paid.
+     *
+     * @param paid The amount paid for the electricity bill.
+     * @return CO2 emissions in kilograms.
+     */
     public static double elecBill(double paid){
         if (paid < 50){
             return 1.15;
@@ -288,6 +398,12 @@ public class Calculations {
         return 6.96;
     }
 
+    /**
+     * Calculates CO2 emissions for electricity bills based on user responses.
+     *
+     * @param responses A map of responses containing electricity bill details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double elecBillCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Electricity Paid"};
         if (!validResponses(responses, requiredKeys)){
@@ -303,6 +419,12 @@ public class Calculations {
         return elecBill(newPaid);
     }
 
+    /**
+     * Calculates CO2 emissions for water bills based on the amount paid.
+     *
+     * @param paid The amount paid for the water bill.
+     * @return CO2 emissions in kilograms.
+     */
     public static double waterBill(double paid){
         if (paid < 50){
             return 13.7;
@@ -319,6 +441,12 @@ public class Calculations {
         return 61.6;
     }
 
+    /**
+     * Calculates CO2 emissions for water bills based on user responses.
+     *
+     * @param responses A map of responses containing water bill details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double waterBillCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Water Paid"};
         if (!validResponses(responses, requiredKeys)){
@@ -334,10 +462,22 @@ public class Calculations {
         return waterBill(newPaid);
     }
 
+    /**
+     * Calculates CO2 emissions for other purchases based on the number of items bought.
+     *
+     * @param num The number of items purchased.
+     * @return CO2 emissions in kilograms.
+     */
     public static double otherPurchases(int num){
         return num * 300;
     }
 
+    /**
+     * Calculates CO2 emissions for other purchases based on user responses.
+     *
+     * @param responses A map of responses containing other purchase details.
+     * @return CO2 emissions in kilograms.
+     */
     public static double otherPurchasesCO2(HashMap<String, String> responses){
         String[] requiredKeys = {"Other Purchases", "How many clothing items did you purchase?"};
         if (!validResponses(responses, requiredKeys)){

@@ -21,12 +21,38 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Activity for conducting the Annual Carbon Footprint Survey.
+ *
+ * This class provides a user interface to guide users through a series of questions
+ * related to their carbon footprint. It collects responses, handles navigation between
+ * questions using a {@link ViewPager2}, and saves the survey results to Firebase Firestore.
+ */
 public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
 
+    /**
+     * Instance of Firebase Authentication used to manage user authentication
+     * and retrieve the currently authenticated user.
+     */
     private FirebaseAuth firebaseAuth;
+
+    /**
+     * Instance of Firebase Firestore used to store and retrieve survey results
+     * for the Annual Carbon Footprint Survey.
+     */
     private FirebaseFirestore firestore;
 
-
+    /**
+     * Initializes the Annual Carbon Footprint Survey activity.
+     *
+     * This method sets up the user interface, including navigation, window insets, and a survey
+     * question navigation system using a {@link ViewPager2}. It handles the survey logic,
+     * such as navigating between questions, skipping irrelevant questions, and saving the
+     * user's responses to Firebase Firestore.
+     *
+     * @param savedInstanceState a {@link Bundle} containing the activity's previously saved state,
+     *                           or null if this is a new instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +147,15 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initializes the list of survey questions for the Annual Carbon Footprint Survey.
+     *
+     * This method creates a list of {@link SurveyQuestionFragment} objects, each representing
+     * a question in the survey. The questions cover various topics such as transportation, diet,
+     * housing, and consumption habits.
+     *
+     * @return an {@link ArrayList} of {@link SurveyQuestionFragment} objects containing all the survey questions.
+     */
     private ArrayList<SurveyQuestionFragment> initSurveyQuestions() {
         ArrayList<SurveyQuestionFragment> fragments = new ArrayList<>();
         fragments.add(SurveyQuestionFragment.newInstance("Do you own or regularly use a car?", new String[]{"Yes", "No"}));
@@ -150,6 +185,16 @@ public class AnnualCarbonFootprintSurvey extends AppCompatActivity {
         return fragments;
     }
 
+    /**
+     * Saves the user's survey results to Firebase Firestore.
+     *
+     * This method stores the provided survey answers in the Firestore database under
+     * the current user's document in the "AnnualCarbonFootprintSurveyData" collection.
+     * It provides feedback to the user upon successful submission or if an error occurs.
+     *
+     * @param answers a {@link HashMap} containing the survey questions as keys and the user's
+     *                selected answers as values.
+     */
     private void saveSurveyResults(HashMap<String, String> answers) {
         String userId = firebaseAuth.getCurrentUser().getUid();
         firestore.collection("AnnualCarbonFootprintSurveyData").document(userId).set(answers).addOnSuccessListener(aVoid -> Toast.makeText(this, "Survey submitted successfully!", Toast.LENGTH_SHORT).show()).addOnFailureListener(e -> Toast.makeText(this, "Error submitting survey: " + e.getMessage(), Toast.LENGTH_SHORT).show());

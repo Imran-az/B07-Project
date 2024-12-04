@@ -16,10 +16,26 @@ import com.google.android.material.appbar.MaterialToolbar;
 
 import net.robertx.planeteze_b07.R;
 
+/**
+ * Activity for the Habit Decision screen.
+ *
+ * This class provides options for users to log their current habit or select a new habit to track.
+ * It sets up navigation to the habit logging page and the habit tracker list page.
+ */
 public class HabitDecision extends AppCompatActivity {
 
-    public Button button1, button2;
+    /** Button for navigating to the habit logging page. */
+    public Button button1;
 
+    /** Button for navigating to the habit tracker list page to select a new habit. */
+    public Button button2;
+
+    /**
+     * Initializes the Habit Decision activity.
+     * Sets up buttons for navigating to other activities and applies edge-to-edge window insets.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down, this Bundle contains the most recent data supplied; otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
