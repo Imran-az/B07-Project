@@ -43,6 +43,7 @@ dependencies {
     implementation libs.core
     implementation platform(libs.firebase.bom)
     implementation libs.view
+    implementation libs.firebase.messaging
 
     // Testing Libraries
     testImplementation libs.junit
