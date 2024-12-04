@@ -67,22 +67,11 @@ public class YearlyTotalCarbonFootprintCalculator {
     public HashMap<String, Double> calculatePerCategoryEmission(HashMap<String, String> responses) {
         HashMap<String, Double> categoryEmissions = new HashMap<>();
 
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating driving emissions");
         categoryEmissions.put("DrivingEmissions", drivingCalculator.calculateYearlyFootprint(responses));
-
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating public transport emissions");
         categoryEmissions.put("PublicTransportEmissions", publicTransportCalculator.calculateYearlyFootprint(responses));
-
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating flight emissions");
         categoryEmissions.put("FlightEmissions", flightCalculator.calculateYearlyFootprint(responses));
-
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating housing emissions");
         categoryEmissions.put("HousingEmissions", housingCalculator.calculateYearlyFootprint(responses));
-
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating food emissions");
         categoryEmissions.put("FoodEmissions", foodCalculator.calculateYearlyFootprint(responses));
-
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Calculating consumption emissions");
         categoryEmissions.put("ConsumptionEmissions", consumptionCalculator.calculateYearlyFootprint(responses));
 
         return categoryEmissions;
@@ -121,24 +110,12 @@ public class YearlyTotalCarbonFootprintCalculator {
     public double calculateTotalEmissions(HashMap<String, String> responses) {
         double totalEmissions = 0.0;
 
-        // Add contributions from each category
         totalEmissions += drivingCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Driving Emissions: " + drivingCalculator.calculateYearlyFootprint(responses));
-
         totalEmissions += publicTransportCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Public Transport Emissions: " + publicTransportCalculator.calculateYearlyFootprint(responses));
-
         totalEmissions += flightCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Flight Emissions: " + flightCalculator.calculateYearlyFootprint(responses));
-
         totalEmissions += housingCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Housing Emissions: " + housingCalculator.calculateYearlyFootprint(responses));
-
         totalEmissions += foodCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Food Emissions: " + foodCalculator.calculateYearlyFootprint(responses));
-
         totalEmissions += consumptionCalculator.calculateYearlyFootprint(responses);
-        Log.d("YearlyTotalCarbonFootprintCalculator", "Consumption Emissions: " + consumptionCalculator.calculateYearlyFootprint(responses));
 
         return totalEmissions;
     }

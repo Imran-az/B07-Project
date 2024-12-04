@@ -10,7 +10,10 @@ import java.util.HashMap;
  */
 public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFootPrint {
 
-    // Required keys for validation
+    /**
+     * Required keys for the user responses map.
+     * These keys are used to validate the input data.
+     */
     private final String[] requiredKeys = {
             "What best describes your diet?",
             "How often do you eat the following animal-based products? Beef:",
@@ -36,21 +39,15 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
      */
     @Override
     public double calculateYearlyFootprint(HashMap<String, String> responses) {
-        // Validate the responses
         if (!areResponsesValid(responses, requiredKeys)) {
             Log.d(TAG, "Invalid or missing responses Food Footprint");
             return 0.0;
         }
-
-        // Extract responses
-        // Fields to hold responses
         String dietType = responses.get("What best describes your diet?");
         String foodWaste = responses.get("How often do you waste food or throw away uneaten leftovers?");
 
-        // Calculate the diet footprint
         double dietFootprint = 0;
 
-        // If diet is meat-based, add meat consumption footprint
         if (dietType.equalsIgnoreCase("Meat-based (eat all types of animal products)")) {
             String beefConsumption = responses.get("How often do you eat the following animal-based products? Beef:");
             String porkConsumption = responses.get("How often do you eat the following animal-based products? Pork:");
@@ -59,11 +56,9 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
             dietFootprint += calculateMeatConsumptionFootprint(beefConsumption, porkConsumption, chickenConsumption, fishConsumption);
         }
         else{
-            // Calculate the diet footprint for non-meat-based diets
             dietFootprint = calculateDietFootprint(dietType);
         }
 
-        // Add food waste footprint
         dietFootprint += calculateFoodWasteFootprint(foodWaste);
 
         return dietFootprint;
@@ -72,8 +67,9 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
     /**
      * Calculates the footprint for non-meat-based diets.
      *
-     * @param dietType The user's diet type.
+     * @param dietType The user's diet type. Expected values are "Vegetarian", "Vegan", or "Pescatarian (fish/seafood)".
      * @return The carbon footprint in kg CO2 for the diet type.
+     * @throws IllegalArgumentException if the diet type is invalid.
      */
     private double calculateDietFootprint(String dietType) {
         if (dietType.equalsIgnoreCase("Vegetarian")) {
@@ -89,78 +85,74 @@ public class YearlyFoodCarbonFootprintCalculator extends CalculateYearlyCarbonFo
     /**
      * Calculates the carbon footprint for meat consumption.
      *
-     * @param beef    The user's beef consumption frequency.
-     * @param pork    The user's pork consumption frequency.
-     * @param chicken The user's chicken consumption frequency.
-     * @param fish    The user's fish consumption frequency.
-     * @return The carbon footprint in kg CO2 for meat consumption.
+     * @param frequencyBeef    The user's beef consumption frequency.
+     * @param frequencyPork    The user's pork consumption frequency.
+     * @param frequencyChicken The user's chicken consumption frequency.
+     * @param frequencyFish    The user's fish consumption frequency.
+     * @return The carbon footprint in kg CO2 for meat consumption. Returns 0 for invalid responses.
      */
-    private double calculateMeatConsumptionFootprint(String beef, String pork, String chicken, String fish) {
+    private double calculateMeatConsumptionFootprint(String frequencyBeef, String frequencyPork, String frequencyChicken, String frequencyFish) {
         double totalFootprint = 0.0;
 
-        // Add footprint for beef consumption
-        if (beef != null) {
-            if (beef.equalsIgnoreCase("Daily")) {
+        if (frequencyBeef != null) {
+            if (frequencyBeef.equalsIgnoreCase("Daily")) {
                 totalFootprint += 2500.0;
-            } else if (beef.equalsIgnoreCase("Frequently (3-5 times/week)")) {
+            } else if (frequencyBeef.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 1900.0;
-            } else if (beef.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
+            } else if (frequencyBeef.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 1300.0;
             }
         }
 
-        // Add footprint for pork consumption
-        if (pork != null) {
-            if (pork.equalsIgnoreCase("Daily")) {
+        if (frequencyPork != null) {
+            if (frequencyPork.equalsIgnoreCase("Daily")) {
                 totalFootprint += 1450.0;
-            } else if (pork.equalsIgnoreCase("Frequently (3-5 times/week)")) {
+            } else if (frequencyPork.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 860.0;
-            } else if (pork.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
+            } else if (frequencyPork.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 450.0;
             }
         }
 
-        // Add footprint for chicken consumption
-        if (chicken != null) {
-            if (chicken.equalsIgnoreCase("Daily")) {
+        if (frequencyChicken != null) {
+            if (frequencyChicken.equalsIgnoreCase("Daily")) {
                 totalFootprint += 950.0;
-            } else if (chicken.equalsIgnoreCase("Frequently (3-5 times/week)")) {
+            } else if (frequencyChicken.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 600.0;
-            } else if (chicken.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
+            } else if (frequencyChicken.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 200.0;
             }
         }
 
-        // Add footprint for fish consumption
-        if (fish != null) {
-            if (fish.equalsIgnoreCase("Daily")) {
+        if (frequencyFish != null) {
+            if (frequencyFish.equalsIgnoreCase("Daily")) {
                 totalFootprint += 800.0;
-            } else if (fish.equalsIgnoreCase("Frequently (3-5 times/week)")) {
+            } else if (frequencyFish.equalsIgnoreCase("Frequently (3-5 times/week)")) {
                 totalFootprint += 500.0;
-            } else if (fish.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
+            } else if (frequencyFish.equalsIgnoreCase("Occasionally (1-2 times/week)")) {
                 totalFootprint += 150.0;
             }
         }
-
         return totalFootprint;
     }
 
     /**
      * Calculates the carbon footprint for food waste habits.
      *
-     * @param waste The user's food waste frequency.
+     * @param wasteFrequency The user's food waste frequency. Expected values are "Never", "Rarely", "Occasionally", or "Frequently".
      * @return The carbon footprint in kg CO2 for food waste.
+     * @throws IllegalArgumentException if the food waste frequency is invalid.
      */
-    private double calculateFoodWasteFootprint(String waste) {
-        if (waste.equalsIgnoreCase("Never")) {
+    private double calculateFoodWasteFootprint(String wasteFrequency) {
+        if (wasteFrequency.equalsIgnoreCase("Never")) {
             return 0.0;
-        } else if (waste.equalsIgnoreCase("Rarely")) {
+        } else if (wasteFrequency.equalsIgnoreCase("Rarely")) {
             return 23.4;
-        } else if (waste.equalsIgnoreCase("Occasionally")) {
+        } else if (wasteFrequency.equalsIgnoreCase("Occasionally")) {
             return 70.2;
-        } else if (waste.equalsIgnoreCase("Frequently")) {
+        } else if (wasteFrequency.equalsIgnoreCase("Frequently")) {
             return 140.4;
         }
-        throw new IllegalArgumentException("Invalid food waste frequency: " + waste);
+        throw new IllegalArgumentException("Invalid food waste frequency: " + wasteFrequency);
     }
 }

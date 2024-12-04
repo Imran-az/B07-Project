@@ -16,11 +16,28 @@ import com.google.firebase.auth.FirebaseUser;
 import net.robertx.planeteze_b07.Dashboard;
 import net.robertx.planeteze_b07.R;
 
+/**
+ * The WelcomePage activity is the entry point of the application.
+ * It provides options for the user to either log in or sign up.
+ * If the user is already authenticated, they are redirected to the Dashboard.
+ */
 public class WelcomePage extends AppCompatActivity {
+    /**
+     * Button to navigate to the login page.
+     */
     Button logininbutton;
+
+    /**
+     * Button to navigate to the sign-up page.
+     */
     Button signinbutton;
 
-
+    /**
+     * Called when the activity is first created. Initializes the UI components and Firebase.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,21 +48,18 @@ public class WelcomePage extends AppCompatActivity {
         FirebaseUser currentUser = auth.getCurrentUser();
 
         if (currentUser != null) {
-            // send logged in user to dashboard
             Intent intent = new Intent(WelcomePage.this, Dashboard.class);
             startActivity(intent);
             finish();
             return;
         }
 
-        //sends user to sign up page
         signinbutton= findViewById(R.id.signupbutton);
         signinbutton.setOnClickListener(v -> {
             Intent intent= new Intent(WelcomePage.this, SignUpPage.class);
             startActivity(intent);
         });
 
-        //sends user to the login page
         logininbutton = findViewById(R.id.loginbutton);
         logininbutton.setOnClickListener(v -> {
             Intent intent = new Intent(WelcomePage.this, LoginPageView.class);

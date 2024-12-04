@@ -45,24 +45,71 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Activity to display the results of the user's annual carbon footprint.
+ * This activity shows a breakdown of the user's carbon emissions in various categories
+ * and allows comparison with country-specific and global averages.
+ * <p>
+ * The activity fetches data from Firebase Firestore, processes it, and visualizes it using
+ * PieChart and BarChart. Users can also compare their emissions with the average emissions
+ * of a specified country.
+ * </p>
+ */
 public class ResultsActivity extends AppCompatActivity {
+    /**
+     * Pie chart to display the breakdown of the user's carbon emissions.
+     */
     private PieChart pieChart;
+
+    /**
+     * Bar chart to display the user's carbon emissions in various categories.
+     */
     private BarChart barChart;
-    private TextView comparisonText;
+
+
+
+    /**
+     * GridLayout to contain the shared legend for both the PieChart and BarChart.
+     */
     private GridLayout sharedLegendContainer;
 
-    private Button compareButton;
-    private EditText countryEditText;
-
+    /**
+     * Bar chart to display the comparison between the user's emissions and the specified country's average emissions.
+     */
     private BarChart comparisonBarChart;
+
+    /**
+     * TextView to display the result of the comparison between the user's emissions and the specified country's average emissions.
+     */
     private TextView comparisonResult;
+
+    /**
+     * EditText to input the name of the country for comparison.
+     */
     private EditText editTextCountry;
+
+    /**
+     * Button to submit the country name and initiate the comparison.
+     */
     private Button compareSubmitButton;
 
+    /**
+     * FirebaseAuth instance to manage user authentication.
+     */
     final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+    /**
+     * FirebaseFirestore instance to interact with the Firestore database.
+     */
     FirebaseFirestore firestore;
 
+    /**
+     * Called when the activity is starting. This is where most initialization should go.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     *                           Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +118,6 @@ public class ResultsActivity extends AppCompatActivity {
 
         findViewById(R.id.returnHome).setOnClickListener(v -> finish());
 
-        // Apply insets for system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainScrollView), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -86,7 +132,6 @@ public class ResultsActivity extends AppCompatActivity {
             throw new RuntimeException("Failed to initialize EmissionsDataRetriever.");
         }
 
-        // Initialize HousingCO2DataRetriever
         try {
             HousingCO2DataRetriever.initialize(this);
         } catch (IOException e) {
@@ -95,16 +140,12 @@ public class ResultsActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
-        // Initialize views
         initializeViews();
 
-        // Fetch and process data from Firebase
         fetchDataFromFirebase();
         fetchTotalEmissions(totalEmissions -> {
-            // Hide the chart initially
             comparisonBarChart.setVisibility(View.GONE);
 
-            // Set up button click logic
             compareSubmitButton.setOnClickListener(v -> {
                 String country = editTextCountry.getText().toString().trim();
                 if (!country.isEmpty()) {
@@ -123,7 +164,6 @@ public class ResultsActivity extends AppCompatActivity {
     /**
      * Initializes the UI components used in the activity.
      */
-
     private void initializeViews() {
         comparisonBarChart = findViewById(R.id.comparisonBarChart);
         comparisonResult = findViewById(R.id.comparisonResult);
@@ -134,8 +174,6 @@ public class ResultsActivity extends AppCompatActivity {
         sharedLegendContainer = findViewById(R.id.sharedLegendContainer);
 
     }
-
-
 
 
     /**
@@ -149,31 +187,25 @@ public class ResultsActivity extends AppCompatActivity {
      *                 once the data is successfully fetched and calculated. The value is passed in tons.
      */
     private void fetchTotalEmissions(DataFetchCallback callback) {
-        // Reference to the Firestore collection containing the user's carbon footprint data
         CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
 
-        // Fetch the document associated with the current user's unique ID
         annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
-                        // Retrieve and parse the Firestore data into a usable format
                         Map<String, Object> data = document.getData();
                         HashMap<String, String> parsedResponses = new HashMap<>();
                         for (String key : data.keySet()) {
                             parsedResponses.put(key, data.get(key).toString());
                         }
 
-                        // Calculate emissions for each category using the parsed responses
                         HashMap<String, Double> categoryEmissions = new YearlyTotalCarbonFootprintCalculator()
                                 .calculatePerCategoryEmission(parsedResponses);
 
-                        // Calculate the total emissions in kilograms and convert to tons
                         double totalKg = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
-                        double totalTons = totalKg; // Convert kg to tons
+                        double totalTons = totalKg;
 
-                        // Pass the calculated total emissions to the callback
                         callback.onDataFetched(totalTons);
                     } catch (IOException e) {
                         // Handle parsing errors and throw a runtime exception
@@ -201,17 +233,13 @@ public class ResultsActivity extends AppCompatActivity {
         EmissionsDataRetriever dataRetriever = new EmissionsDataRetriever();
 
         try {
-            // Format the country name
             String formattedCountry = country.substring(0, 1).toUpperCase() + country.substring(1).toLowerCase();
 
-            // Retrieve country emissions in tons and convert to kilograms
             double countryEmissionsKg = dataRetriever.getEmissionValue(formattedCountry) * 1000;
 
             if (countryEmissionsKg > 0) {
-                // Calculate percentage difference
                 double percentageDifference = ((userEmissionsKg - countryEmissionsKg) / countryEmissionsKg) * 100;
 
-                // Create a comparison message
                 String message;
                 if (userEmissionsKg > countryEmissionsKg) {
                     message = String.format(Locale.getDefault(), "Your emissions are %.2f%% higher than %s's average of %.2f kg.",
@@ -221,11 +249,8 @@ public class ResultsActivity extends AppCompatActivity {
                             Math.abs(percentageDifference), formattedCountry, countryEmissionsKg);
                 }
 
-                // Update the comparison result
                 comparisonResult.setText(message);
                 comparisonResult.setVisibility(View.VISIBLE);
-
-                // Populate and display the bar chart
                 double[] emissions = {userEmissionsKg, countryEmissionsKg};
                 String[] labels = {"Yours (Kg)", formattedCountry + " Avg (kg)"};
                 updateComparisonBarChart(emissions, labels);
@@ -240,51 +265,49 @@ public class ResultsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Updates the comparison bar chart with the given emissions data and labels.
+     * This method creates entries for the bar chart, configures the bar data set with custom colors,
+     * and styles the bar chart for modern look. It also sets up the X and Y axes with
+     * appropriate labels and formatting.
+     *
+     * @param emissions An array of emission values to be displayed in the bar chart.
+     * @param labels    An array of labels corresponding to the emission values.
+     */
     private void updateComparisonBarChart(double[] emissions, String[] labels) {
-        // Create entries for the Bar Chart
         ArrayList<BarEntry> entries = new ArrayList<>();
         for (int i = 0; i < emissions.length; i++) {
             entries.add(new BarEntry(i, (float) emissions[i]));
         }
 
-        // Create a BarDataSet with custom colors
         BarDataSet dataSet = new BarDataSet(entries, "Comparison");
         dataSet.setColors(Color.parseColor("#4CAF50"), Color.parseColor("#FF5722")); // Green and red
-        dataSet.setValueTextSize(12f); // Adjust font size for bar values
-        dataSet.setValueTextColor(Color.BLACK); // Set value text color
-
-        // Configure the BarData
+        dataSet.setValueTextSize(12f);
+        dataSet.setValueTextColor(Color.BLACK);
         BarData data = new BarData(dataSet);
-        data.setBarWidth(0.8f); // Adjust bar width for a sleek look
+        data.setBarWidth(0.8f);
+
         comparisonBarChart.setData(data);
+        comparisonBarChart.getDescription().setEnabled(false);
+        comparisonBarChart.setFitBars(true);
+        comparisonBarChart.getLegend().setEnabled(false);
+        comparisonBarChart.animateY(1000);
 
-        // Style the Bar Chart
-        comparisonBarChart.getDescription().setEnabled(false); // Remove the "Description Label"
-        comparisonBarChart.setFitBars(true); // Ensure bars are fitted nicely
-        comparisonBarChart.getLegend().setEnabled(false); // Hide the legend
-        comparisonBarChart.animateY(1000); // Add animation for a modern feel
-
-        // Configure X-Axis
         XAxis xAxis = comparisonBarChart.getXAxis();
-        xAxis.setGranularity(1f); // Ensure labels are spaced evenly
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Position labels at the bottom
-        xAxis.setDrawGridLines(false); // Remove grid lines
-        xAxis.setTextSize(12f); // Adjust font size
-        xAxis.setTextColor(Color.DKGRAY); // Set label color
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels)); // Set custom labels
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.DKGRAY);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
-        // Configure Y-Axis
-        comparisonBarChart.getAxisLeft().setDrawGridLines(false); // Remove left-axis grid lines
-        comparisonBarChart.getAxisLeft().setTextSize(12f); // Adjust font size
-        comparisonBarChart.getAxisLeft().setTextColor(Color.DKGRAY); // Set text color
-        comparisonBarChart.getAxisLeft().setAxisMinimum(0f); // Start at 0
-
-        comparisonBarChart.getAxisRight().setEnabled(false); // Disable right Y-axis
-
-        // Refresh the chart
+        comparisonBarChart.getAxisLeft().setDrawGridLines(false);
+        comparisonBarChart.getAxisLeft().setTextSize(12f);
+        comparisonBarChart.getAxisLeft().setTextColor(Color.DKGRAY);
+        comparisonBarChart.getAxisLeft().setAxisMinimum(0f);
+        comparisonBarChart.getAxisRight().setEnabled(false);
         comparisonBarChart.invalidate();
     }
-
 
     /**
      * Callback interface for fetching data from Firebase.
@@ -306,21 +329,14 @@ public class ResultsActivity extends AppCompatActivity {
      *             This view is used as the parent for the transition animation.
      */
     public void expand(View view) {
-        // Find the container for the breakdown section
         LinearLayout breakdownContainer = findViewById(R.id.breakdownContainer);
-
-        // Check the current visibility state of the breakdown section
         boolean isVisible = breakdownContainer.getVisibility() == View.VISIBLE;
 
-        // Apply a smooth transition animation for layout changes
         TransitionManager.beginDelayedTransition((ViewGroup) view, new AutoTransition());
 
-        // Toggle between expanding and collapsing the breakdown section
         if (isVisible) {
-            // Collapse the breakdown section if it is currently visible
             collapseSection(breakdownContainer);
         } else {
-            // Expand the breakdown section if it is currently hidden
             expandSection(breakdownContainer);
         }
     }
@@ -348,47 +364,32 @@ public class ResultsActivity extends AppCompatActivity {
      *                           detailed emission data for each category after it is populated dynamically.
      */
     private void expandSection(LinearLayout breakdownContainer) {
-        // Initialize the container's alpha for the fade-in animation
         breakdownContainer.setAlpha(0f);
-
-        // Make the container visible before starting the animation
         breakdownContainer.setVisibility(View.VISIBLE);
-
-        // Animate the fade-in effect for the breakdown section
         breakdownContainer.animate().alpha(1f).setDuration(300).start();
-
-        // Update the container's layout parameters to wrap its content
         breakdownContainer.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        // Reference to Firestore collection for annual carbon footprint data
         CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
-
-        // Fetch data from Firestore and populate the breakdown section
         annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
-                        // Parse Firestore data into a HashMap
                         HashMap<String, String> parsedResponses = new HashMap<>();
                         Map<String, Object> data = document.getData();
                         Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
 
-                        // Convert Firestore data to a usable format for calculations
                         for (String key : data.keySet()) {
                             parsedResponses.put(key, data.get(key).toString());
                         }
 
-                        // Calculate category-specific emissions
                         HashMap<String, Double> categoryEmissions =
                                 new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
 
-                        // Extract emission values and categories for UI population
                         double[] emissions = extractEmissions(categoryEmissions);
                         String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
 
-                        // Populate the breakdown section with detailed emission data
                         populateBreakdown(breakdownContainer, emissions, categories);
                     } catch (IOException e) {
                         throw new RuntimeException("Parsing Firestore data failed", e);
@@ -419,7 +420,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         for (int i = 0; i < emissions.length; i++) {
             TextView textView = createTextView(
-                    String.format(Locale.getDefault(), "You have contributed %.2f tons of CO2 emissions from %s.", emissions[i], categories[i]));
+                    String.format(Locale.getDefault(), "You have contributed %.2f kilograms of CO2 emissions from %s.", emissions[i], categories[i]));
             container.addView(textView);
         }
     }
@@ -434,18 +435,12 @@ public class ResultsActivity extends AppCompatActivity {
      * @return A newly created `TextView` instance with the provided text and default styling applied.
      */
     private TextView createTextView(String text) {
-        // Create a new TextView instance
         TextView textView = new TextView(this);
-
-        // Set layout parameters: full width and height wrapping its content
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
         textView.setTextSize(16f);
-
         textView.setTextColor(Color.DKGRAY);
-
-        // Assign the provided text to the TextView
         textView.setText(text);
 
         return textView;
@@ -463,12 +458,9 @@ public class ResultsActivity extends AppCompatActivity {
      *                   The order of colors should match the order of categories.
      */
     private void createSharedLegend(String[] categories, int[] colors) {
-        // Clear any existing legend items to avoid duplication
         sharedLegendContainer.removeAllViews();
 
-        // Iterate through categories and colors to create and add legend entries
         for (int i = 0; i < categories.length; i++) {
-            // Create a legend entry and add it to the container
             sharedLegendContainer.addView(createLegendItem(colors[i], categories[i]));
         }
     }
@@ -485,27 +477,22 @@ public class ResultsActivity extends AppCompatActivity {
      * @return A `View` representing the complete legend item, including the color box and text label.
      */
     private View createLegendItem(int color, String label) {
-        // Create a horizontal LinearLayout to hold the legend item
         LinearLayout item = new LinearLayout(this);
         item.setOrientation(LinearLayout.HORIZONTAL);
 
-        // Create a square View for the color box and set its size and margins
         View colorBox = new View(this);
         LinearLayout.LayoutParams boxParams = new LinearLayout.LayoutParams(40, 40);
         boxParams.setMargins(8, 8, 16, 8);
         colorBox.setLayoutParams(boxParams);
-        colorBox.setBackgroundColor(color); // Set the background color for the box
+        colorBox.setBackgroundColor(color);
 
-        // Create a TextView for the label and set its text and style
         TextView labelText = createTextView(label);
-        labelText.setTextSize(14f); // Adjust text size for better readability
-        labelText.setTextColor(Color.BLACK); // Set text color to black
+        labelText.setTextSize(14f);
+        labelText.setTextColor(Color.BLACK);
 
-        // Add the color box and label to the LinearLayout
         item.addView(colorBox);
         item.addView(labelText);
 
-        // Return the fully constructed legend item
         return item;
     }
 
@@ -518,49 +505,35 @@ public class ResultsActivity extends AppCompatActivity {
      * @throws RuntimeException If parsing Firestore data fails due to an I/O error.
      */
     private void fetchDataFromFirebase() {
-        // Reference to Firestore collection containing user carbon footprint data
         CollectionReference annualCarbonFootprintSurveyDataRef = firestore.collection("AnnualCarbonFootprintSurveyData");
-
-        // Fetch the document corresponding to the current user's unique ID
         annualCarbonFootprintSurveyDataRef.document(mAuth.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     try {
-                        // Parse Firestore document into a HashMap for processing
                         HashMap<String, String> parsedResponses = new HashMap<>();
                         Map<String, Object> data = document.getData();
                         Log.d("ResultsActivity", "DocumentSnapshot data: " + data);
 
-                        // Convert Firestore data to a usable format for calculations
                         for (String key : data.keySet()) {
                             parsedResponses.put(key, data.get(key).toString());
                         }
-
-                        // Calculate emissions for each category using the parsed responses
                         HashMap<String, Double> categoryEmissions =
                                 new YearlyTotalCarbonFootprintCalculator().calculatePerCategoryEmission(parsedResponses);
 
-                        // Extract emission values and categories for visualization
                         double[] emissions = extractEmissions(categoryEmissions);
                         String[] categories = {"Consumption", "Driving", "Flight", "Food", "Housing", "Public Transport"};
-
-                        // Calculate the total emissions in kilograms and convert to tons
                         double total = categoryEmissions.values().stream().mapToDouble(Double::doubleValue).sum();
 
-                        // Update the summary text view with the user's yearly CO2 contribution
                         TextView contributionText = findViewById(R.id.contributionText);
                         String yearlyContributionText = getString(R.string.yearly_co2_contribution_summary_line, total / 1000);
                         contributionText.setText(yearlyContributionText);
 
-                        // Populate the PieChart and BarChart with calculated data
                         populatePieChart(emissions, categories);
                         populateBarChart(emissions);
 
-                        // Create a shared legend for both charts
                         createSharedLegend(categories, getLegendColors());
                     } catch (IOException e) {
-                        // Throw a runtime exception if data parsing fails
                         throw new RuntimeException("Parsing Firestore data failed", e);
                     }
                 }
@@ -587,7 +560,6 @@ public class ResultsActivity extends AppCompatActivity {
      * @throws NullPointerException If a required key is missing or its value is `null` in the input map.
      */
     private double[] extractEmissions(HashMap<String, Double> data) {
-        // Extract and return emission values for the predefined categories
         return new double[]{
                 data.get("ConsumptionEmissions"),
                 data.get("DrivingEmissions"),
@@ -598,12 +570,17 @@ public class ResultsActivity extends AppCompatActivity {
         };
     }
 
-
+    /**
+     * Populates the PieChart with emission data and category labels.
+     * This method creates entries for the PieChart, configures the PieDataSet with custom colors,
+     * and styles the PieChart for a sleek and modern look. It also sets up the PieChart with
+     * appropriate labels, text sizes, and other visual properties.
+     *
+     * @param emissions  An array of emission values to be displayed in the PieChart.
+     * @param categories An array of category labels corresponding to the emission values.
+     */
     private void populatePieChart(double[] emissions, String[] categories) {
-
-        // Create entries for the Pie Chart
         ArrayList<PieEntry> entries = new ArrayList<>();
-
         ArrayList<Integer> colors = new ArrayList<>();
 
         for (int i = 0; i < emissions.length; i++) {
@@ -613,100 +590,90 @@ public class ResultsActivity extends AppCompatActivity {
             }
         }
 
-        // Create dataset
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(colors);
-        dataSet.setValueTextSize(12f);                     // Value text size for visibility
-        dataSet.setValueTextColor(Color.BLACK);            // Value text color
-        dataSet.setValueLineColor(Color.BLACK);            // Black lines for values
-        dataSet.setValueLineWidth(1.5f);                   // Slightly thicker connecting lines
+        dataSet.setValueTextSize(12f);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueLineColor(Color.BLACK);
+        dataSet.setValueLineWidth(1.5f);
 
-        // Configure label positions and behavior
-        dataSet.setValueLinePart1OffsetPercentage(80f);    // Offset the first part of the value line
-        dataSet.setValueLinePart1Length(0.4f);             // First segment length of the line
-        dataSet.setValueLinePart2Length(0.5f);             // Second segment length of the line
-        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE); // Values float outside slices
-        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE); // Labels float outside slices
+        dataSet.setValueLinePart1OffsetPercentage(80f);
+        dataSet.setValueLinePart1Length(0.4f);
+        dataSet.setValueLinePart2Length(0.5f);
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
         PieData data = new PieData(dataSet);
 
-        // Configure Pie Chart
         pieChart.setData(data);
-        pieChart.setHoleRadius(35f);                      // Adjust the inner circle radius
-        pieChart.setTransparentCircleRadius(40f);         // Adjust transparent circle radius
-
-        // Enable entry labels (floating labels on slices)
-        pieChart.setDrawEntryLabels(true);                // Enable labels on the slices
-        pieChart.setEntryLabelColor(Color.BLACK);         // Set slice label color
-        pieChart.setEntryLabelTextSize(10f);              // Set slice label size
-
-        // Floating animation for labels
-        pieChart.setDragDecelerationFrictionCoef(0.95f);  // Smooth drag behavior
-        pieChart.setRotationAngle(0);                     // Start at default rotation angle
-        pieChart.setRotationEnabled(true);                // Enable rotation for dynamic interaction
-        pieChart.setHighlightPerTapEnabled(true);         // Highlight slice on tap
-
-        // Add center text
-        pieChart.setCenterText("Emissions\nBreakdown");    // Add multi-line text in the center
-        pieChart.setCenterTextSize(16f);                  // Set center text size
-        pieChart.setCenterTextColor(Color.DKGRAY);        // Set center text color
-
-        // Aesthetic adjustments
-        pieChart.getDescription().setEnabled(false);      // Disable description
-        pieChart.getLegend().setEnabled(false);           // Disable legend (handled elsewhere)
-
-        // Refresh the Pie Chart
+        pieChart.setHoleRadius(35f);
+        pieChart.setTransparentCircleRadius(40f);
+        pieChart.setDrawEntryLabels(true);
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.setEntryLabelTextSize(10f);
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        pieChart.setRotationAngle(0);
+        pieChart.setRotationEnabled(true);
+        pieChart.setHighlightPerTapEnabled(true);
+        pieChart.setCenterText("Emissions\nBreakdown");
+        pieChart.setCenterTextSize(16f);
+        pieChart.setCenterTextColor(Color.DKGRAY);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
         pieChart.invalidate();
     }
 
-
+    /**
+     * Populates the BarChart with emission data.
+     * This method creates entries for the BarChart, configures the BarDataSet with custom colors,
+     * and styles the BarChart for a sleek and modern look. It also sets up the BarChart with
+     * appropriate labels, text sizes, and other visual properties.
+     *
+     * @param emissions An array of emission values to be displayed in the BarChart.
+     */
     private void populateBarChart(double[] emissions) {
-        // Create entries for the Bar Chart
         ArrayList<BarEntry> entries = new ArrayList<>();
         for (int i = 0; i < emissions.length; i++) {
             entries.add(new BarEntry(i, (float) emissions[i]));
         }
 
-        // Create a BarDataSet with custom colors
-        BarDataSet dataSet = new BarDataSet(entries, ""); // Empty label to avoid "Description Label"
+        BarDataSet dataSet = new BarDataSet(entries, "");
         dataSet.setColors(getLegendColors());
-        dataSet.setValueTextSize(12f); // Adjust font size for bar values
-        dataSet.setValueTextColor(Color.BLACK); // Set value text color
+        dataSet.setValueTextSize(12f);
+        dataSet.setValueTextColor(Color.BLACK);
 
-        // Configure the BarData
         BarData data = new BarData(dataSet);
-        data.setBarWidth(0.8f); // Adjust bar width for a sleeker look
+        data.setBarWidth(0.8f);
         barChart.setData(data);
+        barChart.getDescription().setEnabled(false);
+        barChart.setFitBars(true);
+        barChart.getLegend().setEnabled(false);
+        barChart.animateY(1000);
 
-        // Style the Bar Chart
-        barChart.getDescription().setEnabled(false); // Remove the "Description Label"
-        barChart.setFitBars(true); // Ensure bars are fitted nicely
-        barChart.getLegend().setEnabled(false); // Hide the legend
-        barChart.animateY(1000); // Add animation for a modern feel
-
-        // Configure X-Axis
         XAxis xAxis = barChart.getXAxis();
-        xAxis.setGranularity(1f); // Ensure labels are spaced evenly
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Position labels at the bottom
-        xAxis.setDrawGridLines(false); // Remove grid lines
-        xAxis.setTextSize(12f); // Adjust font size
-        xAxis.setTextColor(Color.DKGRAY); // Set label color
-        xAxis.setDrawAxisLine(false); // Remove axis line for a cleaner look
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.DKGRAY);
+        xAxis.setDrawAxisLine(false);
 
-        // Configure Y-Axis
-        barChart.getAxisLeft().setDrawGridLines(false); // Remove left-axis grid lines
-        barChart.getAxisLeft().setTextSize(12f); // Adjust font size
-        barChart.getAxisLeft().setTextColor(Color.DKGRAY); // Set text color
-        barChart.getAxisLeft().setAxisMinimum(0f); // Start at 0
-
-        barChart.getAxisRight().setEnabled(false); // Disable right Y-axis
-
-        // Apply final styling
-        barChart.setExtraBottomOffset(10f); // Add padding below chart
-        barChart.invalidate(); // Refresh the chart
+        barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.getAxisLeft().setTextSize(12f);
+        barChart.getAxisLeft().setTextColor(Color.DKGRAY);
+        barChart.getAxisLeft().setAxisMinimum(0f);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.setExtraBottomOffset(10f);
+        barChart.invalidate();
     }
 
 
+    /**
+     * Returns an array of colors used for the legend in the charts.
+     * Each color corresponds to a specific category in the emission breakdown.
+     *
+     * @return An array of integer color values.
+     */
     private int[] getLegendColors() {
         return new int[]{
                 Color.parseColor("#4CAF50"), Color.parseColor("#8BC34A"),
@@ -714,17 +681,6 @@ public class ResultsActivity extends AppCompatActivity {
                 Color.parseColor("#6D4C41"), Color.parseColor("#9E9D24")
         };
     }
-
-    private void compareWithGlobalAverages(double userTotal, double globalAverage) {
-        String message;
-        if (userTotal > globalAverage) {
-            message = String.format(Locale.getDefault(), "Your emissions are %.2f tons above the global average.", userTotal - globalAverage);
-        } else {
-            message = String.format(Locale.getDefault(), "Your emissions are %.2f tons below the global average.", globalAverage - userTotal);
-        }
-        comparisonText.setText(message);
-    }
-
 }
 
 
