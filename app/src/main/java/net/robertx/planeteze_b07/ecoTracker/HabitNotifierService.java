@@ -52,6 +52,11 @@ public class HabitNotifierService extends FirebaseMessagingService {
         // Show the notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, notificationBuilder.build());
+
+        Intent broadcastIntent = new Intent("net.robertx.planeteze_b07.FCM_MESSAGE");
+        broadcastIntent.putExtra("message", remoteMessage.getNotification().getTitle() + ": " + remoteMessage.getNotification().getBody());
+        sendBroadcast(broadcastIntent);
+
     }
 
     @Override

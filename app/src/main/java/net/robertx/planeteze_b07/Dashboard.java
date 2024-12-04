@@ -1,6 +1,10 @@
 package net.robertx.planeteze_b07;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +12,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -17,8 +20,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -27,6 +28,9 @@ import net.robertx.planeteze_b07.ui.dashboard.PastSurveyResultsFragment;
 import net.robertx.planeteze_b07.ui.dashboard.ProfileFragment;
 
 public class Dashboard extends AppCompatActivity {
+
+    private BroadcastReceiver messageReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +79,28 @@ public class Dashboard extends AppCompatActivity {
 
                     // Log and toast
                     Log.d("Dashboard", "FCM token: " + token);
-                    Toast.makeText(getApplicationContext(), "FCM token: " + token, Toast.LENGTH_SHORT).show();
                 });
-
+        // Register the broadcast receiver
+        messageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String message = intent.getStringExtra("message");
+                showToast(message);
+            }
+        };
+        registerReceiver(messageReceiver, new IntentFilter("net.robertx.planeteze_b07.FCM_MESSAGE"), Context.RECEIVER_EXPORTED);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(messageReceiver);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, fragment)
